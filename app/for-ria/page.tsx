@@ -7,7 +7,7 @@ export default function ForRiaPage() {
       {/* Hero / Intro */}
       <section className="bg-gradient-to-r from-[#CAEF7D] to-[#FCFFEE] py-20 px-4 text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-[#1B1F13] mb-4">
-          Partner with us as a Registered Investment Advisor
+        Join India’s Leading RIA Marketplace
         </h1>
         <p className="text-lg md:text-xl text-[#1B1F13] max-w-3xl mx-auto">
           Expand your reach and connect with a wide audience seeking expert financial guidance. Join our trusted network of SEBI-registered advisors and gain access to advanced analytics and dedicated support.

@@ -75,7 +75,7 @@ export default function ForAmcPage() {
       {/* Hero / Intro */}
       <section className="bg-gradient-to-r from-[#FCFFEE] to-[#CAEF7D] py-20 px-4 text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-[#1B1F13] mb-4">
-          Partner with us as an Asset Management Company
+        Enterprise Solutions for Asset Management Companies
         </h1>
         <p className="text-lg md:text-xl text-[#1B1F13] max-w-3xl mx-auto">
           Empower your organization by leveraging our digital solutions to drive growth, streamline operations, and enhance your brand credibility.

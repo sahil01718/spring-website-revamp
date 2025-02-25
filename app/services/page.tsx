@@ -78,55 +78,41 @@ const professionalSolutions = [
   },
   {
     id: 8,
-    title: 'Chartered Accountants & Finance Professionals',
-    tagline: 'Optimize Your Finances, Just as You Do for Others!',
-    description:
-      'Balancing earnings with tax optimization and diversified investment strategies for finance experts.',
-  },
-  {
-    id: 9,
     title: 'Startup Founders & Entrepreneurs',
     tagline: 'Scale Your Startup, Scale Your Wealth!',
     description:
       'Structured wealth-building plans that balance reinvestment with long-term financial planning.',
   },
   {
-    id: 10,
+    id: 9,
     title: 'Engineers & Architects',
     tagline: 'Design the Future, Build Your Wealth!',
     description:
       'Optimizing tax strategies and planning for early retirement with tailored investment structures.',
   },
   {
-    id: 11,
+    id: 10,
     title: 'Teachers & Professors',
     tagline: 'Shape Minds, Secure Your Future!',
     description:
       'Structured savings, side-income strategies, and pension planning for educators.',
   },
   {
-    id: 12,
+    id: 11,
     title: 'Media & Creative Professionals',
     tagline: 'Transform Creativity into Wealth!',
     description:
       'Managing irregular income with smart tax planning and secure long-term financial strategies.',
   },
   {
-    id: 13,
+    id: 12,
     title: 'Freelancers & Consultants',
     tagline: 'From Irregular Income to Consistent Wealth!',
     description:
       'Income stabilization, tax-efficient savings, and comprehensive financial roadmaps for independent professionals.',
   },
   {
-    id: 14,
-    title: 'Real Estate Agents & Investors',
-    tagline: 'Build Properties, Build Your Empire!',
-    description:
-      'Optimize commissions, create diversified portfolios, and manage taxation smartly for sustained wealth creation.',
-  },
-  {
-    id: 15,
+    id: 13,
     title: 'Business Owners & SME Operators',
     tagline: 'Run Your Business, Let Us Manage Your Wealth!',
     description:
@@ -162,10 +148,10 @@ export default function ServicesPage() {
       {/* HERO SECTION */}
       <section className="bg-gradient-to-r from-[#FCFFEE] to-[#CAEF7D] py-20 px-4 text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-[#1B1F13] mb-4">
-          Tailored Financial Solutions
+        Personalized Financial Planning, Simplified
         </h1>
         <p className="text-lg md:text-xl text-[#1B1F13] max-w-3xl mx-auto">
-          Our SEBI-registered advisors craft personalized plans designed to address your unique financial challenges.
+        Let’s create your perfect financial plan! with our SEBI-registered advisors.
         </p>
       </section>
 

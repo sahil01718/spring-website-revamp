@@ -101,10 +101,10 @@ export default function ToolsPage() {
       {/* Hero / Intro */}
       <section className="bg-gradient-to-r from-[#CAEF7D] to-[#FCFFEE] py-16 px-4 text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-[#1B1F13] mb-4">
-          Tools Dashboard
+        Plan, Calculate & Succeed
         </h1>
         <p className="text-lg md:text-xl text-[#1B1F13] max-w-2xl mx-auto">
-          Explore our suite of financial calculators designed to help you plan, track, and optimize your finances.
+        Your trusted bunch of financial tools for clear, straightforward planning.
         </p>
       </section>
 
