@@ -1,0 +1,38 @@
+/* globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global body styles */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #FCFFEE;
+  color: #1B1F13;
+  line-height: 1.6;
+}
+
+/* Anchor tag transition */
+a {
+  transition: all 0.3s ease;
+}
+
+/* Utility class for subtle shadow hover effects */
+.hover-scale:hover {
+  transform: scale(1.03);
+}
+
+@keyframes autoScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Adjust duration as needed for desired scroll speed */
+.animate-autoScroll {
+  animation: autoScroll 30s linear infinite;
+}
