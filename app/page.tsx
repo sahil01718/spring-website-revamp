@@ -168,9 +168,9 @@ export default function HomePage() {
               Get Started Now
             </Link>
           </div>
-          <div className="hidden md:block md:w-1/2">
+          {/* <div className="hidden md:block md:w-1/2">
             <Image src="/images/fintech-hero.png" alt="Fintech Hero Illustration" className="w-full object-contain" />
-          </div>
+          </div> */}
         </div>
       </section>
 
