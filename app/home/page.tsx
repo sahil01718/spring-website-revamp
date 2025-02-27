@@ -191,7 +191,7 @@ export default function HomePage() {
       {/* FAQs */}
       <section className="container mx-auto px-4 py-16">
         <h2 className="text-3xl font-bold text-center mb-8">FAQs</h2>
-        <div className="space-y-4 max-w-3xl mx-auto">
+        <div className="space-y-4 max-w-3xl mx-auto ">
           <div className="p-4 bg-[#CAEF7D] rounded-md shadow">
             <p className="font-semibold">How do I book a free consultation?</p>
             <p>Simply WhatsApp us, and our team will guide you step by step!</p>

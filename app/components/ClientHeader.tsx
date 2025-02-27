@@ -3,18 +3,21 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { useState } from "react";
 
 type NavLinkProps = {
   href: string;
   children: React.ReactNode;
+  onClick?: () => void;
 };
 
-const NavLink = ({ href, children }: NavLinkProps) => {
+const NavLink = ({ href, children, onClick }: NavLinkProps) => {
   const pathname = usePathname();
   const isActive = pathname === href;
   return (
     <Link
       href={href}
+      onClick={onClick}
       className={`transition-colors px-2 py-1 ${
         isActive
           ? "text-[#108e66] font-bold border-b-2 border-[#108e66]"
@@ -26,46 +29,96 @@ const NavLink = ({ href, children }: NavLinkProps) => {
   );
 };
 
-const ClientHeader = () => (
-  <header className="bg-[#fcfffe] shadow-md border-b border-b-[#108e66]">
-    <div className="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
-      {/* Site Logo/Title */}
-      <div className="text-2xl font-bold text-[#272B2A]">
-        <Link href="/">Spring Money</Link>
+const ClientHeader = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  return (
+    <header className="bg-[#fcfffe] shadow-md border-b border-b-[#108e66]">
+      <div className="container mx-auto px-4 py-4">
+        <div className="flex justify-between items-center">
+          {/* Site Logo/Title */}
+          <div className="text-2xl font-bold text-[#272B2A]">
+            <Link href="/">Spring Money</Link>
+          </div>
+
+          {/* Hamburger Menu Button */}
+          <button
+            className="lg:hidden text-[#272B2A]"
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              {isMenuOpen ? (
+                <path d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex lg:items-center lg:gap-4">
+            <nav>
+              <ul className="flex items-center gap-4">
+                <li><NavLink href="/">Home</NavLink></li>
+                <li><NavLink href="/services">Financial Planning</NavLink></li>
+                <li><NavLink href="/tools">Tools</NavLink></li>
+                <li><NavLink href="/for-ria">For RIA</NavLink></li>
+                <li><NavLink href="/for-amc">For AMC</NavLink></li>
+              </ul>
+            </nav>
+            <div className="ml-4">
+              <a
+                href="https://wa.me/your-phone-number"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[#108e66] text-[#fcfffe] px-6 py-2 rounded-md hover:bg-[#fcfffe] hover:text-[#108e66] border border-[#108e66] transition"
+              >
+                Get in touch
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="lg:hidden mt-4">
+            <nav>
+              <ul className="flex flex-col gap-4">
+                <li><NavLink href="/" onClick={toggleMenu}>Home</NavLink></li>
+                <li><NavLink href="/services" onClick={toggleMenu}>Financial Planning</NavLink></li>
+                <li><NavLink href="/tools" onClick={toggleMenu}>Tools</NavLink></li>
+                <li><NavLink href="/for-ria" onClick={toggleMenu}>For RIA</NavLink></li>
+                <li><NavLink href="/for-amc" onClick={toggleMenu}>For AMC</NavLink></li>
+              </ul>
+            </nav>
+            <div className="mt-4">
+              <a
+                href="https://wa.me/your-phone-number"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-[#108e66] text-[#fcfffe] px-6 py-2 rounded-md hover:bg-[#fcfffe] hover:text-[#108e66] border border-[#108e66] transition"
+              >
+                Get in touch
+              </a>
+            </div>
+          </div>
+        )}
       </div>
-      {/* Navigation Links */}
-      <nav className="mt-4 md:mt-0">
-        <ul className="flex flex-col md:flex-row gap-4 text-center">
-          <li>
-            <NavLink href="/">Home</NavLink>
-          </li>
-          <li>
-            <NavLink href="/services">Financial Planning</NavLink>
-          </li>
-          <li>
-            <NavLink href="/tools">Tools</NavLink>
-          </li>
-          <li>
-            <NavLink href="/for-ria">For RIA</NavLink>
-          </li>
-          <li>
-            <NavLink href="/for-amc">For AMC</NavLink>
-          </li>
-        </ul>
-      </nav>
-      {/* CTA Button */}
-      <div className="mt-4 md:mt-0">
-        <a
-          href="https://wa.me/your-phone-number" // Replace with your actual WhatsApp link
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-[#108e66] text-[#fcfffe] px-6 py-2 rounded-md hover:bg-[#fcfffe] hover:text-[#108e66] border border-[#108e66] transition"
-        >
-          Get in touch
-        </a>
-      </div>
-    </div>
-  </header>
-);
+    </header>
+  );
+};
 
 export default ClientHeader;

@@ -16,12 +16,12 @@ const Footer = () => (
       <FAQAccordion />
       {/* Footer Main Grid */}
       <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div>
+        <div className="flex flex-col items-center justify-center sm:justify-start sm:items-start">
           <h3 className="text-xl font-semibold text-[#fcfffe]">Download the app</h3>
           {/* Placeholder for app download links */}
           <p className="mt-2 text-sm text-[#fcfffe]">Coming Soon</p>
         </div>
-        <div>
+        <div  className="flex flex-col items-center justify-center sm:justify-start sm:items-start">
           <h3 className="text-xl font-semibold text-[#fcfffe]">Quick Links</h3>
           <ul className="mt-2 space-y-2">
             <li>
@@ -36,7 +36,7 @@ const Footer = () => (
             </li>
           </ul>
         </div>
-        <div>
+        <div  className="flex flex-col items-center justify-center sm:justify-start sm:items-start">
           <h3 className="text-xl font-semibold text-[#fcfffe]">Office Address</h3>
           <p className="mt-2 text-sm text-[#fcfffe]">
             5th Floor, MIT TBI, Kashyap Building,

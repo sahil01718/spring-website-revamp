@@ -1,5 +1,7 @@
 "use client"; // This component uses client-side state
 import React, { useState } from "react";
+import Image from "next/image";
+import arrow from "../../public/chevron-down.svg";
 
 const faqs = [
   {
@@ -37,7 +39,7 @@ export default function FAQAccordion() {
   return (
     <div className="mt-6">
       <h3 className="text-lg font-bold text-[#FCFFEE] mb-4">FAQs</h3>
-      <div>
+      <div className="flex flex-col gap-8 ">
         {faqs.map((faq, index) => (
           <FAQItem key={index} question={faq.question} answer={faq.answer} />
         ))}
@@ -49,15 +51,22 @@ export default function FAQAccordion() {
 function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border-b border-gray-500 py-3">
+    <div className="border-gray-500 py-3 bg-accordion rounded-lg">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full text-left text-base font-semibold text-[#FCFFEE] focus:outline-none"
+        className="w-full text-left text-base font-semibold text-[#FCFFEE] focus:outline-none px-6 py-4 flex justify-between"
       >
         {question}
+        <Image 
+          src={arrow} 
+          width={24} 
+          height={24} 
+          alt="chevron image" 
+          className={`transform duration-300 transition-transform ${open ? '' : 'rotate-180'}`}
+        />
       </button>
       {open && (
-        <p className="mt-2 text-sm text-[#FCFFEE] transition-all duration-300">
+        <p className="border-t text-sm text-[#FCFFEE] transition-all duration-300 px-6 py-4">
           {answer}
         </p>
       )}
