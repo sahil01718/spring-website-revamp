@@ -211,7 +211,7 @@ export default function ServicesPage() {
             rel="noopener noreferrer"
             className="inline-block bg-[#FCFFFE] text-[#108e66] px-8 py-3 rounded-md hover:bg-[#108e66] transition"
           >
-            Get in touch
+            Get in touch Now
           </a>
         </div>
       </section>
