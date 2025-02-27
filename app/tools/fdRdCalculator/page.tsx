@@ -50,7 +50,7 @@ interface YearlyData {
 // -----------------------
 // Tooltip Component (Updated to our theme)
 // -----------------------
-const Tooltip: React.FC<{ text: string }> = ({ text }) => {
+const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
   const [isHovered, setIsHovered] = useState(false);
   
   return (
@@ -71,8 +71,8 @@ const Tooltip: React.FC<{ text: string }> = ({ text }) => {
         }
         .info-icon {
           display: inline-block;
-          background: #108e66;
-          color: #fcfffe;
+          background: #108E66;
+          color: #FCFFFE;
           border-radius: 50%;
           font-size: 0.6rem;
           width: 14px;
@@ -84,8 +84,8 @@ const Tooltip: React.FC<{ text: string }> = ({ text }) => {
         .tooltiptext {
           visibility: visible;
           width: 200px;
-          background-color: #108e66;
-          color: #fcfffe;
+          background-color: #108E66;
+          color: #FCFFFE;
           text-align: left;
           border-radius: 4px;
           padding: 6px 8px;
@@ -107,7 +107,7 @@ const Tooltip: React.FC<{ text: string }> = ({ text }) => {
           margin-left: -4px;
           border-width: 4px;
           border-style: solid;
-          border-color: #108e66 transparent transparent transparent;
+          border-color: #108E66 transparent transparent transparent;
         }
       `}</style>
     </span>
@@ -246,11 +246,9 @@ const FDRDCalculator: React.FC = () => {
 
       let totalRdInvested = 0;
       let totalRdFV = 0;
-      const currentDeposit = rdMonthly;
-
+      let depositForCalc = rdMonthly;
       // Build year-wise breakdown
       const rdYearWise: YearlyData[] = [];
-      let depositForCalc = rdMonthly;
       for (let y = 1; y <= rdTenure; y++) {
         let cumulativeInvested = 0;
         let yearFV = 0;
@@ -327,8 +325,8 @@ const FDRDCalculator: React.FC = () => {
         </button>
       </div>
 
-      {/* Conditionally render the form based on active calculator */}
-      {activeCalc === "fd" ? (
+      {/* FD Form */}
+      {activeCalc === "fd" && (
         <div className="form-container">
           <h2 className="section-title">Fixed Deposit (FD) Details</h2>
           <div className="input-group">
@@ -388,7 +386,10 @@ const FDRDCalculator: React.FC = () => {
             {isCalculating ? "Calculating..." : "Calculate"}
           </button>
         </div>
-      ) : (
+      )}
+
+      {/* RD Form */}
+      {activeCalc === "rd" && (
         <div className="form-container">
           <h2 className="section-title">Recurring Deposit (RD) Details</h2>
           <div className="input-group">
@@ -468,7 +469,7 @@ const FDRDCalculator: React.FC = () => {
       )}
 
       {/* -----------------------
-          Results Section
+          Results Section for FD
       ----------------------- */}
       {activeCalc === "fd" && fdResults && (
         <div className="results-container">
@@ -498,20 +499,20 @@ const FDRDCalculator: React.FC = () => {
                 <YAxis domain={["auto", "auto"]} tickFormatter={(val) => val.toLocaleString("en-IN")} />
                 <RechartsTooltip formatter={(value: number) => [`₹${value.toLocaleString("en-IN")}`, "Maturity Value"]} />
                 <Legend />
-                <Line type="monotone" dataKey="MaturityValue" stroke="#108e66" strokeWidth={2} name="Maturity Value" />
+                <Line type="monotone" dataKey="MaturityValue" stroke="#108E66" strokeWidth={2} name="Maturity Value" />
               </LineChart>
             </ResponsiveContainer>
           </div>
 
           {/* -----------------------
-              Get in Touch CTA Section
+              Get in Touch CTA Section for FD
           ----------------------- */}
           <div className="cta-container mt-8 text-center">
             <Link
-              href="https://wa.me/your-phone-number" // Replace with your actual WhatsApp link
+              href="https://wa.me/your-phone-number"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block bg-[#108e66] text-[#fcfffe] px-8 py-3 rounded-md font-medium hover:bg-[#272B2A] transition-colors"
+              className="inline-block bg-[#108E66] text-[#FCFFFE] px-8 py-3 rounded-md font-medium hover:bg-[#272B2A] transition-colors"
             >
               Get in touch
             </Link>
@@ -519,6 +520,9 @@ const FDRDCalculator: React.FC = () => {
         </div>
       )}
 
+      {/* -----------------------
+          Results Section for RD
+      ----------------------- */}
       {activeCalc === "rd" && rdResults && (
         <div className="results-container">
           <h2 className="results-title">RD Summary</h2>
@@ -581,14 +585,14 @@ const FDRDCalculator: React.FC = () => {
           </div>
 
           {/* -----------------------
-              Get in Touch CTA Section
+              Get in Touch CTA Section for RD
           ----------------------- */}
           <div className="cta-container mt-8 text-center">
             <Link
-              href="https://wa.me/your-phone-number" // Replace with your actual WhatsApp link
+              href="https://wa.me/your-phone-number"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block bg-[#108e66] text-[#fcfffe] px-8 py-3 rounded-md font-medium hover:bg-[#272B2A] transition-colors"
+              className="inline-block bg-[#108E66] text-[#FCFFFE] px-8 py-3 rounded-md font-medium hover:bg-[#272B2A] transition-colors"
             >
               Get in touch
             </Link>
@@ -597,7 +601,7 @@ const FDRDCalculator: React.FC = () => {
       )}
 
       {/* Disclaimer Section */}
-      {results && (
+      {(activeCalc === "fd" ? fdResults : rdResults) && (
         <div className="disclaimer">
           <h4>Important Considerations</h4>
           <ul>
@@ -622,15 +626,15 @@ const FDRDCalculator: React.FC = () => {
         .container {
           padding: 2rem;
           font-family: "Poppins", sans-serif;
-          background: #fcfffe;
-          color: #272b2a;
+          background: #FCFFFE;
+          color: #272B2A;
         }
         .top-nav {
           margin-bottom: 1rem;
         }
         .back-button {
-          background: #108e66;
-          color: #fcfffe;
+          background: #108E66;
+          color: #FCFFFE;
           border: none;
           padding: 0.5rem 1rem;
           border-radius: 4px;
@@ -649,11 +653,11 @@ const FDRDCalculator: React.FC = () => {
           margin-bottom: 2rem;
         }
         .explanation {
-          background: #f0f8e8;
+          background: #FCFFFE;
           padding: 1rem;
           border-radius: 8px;
           margin-bottom: 1.5rem;
-          border-left: 4px solid #108e66;
+          border-left: 4px solid #108E66;
           font-size: 0.95rem;
         }
         .explanation p {
@@ -668,19 +672,19 @@ const FDRDCalculator: React.FC = () => {
         }
         .calc-toggle button {
           background: transparent;
-          border: 1px solid #272b2a;
+          border: 1px solid #272B2A;
           padding: 0.5rem 1rem;
           cursor: pointer;
           border-radius: 4px;
           transition: all 0.2s ease;
         }
         .calc-toggle button.active {
-          background: #caef7d;
-          color: #1b1f13;
-          border-color: #caef7d;
+          background: #108E66;
+          color: #FCFFFE;
+          border-color: #108E66;
         }
         .form-container {
-          background: #fff;
+          background: #FCFFFE;
           padding: 2rem;
           border-radius: 8px;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -729,8 +733,8 @@ const FDRDCalculator: React.FC = () => {
           font-size: 0.8rem;
         }
         .calculate-button {
-          background: #108e66;
-          color: #fcfffe;
+          background: #108E66;
+          color: #FCFFFE;
           border: none;
           padding: 0.75rem 1.5rem;
           border-radius: 4px;
@@ -744,7 +748,7 @@ const FDRDCalculator: React.FC = () => {
           cursor: not-allowed;
         }
         .results-container {
-          background: #fff;
+          background: #FCFFFE;
           padding: 2rem;
           border-radius: 8px;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -757,7 +761,7 @@ const FDRDCalculator: React.FC = () => {
           text-align: center;
         }
         .summary-card {
-          background: #f9f9f9;
+          background: #FCFFFE;
           padding: 1rem;
           border-radius: 8px;
           margin-bottom: 1.5rem;
@@ -769,11 +773,11 @@ const FDRDCalculator: React.FC = () => {
           margin: 0.25rem 0;
         }
         .chart-explanation {
-          background: #f0f8e8;
+          background: #FCFFFE;
           padding: 1rem;
           border-radius: 8px;
           margin-bottom: 1rem;
-          border-left: 4px solid #108e66;
+          border-left: 4px solid #108E66;
           text-align: center;
           font-size: 0.95rem;
         }
@@ -785,16 +789,16 @@ const FDRDCalculator: React.FC = () => {
         }
         .chart-toggle button {
           background: transparent;
-          border: 1px solid #272b2a;
+          border: 1px solid #272B2A;
           padding: 0.5rem 1rem;
           cursor: pointer;
           border-radius: 4px;
           transition: all 0.2s ease;
         }
         .chart-toggle button.active {
-          background: #108e66;
-          color: #fcfffe;
-          border-color: #108e66;
+          background: #108E66;
+          color: #FCFFFE;
+          border-color: #108E66;
         }
         .chart-container {
           margin: 1rem 0 2rem;
@@ -819,7 +823,8 @@ const FDRDCalculator: React.FC = () => {
           text-align: center;
         }
         .amortization-table th {
-          background: #f0f8e8;
+          background: #FCFFFE;
+          color: #272B2A;
           position: sticky;
           top: 0;
         }
@@ -827,17 +832,17 @@ const FDRDCalculator: React.FC = () => {
           margin-top: 2rem;
         }
         .disclaimer {
-          background: #f9f9f9;
+          background: #FCFFFE;
           padding: 1rem;
           border-radius: 4px;
           font-size: 0.9rem;
-          color: #555;
+          color: #272B2A;
           border: 1px solid #ddd;
           margin-top: 2rem;
         }
         .disclaimer h4 {
           margin-top: 0;
-          color: #272b2a;
+          color: #272B2A;
           margin-bottom: 0.5rem;
         }
         .disclaimer ul {
