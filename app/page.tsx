@@ -258,12 +258,14 @@ export default function HomePage() {
             </div>
           ))}
         </div>
-        <Link
-          href="/financial-planning"
-          className="inline-block bg-[#108e66] text-[#fcfffe] px-8 py-3 rounded-md font-medium hover:bg-[#272B2A] transition-colors"
-        >
-          Learn More About Our Financial Planning
-        </Link>
+        <div className="flex justify-center">
+          <Link
+            href="/financial-planning"
+            className="inline-block bg-[#108e66] text-[#fcfffe] px-8 py-3 rounded-md font-medium hover:bg-[#272B2A] transition-colors"
+          >
+            Learn More About Our Financial Planning
+          </Link>
+        </div>
         <p className="text-center text-[#272B2A] text-lg mt-4">
           Our vision is to help bring about a world that confidently makes smart financial decisions.
         </p>
