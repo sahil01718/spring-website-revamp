@@ -15,7 +15,7 @@ import {
 } from "recharts";
 
 // -----------------------
-// Interfaces
+// Interfaces for Input, Yearly Data & Results
 // -----------------------
 interface CalculatorInputs {
   fdCorpus: string;           // FD Corpus (INR)
@@ -45,20 +45,21 @@ interface Results {
 }
 
 // -----------------------
-// Utility: Tooltip Component for Inputs
+// Updated TooltipIcon Component
+// Uses Primary (#108e66) for background and White (#fcfffe) for text
 // -----------------------
 const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
   const [isHovered, setIsHovered] = useState(false);
   return (
     <span
-      className="tooltipIcon"
+      className="TooltipIcon"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <span className="info-icon">i</span>
       {isHovered && <span className="tooltiptext">{text}</span>}
       <style jsx>{`
-        .tooltipIcon {
+        .TooltipIcon {
           position: relative;
           display: inline-block;
           margin-left: 5px;
@@ -67,8 +68,8 @@ const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
         }
         .info-icon {
           display: inline-block;
-          background: #caef7d;
-          color: #1b1f13;
+          background: #108e66;
+          color: #fcfffe;
           border-radius: 50%;
           font-size: 0.6rem;
           width: 14px;
@@ -80,8 +81,8 @@ const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
         .tooltiptext {
           visibility: visible;
           width: 220px;
-          background-color: #caef7d;
-          color: #1b1f13;
+          background-color: #108e66;
+          color: #fcfffe;
           text-align: left;
           border-radius: 4px;
           padding: 6px 8px;
@@ -103,7 +104,7 @@ const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
           margin-left: -4px;
           border-width: 4px;
           border-style: solid;
-          border-color: #caef7d transparent transparent transparent;
+          border-color: #108e66 transparent transparent transparent;
         }
       `}</style>
     </span>
@@ -111,72 +112,30 @@ const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
 };
 
 // -----------------------
-// Utility: Number to Words Converters
+// Number to Words Converter Functions
 // -----------------------
 const numberToWords = (num: number): string => {
   if (num === undefined || num === null) return "";
   num = Math.abs(Math.round(num));
   if (num === 0) return "Zero";
   const ones = [
-    "",
-    "One",
-    "Two",
-    "Three",
-    "Four",
-    "Five",
-    "Six",
-    "Seven",
-    "Eight",
-    "Nine",
-    "Ten",
-    "Eleven",
-    "Twelve",
-    "Thirteen",
-    "Fourteen",
-    "Fifteen",
-    "Sixteen",
-    "Seventeen",
-    "Eighteen",
-    "Nineteen",
+    "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
+    "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen",
+    "Seventeen", "Eighteen", "Nineteen",
   ];
   const tens = [
-    "",
-    "Ten",
-    "Twenty",
-    "Thirty",
-    "Forty",
-    "Fifty",
-    "Sixty",
-    "Seventy",
-    "Eighty",
-    "Ninety",
+    "", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety",
   ];
   if (num < 20) return ones[num];
   if (num < 100)
     return tens[Math.floor(num / 10)] + (num % 10 !== 0 ? " " + ones[num % 10] : "");
   if (num < 1000)
-    return (
-      ones[Math.floor(num / 100)] +
-      " Hundred" +
-      (num % 100 !== 0 ? " " + numberToWords(num % 100) : "")
-    );
+    return ones[Math.floor(num / 100)] + " Hundred" + (num % 100 !== 0 ? " " + numberToWords(num % 100) : "");
   if (num < 100000)
-    return (
-      numberToWords(Math.floor(num / 1000)) +
-      " Thousand" +
-      (num % 1000 !== 0 ? " " + numberToWords(num % 1000) : "")
-    );
+    return numberToWords(Math.floor(num / 1000)) + " Thousand" + (num % 1000 !== 0 ? " " + numberToWords(num % 1000) : "");
   if (num < 10000000)
-    return (
-      numberToWords(Math.floor(num / 100000)) +
-      " Lakh" +
-      (num % 100000 !== 0 ? " " + numberToWords(num % 100000) : "")
-    );
-  return (
-    numberToWords(Math.floor(num / 10000000)) +
-    " Crore" +
-    (num % 10000000 !== 0 ? " " + numberToWords(num % 10000000) : "")
-  );
+    return numberToWords(Math.floor(num / 100000)) + " Lakh" + (num % 100000 !== 0 ? " " + numberToWords(num % 100000) : "");
+  return numberToWords(Math.floor(num / 10000000)) + " Crore" + (num % 10000000 !== 0 ? " " + numberToWords(num % 10000000) : "");
 };
 
 const numberToWordsPercent = (value: number): string => {
@@ -204,13 +163,17 @@ const FDBasedRetirementCalculator: React.FC = () => {
   const [isCalculating, setIsCalculating] = useState<boolean>(false);
   const [chartType, setChartType] = useState<"line" | "bar">("line");
 
+  // -----------------------
   // Handle input changes
+  // -----------------------
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputs((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Validate inputs
+  // -----------------------
+  // Validate required inputs
+  // -----------------------
   const validateInputs = (): boolean => {
     const newErrors: Partial<CalculatorInputs> = {};
     const requiredFields = ["fdCorpus", "annualWithdrawal", "fdInterestRate", "inflationRate"];
@@ -224,7 +187,9 @@ const FDBasedRetirementCalculator: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Calculation Logic
+  // -----------------------
+  // Calculate Results for Retirement Sustainability
+  // -----------------------
   const calculateResults = () => {
     if (!validateInputs()) return;
     setIsCalculating(true);
@@ -242,6 +207,7 @@ const FDBasedRetirementCalculator: React.FC = () => {
     let totalInterestEarned = 0;
     const yearWise: YearlyData[] = [];
 
+    // Simulate year-by-year withdrawals and interest accumulation until corpus depletes
     while (corpus > 0 && year < 100) {
       year++;
       const startingCorpus = corpus;
@@ -249,6 +215,7 @@ const FDBasedRetirementCalculator: React.FC = () => {
       const taxPaid = taxRate ? interestEarned * taxRate : 0;
       const netInterest = interestEarned - taxPaid;
       totalInterestEarned += netInterest;
+      // Adjust withdrawal amount for inflation and lifestyle changes over time
       const withdrawal = withdrawalBase * Math.pow(1 + inflation, year - 1) * Math.pow(1 + lifestyle, year - 1);
       totalWithdrawals += withdrawal;
       corpus = startingCorpus + netInterest - withdrawal;
@@ -274,7 +241,9 @@ const FDBasedRetirementCalculator: React.FC = () => {
     setTimeout(() => setIsCalculating(false), 1000);
   };
 
-  // Prepare chart data for line and bar charts (showing remaining corpus over time)
+  // -----------------------
+  // Prepare chart data for visualizing remaining corpus over time
+  // -----------------------
   const lineChartData =
     results &&
     results.yearWise.map((data) => ({
@@ -300,18 +269,22 @@ const FDBasedRetirementCalculator: React.FC = () => {
 
   return (
     <div className="container">
-      {/* Back to Dashboard Button at Top */}
+      {/* -----------------------
+          Top Navigation: Back to Dashboard
+      ----------------------- */}
       <div className="top-nav">
         <Link href="/tools">
           <button className="back-button">Back to Dashboard</button>
         </Link>
       </div>
 
+      {/* Page Title & Description */}
       <h1 className="title">Can I retire solely on my FD corpus?</h1>
       <p className="description">
         Assess whether relying on your Fixed Deposit corpus can sustainably fund your retirement withdrawals.
       </p>
 
+      {/* Input Form */}
       <div className="form-container">
         <h2 className="section-title">Retirement Investment Details</h2>
         <div className="input-group">
@@ -421,6 +394,7 @@ const FDBasedRetirementCalculator: React.FC = () => {
         </button>
       </div>
 
+      {/* Results Section */}
       {results && (
         <div className="results-container">
           <h2 className="results-title">Retirement Sustainability Summary</h2>
@@ -483,64 +457,76 @@ const FDBasedRetirementCalculator: React.FC = () => {
                   <YAxis domain={["auto", "auto"]} tickFormatter={(val) => "₹" + val.toLocaleString("en-IN")} />
                   <RechartsTooltip formatter={(value: number) => "₹" + Math.round(value).toLocaleString("en-IN")} />
                   <Legend />
-                  <Line type="monotone" dataKey="Remaining Corpus" stroke="#1B1F13" strokeWidth={2} name="Remaining Corpus" />
+                  <Line type="monotone" dataKey="Remaining Corpus" stroke="#108e66" strokeWidth={2} name="Remaining Corpus" />
                 </LineChart>
-              ) : chartType === "bar" && barChartData ? (
-                <BarChart data={barChartData} margin={{ left: 50, right: 30, top: 20, bottom: 20 }}>
+              ) : chartType === "bar" && lineChartData ? (
+                <BarChart data={lineChartData} margin={{ left: 50, right: 30, top: 20, bottom: 20 }}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="year" />
                   <YAxis tickFormatter={(val) => "₹" + val.toLocaleString("en-IN")} />
                   <RechartsTooltip formatter={(value: number) => "₹" + Math.round(value).toLocaleString("en-IN")} />
                   <Legend />
-                  <Bar dataKey="Withdrawal" fill="#CAEF7D" name="Annual Withdrawal" />
-                  <Bar dataKey="Net Interest" fill="#1B1F13" name="Net Interest" />
+                  <Bar dataKey="Remaining Corpus" fill="#108e66" name="Remaining Corpus" />
                 </BarChart>
               ) : (
                 <React.Fragment />
               )}
             </ResponsiveContainer>
           </div>
+
+          {/* -----------------------
+              Get in Touch CTA Section
+          ----------------------- */}
+          <div className="cta-container mt-8 text-center">
+            <Link
+              href="https://wa.me/your-phone-number" // Replace with your actual WhatsApp link
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-[#108e66] text-[#fcfffe] px-8 py-3 rounded-md font-medium hover:bg-[#272B2A] transition-colors"
+            >
+              Get in touch
+            </Link>
+          </div>
         </div>
       )}
 
-    {results && (
-      <div className="disclaimer">
-        <h4>Important Considerations</h4>
-        <ul>
-          <li>
-            This calculator estimates how long your FD corpus can support your retirement withdrawals.
-          </li>
-          <li>
-            Calculations account for interest earned (net of tax, if provided) and withdrawals adjusted for inflation and lifestyle changes.
-          </li>
-          <li>
-            Results are based on the input parameters and are for reference only.
-          </li>
-          <li>
-            Please consult a financial advisor before making any major retirement decisions.
-          </li>
-        </ul>
-      </div>
-    )}
+      {results && (
+        <div className="disclaimer">
+          <h4>Important Considerations</h4>
+          <ul>
+            <li>
+              This calculator estimates how long your FD corpus can support your retirement withdrawals.
+            </li>
+            <li>
+              Calculations account for interest earned (net of tax, if provided) and withdrawals adjusted for inflation and lifestyle changes.
+            </li>
+            <li>
+              Results are based on the input parameters and are for reference only.
+            </li>
+            <li>
+              Please consult a financial advisor before making major retirement decisions.
+            </li>
+          </ul>
+        </div>
+      )}
 
       <style jsx>{`
         .container {
           padding: 2rem;
           font-family: "Poppins", sans-serif;
-          background: #fcffee;
-          color: #1b1f13;
+          background: #fcfffe;
+          color: #272b2a;
         }
         .top-nav {
           margin-bottom: 1rem;
         }
         .back-button {
-          background: #000000;
-          color: #fcffee;
+          background: #108e66;
+          color: #fcfffe;
           border: none;
           padding: 0.5rem 1rem;
           border-radius: 4px;
           cursor: pointer;
-          font-family: "Poppins", sans-serif;
           font-weight: 500;
         }
         .title {
@@ -552,10 +538,19 @@ const FDBasedRetirementCalculator: React.FC = () => {
         .description {
           text-align: center;
           font-size: 1.2rem;
-          margin-bottom: 1rem;
+          margin-bottom: 2rem;
         }
         .explanation {
-          display: none;
+          background: #f0f8e8;
+          padding: 1rem;
+          border-radius: 8px;
+          margin-bottom: 1.5rem;
+          border-left: 4px solid #108e66;
+          font-size: 0.95rem;
+        }
+        .explanation p {
+          margin: 0.5rem 0;
+          line-height: 1.5;
         }
         .form-container {
           background: #fff;
@@ -607,8 +602,8 @@ const FDBasedRetirementCalculator: React.FC = () => {
           font-size: 0.8rem;
         }
         .calculate-button {
-          background: #caef7d;
-          color: #1b1f13;
+          background: #108e66;
+          color: #fcfffe;
           border: none;
           padding: 0.75rem 1.5rem;
           border-radius: 4px;
@@ -651,7 +646,7 @@ const FDBasedRetirementCalculator: React.FC = () => {
           padding: 1rem;
           border-radius: 8px;
           margin-bottom: 1rem;
-          border-left: 4px solid #caef7d;
+          border-left: 4px solid #108e66;
           text-align: center;
           font-size: 0.95rem;
         }
@@ -663,16 +658,16 @@ const FDBasedRetirementCalculator: React.FC = () => {
         }
         .chart-toggle button {
           background: transparent;
-          border: 1px solid #1b1f13;
+          border: 1px solid #272b2a;
           padding: 0.5rem 1rem;
           cursor: pointer;
           border-radius: 4px;
           transition: all 0.2s ease;
         }
         .chart-toggle button.active {
-          background: #caef7d;
-          color: #1b1f13;
-          border-color: #caef7d;
+          background: #108e66;
+          color: #fcfffe;
+          border-color: #108e66;
         }
         .chart-container {
           margin: 1rem 0 2rem;
@@ -701,6 +696,9 @@ const FDBasedRetirementCalculator: React.FC = () => {
           position: sticky;
           top: 0;
         }
+        .cta-container {
+          margin-top: 2rem;
+        }
         .disclaimer {
           background: #f9f9f9;
           padding: 1rem;
@@ -712,7 +710,7 @@ const FDBasedRetirementCalculator: React.FC = () => {
         }
         .disclaimer h4 {
           margin-top: 0;
-          color: #1b1f13;
+          color: #272b2a;
           margin-bottom: 0.5rem;
         }
         .disclaimer ul {

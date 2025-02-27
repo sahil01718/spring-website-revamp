@@ -14,6 +14,9 @@ import {
   Pie,
 } from "recharts";
 
+// -----------------------
+// Interfaces for Input & Results
+// -----------------------
 interface CalculatorInputs {
   // Required Inputs
   loanAmount: string;
@@ -40,16 +43,15 @@ interface Results {
   amortizationSchedule: AmortizationRow[];
 }
 
-//
-// TooltipIcon Component
-// Displays an "i" icon that shows friendly information when hovered over.
-//
+// -----------------------
+// Tooltip Component
+// Updated to use primary color (#108e66) with white text for consistency
+// -----------------------
 const Tooltip: React.FC<{ text: string }> = ({ text }) => {
   const [isHovered, setIsHovered] = useState(false);
-  
   return (
-    <span 
-      className="tooltip" 
+    <span
+      className="tooltip"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -65,8 +67,8 @@ const Tooltip: React.FC<{ text: string }> = ({ text }) => {
         }
         .info-icon {
           display: inline-block;
-          background: #CAEF7D;
-          color: #1B1F13;
+          background: #108e66;
+          color: #fcfffe;
           border-radius: 50%;
           font-size: 0.6rem;
           width: 14px;
@@ -78,8 +80,8 @@ const Tooltip: React.FC<{ text: string }> = ({ text }) => {
         .tooltiptext {
           visibility: visible;
           width: 200px;
-          background-color: #CAEF7D;
-          color: #1B1F13;
+          background-color: #108e66;
+          color: #fcfffe;
           text-align: left;
           border-radius: 4px;
           padding: 6px 8px;
@@ -101,25 +103,20 @@ const Tooltip: React.FC<{ text: string }> = ({ text }) => {
           margin-left: -4px;
           border-width: 4px;
           border-style: solid;
-          border-color: #CAEF7D transparent transparent transparent;
+          border-color: #108e66 transparent transparent transparent;
         }
       `}</style>
     </span>
   );
 };
 
-//
+// -----------------------
 // Simple Number to Words Converter (for basic amounts)
-// This converter works for values up to millions. Adjust as needed.
-//
+// -----------------------
 const numberToWords = (num: number): string => {
   if (num === undefined || num === null) return "";
-  
-  // Round the number to handle decimals
   num = Math.abs(Math.round(num));
-  
   if (num === 0) return "Zero";
-  
   const ones = [
     "",
     "One",
@@ -142,73 +139,35 @@ const numberToWords = (num: number): string => {
     "Eighteen",
     "Nineteen",
   ];
-  const tens = [
-    "",
-    "Ten",
-    "Twenty",
-    "Thirty",
-    "Forty",
-    "Fifty",
-    "Sixty",
-    "Seventy",
-    "Eighty",
-    "Ninety",
-  ];
-
+  const tens = ["", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
   if (num < 20) return ones[num];
   if (num < 100)
     return tens[Math.floor(num / 10)] + (num % 10 !== 0 ? " " + ones[num % 10] : "");
   if (num < 1000)
-    return (
-      ones[Math.floor(num / 100)] +
-      " Hundred" +
-      (num % 100 !== 0 ? " " + numberToWords(num % 100) : "")
-    );
+    return ones[Math.floor(num / 100)] + " Hundred" + (num % 100 !== 0 ? " " + numberToWords(num % 100) : "");
   if (num < 100000)
-    return (
-      numberToWords(Math.floor(num / 1000)) +
-      " Thousand" +
-      (num % 1000 !== 0 ? " " + numberToWords(num % 1000) : "")
-    );
+    return numberToWords(Math.floor(num / 1000)) + " Thousand" + (num % 1000 !== 0 ? " " + numberToWords(num % 1000) : "");
   if (num < 10000000)
-    return (
-      numberToWords(Math.floor(num / 100000)) +
-      " Lakh" +
-      (num % 100000 !== 0 ? " " + numberToWords(num % 100000) : "")
-    );
-  return (
-    numberToWords(Math.floor(num / 10000000)) +
-    " Crore" +
-    (num % 10000000 !== 0 ? " " + numberToWords(num % 10000000) : "")
-  );
+    return numberToWords(Math.floor(num / 100000)) + " Lakh" + (num % 100000 !== 0 ? " " + numberToWords(num % 100000) : "");
+  return numberToWords(Math.floor(num / 10000000)) + " Crore" + (num % 10000000 !== 0 ? " " + numberToWords(num % 10000000) : "");
 };
 
-//
-// Number to Words Percent
-// Converts numbers to word format with percent
-//
+// -----------------------
+// Number to Words for Percent Values
+// -----------------------
 const numberToWordsPercent = (value: number): string => {
   if (value === undefined || value === null) return "";
-  
-  // If the user enters an integer
-  if (Number.isInteger(value)) {
-    return numberToWords(value) + " percent";
-  }
-  
-  // If decimals exist, handle them
+  if (Number.isInteger(value)) return numberToWords(value) + " percent";
   const intPart = Math.floor(value);
   const decimalPart = Math.round((value - intPart) * 10);
-  
-  const intWords = numberToWords(intPart);
-  const decimalWords = numberToWords(decimalPart);
-  
-  return `${intWords} point ${decimalWords} percent`;
+  return `${numberToWords(intPart)} point ${numberToWords(decimalPart)} percent`;
 };
 
-//
+// -----------------------
 // Main EMI Calculator Component
-//
+// -----------------------
 const EmiCalculator: React.FC = () => {
+  // State hooks for inputs, errors, results, loading indicator, and chart type
   const [inputs, setInputs] = useState<CalculatorInputs>({
     loanAmount: "",
     loanTenure: "",
@@ -221,6 +180,9 @@ const EmiCalculator: React.FC = () => {
   const [isCalculating, setIsCalculating] = useState(false);
   const [chartType, setChartType] = useState<"line" | "pie">("pie");
 
+  // -----------------------
+  // Handle input changes for both input and select elements
+  // -----------------------
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -228,9 +190,11 @@ const EmiCalculator: React.FC = () => {
     setInputs((prev) => ({ ...prev, [name]: value }));
   };
 
+  // -----------------------
+  // Validate required inputs
+  // -----------------------
   const validateInputs = (): boolean => {
     const newErrors: Partial<CalculatorInputs> = {};
-    // Validate required fields
     ["loanAmount", "loanTenure", "annualInterestRate"].forEach((field) => {
       const value = inputs[field as keyof CalculatorInputs];
       if (!value || isNaN(Number(value)) || Number(value) <= 0) {
@@ -241,6 +205,9 @@ const EmiCalculator: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  // -----------------------
+  // Calculate EMI and Amortization Schedule
+  // -----------------------
   const calculateResults = () => {
     if (!validateInputs()) return;
     setIsCalculating(true);
@@ -250,14 +217,13 @@ const EmiCalculator: React.FC = () => {
     const annualRate = parseFloat(inputs.annualInterestRate);
     const processingFeePercent = inputs.processingFee ? parseFloat(inputs.processingFee) : 0;
 
-    // With prepayment removed, effective principal is same as principal.
     const effectivePrincipal = principal;
     const processingFeeAmount = principal * (processingFeePercent / 100);
 
     const monthlyRate = annualRate / 12 / 100;
     const numberOfPayments = tenureYears * 12;
 
-    // EMI formula: EMI = [P * r * (1+r)^n] / [(1+r)^n - 1]
+    // EMI formula
     const emi =
       (effectivePrincipal * monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) /
       (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
@@ -290,10 +256,15 @@ const EmiCalculator: React.FC = () => {
       amortizationSchedule,
     });
 
+    // Simulate calculation delay
     setTimeout(() => setIsCalculating(false), 1000);
   };
 
-  // Prepare chart data for line chart: Remaining Balance over Months
+  // -----------------------
+  // Prepare chart data for visualization
+  // Line Chart: Remaining Balance over Months
+  // Pie Chart: Breakdown of Principal vs Total Interest
+  // -----------------------
   const lineChartData =
     results &&
     results.amortizationSchedule.map((row) => ({
@@ -301,27 +272,34 @@ const EmiCalculator: React.FC = () => {
       remaining: row.remaining,
     }));
 
-  // For pie chart: breakdown of Principal vs Total Interest
   const pieChartData = [
-    { name: "Principal", value: parseFloat(inputs.loanAmount || "0"), fill: "#CAEF7D" },
-    { name: "Total Interest", value: results ? results.totalInterest : 0, fill: "#1B1F13" },
+    { name: "Principal", value: parseFloat(inputs.loanAmount || "0"), fill: "#108e66" },
+    { name: "Total Interest", value: results ? results.totalInterest : 0, fill: "#525ECC" },
   ];
 
   return (
     <div className="container">
-      {/* Top Navigation */}
+      {/* -----------------------
+          Top Navigation: Back to Tools Dashboard
+      ----------------------- */}
       <div className="top-nav">
         <Link href="/tools">
           <button className="back-button">Back to Dashboard</button>
         </Link>
       </div>
-      
+
+      {/* -----------------------
+          Page Title & Description
+      ----------------------- */}
       <h1 className="title">How Much is My EMI?</h1>
       <p className="description">
         Compute your Equated Monthly Installment (EMI) for a loan. Enter the loan amount, tenure, and annual
         interest rate to see your fixed monthly payment, total interest, and repayment summary.
       </p>
 
+      {/* -----------------------
+          Input Form for Loan Details
+      ----------------------- */}
       <div className="form-container">
         <h2 className="section-title">Loan Details</h2>
         <div className="input-group">
@@ -426,6 +404,9 @@ const EmiCalculator: React.FC = () => {
         </button>
       </div>
 
+      {/* -----------------------
+          Results Section
+      ----------------------- */}
       {results && (
         <div className="results-container">
           <h2 className="results-title">Loan Summary</h2>
@@ -453,29 +434,26 @@ const EmiCalculator: React.FC = () => {
             )}
           </div>
 
-          <h2 className="results-title">Loan Breakdown</h2>
+          {/* Chart Explanation & Toggle */}
           {chartType === "pie" && (
             <div className="chart-explanation">
-              <p>This pie chart shows the breakdown of your loan payments. The green segment represents the principal amount you're borrowing (₹{parseFloat(inputs.loanAmount).toLocaleString("en-IN")}), while the dark segment represents the total interest you'll pay over the loan term (₹{results.totalInterest.toLocaleString("en-IN")}). This visualization helps you understand what portion of your total repayment goes toward interest.</p>
+              <p>
+                This pie chart breaks down your total repayment into the principal amount (green) and the total interest (purple) you'll pay.
+              </p>
             </div>
           )}
           {chartType === "line" && (
             <div className="chart-explanation">
-              <p>This line chart shows how your loan balance decreases over time. The vertical axis shows the remaining loan amount, while the horizontal axis shows the months. This visualization helps you understand how your loan gets paid off over the loan tenure.</p>
+              <p>
+                This line chart shows how your loan balance decreases over time. The vertical axis shows the remaining balance, while the horizontal axis shows the months.
+              </p>
             </div>
           )}
-          
           <div className="chart-toggle">
-            <button
-              onClick={() => setChartType("line")}
-              className={chartType === "line" ? "active" : ""}
-            >
+            <button onClick={() => setChartType("line")} className={chartType === "line" ? "active" : ""}>
               Balance Chart
             </button>
-            <button
-              onClick={() => setChartType("pie")}
-              className={chartType === "pie" ? "active" : ""}
-            >
+            <button onClick={() => setChartType("pie")} className={chartType === "pie" ? "active" : ""}>
               Loan Breakdown
             </button>
           </div>
@@ -485,14 +463,11 @@ const EmiCalculator: React.FC = () => {
               {chartType === "line" && lineChartData ? (
                 <LineChart data={lineChartData} margin={{ left: 50, right: 30, top: 20, bottom: 20 }}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis
-                    dataKey="month"
-                    label={{ value: "Month", position: "insideBottom", offset: -5 }}
-                  />
-                  <YAxis domain={["auto", "auto"]} tickFormatter={(val) => val.toLocaleString("en-IN")} />
-                  <RechartsTooltip formatter={(value: number) => [`₹${value.toLocaleString("en-IN")}`, "Remaining Balance"]} />
+                  <XAxis dataKey="month" label={{ value: "Month", position: "insideBottom", offset: -5 }} />
+                  <YAxis tickFormatter={(val) => "₹" + val.toLocaleString("en-IN")} />
+                  <RechartsTooltip formatter={(value: number) => "₹" + Math.round(value).toLocaleString("en-IN")} />
                   <Legend />
-                  <Line type="monotone" dataKey="remaining" stroke="#CAEF7D" strokeWidth={2} name="Remaining Balance" />
+                  <Line type="monotone" dataKey="remaining" stroke="#108e66" strokeWidth={2} name="Remaining Balance" />
                 </LineChart>
               ) : (
                 <PieChart>
@@ -505,13 +480,14 @@ const EmiCalculator: React.FC = () => {
                     labelLine={true}
                     label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
                   />
-                  <RechartsTooltip formatter={(value: number) => [`₹${value.toLocaleString("en-IN")}`, ""]} />
+                  <RechartsTooltip formatter={(value: number) => "₹" + value.toLocaleString("en-IN")} />
                   <Legend />
                 </PieChart>
               )}
             </ResponsiveContainer>
           </div>
 
+          {/* Amortization Schedule */}
           <h2 className="results-title">Amortization Schedule</h2>
           <div className="amortization-table">
             <table>
@@ -538,37 +514,55 @@ const EmiCalculator: React.FC = () => {
             </table>
           </div>
 
-          <div className="disclaimer">
-            <h4>Important Considerations</h4>
-            <ul>
-              <li>This calculator provides a financial overview based on the inputs entered and standard EMI calculation formulas.</li>
-              <li>Actual repayment figures may vary based on additional fees, fluctuations in interest rates, and other factors.</li>
-              <li>The pie chart shows a simple breakdown of principal vs. interest to help visualize the cost of borrowing.</li>
-              <li>Consider other factors like prepayment options, loan flexibility, and tax benefits before making a decision.</li>
-              <li>Please consult a financial advisor before making major financial decisions.</li>
-            </ul>
+          {/* -----------------------
+              Get in Touch CTA Section
+          ----------------------- */}
+          <div className="cta-container mt-8 text-center">
+            <Link
+              href="https://wa.me/your-phone-number" // Replace with your actual WhatsApp link
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-[#108e66] text-[#fcfffe] px-8 py-3 rounded-md font-medium hover:bg-[#272B2A] transition-colors"
+            >
+              Get in touch
+            </Link>
           </div>
         </div>
       )}
 
+      {/* Disclaimer Section */}
+      {results && (
+        <div className="disclaimer">
+          <h4>Important Considerations</h4>
+          <ul>
+            <li>This calculator provides an overview based on standard EMI formulas and may not reflect all fees or variations in interest rates.</li>
+            <li>Processing fees and other charges are considered separately.</li>
+            <li>The charts and amortization schedule are for illustration purposes only.</li>
+            <li>Please consult a financial advisor before making major financial decisions.</li>
+          </ul>
+        </div>
+      )}
+
+      {/* -----------------------
+          Inline Styles for the EMI Calculator Component
+      ----------------------- */}
       <style jsx>{`
         .container {
           padding: 2rem;
           font-family: "Poppins", sans-serif;
-          background: #fcffee;
-          color: #1b1f13;
+          background: #fcfffe;
+          color: #272b2a;
         }
         .top-nav {
           margin-bottom: 1rem;
         }
         .back-button {
-          background: #000000;
-          color: #fcffee;
+          background: #108e66;
+          color: #fcfffe;
           border: none;
           padding: 0.5rem 1rem;
           border-radius: 4px;
           cursor: pointer;
-          font-family: "Poppins", sans-serif;
           font-weight: 500;
         }
         .title {
@@ -632,8 +626,8 @@ const EmiCalculator: React.FC = () => {
           font-size: 0.8rem;
         }
         .calculate-button {
-          background: #caef7d;
-          color: #1b1f13;
+          background: #108e66;
+          color: #fcfffe;
           border: none;
           padding: 0.75rem 1.5rem;
           border-radius: 4px;
@@ -676,7 +670,7 @@ const EmiCalculator: React.FC = () => {
           padding: 1rem;
           border-radius: 8px;
           margin-bottom: 1rem;
-          border-left: 4px solid #caef7d;
+          border-left: 4px solid #108e66;
         }
         .chart-explanation p {
           margin: 0;
@@ -690,16 +684,16 @@ const EmiCalculator: React.FC = () => {
         }
         .chart-toggle button {
           background: transparent;
-          border: 1px solid #1b1f13;
+          border: 1px solid #272b2a;
           padding: 0.5rem 1rem;
           cursor: pointer;
           border-radius: 4px;
           transition: all 0.2s ease;
         }
         .chart-toggle button.active {
-          background: #caef7d;
-          color: #1b1f13;
-          border-color: #caef7d;
+          background: #108e66;
+          color: #fcfffe;
+          border-color: #108e66;
         }
         .chart-container {
           margin: 1rem 0 2rem;
@@ -728,6 +722,9 @@ const EmiCalculator: React.FC = () => {
           position: sticky;
           top: 0;
         }
+        .cta-container {
+          margin-top: 2rem;
+        }
         .disclaimer {
           background: #f9f9f9;
           padding: 1rem;
@@ -739,7 +736,7 @@ const EmiCalculator: React.FC = () => {
         }
         .disclaimer h4 {
           margin-top: 0;
-          color: #1b1f13;
+          color: #272b2a;
           margin-bottom: 0.5rem;
         }
         .disclaimer ul {
@@ -748,9 +745,6 @@ const EmiCalculator: React.FC = () => {
         }
         .disclaimer li {
           margin-bottom: 0.5rem;
-        }
-        .disclaimer li:last-child {
-          margin-bottom: 0;
         }
         @media (max-width: 768px) {
           .input-group {

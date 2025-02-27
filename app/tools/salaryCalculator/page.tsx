@@ -59,7 +59,7 @@ interface BarData {
 }
 
 // -----------------------
-// Tooltip for question marks
+// Utility: Tooltip for question marks
 // -----------------------
 const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -81,8 +81,8 @@ const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
         }
         .info-icon {
           display: inline-block;
-          background: #caef7d;
-          color: #1b1f13;
+          background: #108e66;
+          color: #FCFFFE;
           border-radius: 50%;
           font-size: 0.6rem;
           width: 14px;
@@ -94,8 +94,8 @@ const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
         .tooltiptext {
           visibility: visible;
           width: 220px;
-          background-color: #caef7d;
-          color: #1b1f13;
+          background-color: #108e66;
+          color: #FCFFFE;
           text-align: left;
           border-radius: 4px;
           padding: 6px 8px;
@@ -117,7 +117,7 @@ const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
           margin-left: -4px;
           border-width: 4px;
           border-style: solid;
-          border-color: #caef7d transparent transparent transparent;
+          border-color: #108e66 transparent transparent transparent;
         }
       `}</style>
     </span>
@@ -125,7 +125,7 @@ const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
 };
 
 // -----------------------
-// Utility: number to words
+// Utility: Number to Words Converters
 // -----------------------
 const numberToWords = (num: number): string => {
   if (num === undefined || num === null) return "";
@@ -206,7 +206,141 @@ const numberToWordsPercent = (value: number): string => {
 };
 
 // -----------------------
-// Main CTC vs In-Hand Calculator Component
+// Pie Chart & Bar Chart Components
+// -----------------------
+
+// Colors for visualizations – use shades of purple for visual elements in charts
+const PIE_COLORS = ["#525ECC", "#6A5ECC", "#7B66CC", "#8C6ECC", "#9D77CC"];
+
+const PieChartContainer: React.FC<{ results: Results }> = ({ results }) => {
+  // Extract breakdown values from results
+  const {
+    grossAnnualSalary,
+    annualBonus,
+    totalAnnualDeductions,
+    takeHomeAnnualBeforeTax,
+    taxPaid = 0,
+  } = results.breakdown;
+  const netAfterTax =
+    taxPaid > 0
+      ? results.breakdown.finalTakeHomeAnnual || takeHomeAnnualBeforeTax
+      : takeHomeAnnualBeforeTax;
+
+  const pieData: ChartData[] = [
+    { name: "Gross Salary (Excl. Bonus)", value: grossAnnualSalary },
+    { name: "Bonus", value: annualBonus },
+    { name: "Deductions", value: totalAnnualDeductions },
+    { name: "Tax", value: taxPaid },
+    { name: "Net In-Hand", value: netAfterTax },
+  ];
+
+  return (
+    <div className="chart-container">
+      <ResponsiveContainer width="100%" height={400}>
+        <PieChart>
+          <RechartsTooltip
+            formatter={(value: number, name: string) => [
+              `₹${value.toLocaleString("en-IN")} (${toWordsRupees(value)})`,
+              name,
+            ]}
+          />
+          <Legend layout="horizontal" verticalAlign="bottom" align="center" />
+          <Pie
+            dataKey="value"
+            data={pieData}
+            cx="50%"
+            cy="45%"
+            outerRadius={120}
+            labelLine={true}
+            label={({ name }) => name}
+          >
+            {pieData.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={PIE_COLORS[index % PIE_COLORS.length]} />
+            ))}
+          </Pie>
+        </PieChart>
+      </ResponsiveContainer>
+      <div className="pie-legend">
+        {pieData.map((entry, index) => (
+          <div key={`legend-${index}`} className="legend-item">
+            <span className="color-box" style={{ backgroundColor: PIE_COLORS[index % PIE_COLORS.length] }}></span>
+            <span className="legend-text">
+              {entry.name}: ₹{entry.value.toLocaleString("en-IN")} ({toWordsRupees(entry.value)})
+            </span>
+          </div>
+        ))}
+      </div>
+      <style jsx>{`
+        .pie-legend {
+          margin-top: 1rem;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 0.5rem;
+          padding: 1rem;
+          background: #f9f9f9;
+          border-radius: 8px;
+        }
+        .legend-item {
+          display: flex;
+          align-items: center;
+          font-size: 0.9rem;
+          padding: 0.25rem;
+        }
+        .color-box {
+          width: 12px;
+          height: 12px;
+          margin-right: 8px;
+          border-radius: 2px;
+        }
+        .legend-text {
+          flex: 1;
+        }
+      `}</style>
+    </div>
+  );
+};
+
+interface BarData {
+  name: string;
+  monthly: number;
+}
+
+const BarChartContainer: React.FC<{ results: Results; inputs: CalculatorInputs }> = ({
+  results,
+  inputs,
+}) => {
+  const grossMonthly = parseFloat(inputs.annualCTC) / 12;
+  const { totalMonthlyDeductions, taxPaid = 0, takeHomeMonthlyBeforeTax, finalTakeHomeMonthly } =
+    results.breakdown;
+  const netMonthly =
+    taxPaid > 0 ? finalTakeHomeMonthly || takeHomeMonthlyBeforeTax : takeHomeMonthlyBeforeTax;
+
+  const barData: BarData[] = [
+    { name: "Gross Monthly", monthly: grossMonthly },
+    { name: "Deductions", monthly: totalMonthlyDeductions },
+    { name: "Net In-Hand", monthly: netMonthly },
+  ];
+
+  return (
+    <div className="chart-container">
+      <ResponsiveContainer width="100%" height={300}>
+        <BarChart data={barData}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis tickFormatter={(val) => "₹" + val.toLocaleString("en-IN")} />
+          <RechartsTooltip
+            formatter={(value: number) => `₹${value.toLocaleString("en-IN")} (${toWordsRupees(value)})`}
+          />
+          <Legend />
+          <Bar dataKey="monthly" fill="#525ECC" name="Amount (Monthly)" />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  );
+};
+
+// -----------------------
+// Main CTC vs. In‑Hand Calculator Component
 // -----------------------
 const CTCvsInHandCalculator: React.FC = () => {
   const [inputs, setInputs] = useState<CalculatorInputs>({
@@ -251,7 +385,7 @@ const CTCvsInHandCalculator: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Calculation logic
+  // Calculation logic (unchanged)
   const calculateResults = () => {
     if (!validateInputs()) return;
     setIsCalculating(true);
@@ -267,23 +401,17 @@ const CTCvsInHandCalculator: React.FC = () => {
 
     // 1. Annual bonus
     const annualBonus = annualCTC * bonusPercentage;
-
     // 2. Gross annual salary (excl. bonus)
     const grossAnnualSalary = annualCTC - annualBonus;
-
     // 3. Total monthly deductions
     const totalMonthlyDeductions =
       monthlyProfessionalTax + monthlyEmployerPF + monthlyEmployeePF + additionalMonthlyDeductions;
-
     // 4. Total annual deductions
     const totalAnnualDeductions = totalMonthlyDeductions * 12;
-
     // 5. Take-home annual (before tax)
     const takeHomeAnnualBeforeTax = grossAnnualSalary - totalAnnualDeductions + annualBonus;
-
     // 6. Take-home monthly (before tax)
     const takeHomeMonthlyBeforeTax = takeHomeAnnualBeforeTax / 12;
-
     // 7. Income tax (if any)
     let taxPaid = 0;
     let finalTakeHomeAnnual = takeHomeAnnualBeforeTax;
@@ -302,13 +430,7 @@ const CTCvsInHandCalculator: React.FC = () => {
       totalAnnualDeductions,
       takeHomeAnnualBeforeTax,
       takeHomeMonthlyBeforeTax,
-      ...(taxSlab > 0
-        ? {
-            taxPaid,
-            finalTakeHomeAnnual,
-            finalTakeHomeMonthly,
-          }
-        : {}),
+      ...(taxSlab > 0 ? { taxPaid, finalTakeHomeAnnual, finalTakeHomeMonthly } : {}),
     };
 
     setResults({ breakdown });
@@ -332,10 +454,10 @@ const CTCvsInHandCalculator: React.FC = () => {
             : takeHomeAnnualBeforeTax;
 
         return [
-          { name: "Gross Salary (excl. Bonus)", value: grossAnnualSalary },
+          { name: "Gross Salary (Excl. Bonus)", value: grossAnnualSalary },
           { name: "Bonus", value: annualBonus },
           { name: "Deductions", value: totalAnnualDeductions },
-          { name: "Tax (If any)", value: taxPaid },
+          { name: "Tax", value: taxPaid },
           { name: "Net In-Hand", value: netAfterTax },
         ];
       })()
@@ -344,25 +466,18 @@ const CTCvsInHandCalculator: React.FC = () => {
   // Bar data
   const barData: BarData[] = results
     ? (() => {
-        const {
-          totalMonthlyDeductions,
-          taxPaid = 0,
-          takeHomeMonthlyBeforeTax,
-          finalTakeHomeMonthly,
-        } = results.breakdown;
+        const grossMonthly = parseFloat(inputs.annualCTC) / 12;
+        const { totalMonthlyDeductions, taxPaid = 0, takeHomeMonthlyBeforeTax, finalTakeHomeMonthly } =
+          results.breakdown;
         const netMonthly =
           taxPaid > 0 ? finalTakeHomeMonthly || takeHomeMonthlyBeforeTax : takeHomeMonthlyBeforeTax;
-
         return [
-          { name: "Gross Monthly", monthly: parseFloat(inputs.annualCTC) / 12 },
-          { name: "Monthly Deductions", monthly: totalMonthlyDeductions },
+          { name: "Gross Monthly", monthly: grossMonthly },
+          { name: "Deductions", monthly: totalMonthlyDeductions },
           { name: "Net In-Hand", monthly: netMonthly },
         ];
       })()
     : [];
-
-  // Colors for the pie slices
-  const PIE_COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#caef7d"];
 
   return (
     <div className="container">
@@ -373,9 +488,9 @@ const CTCvsInHandCalculator: React.FC = () => {
         </Link>
       </div>
 
-      <h1 className="title">CTC vs. In-Hand Salary Calculator</h1>
+      <h1 className="title">CTC vs. In‑Hand Salary Calculator</h1>
       <p className="description">
-        Understand how your annual CTC breaks down into monthly in-hand salary after bonus, PF contributions, professional tax, and other deductions.
+        Understand how your annual CTC is distributed into your monthly take‑home pay after bonus, PF contributions, professional tax, and other deductions.
       </p>
 
       {/* Form */}
@@ -457,7 +572,7 @@ const CTCvsInHandCalculator: React.FC = () => {
           <label>
             <span className="input-label">
               Additional Monthly Deductions (INR)
-              <TooltipIcon text="Enter any other monthly deductions (loan EMIs, insurance, etc.)" />
+              <TooltipIcon text="Enter any other monthly deductions (loan EMIs, insurance, etc.)." />
             </span>
             <input
               type="number"
@@ -510,48 +625,48 @@ const CTCvsInHandCalculator: React.FC = () => {
 
       {results && (
         <div className="results-container">
-          <h2 className="results-title">CTC vs In-Hand Salary Breakdown</h2>
+          <h2 className="results-title">CTC vs In‑Hand Salary Breakdown</h2>
           <div className="summary-card">
             <div className="summary-item">
               <strong>Gross Annual Salary (Excl. Bonus):</strong>{" "}
-              ₹{results.breakdown.grossAnnualSalary.toLocaleString("en-IN")}{" "}
-              ({toWordsRupees(results.breakdown.grossAnnualSalary)})
+              ₹{results.breakdown.grossAnnualSalary.toLocaleString("en-IN")} (
+              {toWordsRupees(results.breakdown.grossAnnualSalary)})
             </div>
             <div className="summary-item">
-              <strong>Annual Bonus:</strong> ₹{results.breakdown.annualBonus.toLocaleString("en-IN")}{" "}
-              ({toWordsRupees(results.breakdown.annualBonus)})
+              <strong>Annual Bonus:</strong> ₹{results.breakdown.annualBonus.toLocaleString("en-IN")} (
+              {toWordsRupees(results.breakdown.annualBonus)})
             </div>
             <div className="summary-item">
               <strong>Total Annual Deductions:</strong>{" "}
-              ₹{results.breakdown.totalAnnualDeductions.toLocaleString("en-IN")}{" "}
-              ({toWordsRupees(results.breakdown.totalAnnualDeductions)})
+              ₹{results.breakdown.totalAnnualDeductions.toLocaleString("en-IN")} (
+              {toWordsRupees(results.breakdown.totalAnnualDeductions)})
             </div>
             <div className="summary-item">
               <strong>Take-Home (Annual, Before Tax):</strong>{" "}
-              ₹{results.breakdown.takeHomeAnnualBeforeTax.toLocaleString("en-IN")}{" "}
-              ({toWordsRupees(results.breakdown.takeHomeAnnualBeforeTax)})
+              ₹{results.breakdown.takeHomeAnnualBeforeTax.toLocaleString("en-IN")} (
+              {toWordsRupees(results.breakdown.takeHomeAnnualBeforeTax)})
             </div>
             <div className="summary-item">
               <strong>Take-Home (Monthly, Before Tax):</strong>{" "}
-              ₹{results.breakdown.takeHomeMonthlyBeforeTax.toLocaleString("en-IN")}{" "}
-              ({toWordsRupees(results.breakdown.takeHomeMonthlyBeforeTax)})
+              ₹{results.breakdown.takeHomeMonthlyBeforeTax.toLocaleString("en-IN")} (
+              {toWordsRupees(results.breakdown.takeHomeMonthlyBeforeTax)})
             </div>
             {results.breakdown.taxPaid !== undefined && (
               <>
                 <div className="summary-item">
                   <strong>Estimated Tax Paid:</strong>{" "}
-                  ₹{results.breakdown.taxPaid.toLocaleString("en-IN")}{" "}
-                  ({toWordsRupees(results.breakdown.taxPaid)})
+                  ₹{results.breakdown.taxPaid.toLocaleString("en-IN")} (
+                  {toWordsRupees(results.breakdown.taxPaid)})
                 </div>
                 <div className="summary-item">
                   <strong>Final Take-Home (Annual):</strong>{" "}
-                  ₹{results.breakdown.finalTakeHomeAnnual?.toLocaleString("en-IN")}{" "}
-                  ({toWordsRupees(results.breakdown.finalTakeHomeAnnual || 0)})
+                  ₹{results.breakdown.finalTakeHomeAnnual?.toLocaleString("en-IN")} (
+                  {toWordsRupees(results.breakdown.finalTakeHomeAnnual || 0)})
                 </div>
                 <div className="summary-item">
                   <strong>Final Take-Home (Monthly):</strong>{" "}
-                  ₹{results.breakdown.finalTakeHomeMonthly?.toLocaleString("en-IN")}{" "}
-                  ({toWordsRupees(results.breakdown.finalTakeHomeMonthly || 0)})
+                  ₹{results.breakdown.finalTakeHomeMonthly?.toLocaleString("en-IN")} (
+                  {toWordsRupees(results.breakdown.finalTakeHomeMonthly || 0)})
                 </div>
               </>
             )}
@@ -565,7 +680,6 @@ const CTCvsInHandCalculator: React.FC = () => {
             </p>
           </div>
 
-          {/* Toggle for Pie / Bar */}
           <div className="chart-toggle">
             <button onClick={() => setChartType("pie")} className={chartType === "pie" ? "active" : ""}>
               Pie Chart
@@ -580,46 +694,44 @@ const CTCvsInHandCalculator: React.FC = () => {
           ) : (
             <BarChartContainer results={results} inputs={inputs} />
           )}
-
-          {/* Important Considerations Section */}
-          <div className="disclaimer">
-            <h4>Important Considerations</h4>
-            <ul>
-              <li>
-                This calculator provides an approximate breakdown of your CTC vs. in-hand salary based on the inputs provided.
-              </li>
-              <li>
-                Actual take-home pay may vary due to additional factors such as variable bonuses, special allowances, or changes in tax laws.
-              </li>
-              <li>
-                The calculations use simplified assumptions and may not include all possible deductions.
-              </li>
-              <li>
-                Consult with your HR or a financial advisor for personalized advice.
-              </li>
-            </ul>
-          </div>
         </div>
       )}
+
+      <div className="disclaimer">
+        <h4>Important Considerations</h4>
+        <ul>
+          <li>
+            This calculator provides an approximate breakdown of your CTC vs. in‑hand salary based on the inputs provided.
+          </li>
+          <li>
+            Actual take‑home pay may vary due to additional factors such as variable bonuses, special allowances, or changes in tax laws.
+          </li>
+          <li>
+            The calculations use simplified assumptions and may not include all possible deductions.
+          </li>
+          <li>
+            Consult with your HR or a financial advisor for personalized advice.
+          </li>
+        </ul>
+      </div>
 
       <style jsx>{`
         .container {
           padding: 2rem;
           font-family: "Poppins", sans-serif;
-          background: #fcffee;
-          color: #1b1f13;
+          background: #FCFFFE;
+          color: #272B2A;
         }
         .top-nav {
           margin-bottom: 1rem;
         }
         .back-button {
-          background: #000000;
-          color: #fcffee;
+          background: #272B2A;
+          color: #FCFFFE;
           border: none;
           padding: 0.5rem 1rem;
           border-radius: 4px;
           cursor: pointer;
-          font-family: "Poppins", sans-serif;
           font-weight: 500;
         }
         .title {
@@ -634,10 +746,10 @@ const CTCvsInHandCalculator: React.FC = () => {
           margin-bottom: 2rem;
         }
         .form-container {
-          background: #fff;
+          background: #FCFFFE;
           padding: 2rem;
           border-radius: 8px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 8px rgba(39, 43, 42, 0.15);
           margin-bottom: 2rem;
         }
         .section-title {
@@ -662,23 +774,26 @@ const CTCvsInHandCalculator: React.FC = () => {
           align-items: center;
           margin-bottom: 4px;
         }
-        .input-group input {
+        .input-group input,
+        .select-input {
           padding: 0.5rem;
           margin-top: 0.5rem;
-          border: 1px solid #ccc;
+          border: 1px solid #272B2A;
           border-radius: 4px;
           height: 38px;
           width: 100%;
           box-sizing: border-box;
           font-size: 1rem;
+          background: #FCFFFE;
+          color: #272B2A;
         }
         .error {
           color: red;
           font-size: 0.8rem;
         }
         .calculate-button {
-          background: #caef7d;
-          color: #1b1f13;
+          background: #108e66;
+          color: #FCFFFE;
           border: none;
           padding: 0.75rem 1.5rem;
           border-radius: 4px;
@@ -692,10 +807,10 @@ const CTCvsInHandCalculator: React.FC = () => {
           cursor: not-allowed;
         }
         .results-container {
-          background: #fff;
+          background: #FCFFFE;
           padding: 2rem;
           border-radius: 8px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 8px rgba(39, 43, 42, 0.15);
           margin-bottom: 2rem;
         }
         .results-title {
@@ -721,7 +836,7 @@ const CTCvsInHandCalculator: React.FC = () => {
           padding: 1rem;
           border-radius: 8px;
           margin-bottom: 1rem;
-          border-left: 4px solid #caef7d;
+          border-left: 4px solid #108e66;
           text-align: center;
           font-size: 0.95rem;
         }
@@ -733,16 +848,17 @@ const CTCvsInHandCalculator: React.FC = () => {
         }
         .chart-toggle button {
           background: transparent;
-          border: 1px solid #1b1f13;
+          border: 1px solid #272B2A;
           padding: 0.5rem 1rem;
           cursor: pointer;
           border-radius: 4px;
           transition: all 0.2s ease;
+          color: #272B2A;
         }
         .chart-toggle button.active {
-          background: #caef7d;
-          color: #1b1f13;
-          border-color: #caef7d;
+          background: #108e66;
+          color: #FCFFFE;
+          border-color: #108e66;
         }
         .chart-container {
           margin: 1rem 0 2rem;
@@ -752,13 +868,13 @@ const CTCvsInHandCalculator: React.FC = () => {
           padding: 1rem;
           border-radius: 4px;
           font-size: 0.9rem;
-          color: #555;
-          border: 1px solid #ddd;
+          color: #272B2A;
+          border: 1px solid #272B2A;
           margin-top: 2rem;
         }
         .disclaimer h4 {
           margin-top: 0;
-          color: #1b1f13;
+          color: #272B2A;
           margin-bottom: 0.5rem;
         }
         .disclaimer ul {
@@ -775,152 +891,11 @@ const CTCvsInHandCalculator: React.FC = () => {
           .chart-container {
             margin: 1.5rem 0;
           }
+          .summary-card {
+            grid-template-columns: 1fr;
+          }
         }
       `}</style>
-    </div>
-  );
-};
-
-// Colors for Pie slices
-const PIE_COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#caef7d"];
-
-/**
- * Separate component for the Pie Chart
- */
-const PieChartContainer: React.FC<{ results: Results }> = ({ results }) => {
-  const {
-    grossAnnualSalary,
-    annualBonus,
-    totalAnnualDeductions,
-    takeHomeAnnualBeforeTax,
-    taxPaid = 0,
-  } = results.breakdown;
-
-  const netAfterTax =
-    taxPaid > 0
-      ? results.breakdown.finalTakeHomeAnnual || takeHomeAnnualBeforeTax
-      : takeHomeAnnualBeforeTax;
-
-  const pieData: ChartData[] = [
-    { name: "Gross Salary (excl. Bonus)", value: grossAnnualSalary },
-    { name: "Bonus", value: annualBonus },
-    { name: "Deductions", value: totalAnnualDeductions },
-    { name: "Tax (If any)", value: taxPaid },
-    { name: "Net In-Hand", value: netAfterTax },
-  ];
-
-  return (
-    <div className="chart-container">
-      <ResponsiveContainer width="100%" height={400}>
-        <PieChart>
-          <RechartsTooltip
-            formatter={(value: number, name: string) => [
-              `₹${value.toLocaleString("en-IN")} (${toWordsRupees(value)})`,
-              name,
-            ]}
-          />
-          <Legend layout="horizontal" verticalAlign="bottom" align="center" />
-          <Pie
-            dataKey="value"
-            data={pieData}
-            cx="50%"
-            cy="45%"
-            outerRadius={120}
-            labelLine={true}
-            label={({ name }) => name}
-          >
-            {pieData.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={PIE_COLORS[index % PIE_COLORS.length]} />
-            ))}
-          </Pie>
-        </PieChart>
-      </ResponsiveContainer>
-      <div className="pie-legend">
-        {pieData.map((entry, index) => (
-          <div key={`legend-${index}`} className="legend-item">
-            <span className="color-box" style={{ backgroundColor: PIE_COLORS[index % PIE_COLORS.length] }}></span>
-            <span className="legend-text">
-              {entry.name}: ₹{entry.value.toLocaleString("en-IN")} ({toWordsRupees(entry.value)})
-            </span>
-          </div>
-        ))}
-      </div>
-      <style jsx>{`
-        .pie-legend {
-          margin-top: 1rem;
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 0.5rem;
-          padding: 1rem;
-          background: #f9f9f9;
-          border-radius: 8px;
-        }
-        .legend-item {
-          display: flex;
-          align-items: center;
-          font-size: 0.9rem;
-          padding: 0.25rem;
-        }
-        .color-box {
-          width: 12px;
-          height: 12px;
-          margin-right: 8px;
-          border-radius: 2px;
-        }
-        .legend-text {
-          flex: 1;
-        }
-      `}</style>
-    </div>
-  );
-};
-
-/**
- * Separate component for the Bar Chart
- */
-const BarChartContainer: React.FC<{ results: Results; inputs: CalculatorInputs }> = ({
-  results,
-  inputs,
-}) => {
-  const {
-    totalMonthlyDeductions,
-    taxPaid = 0,
-    takeHomeMonthlyBeforeTax,
-    finalTakeHomeMonthly,
-  } = results.breakdown;
-
-  const netMonthly =
-    taxPaid > 0 ? finalTakeHomeMonthly || takeHomeMonthlyBeforeTax : takeHomeMonthlyBeforeTax;
-
-  const barData: BarData[] = [
-    {
-      name: "Gross Monthly",
-      monthly: parseFloat(inputs.annualCTC) / 12,
-    },
-    {
-      name: "Monthly Deductions",
-      monthly: totalMonthlyDeductions,
-    },
-    {
-      name: "Net In-Hand",
-      monthly: netMonthly,
-    },
-  ];
-
-  return (
-    <div className="chart-container">
-      <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={barData}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis tickFormatter={(val) => val.toLocaleString("en-IN")} />
-          <RechartsTooltip
-            formatter={(value: number) => `₹${value.toLocaleString("en-IN")} (${toWordsRupees(value)})`}
-          />
-          <Legend />
-          <Bar dataKey="monthly" fill="#caef7d" name="Amount (Monthly)" />
-        </BarChart>
-      </ResponsiveContainer>
     </div>
   );
 };

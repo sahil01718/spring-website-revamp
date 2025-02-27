@@ -42,7 +42,7 @@ interface Results {
 }
 
 // -----------------------
-// Utility: Tooltip Component for Inputs
+// Updated Tooltip Component
 // -----------------------
 const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -64,8 +64,8 @@ const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
         }
         .info-icon {
           display: inline-block;
-          background: #caef7d;
-          color: #1b1f13;
+          background: #108e66;
+          color: #fcfffe;
           border-radius: 50%;
           font-size: 0.6rem;
           width: 14px;
@@ -77,8 +77,8 @@ const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
         .tooltiptext {
           visibility: visible;
           width: 220px;
-          background-color: #caef7d;
-          color: #1b1f13;
+          background-color: #108e66;
+          color: #fcfffe;
           text-align: left;
           border-radius: 4px;
           padding: 6px 8px;
@@ -100,7 +100,7 @@ const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
           margin-left: -4px;
           border-width: 4px;
           border-style: solid;
-          border-color: #caef7d transparent transparent transparent;
+          border-color: #108e66 transparent transparent transparent;
         }
       `}</style>
     </span>
@@ -185,7 +185,7 @@ const numberToWordsPercent = (value: number): string => {
 };
 
 // -----------------------
-// Custom Tooltip for Line Chart
+// Custom Tooltip for Line Chart (Updated UI)
 // -----------------------
 const CustomLineTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
@@ -203,10 +203,11 @@ const CustomLineTooltip = ({ active, payload, label }: any) => {
         </p>
         <style jsx>{`
           .custom-tooltip {
-            background: #ffffff;
-            border: 1px solid #ccc;
+            background: #108e66;
+            border: 1px solid #272b2a;
             padding: 8px;
             border-radius: 4px;
+            color: #fcfffe;
           }
           .label {
             font-weight: bold;
@@ -217,7 +218,6 @@ const CustomLineTooltip = ({ active, payload, label }: any) => {
           }
           .desc {
             font-size: 0.8rem;
-            color: #555;
             margin-top: 4px;
           }
         `}</style>
@@ -228,7 +228,7 @@ const CustomLineTooltip = ({ active, payload, label }: any) => {
 };
 
 // -----------------------
-// Custom Tooltip for Area Chart
+// Custom Tooltip for Area Chart (Updated UI)
 // -----------------------
 const CustomAreaTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
@@ -239,14 +239,15 @@ const CustomAreaTooltip = ({ active, payload, label }: any) => {
           Corpus Difference: ₹{payload[0]?.value?.toLocaleString("en-IN")}
         </p>
         <p className="desc">
-          The shaded area shows the extra value in NPS (with tax benefit) compared to Mutual Fund.
+          The shaded area represents the extra value in NPS (with tax benefit) compared to Mutual Fund.
         </p>
         <style jsx>{`
           .custom-tooltip {
-            background: #ffffff;
-            border: 1px solid #ccc;
+            background: #108e66;
+            border: 1px solid #272b2a;
             padding: 8px;
             border-radius: 4px;
+            color: #fcfffe;
           }
           .label {
             font-weight: bold;
@@ -257,7 +258,6 @@ const CustomAreaTooltip = ({ active, payload, label }: any) => {
           }
           .desc {
             font-size: 0.8rem;
-            color: #555;
             margin-top: 4px;
           }
         `}</style>
@@ -268,7 +268,7 @@ const CustomAreaTooltip = ({ active, payload, label }: any) => {
 };
 
 // -----------------------
-// Main Mutual Fund vs. NPS Calculator Component
+// Main Mutual Fund vs. NPS Tier I Calculator Component (UI Updated)
 // -----------------------
 const MutualFundvsNPSTierICalculator: React.FC = () => {
   const [inputs, setInputs] = useState<CalculatorInputs>({
@@ -397,7 +397,7 @@ const MutualFundvsNPSTierICalculator: React.FC = () => {
 
   return (
     <div className="container">
-      {/* Back to Dashboard Button at Top */}
+      {/* Top Navigation */}
       <div className="top-nav">
         <Link href="/tools">
           <button className="back-button">Back to Dashboard</button>
@@ -408,7 +408,7 @@ const MutualFundvsNPSTierICalculator: React.FC = () => {
       <p className="description">
         Compare long-term returns between market-driven Mutual Funds and government-backed NPS Tier I investments.
       </p>
-      {/* Simple Explanation Section */}
+      {/* Explanation Section */}
       <div className="explanation">
         <p>
           <strong>Mutual Funds:</strong> Investment vehicles that pool money from many investors to buy a diversified portfolio of stocks or bonds. They are managed by professionals and reflect market performance.
@@ -621,43 +621,35 @@ const MutualFundvsNPSTierICalculator: React.FC = () => {
             </ResponsiveContainer>
           </div>
 
-          <h2 className="results-title">Year-wise Breakdown</h2>
-          <div className="amortization-table">
-            <table>
-              <thead>
-                <tr>
-                  <th>Year</th>
-                  <th>Mutual Fund Corpus (INR)</th>
-                  <th>NPS Corpus (incl. Tax Benefit) (INR)</th>
-                </tr>
-              </thead>
-              <tbody>
-                {results.yearWise.map((data) => (
-                  <tr key={data.year}>
-                    <td>{data.year}</td>
-                    <td>{data.mfCorpus.toLocaleString("en-IN")}</td>
-                    <td>{data.npsCorpus.toLocaleString("en-IN")}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          {/* Get in Touch CTA */}
+          <div className="cta-container mt-8 text-center">
+            <Link
+              href="https://wa.me/your-phone-number"  // Replace with your actual WhatsApp link
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-[#108e66] text-[#fcfffe] px-8 py-3 rounded-md font-medium hover:bg-[#272b2a] transition-colors"
+            >
+              Get in touch
+            </Link>
           </div>
+        </div>
+      )}
 
-          <div className="disclaimer">
-            <h4>Important Considerations</h4>
-            <ul>
-              <li>
-                This calculator projects your investment corpus over the chosen tenure based on the input parameters.
-              </li>
-              <li>
-                Mutual Funds and NPS are compared using a SIP formula, with NPS including an estimated tax benefit.
-              </li>
-              <li>
-                Actual returns can vary due to market conditions and other factors.
-              </li>
-            </ul>
-            <p>Please consult with a financial advisor before making any investment decisions.</p>
-          </div>
+      {results && (
+        <div className="disclaimer">
+          <h4>Important Considerations</h4>
+          <ul>
+            <li>
+              This calculator projects your investment corpus over the chosen tenure based on the input parameters.
+            </li>
+            <li>
+              Mutual Funds and NPS are compared using a SIP formula, with NPS including an estimated tax benefit.
+            </li>
+            <li>
+              Actual returns can vary due to market conditions and other factors.
+            </li>
+          </ul>
+          <p>Please consult with a financial advisor before making any investment decisions.</p>
         </div>
       )}
 
@@ -665,7 +657,7 @@ const MutualFundvsNPSTierICalculator: React.FC = () => {
         .container {
           padding: 2rem;
           font-family: "Poppins", sans-serif;
-          background: #fcffee;
+          background: #fcfffe;
           color: #1b1f13;
         }
         .top-nav {
@@ -673,7 +665,7 @@ const MutualFundvsNPSTierICalculator: React.FC = () => {
         }
         .back-button {
           background: #000000;
-          color: #fcffee;
+          color: #fcfffe;
           border: none;
           padding: 0.5rem 1rem;
           border-radius: 4px;
@@ -754,8 +746,8 @@ const MutualFundvsNPSTierICalculator: React.FC = () => {
           font-size: 0.8rem;
         }
         .calculate-button {
-          background: #caef7d;
-          color: #1b1f13;
+          background: #108e66;
+          color: #fcfffe;
           border: none;
           padding: 0.75rem 1.5rem;
           border-radius: 4px;
@@ -798,7 +790,7 @@ const MutualFundvsNPSTierICalculator: React.FC = () => {
           padding: 1rem;
           border-radius: 8px;
           margin-bottom: 1rem;
-          border-left: 4px solid #caef7d;
+          border-left: 4px solid #108e66;
           text-align: center;
           font-size: 0.95rem;
         }
@@ -810,16 +802,16 @@ const MutualFundvsNPSTierICalculator: React.FC = () => {
         }
         .chart-toggle button {
           background: transparent;
-          border: 1px solid #1b1f13;
+          border: 1px solid #272b2a;
           padding: 0.5rem 1rem;
           cursor: pointer;
           border-radius: 4px;
           transition: all 0.2s ease;
         }
         .chart-toggle button.active {
-          background: #caef7d;
-          color: #1b1f13;
-          border-color: #caef7d;
+          background: #108e66;
+          color: #fcfffe;
+          border-color: #108e66;
         }
         .chart-container {
           margin: 1rem 0 2rem;
@@ -859,7 +851,7 @@ const MutualFundvsNPSTierICalculator: React.FC = () => {
         }
         .disclaimer h4 {
           margin-top: 0;
-          color: #1b1f13;
+          color: #272b2a;
           margin-bottom: 0.5rem;
         }
         .disclaimer ul {

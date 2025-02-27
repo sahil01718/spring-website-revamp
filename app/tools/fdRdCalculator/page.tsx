@@ -48,7 +48,7 @@ interface YearlyData {
 }
 
 // -----------------------
-// Tooltip Component
+// Tooltip Component (Updated to our theme)
 // -----------------------
 const Tooltip: React.FC<{ text: string }> = ({ text }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -71,8 +71,8 @@ const Tooltip: React.FC<{ text: string }> = ({ text }) => {
         }
         .info-icon {
           display: inline-block;
-          background: #CAEF7D;
-          color: #1B1F13;
+          background: #108e66;
+          color: #fcfffe;
           border-radius: 50%;
           font-size: 0.6rem;
           width: 14px;
@@ -84,8 +84,8 @@ const Tooltip: React.FC<{ text: string }> = ({ text }) => {
         .tooltiptext {
           visibility: visible;
           width: 200px;
-          background-color: #CAEF7D;
-          color: #1B1F13;
+          background-color: #108e66;
+          color: #fcfffe;
           text-align: left;
           border-radius: 4px;
           padding: 6px 8px;
@@ -107,7 +107,7 @@ const Tooltip: React.FC<{ text: string }> = ({ text }) => {
           margin-left: -4px;
           border-width: 4px;
           border-style: solid;
-          border-color: #CAEF7D transparent transparent transparent;
+          border-color: #108e66 transparent transparent transparent;
         }
       `}</style>
     </span>
@@ -115,72 +115,30 @@ const Tooltip: React.FC<{ text: string }> = ({ text }) => {
 };
 
 // -----------------------
-// Number to Words Converter Functions
+// Number to Words Converters
 // -----------------------
 const numberToWords = (num: number): string => {
   if (num === undefined || num === null) return "";
   num = Math.abs(Math.round(num));
   if (num === 0) return "Zero";
   const ones = [
-    "",
-    "One",
-    "Two",
-    "Three",
-    "Four",
-    "Five",
-    "Six",
-    "Seven",
-    "Eight",
-    "Nine",
-    "Ten",
-    "Eleven",
-    "Twelve",
-    "Thirteen",
-    "Fourteen",
-    "Fifteen",
-    "Sixteen",
-    "Seventeen",
-    "Eighteen",
-    "Nineteen",
+    "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
+    "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen",
+    "Seventeen", "Eighteen", "Nineteen",
   ];
   const tens = [
-    "",
-    "Ten",
-    "Twenty",
-    "Thirty",
-    "Forty",
-    "Fifty",
-    "Sixty",
-    "Seventy",
-    "Eighty",
-    "Ninety",
+    "", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety",
   ];
   if (num < 20) return ones[num];
   if (num < 100)
     return tens[Math.floor(num / 10)] + (num % 10 !== 0 ? " " + ones[num % 10] : "");
   if (num < 1000)
-    return (
-      ones[Math.floor(num / 100)] +
-      " Hundred" +
-      (num % 100 !== 0 ? " " + numberToWords(num % 100) : "")
-    );
+    return ones[Math.floor(num / 100)] + " Hundred" + (num % 100 !== 0 ? " " + numberToWords(num % 100) : "");
   if (num < 100000)
-    return (
-      numberToWords(Math.floor(num / 1000)) +
-      " Thousand" +
-      (num % 1000 !== 0 ? " " + numberToWords(num % 1000) : "")
-    );
+    return numberToWords(Math.floor(num / 1000)) + " Thousand" + (num % 1000 !== 0 ? " " + numberToWords(num % 1000) : "");
   if (num < 10000000)
-    return (
-      numberToWords(Math.floor(num / 100000)) +
-      " Lakh" +
-      (num % 100000 !== 0 ? " " + numberToWords(num % 100000) : "")
-    );
-  return (
-    numberToWords(Math.floor(num / 10000000)) +
-    " Crore" +
-    (num % 10000000 !== 0 ? " " + numberToWords(num % 10000000) : "")
-  );
+    return numberToWords(Math.floor(num / 100000)) + " Lakh" + (num % 100000 !== 0 ? " " + numberToWords(num % 100000) : "");
+  return numberToWords(Math.floor(num / 10000000)) + " Crore" + (num % 10000000 !== 0 ? " " + numberToWords(num % 10000000) : "");
 };
 
 const numberToWordsPercent = (value: number): string => {
@@ -198,7 +156,7 @@ const FDRDCalculator: React.FC = () => {
   // State for active calculator ("fd" or "rd")
   const [activeCalc, setActiveCalc] = useState<"fd" | "rd">("fd");
   
-  // Combined input state (we use all keys, but only the relevant ones are validated/calculated)
+  // Combined input state (all keys are included; only relevant ones are validated/calculated)
   const [inputs, setInputs] = useState<CalculatorInputs>({
     principal: "",
     fdTenure: "",
@@ -214,19 +172,22 @@ const FDRDCalculator: React.FC = () => {
   const [rdResults, setRdResults] = useState<RDResults | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
 
+  // Handle input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setInputs((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Toggle between FD and RD modes
   const handleToggleCalc = (calcType: "fd" | "rd") => {
     setActiveCalc(calcType);
   };
 
+  // Validate inputs based on active calculator
   const validateInputs = (): boolean => {
     const newErrors: Partial<CalculatorInputs> = {};
     if (activeCalc === "fd") {
-      // FD validation: principal, fdTenure, fdInterestRate
+      // FD: principal, fdTenure, fdInterestRate are required
       ["principal", "fdTenure", "fdInterestRate"].forEach((field) => {
         const value = inputs[field as keyof CalculatorInputs];
         if (!value || isNaN(Number(value)) || Number(value) <= 0) {
@@ -234,39 +195,37 @@ const FDRDCalculator: React.FC = () => {
         }
       });
     } else {
-      // RD validation: monthlyDeposit, rdTenure, rdInterestRate
+      // RD: monthlyDeposit, rdTenure, rdInterestRate are required; stepUp is optional
       ["monthlyDeposit", "rdTenure", "rdInterestRate"].forEach((field) => {
         const value = inputs[field as keyof CalculatorInputs];
         if (!value || isNaN(Number(value)) || Number(value) <= 0) {
           newErrors[field as keyof CalculatorInputs] = "Please enter a valid number";
         }
       });
-      // stepUp is optional, can be empty or zero
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
+  // Calculation Logic for FD & RD
   const calculateResults = () => {
     if (!validateInputs()) return;
     setIsCalculating(true);
 
     if (activeCalc === "fd") {
       // -----------------
-      // FD Calculation:
-      // FD Maturity Value = Principal × (1 + (r/400))^(4 × fdTenure)
-      // (Quarterly compounding)
+      // FD Calculation (Quarterly compounding)
       // -----------------
       const fdPrincipal = parseFloat(inputs.principal);
       const fdTenure = parseFloat(inputs.fdTenure);
       const fdRate = parseFloat(inputs.fdInterestRate);
-      const r_fd = fdRate / 400; // quarterly rate
-      const fdMaturity = fdPrincipal * Math.pow(1 + r_fd, 4 * fdTenure);
+      const quarterlyRate = fdRate / 400;
+      const fdMaturity = fdPrincipal * Math.pow(1 + quarterlyRate, 4 * fdTenure);
       const fdInterest = fdMaturity - fdPrincipal;
       // Generate FD chart data: growth per year
       const fdChartData = [];
       for (let year = 1; year <= fdTenure; year++) {
-        const maturityYear = fdPrincipal * Math.pow(1 + r_fd, 4 * year);
+        const maturityYear = fdPrincipal * Math.pow(1 + quarterlyRate, 4 * year);
         fdChartData.push({ year, MaturityValue: parseFloat(maturityYear.toFixed(2)) });
       }
       setFdResults({
@@ -276,14 +235,7 @@ const FDRDCalculator: React.FC = () => {
       });
     } else {
       // -----------------
-      // RD Calculation (Monthly Compounding):
-      // We deposit every month for 'rdTenure' years → totalMonths = rdTenure * 12
-      // monthlyRate = (rdInterestRate / 100) / 12
-      //
-      // Standard RD formula for monthly deposits at end of each month:
-      //   For each deposit made in month m, it compounds for (totalMonths - m) months.
-      //   Final RD = Σ [ deposit_m * (1 + monthlyRate)^(totalMonths - m) ]
-      //   plus any step-up increments each year
+      // RD Calculation (Monthly compounding with optional step-up)
       // -----------------
       const rdMonthly = parseFloat(inputs.monthlyDeposit);
       const rdTenure = parseFloat(inputs.rdTenure);
@@ -296,60 +248,27 @@ const FDRDCalculator: React.FC = () => {
       let totalRdFV = 0;
       let currentDeposit = rdMonthly;
 
-      // We'll also build a "yearWise" breakdown to mimic your table
+      // Build year-wise breakdown
       const rdYearWise: YearlyData[] = [];
-
-      // We'll track the lumpsum approach for the final result
-      let monthCounter = 1;
-      let nextYearEnd = 12; // when we cross each year boundary
-
-      for (let m = 1; m <= totalMonths; m++) {
-        // deposit at end of month m
-        totalRdFV += currentDeposit * Math.pow(1 + monthlyRate, (totalMonths - m));
-        totalRdInvested += currentDeposit;
-
-        // Step-up the deposit at the end of each 12-month block (start of next year)
-        if (m === nextYearEnd && m < totalMonths) {
-          nextYearEnd += 12;
-          currentDeposit *= (1 + stepUpPercent / 100);
-        }
-      }
-
-      // Now build a year-wise table (if you want to display partial growth each year)
-      // For year 1..rdTenure, we re-run the lumpsum sum for that year
-      let depositForYearWise = rdMonthly;
-      let cumulativeInvested = 0;
-      let lumpsumSum = 0;
-      let yearBoundary = 12;
-      nextYearEnd = 12;
-
+      let depositForCalc = rdMonthly;
       for (let y = 1; y <= rdTenure; y++) {
-        // Sum from month=1 to month=(12*y)
-        lumpsumSum = 0;
-        depositForYearWise = rdMonthly;
-        cumulativeInvested = 0;
-        let boundary = y * 12; // the last month of that year
-
-        let depositForCalc = rdMonthly;
-        let yearNextStep = 12;
-
-        for (let m = 1; m <= boundary; m++) {
-          lumpsumSum += depositForCalc * Math.pow(1 + monthlyRate, (boundary - m));
+        let cumulativeInvested = 0;
+        let yearFV = 0;
+        const monthsThisYear = 12;
+        for (let m = 1; m <= monthsThisYear; m++) {
+          yearFV += depositForCalc * Math.pow(1 + monthlyRate, (totalMonths - ((y - 1) * 12 + m)));
           cumulativeInvested += depositForCalc;
-
-          // step up after every 12 months
-          if (m === yearNextStep && m < boundary) {
-            yearNextStep += 12;
-            depositForCalc *= (1 + stepUpPercent / 100);
-          }
         }
-
+        totalRdInvested += cumulativeInvested;
+        totalRdFV += yearFV;
         rdYearWise.push({
           year: y,
           totalInvested: parseFloat(cumulativeInvested.toFixed(2)),
-          futureValue: parseFloat(lumpsumSum.toFixed(2)),
-          wealthGained: parseFloat((lumpsumSum - cumulativeInvested).toFixed(2)),
+          futureValue: parseFloat(yearFV.toFixed(2)),
+          wealthGained: parseFloat((yearFV - cumulativeInvested).toFixed(2)),
         });
+        // Step-up the deposit for next year
+        depositForCalc *= (1 + stepUpPercent / 100);
       }
 
       const rdInterest = totalRdFV - totalRdInvested;
@@ -360,11 +279,12 @@ const FDRDCalculator: React.FC = () => {
         yearWise: rdYearWise,
       });
     }
-
     setTimeout(() => setIsCalculating(false), 1000);
   };
 
-  // Get the right chart data based on active calculator
+  // -----------------------
+  // Prepare chart data based on active calculator
+  // -----------------------
   const fdChartData = fdResults?.chartData || [];
   const rdChartData =
     rdResults?.yearWise.map((data) => ({
@@ -374,36 +294,40 @@ const FDRDCalculator: React.FC = () => {
 
   return (
     <div className="container">
-      {/* Back to Dashboard Button at Top */}
+      {/* Top Navigation: Back to Dashboard */}
       <div className="top-nav">
-        <Link href="/">
+        <Link href="/tools">
           <button className="back-button">Back to Dashboard</button>
         </Link>
       </div>
 
-      <h1 className="title">FD & RD Calculator</h1>
+      {/* Page Title & Description */}
+      <h1 className="title">Endowment Insurance Calculator</h1>
       <p className="description">
-        Compare the final maturity value of Fixed Deposits (FD) versus Recurring Deposits (RD)
-        based on your chosen investment strategy. Toggle between FD and RD to view their respective calculations.
+        Determine whether to continue your endowment policy or surrender it and invest the amount.
       </p>
 
-      {/* Toggle for FD and RD */}
+      {/* Explanation Section */}
+      <div className="explanation">
+        <p>
+          <strong>Endowment Policy:</strong> A life insurance product that guarantees a lump sum payout (maturity value) at the end of the policy term.
+        </p>
+        <p>
+          <strong>Surrender Value:</strong> The amount you would receive if you cancel your policy today. If invested, this can grow at a compound rate.
+        </p>
+      </div>
+
+      {/* Toggle between FD and RD */}
       <div className="calc-toggle">
-        <button
-          onClick={() => handleToggleCalc("fd")}
-          className={activeCalc === "fd" ? "active" : ""}
-        >
+        <button onClick={() => handleToggleCalc("fd")} className={activeCalc === "fd" ? "active" : ""}>
           Fixed Deposit
         </button>
-        <button
-          onClick={() => handleToggleCalc("rd")}
-          className={activeCalc === "rd" ? "active" : ""}
-        >
+        <button onClick={() => handleToggleCalc("rd")} className={activeCalc === "rd" ? "active" : ""}>
           Recurring Deposit
         </button>
       </div>
 
-      {/* Conditionally render form based on activeCalc */}
+      {/* Conditionally render the form based on active calculator */}
       {activeCalc === "fd" ? (
         <div className="form-container">
           <h2 className="section-title">Fixed Deposit (FD) Details</h2>
@@ -411,7 +335,7 @@ const FDRDCalculator: React.FC = () => {
             <label>
               <span className="input-label">
                 Initial Investment (INR)
-                <Tooltip text="Enter the lump-sum amount for FD." />
+                <TooltipIcon text="Enter the lump-sum amount for FD." />
               </span>
               <input
                 type="number"
@@ -421,15 +345,14 @@ const FDRDCalculator: React.FC = () => {
                 placeholder="e.g., 500000"
               />
               <span className="converter">
-                {inputs.principal &&
-                  numberToWords(parseFloat(inputs.principal))} Rupees
+                {inputs.principal && numberToWords(parseFloat(inputs.principal))} Rupees
               </span>
               {errors.principal && <span className="error">{errors.principal}</span>}
             </label>
             <label>
               <span className="input-label">
                 FD Tenure (Years)
-                <Tooltip text="Enter the duration for the FD." />
+                <TooltipIcon text="Enter the duration for the FD." />
               </span>
               <input
                 type="number"
@@ -446,7 +369,7 @@ const FDRDCalculator: React.FC = () => {
             <label>
               <span className="input-label">
                 FD Annual Interest Rate (%)
-                <Tooltip text="Enter the annual FD interest rate (compounded quarterly)." />
+                <TooltipIcon text="Enter the annual FD interest rate (compounded quarterly)." />
               </span>
               <input
                 type="number"
@@ -456,8 +379,7 @@ const FDRDCalculator: React.FC = () => {
                 placeholder="e.g., 7.5"
               />
               <span className="converter">
-                {inputs.fdInterestRate &&
-                  numberToWordsPercent(parseFloat(inputs.fdInterestRate))}
+                {inputs.fdInterestRate && numberToWordsPercent(parseFloat(inputs.fdInterestRate))}
               </span>
               {errors.fdInterestRate && <span className="error">{errors.fdInterestRate}</span>}
             </label>
@@ -473,7 +395,7 @@ const FDRDCalculator: React.FC = () => {
             <label>
               <span className="input-label">
                 Monthly Deposit (INR)
-                <Tooltip text="Enter the amount you plan to deposit every month in RD." />
+                <TooltipIcon text="Enter the amount you plan to deposit every month in RD." />
               </span>
               <input
                 type="number"
@@ -483,15 +405,14 @@ const FDRDCalculator: React.FC = () => {
                 placeholder="e.g., 5000"
               />
               <span className="converter">
-                {inputs.monthlyDeposit &&
-                  numberToWords(parseFloat(inputs.monthlyDeposit))} Rupees
+                {inputs.monthlyDeposit && numberToWords(parseFloat(inputs.monthlyDeposit))} Rupees
               </span>
               {errors.monthlyDeposit && <span className="error">{errors.monthlyDeposit}</span>}
             </label>
             <label>
               <span className="input-label">
                 RD Tenure (Years)
-                <Tooltip text="Enter the duration for the RD." />
+                <TooltipIcon text="Enter the duration for the RD." />
               </span>
               <input
                 type="number"
@@ -508,7 +429,7 @@ const FDRDCalculator: React.FC = () => {
             <label>
               <span className="input-label">
                 RD Annual Interest Rate (%)
-                <Tooltip text="Enter the annual RD interest rate (typically monthly compounding for standard RD calculators)." />
+                <TooltipIcon text="Enter the annual RD interest rate (with monthly compounding)." />
               </span>
               <input
                 type="number"
@@ -518,15 +439,14 @@ const FDRDCalculator: React.FC = () => {
                 placeholder="e.g., 7.0"
               />
               <span className="converter">
-                {inputs.rdInterestRate &&
-                  numberToWordsPercent(parseFloat(inputs.rdInterestRate))}
+                {inputs.rdInterestRate && numberToWordsPercent(parseFloat(inputs.rdInterestRate))}
               </span>
               {errors.rdInterestRate && <span className="error">{errors.rdInterestRate}</span>}
             </label>
             <label>
               <span className="input-label">
                 Step-up (%) (Optional)
-                <Tooltip text="If you plan to increase your RD contribution annually, enter the percentage increase." />
+                <TooltipIcon text="If you plan to increase your RD contribution annually, enter the percentage increase." />
               </span>
               <input
                 type="number"
@@ -547,28 +467,29 @@ const FDRDCalculator: React.FC = () => {
         </div>
       )}
 
-      {/* Display results based on active calculator */}
+      {/* -----------------------
+          Results Section
+      ----------------------- */}
       {activeCalc === "fd" && fdResults && (
         <div className="results-container">
           <h2 className="results-title">FD Summary</h2>
           <div className="summary-card">
             <div className="summary-item">
-              <strong>FD Final Maturity Value:</strong> ₹
-              {fdResults.maturityValue.toLocaleString("en-IN")} (
+              <strong>FD Final Maturity Value:</strong> ₹{fdResults.maturityValue.toLocaleString("en-IN")} (
               {numberToWords(Math.round(fdResults.maturityValue))} Rupees)
             </div>
             <div className="summary-item">
-              <strong>FD Interest Earned:</strong> ₹
-              {fdResults.totalInterest.toLocaleString("en-IN")} (
+              <strong>FD Interest Earned:</strong> ₹{fdResults.totalInterest.toLocaleString("en-IN")} (
               {numberToWords(Math.round(fdResults.totalInterest))} Rupees)
             </div>
           </div>
-          
+
           <h2 className="results-title">Growth Visualization</h2>
           <div className="chart-explanation">
-            <p>This growth chart shows how your initial investment of ₹{parseFloat(inputs.principal).toLocaleString("en-IN")} grows over time with a fixed interest rate of {inputs.fdInterestRate}% (compounded quarterly). At maturity after {inputs.fdTenure} years, your investment reaches ₹{fdResults.maturityValue.toLocaleString("en-IN")}.</p>
+            <p>
+              This growth chart shows how your initial investment of ₹{parseFloat(inputs.principal).toLocaleString("en-IN")} grows over time at an annual rate of {inputs.fdInterestRate}%, compounded quarterly. At maturity after {inputs.fdTenure} years, your investment reaches ₹{fdResults.maturityValue.toLocaleString("en-IN")}.
+            </p>
           </div>
-          
           <div className="chart-container">
             <ResponsiveContainer width="90%" height={300}>
               <LineChart data={fdChartData} margin={{ left: 50, right: 30, top: 20, bottom: 20 }}>
@@ -577,28 +498,23 @@ const FDRDCalculator: React.FC = () => {
                 <YAxis domain={["auto", "auto"]} tickFormatter={(val) => val.toLocaleString("en-IN")} />
                 <RechartsTooltip formatter={(value: number) => [`₹${value.toLocaleString("en-IN")}`, "Maturity Value"]} />
                 <Legend />
-                <Line type="monotone" dataKey="MaturityValue" stroke="#CAEF7D" strokeWidth={2} name="Maturity Value" />
+                <Line type="monotone" dataKey="MaturityValue" stroke="#108e66" strokeWidth={2} name="Maturity Value" />
               </LineChart>
             </ResponsiveContainer>
           </div>
-          
-          <div className="disclaimer">
-            <h4>Important Considerations</h4>
-            <ul>
-              <li>
-                FD Maturity is calculated using quarterly compounding: FV = P × (1 + (r/400))^(4 × Tenure)
-              </li>
-              <li>
-                Tax implications are not factored in. Interest earned on FDs is taxable based on your income tax slab.
-              </li>
-              <li>
-                Consider TDS (Tax Deducted at Source) implications if your interest income exceeds ₹40,000 per year (₹50,000 for senior citizens).
-              </li>
-              <li>
-                Premature withdrawal may result in lower interest rates and penalties.
-              </li>
-            </ul>
-            <p>Please consult with a financial advisor before making any major financial decisions.</p>
+
+          {/* -----------------------
+              Get in Touch CTA Section
+          ----------------------- */}
+          <div className="cta-container mt-8 text-center">
+            <Link
+              href="https://wa.me/your-phone-number" // Replace with your actual WhatsApp link
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-[#108e66] text-[#fcfffe] px-8 py-3 rounded-md font-medium hover:bg-[#272B2A] transition-colors"
+            >
+              Get in touch
+            </Link>
           </div>
         </div>
       )}
@@ -608,46 +524,38 @@ const FDRDCalculator: React.FC = () => {
           <h2 className="results-title">RD Summary</h2>
           <div className="summary-card">
             <div className="summary-item">
-              <strong>RD Total Invested:</strong> ₹
-              {rdResults.totalInvested.toLocaleString("en-IN")} (
+              <strong>RD Total Invested:</strong> ₹{rdResults.totalInvested.toLocaleString("en-IN")} (
               {numberToWords(Math.round(rdResults.totalInvested))} Rupees)
             </div>
             <div className="summary-item">
-              <strong>RD Final Maturity Value:</strong> ₹
-              {rdResults.maturityValue.toLocaleString("en-IN")} (
+              <strong>RD Final Maturity Value:</strong> ₹{rdResults.maturityValue.toLocaleString("en-IN")} (
               {numberToWords(Math.round(rdResults.maturityValue))} Rupees)
             </div>
             <div className="summary-item">
-              <strong>RD Interest Earned:</strong> ₹
-              {rdResults.totalInterest.toLocaleString("en-IN")} (
+              <strong>RD Interest Earned:</strong> ₹{rdResults.totalInterest.toLocaleString("en-IN")} (
               {numberToWords(Math.round(rdResults.totalInterest))} Rupees)
             </div>
           </div>
-          
+
           <h2 className="results-title">Growth Visualization</h2>
           <div className="chart-explanation">
             <p>
-              This chart shows how your regular monthly deposits grow over time with 
-              <strong> monthly compounding</strong> at {inputs.rdInterestRate}%. 
-              {inputs.stepUp && ` The deposits increase by ${inputs.stepUp}% each year, boosting overall returns.`} 
-              After {inputs.rdTenure} years, your investment reaches a total of ₹
-              {rdResults.maturityValue.toLocaleString("en-IN")}.
+              This chart shows how your regular monthly deposits grow over time with monthly compounding at an annual rate of {inputs.rdInterestRate}%.{inputs.stepUp && ` Deposits increase by ${inputs.stepUp}% each year.`} After {inputs.rdTenure} years, your investment reaches a total of ₹{rdResults.maturityValue.toLocaleString("en-IN")}.
             </p>
           </div>
-          
           <div className="chart-container">
             <ResponsiveContainer width="90%" height={300}>
               <LineChart data={rdChartData} margin={{ left: 50, right: 30, top: 20, bottom: 20 }}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="year" label={{ value: "Year", position: "insideBottom", offset: -5 }} />
                 <YAxis domain={["auto", "auto"]} tickFormatter={(val) => val.toLocaleString("en-IN")} />
-                <RechartsTooltip formatter={(value: number) => [`₹${value.toLocaleString("en-IN")}`, "Future Value"]} />
+                <RechartsTooltip formatter={(value: number) => "₹" + Math.round(value).toLocaleString("en-IN")} />
                 <Legend />
-                <Line type="monotone" dataKey="FutureValue" stroke="#CAEF7D" strokeWidth={2} name="Future Value" />
+                <Line type="monotone" dataKey="FutureValue" stroke="#525ECC" strokeWidth={2} name="Future Value" />
               </LineChart>
             </ResponsiveContainer>
           </div>
-          
+
           <h2 className="results-title">Year-wise RD Growth</h2>
           <div className="amortization-table">
             <table>
@@ -671,46 +579,62 @@ const FDRDCalculator: React.FC = () => {
               </tbody>
             </table>
           </div>
-          
-          <div className="disclaimer">
-            <h4>Important Considerations</h4>
-            <ul>
-              <li>
-                RD maturity here is calculated using standard <strong>monthly compounding</strong> on each monthly deposit.
-              </li>
-              <li>
-                Interest earned on RDs is taxable based on your income tax slab rate.
-              </li>
-              <li>
-                Missing installments may lead to penalties or lower interest rates.
-              </li>
-              <li>
-                Consider the benefit of disciplined saving through regular deposits versus a lump-sum FD investment.
-              </li>
-            </ul>
-            <p>Please consult with a financial advisor before making any major financial decisions.</p>
+
+          {/* -----------------------
+              Get in Touch CTA Section
+          ----------------------- */}
+          <div className="cta-container mt-8 text-center">
+            <Link
+              href="https://wa.me/your-phone-number" // Replace with your actual WhatsApp link
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-[#108e66] text-[#fcfffe] px-8 py-3 rounded-md font-medium hover:bg-[#272B2A] transition-colors"
+            >
+              Get in touch
+            </Link>
           </div>
         </div>
       )}
 
+      {/* Disclaimer Section */}
+      {results && (
+        <div className="disclaimer">
+          <h4>Important Considerations</h4>
+          <ul>
+            <li>
+              This calculator compares the guaranteed maturity value of your endowment policy with the potential returns from investing the surrender value.
+            </li>
+            <li>
+              The policy value is approximated using a linear progression from the current surrender value to the maturity value.
+            </li>
+            <li>
+              Actual returns may vary due to market conditions, fees, and other factors.
+            </li>
+          </ul>
+          <p>Please consult with a financial advisor before making any major decisions.</p>
+        </div>
+      )}
+
+      {/* -----------------------
+          Inline Styles for the Component
+      ----------------------- */}
       <style jsx>{`
         .container {
           padding: 2rem;
           font-family: "Poppins", sans-serif;
-          background: #fcffee;
-          color: #1b1f13;
+          background: #fcfffe;
+          color: #272b2a;
         }
         .top-nav {
           margin-bottom: 1rem;
         }
         .back-button {
-          background: #000000;
-          color: #fcffee;
+          background: #108e66;
+          color: #fcfffe;
           border: none;
           padding: 0.5rem 1rem;
           border-radius: 4px;
           cursor: pointer;
-          font-family: "Poppins", sans-serif;
           font-weight: 500;
         }
         .title {
@@ -724,6 +648,18 @@ const FDRDCalculator: React.FC = () => {
           font-size: 1.2rem;
           margin-bottom: 2rem;
         }
+        .explanation {
+          background: #f0f8e8;
+          padding: 1rem;
+          border-radius: 8px;
+          margin-bottom: 1.5rem;
+          border-left: 4px solid #108e66;
+          font-size: 0.95rem;
+        }
+        .explanation p {
+          margin: 0.5rem 0;
+          line-height: 1.5;
+        }
         .calc-toggle {
           display: flex;
           justify-content: center;
@@ -732,7 +668,7 @@ const FDRDCalculator: React.FC = () => {
         }
         .calc-toggle button {
           background: transparent;
-          border: 1px solid #1b1f13;
+          border: 1px solid #272b2a;
           padding: 0.5rem 1rem;
           cursor: pointer;
           border-radius: 4px;
@@ -793,8 +729,8 @@ const FDRDCalculator: React.FC = () => {
           font-size: 0.8rem;
         }
         .calculate-button {
-          background: #caef7d;
-          color: #1b1f13;
+          background: #108e66;
+          color: #fcfffe;
           border: none;
           padding: 0.75rem 1.5rem;
           border-radius: 4px;
@@ -837,11 +773,28 @@ const FDRDCalculator: React.FC = () => {
           padding: 1rem;
           border-radius: 8px;
           margin-bottom: 1rem;
-          border-left: 4px solid #caef7d;
+          border-left: 4px solid #108e66;
+          text-align: center;
+          font-size: 0.95rem;
         }
-        .chart-explanation p {
-          margin: 0;
-          line-height: 1.5;
+        .chart-toggle {
+          display: flex;
+          justify-content: center;
+          margin: 1rem 0;
+          gap: 1rem;
+        }
+        .chart-toggle button {
+          background: transparent;
+          border: 1px solid #272b2a;
+          padding: 0.5rem 1rem;
+          cursor: pointer;
+          border-radius: 4px;
+          transition: all 0.2s ease;
+        }
+        .chart-toggle button.active {
+          background: #108e66;
+          color: #fcfffe;
+          border-color: #108e66;
         }
         .chart-container {
           margin: 1rem 0 2rem;
@@ -870,6 +823,9 @@ const FDRDCalculator: React.FC = () => {
           position: sticky;
           top: 0;
         }
+        .cta-container {
+          margin-top: 2rem;
+        }
         .disclaimer {
           background: #f9f9f9;
           padding: 1rem;
@@ -881,7 +837,7 @@ const FDRDCalculator: React.FC = () => {
         }
         .disclaimer h4 {
           margin-top: 0;
-          color: #1b1f13;
+          color: #272b2a;
           margin-bottom: 0.5rem;
         }
         .disclaimer ul {

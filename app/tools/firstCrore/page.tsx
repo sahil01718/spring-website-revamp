@@ -15,7 +15,7 @@ import {
 } from "recharts";
 
 // -----------------------
-// Interfaces
+// Interfaces for Inputs, Yearly Data & Results
 // -----------------------
 interface CalculatorInputs {
   currentAge: string;
@@ -46,20 +46,20 @@ interface Results {
 }
 
 // -----------------------
-// Utility: Tooltip Component for Inputs
+// TooltipIcon Component (Updated to use theme Primary color)
 // -----------------------
 const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
   const [isHovered, setIsHovered] = useState(false);
   return (
     <span
-      className="tooltipIcon"
+      className="TooltipIcon"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <span className="info-icon">i</span>
       {isHovered && <span className="tooltiptext">{text}</span>}
       <style jsx>{`
-        .tooltipIcon {
+        .TooltipIcon {
           position: relative;
           display: inline-block;
           margin-left: 5px;
@@ -68,8 +68,8 @@ const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
         }
         .info-icon {
           display: inline-block;
-          background: #caef7d;
-          color: #1b1f13;
+          background: #108e66;
+          color: #fcfffe;
           border-radius: 50%;
           font-size: 0.6rem;
           width: 14px;
@@ -80,9 +80,9 @@ const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
         }
         .tooltiptext {
           visibility: visible;
-          width: 200px;
-          background-color: #caef7d;
-          color: #1b1f13;
+          width: 220px;
+          background-color: #108e66;
+          color: #fcfffe;
           text-align: left;
           border-radius: 4px;
           padding: 6px 8px;
@@ -104,7 +104,7 @@ const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
           margin-left: -4px;
           border-width: 4px;
           border-style: solid;
-          border-color: #caef7d transparent transparent transparent;
+          border-color: #108e66 transparent transparent transparent;
         }
       `}</style>
     </span>
@@ -119,65 +119,23 @@ const numberToWords = (num: number): string => {
   num = Math.abs(Math.round(num));
   if (num === 0) return "Zero";
   const ones = [
-    "",
-    "One",
-    "Two",
-    "Three",
-    "Four",
-    "Five",
-    "Six",
-    "Seven",
-    "Eight",
-    "Nine",
-    "Ten",
-    "Eleven",
-    "Twelve",
-    "Thirteen",
-    "Fourteen",
-    "Fifteen",
-    "Sixteen",
-    "Seventeen",
-    "Eighteen",
-    "Nineteen",
+    "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
+    "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen",
+    "Seventeen", "Eighteen", "Nineteen",
   ];
   const tens = [
-    "",
-    "Ten",
-    "Twenty",
-    "Thirty",
-    "Forty",
-    "Fifty",
-    "Sixty",
-    "Seventy",
-    "Eighty",
-    "Ninety",
+    "", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety",
   ];
   if (num < 20) return ones[num];
   if (num < 100)
     return tens[Math.floor(num / 10)] + (num % 10 !== 0 ? " " + ones[num % 10] : "");
   if (num < 1000)
-    return (
-      ones[Math.floor(num / 100)] +
-      " Hundred" +
-      (num % 100 !== 0 ? " " + numberToWords(num % 100) : "")
-    );
+    return ones[Math.floor(num / 100)] + " Hundred" + (num % 100 !== 0 ? " " + numberToWords(num % 100) : "");
   if (num < 100000)
-    return (
-      numberToWords(Math.floor(num / 1000)) +
-      " Thousand" +
-      (num % 1000 !== 0 ? " " + numberToWords(num % 1000) : "")
-    );
+    return numberToWords(Math.floor(num / 1000)) + " Thousand" + (num % 1000 !== 0 ? " " + numberToWords(num % 1000) : "");
   if (num < 10000000)
-    return (
-      numberToWords(Math.floor(num / 100000)) +
-      " Lakh" +
-      (num % 100000 !== 0 ? " " + numberToWords(num % 100000) : "")
-    );
-  return (
-    numberToWords(Math.floor(num / 10000000)) +
-    " Crore" +
-    (num % 10000000 !== 0 ? " " + numberToWords(num % 10000000) : "")
-  );
+    return numberToWords(Math.floor(num / 100000)) + " Lakh" + (num % 100000 !== 0 ? " " + numberToWords(num % 100000) : "");
+  return numberToWords(Math.floor(num / 10000000)) + " Crore" + (num % 10000000 !== 0 ? " " + numberToWords(num % 10000000) : "");
 };
 
 const numberToWordsPercent = (value: number): string => {
@@ -189,79 +147,40 @@ const numberToWordsPercent = (value: number): string => {
 };
 
 // -----------------------
-// Custom Tooltip for Line Chart
+// Custom Tooltip Components for Charts
 // -----------------------
-const CustomLineTooltip = ({ active, payload, label }: any) => {
+const CustomLineTooltip: React.FC<any> = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="custom-tooltip">
-        <p className="label">Year: {label}</p>
-        <p className="intro">
-          Corpus: ₹{payload[0].value.toLocaleString("en-IN")}
-        </p>
-        <p className="desc">
-          This line shows your total corpus growth over the years.
-        </p>
-        <style jsx>{`
-          .custom-tooltip {
-            background: #ffffff;
-            border: 1px solid #ccc;
-            padding: 8px;
-            border-radius: 4px;
-          }
-          .label {
-            font-weight: bold;
-            margin-bottom: 4px;
-          }
-          .intro {
-            margin: 0;
-          }
-          .desc {
-            font-size: 0.8rem;
-            color: #555;
-            margin-top: 4px;
-          }
-        `}</style>
+      <div
+        className="custom-tooltip"
+        style={{
+          background: "#fff",
+          border: "1px solid #ccc",
+          padding: "10px",
+        }}
+      >
+        <p>{`Year: ${label}`}</p>
+        <p>{`Corpus: ₹${payload[0].value.toLocaleString("en-IN")}`}</p>
       </div>
     );
   }
   return null;
 };
 
-// -----------------------
-// Custom Tooltip for Area Chart
-// -----------------------
-const CustomAreaTooltip = ({ active, payload, label }: any) => {
+const CustomAreaTooltip: React.FC<any> = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="custom-tooltip">
-        <p className="label">Year: {label}</p>
-        <p className="intro">
-          Wealth Gained: ₹{payload[0].value.toLocaleString("en-IN")}
-        </p>
-        <p className="desc">
-          This area highlights the extra wealth gained beyond your total investment.
-        </p>
-        <style jsx>{`
-          .custom-tooltip {
-            background: #ffffff;
-            border: 1px solid #ccc;
-            padding: 8px;
-            border-radius: 4px;
-          }
-          .label {
-            font-weight: bold;
-            margin-bottom: 4px;
-          }
-          .intro {
-            margin: 0;
-          }
-          .desc {
-            font-size: 0.8rem;
-            color: #555;
-            margin-top: 4px;
-          }
-        `}</style>
+      <div
+        className="custom-tooltip"
+        style={{
+          background: "#fff",
+          border: "1px solid #ccc",
+          padding: "10px",
+        }}
+      >
+        <p>{`Year: ${label}`}</p>
+        <p>{`Gap: ₹${payload[0].value.toLocaleString("en-IN")}`}</p>
       </div>
     );
   }
@@ -272,6 +191,7 @@ const CustomAreaTooltip = ({ active, payload, label }: any) => {
 // Main First Crore Calculator Component
 // -----------------------
 const FirstCroreCalculator: React.FC = () => {
+  // State for inputs, errors, results, calculation loading state and chart type toggle
   const [inputs, setInputs] = useState<CalculatorInputs>({
     currentAge: "",
     currentSavings: "",
@@ -287,13 +207,17 @@ const FirstCroreCalculator: React.FC = () => {
   const [isCalculating, setIsCalculating] = useState<boolean>(false);
   const [chartType, setChartType] = useState<"line" | "area">("line");
 
-  // Handle input changes
+  // -----------------------
+  // Handle input changes for each field
+  // -----------------------
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputs((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Validate required inputs
+  // -----------------------
+  // Validate required inputs and ensure retirementAge (if provided) > currentAge
+  // -----------------------
   const validateInputs = (): boolean => {
     const newErrors: Partial<CalculatorInputs> = {};
     const requiredFields = [
@@ -310,7 +234,6 @@ const FirstCroreCalculator: React.FC = () => {
         newErrors[field as keyof CalculatorInputs] = "Please enter a valid number";
       }
     });
-    // If retirement age is provided, it must be greater than current age
     if (inputs.retirementAge && Number(inputs.retirementAge) <= Number(inputs.currentAge)) {
       newErrors.retirementAge = "Retirement age must be greater than current age";
     }
@@ -318,7 +241,9 @@ const FirstCroreCalculator: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Calculation logic: compound the corpus year by year until it reaches 1 crore (₹1,00,00,000)
+  // -----------------------
+  // Calculation Logic: Compound growth until corpus reaches ₹1 crore or retirement age is reached
+  // -----------------------
   const calculateResults = () => {
     if (!validateInputs()) return;
     setIsCalculating(true);
@@ -338,8 +263,9 @@ const FirstCroreCalculator: React.FC = () => {
     let totalInvested = currentSavings + lumpsum;
     const yearWise: YearlyData[] = [];
     let yearsRequired = 0;
-    const target = 10000000; // ₹1 crore
+    const target = 10000000; // 1 Crore = ₹1,00,00,000
 
+    // Compound growth simulation until corpus reaches target or retirement age
     while (corpus < target && age < retirementAge) {
       yearsRequired++;
       age++;
@@ -369,7 +295,9 @@ const FirstCroreCalculator: React.FC = () => {
     setTimeout(() => setIsCalculating(false), 1000);
   };
 
-  // Prepare chart data for line chart (Corpus growth) and area chart (Wealth gained)
+  // -----------------------
+  // Prepare chart data for Line and Area charts
+  // -----------------------
   const lineChartData =
     results &&
     results.yearWise.map((data) => ({
@@ -381,13 +309,15 @@ const FirstCroreCalculator: React.FC = () => {
     results &&
     results.yearWise.map((data) => ({
       year: data.year,
-      WealthGained: data.corpus - data.totalInvested,
-      Corpus: data.corpus,
+      Gap: data.corpus - (parseFloat(inputs.currentAnnualIncome) * parseFloat(inputs.investmentProportion) * 25),
     }));
 
+  // -----------------------
+  // Render Component
+  // -----------------------
   return (
     <div className="container">
-      {/* Back to Dashboard Button at Top */}
+      {/* Back to Dashboard */}
       <div className="top-nav">
         <Link href="/tools">
           <button className="back-button">Back to Dashboard</button>
@@ -396,9 +326,10 @@ const FirstCroreCalculator: React.FC = () => {
 
       <h1 className="title">When Will I Make My First Crore?</h1>
       <p className="description">
-        Estimate how long it will take you to accumulate ₹1 crore based on your current savings, annual income, and investment strategy.
+        Estimate how long it will take you to accumulate ₹1 crore based on your current savings, income, and investment strategy.
       </p>
 
+      {/* Input Form */}
       <div className="form-container">
         <h2 className="section-title">Your Financial Details</h2>
         <div className="input-group">
@@ -422,7 +353,7 @@ const FirstCroreCalculator: React.FC = () => {
           <label>
             <span className="input-label">
               Current Savings (INR)
-              <TooltipIcon text="Enter the total amount you have saved so far." />
+              <TooltipIcon text="Enter your total savings so far." />
             </span>
             <input
               type="number"
@@ -439,7 +370,7 @@ const FirstCroreCalculator: React.FC = () => {
           <label>
             <span className="input-label">
               Current Annual Income (INR)
-              <TooltipIcon text="Enter your current total annual income." />
+              <TooltipIcon text="Enter your total annual income." />
             </span>
             <input
               type="number"
@@ -456,7 +387,7 @@ const FirstCroreCalculator: React.FC = () => {
           <label>
             <span className="input-label">
               Annual Increase in Salary (%)
-              <TooltipIcon text="Enter the expected percentage increase in your salary per year." />
+              <TooltipIcon text="Enter the expected annual percentage increase in your salary." />
             </span>
             <input
               type="number"
@@ -473,7 +404,7 @@ const FirstCroreCalculator: React.FC = () => {
           <label>
             <span className="input-label">
               Investment Proportion (%)
-              <TooltipIcon text="Enter the percentage of your salary that you save and invest each year." />
+              <TooltipIcon text="Enter the percentage of your salary that you save and invest annually." />
             </span>
             <input
               type="number"
@@ -490,7 +421,7 @@ const FirstCroreCalculator: React.FC = () => {
           <label>
             <span className="input-label">
               Expected Return on Investment (%)
-              <TooltipIcon text="Enter the annual return rate (in percent) on your investments." />
+              <TooltipIcon text="Enter your expected annual return on investments." />
             </span>
             <input
               type="number"
@@ -542,6 +473,9 @@ const FirstCroreCalculator: React.FC = () => {
         </button>
       </div>
 
+      {/* -----------------------
+          Results Section
+      ----------------------- */}
       {results && (
         <div className="results-container">
           <h2 className="results-title">Projection Summary</h2>
@@ -579,17 +513,13 @@ const FirstCroreCalculator: React.FC = () => {
           </div>
 
           <h2 className="results-title">Corpus Growth Visualization</h2>
-          {/* Explanation above the graph based on selected chart type */}
           <div className="chart-explanation">
-            {chartType === "line" ? (
-              <p>
-                The Line Chart shows your overall corpus growth over time. This graph gives you a clear picture of how your total savings grow year by year with compound interest.
-              </p>
-            ) : (
-              <p>
-                The Area Chart not only shows your corpus growth but also highlights the extra wealth gained beyond your total investments. The filled area represents the additional returns from compounding.
-              </p>
-            )}
+            <p>
+              {chartType === "line"
+                ? "The Line Chart shows your corpus growth over time with compound interest."
+                : "The Area Chart highlights the gap between your corpus and the target corpus."}
+              <br />Hover over the charts for detailed figures.
+            </p>
           </div>
           <div className="chart-toggle">
             <button onClick={() => setChartType("line")} className={chartType === "line" ? "active" : ""}>
@@ -605,92 +535,83 @@ const FirstCroreCalculator: React.FC = () => {
                 <LineChart data={lineChartData} margin={{ left: 50, right: 30, top: 20, bottom: 20 }}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="year" label={{ value: "Year", position: "insideBottom", offset: -5 }} />
-                  <YAxis domain={["auto", "auto"]} tickFormatter={(val) => val.toLocaleString("en-IN")} />
+                  <YAxis domain={["auto", "auto"]} tickFormatter={(val) => "₹" + val.toLocaleString("en-IN")} />
                   <RechartsTooltip content={CustomLineTooltip} />
                   <Legend />
                   <Line type="monotone" dataKey="Corpus" stroke="#CAEF7D" strokeWidth={2} name="Corpus Growth" />
                 </LineChart>
               ) : chartType === "area" && areaChartData ? (
-                <AreaChart data={areaChartData} margin={{ left: 50, right: 30, top: 20, bottom: 20 }}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="year" label={{ value: "Year", position: "insideBottom", offset: -5 }} />
-                  <YAxis domain={["auto", "auto"]} tickFormatter={(val) => val.toLocaleString("en-IN")} />
-                  <RechartsTooltip content={CustomAreaTooltip} />
-                  <Legend />
-                  <Area type="monotone" dataKey="WealthGained" stroke="#1B1F13" fill="#1B1F13" name="Wealth Gained" />
-                  <Line type="monotone" dataKey="Corpus" stroke="#CAEF7D" strokeWidth={2} name="Corpus Growth" />
-                </AreaChart>
+              <AreaChart data={areaChartData} margin={{ left: 50, right: 30, top: 20, bottom: 20 }}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="year" label={{ value: "Year", position: "insideBottom", offset: -5 }} />
+                <YAxis domain={["auto", "auto"]} tickFormatter={(val) => "₹" + val.toLocaleString("en-IN")} />
+                <RechartsTooltip content={CustomAreaTooltip} />
+                <Legend />
+                <Area type="monotone" dataKey="Gap" stroke="#1B1F13" fill="#1B1F13" name="Wealth Gained" />
+                <Line type="monotone" dataKey="Corpus" stroke="#CAEF7D" strokeWidth={2} name="Corpus Growth" />
+              </AreaChart>
               ) : (
                 <></>
               )}
             </ResponsiveContainer>
           </div>
 
-          <h2 className="results-title">Year-wise Breakdown</h2>
-          <div className="amortization-table">
-            <table>
-              <thead>
-                <tr>
-                  <th>Year</th>
-                  <th>Age</th>
-                  <th>Salary (INR)</th>
-                  <th>Annual Investment (INR)</th>
-                  <th>Corpus (INR)</th>
-                </tr>
-              </thead>
-              <tbody>
-                {results.yearWise.map((data) => (
-                  <tr key={data.year}>
-                    <td>{data.year}</td>
-                    <td>{data.age}</td>
-                    <td>{data.salary.toLocaleString("en-IN")}</td>
-                    <td>{data.annualInvestment.toLocaleString("en-IN")}</td>
-                    <td>{data.corpus.toLocaleString("en-IN")}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          <div className="disclaimer">
-            <h4>Important Considerations</h4>
-            <ul>
-              <li>
-                This calculator uses compound interest to project your corpus by adding your annual investments.
-              </li>
-              <li>
-                It assumes your salary grows at the specified rate and you invest a fixed percentage of your salary each year.
-              </li>
-              <li>
-                Optional inputs (lumpsum and retirement age) are factored in if provided.
-              </li>
-              <li>
-                Actual results may vary due to market fluctuations and changes in interest rates.
-              </li>
-            </ul>
-            <p>Please consult with a financial advisor before making any major financial decisions.</p>
+          {/* -----------------------
+              Get in Touch CTA Section
+          ----------------------- */}
+          <div className="cta-container mt-8 text-center">
+            <Link
+              href="https://wa.me/your-phone-number"  // Replace with your actual WhatsApp link
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-[#108e66] text-[#fcfffe] px-8 py-3 rounded-md font-medium hover:bg-[#272B2A] transition-colors"
+            >
+              Get in touch
+            </Link>
           </div>
         </div>
       )}
 
+      {results && (
+        <div className="disclaimer">
+          <h4>Important Considerations</h4>
+          <ul>
+            <li>
+              This calculator estimates the time required to accumulate ₹1 crore based on your current savings, income growth, and investment returns.
+            </li>
+            <li>
+              It assumes a consistent rate of return and salary growth, which may vary in reality.
+            </li>
+            <li>
+              Optional inputs (lumpsum and retirement age) are factored in if provided.
+            </li>
+            <li>
+              Please consult a financial advisor before making major financial decisions.
+            </li>
+          </ul>
+        </div>
+      )}
+
+      {/* -----------------------
+          Inline Styles for the Component
+      ----------------------- */}
       <style jsx>{`
         .container {
           padding: 2rem;
           font-family: "Poppins", sans-serif;
-          background: #fcffee;
-          color: #1b1f13;
+          background: #fcfffe;
+          color: #272b2a;
         }
         .top-nav {
           margin-bottom: 1rem;
         }
         .back-button {
-          background: #000000;
-          color: #fcffee;
+          background: #108e66;
+          color: #fcfffe;
           border: none;
           padding: 0.5rem 1rem;
           border-radius: 4px;
           cursor: pointer;
-          font-family: "Poppins", sans-serif;
           font-weight: 500;
         }
         .title {
@@ -754,8 +675,8 @@ const FirstCroreCalculator: React.FC = () => {
           font-size: 0.8rem;
         }
         .calculate-button {
-          background: #caef7d;
-          color: #1b1f13;
+          background: #108e66;
+          color: #fcfffe;
           border: none;
           padding: 0.75rem 1.5rem;
           border-radius: 4px;
@@ -807,7 +728,7 @@ const FirstCroreCalculator: React.FC = () => {
           padding: 1rem;
           border-radius: 8px;
           margin-bottom: 1rem;
-          border-left: 4px solid #caef7d;
+          border-left: 4px solid #108e66;
           text-align: center;
           font-size: 0.95rem;
         }
@@ -819,16 +740,16 @@ const FirstCroreCalculator: React.FC = () => {
         }
         .chart-toggle button {
           background: transparent;
-          border: 1px solid #1b1f13;
+          border: 1px solid #272b2a;
           padding: 0.5rem 1rem;
           cursor: pointer;
           border-radius: 4px;
           transition: all 0.2s ease;
         }
         .chart-toggle button.active {
-          background: #caef7d;
-          color: #1b1f13;
-          border-color: #caef7d;
+          background: #108e66;
+          color: #fcfffe;
+          border-color: #108e66;
         }
         .chart-container {
           margin: 1rem 0 2rem;
@@ -857,6 +778,9 @@ const FirstCroreCalculator: React.FC = () => {
           position: sticky;
           top: 0;
         }
+        .cta-container {
+          margin-top: 2rem;
+        }
         .disclaimer {
           background: #f9f9f9;
           padding: 1rem;
@@ -868,7 +792,7 @@ const FirstCroreCalculator: React.FC = () => {
         }
         .disclaimer h4 {
           margin-top: 0;
-          color: #1b1f13;
+          color: #272b2a;
           margin-bottom: 0.5rem;
         }
         .disclaimer ul {

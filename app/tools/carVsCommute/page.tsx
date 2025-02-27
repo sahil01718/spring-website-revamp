@@ -57,20 +57,20 @@ const numberToWordsPercent = (value: number): string => {
 // -----------------------
 interface CalculatorInputs {
   // Car Inputs
-  carPrice: string;             // Car Purchase Price (INR)
-  fuelEfficiency: string;       // Fuel Efficiency (km/L)
-  fuelPrice: string;            // Fuel Price (INR/L)
-  oneWayDistance: string;       // One-way Commute Distance (km)
-  workingDays: string;          // Working Days per Month
-  annualMaintenance: string;    // Annual Maintenance Cost (INR)
-  annualInsurance: string;      // Annual Insurance Cost (INR)
-  registrationTaxes: string;    // Registration & Taxes (INR)
-  parkingTolls?: string;        // Parking & Toll Fees (INR/month, optional)
-  expectedResale: string;       // Expected Resale Value (INR)
-  depreciationRate: string;     // Depreciation Rate (% p.a.)
+  carPrice: string;
+  fuelEfficiency: string;
+  fuelPrice: string;
+  oneWayDistance: string;
+  workingDays: string;
+  annualMaintenance: string;
+  annualInsurance: string;
+  registrationTaxes: string;
+  parkingTolls?: string;
+  expectedResale: string;
+  depreciationRate: string;
   // Public Transport Inputs
-  dailyPublicFare: string;      // Daily Public Transport Fare (INR)
-  tripsPerDay: string;          // Number of Trips per Day
+  dailyPublicFare: string;
+  tripsPerDay: string;
 }
 
 interface YearlyCost {
@@ -95,6 +95,7 @@ interface ChartData {
 
 // -----------------------
 // TooltipIcon Component
+// Updated to use primary color (#108e66) and white text for consistency
 // -----------------------
 const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -116,8 +117,8 @@ const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
         }
         .info-icon {
           display: inline-block;
-          background: #caef7d;
-          color: #1b1f13;
+          background: #108e66;
+          color: #fcfffe;
           border-radius: 50%;
           font-size: 0.6rem;
           width: 14px;
@@ -129,8 +130,8 @@ const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
         .tooltiptext {
           visibility: visible;
           width: 220px;
-          background-color: #caef7d;
-          color: #1b1f13;
+          background-color: #108e66;
+          color: #fcfffe;
           text-align: left;
           border-radius: 4px;
           padding: 6px 8px;
@@ -152,7 +153,7 @@ const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
           margin-left: -4px;
           border-width: 4px;
           border-style: solid;
-          border-color: #caef7d transparent transparent transparent;
+          border-color: #108e66 transparent transparent transparent;
         }
       `}</style>
     </span>
@@ -191,13 +192,17 @@ const BuyCarvsCommuteCalculator: React.FC = () => {
   // Ref for Environmental Impact section
   const envRef = useRef<HTMLDivElement>(null);
 
+  // -----------------------
   // Handle input changes
+  // -----------------------
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputs((prev) => ({ ...prev, [name]: value }));
   };
 
+  // -----------------------
   // Validate required inputs (parkingTolls is optional)
+  // -----------------------
   const validateInputs = (): boolean => {
     const newErrors: Partial<CalculatorInputs> = {};
     const requiredFields: (keyof CalculatorInputs)[] = [
@@ -224,7 +229,9 @@ const BuyCarvsCommuteCalculator: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Calculation Logic for a fixed 5-year period
+  // -----------------------
+  // Calculation Logic for 5-year period
+  // -----------------------
   const calculateResults = () => {
     if (!validateInputs()) return;
     setIsCalculating(true);
@@ -240,7 +247,7 @@ const BuyCarvsCommuteCalculator: React.FC = () => {
     const registrationTaxes = parseFloat(inputs.registrationTaxes);
     const parkingTolls = inputs.parkingTolls ? parseFloat(inputs.parkingTolls) : 0;
     const expectedResale = parseFloat(inputs.expectedResale);
-    const depreciationRate = parseFloat(inputs.depreciationRate); // (Not used directly; we use straight-line depreciation)
+    const depreciationRate = parseFloat(inputs.depreciationRate);
 
     // Parse Public Transport Inputs
     const dailyPublicFare = parseFloat(inputs.dailyPublicFare);
@@ -251,7 +258,9 @@ const BuyCarvsCommuteCalculator: React.FC = () => {
     const monthlyCommute = dailyCommute * workingDays;
     const annualDistance = dailyCommute * workingDays * 12;
 
+    // -----------------------
     // Car Costs Calculations
+    // -----------------------
     const dailyFuelConsumption = dailyCommute / fuelEfficiency;
     const dailyFuelCost = dailyFuelConsumption * fuelPrice;
     const monthlyFuelCost = dailyFuelCost * workingDays;
@@ -264,19 +273,22 @@ const BuyCarvsCommuteCalculator: React.FC = () => {
       registrationTaxes -
       expectedResale;
 
+    // -----------------------
     // Public Transport Cost Calculations
+    // -----------------------
     const monthlyPTCost = dailyPublicFare * tripsPerDay * workingDays;
     const annualPTCost = monthlyPTCost * 12;
     const totalPTCost = annualPTCost * analysisYears;
 
+    // -----------------------
     // Year-wise breakdown
+    // -----------------------
     const yearWise: YearlyCost[] = [];
     let cumulativeCar = carPrice + registrationTaxes;
     let cumulativePT = 0;
     for (let year = 1; year <= analysisYears; year++) {
       cumulativeCar += annualFuelCost + annualRecurringCost + annualDepreciation;
       cumulativePT += annualPTCost;
-      // Deduct resale value only in final year
       const carCumulative = year === analysisYears ? cumulativeCar - expectedResale : cumulativeCar;
       yearWise.push({
         year,
@@ -287,7 +299,9 @@ const BuyCarvsCommuteCalculator: React.FC = () => {
 
     const savings = totalCarCost - totalPTCost;
 
-    // Environmental Impact: Annual CO₂ emissions from fuel consumption (Assume 2.3 kg CO₂ per liter fuel burned)
+    // -----------------------
+    // Environmental Impact: CO₂ emissions (Assume 2.3 kg CO₂ per liter fuel burned)
+    // -----------------------
     const annualFuelConsumption = dailyFuelConsumption * workingDays * 12;
     const carCO2Emissions = annualFuelConsumption * 2.3;
     const co2Savings = carCO2Emissions; // Public transport assumed negligible emissions
@@ -302,7 +316,9 @@ const BuyCarvsCommuteCalculator: React.FC = () => {
     setIsCalculating(false);
   };
 
-  // Prepare chart data for line/bar chart (year-wise cumulative cost)
+  // -----------------------
+  // Prepare chart data for visualization (Line or Bar chart)
+  // -----------------------
   const chartData: ChartData[] = results
     ? results.yearWise.map((data) => ({
         year: data.year,
@@ -311,7 +327,9 @@ const BuyCarvsCommuteCalculator: React.FC = () => {
       }))
     : [];
 
-  // Recommendation and cost difference
+  // -----------------------
+  // Determine recommendation based on total cost
+  // -----------------------
   let costDifferenceText = "";
   let recommendationText = "";
   if (results) {
@@ -325,19 +343,26 @@ const BuyCarvsCommuteCalculator: React.FC = () => {
 
   return (
     <div className="container">
-      {/* Back to Dashboard Button */}
+      {/* -------------------------------
+          Top Navigation: Back to Tools Dashboard
+      ------------------------------- */}
       <div className="top-nav">
         <Link href="/tools">
           <button className="back-button">Back to Dashboard</button>
         </Link>
       </div>
 
+      {/* -------------------------------
+          Page Title & Description
+      ------------------------------- */}
       <h1 className="title">Buy a Car vs. Public Transport Calculator</h1>
       <p className="description">
         Compare the 5‑year total cost of owning a car versus using public transport for your daily commute.
       </p>
 
-      {/* Form Container */}
+      {/* -------------------------------
+          Input Form for Car & Public Transport Details
+      ------------------------------- */}
       <div className="form-container">
         <h2 className="section-title">Car Details</h2>
         <div className="input-group">
@@ -371,7 +396,7 @@ const BuyCarvsCommuteCalculator: React.FC = () => {
               placeholder="e.g., 15"
             />
             {inputs.fuelEfficiency && (
-              <p className="converter">{numberToWords(parseFloat(inputs.fuelEfficiency))} Kilometers per Liter</p>
+              <p className="converter">{numberToWords(parseFloat(inputs.fuelEfficiency))} Km per Liter</p>
             )}
             {errors.fuelEfficiency && <span className="error">{errors.fuelEfficiency}</span>}
           </label>
@@ -574,7 +599,9 @@ const BuyCarvsCommuteCalculator: React.FC = () => {
         </button>
       </div>
 
-      {/* Results Section */}
+      {/* -------------------------------
+          Results Section: Cost Comparison, Chart & Environmental Impact
+      ------------------------------- */}
       {results && (
         <div className="results-container">
           <h2 className="results-title">Cost of Ownership Summary (5 Years)</h2>
@@ -590,7 +617,6 @@ const BuyCarvsCommuteCalculator: React.FC = () => {
             </div>
           </div>
 
-          {/* Difference and Recommendation */}
           <div className="difference-block">
             <p>
               <strong>
@@ -608,12 +634,14 @@ const BuyCarvsCommuteCalculator: React.FC = () => {
             </p>
           </div>
 
-          {/* Chart Section */}
+          {/* -------------------------------
+              Chart Section: Toggle between Line & Bar Chart
+              Uses green (#108e66) for Car Cost and purple (#525ECC) for PT Cost
+          ------------------------------- */}
           <div className="chart-explanation">
             <p>
-              The chart below shows the cumulative cost for owning a car versus using public transport over a fixed 5‑year period.
-              <br />
-              Hover over the graph for detailed values.
+              The chart below shows the cumulative cost for owning a car versus using public transport over 5 years.
+              Hover over the graph for details.
             </p>
           </div>
           <div className="chart-toggle">
@@ -624,47 +652,31 @@ const BuyCarvsCommuteCalculator: React.FC = () => {
               Bar Chart
             </button>
           </div>
-          {results && (
-            <div className="chart-container">
-              <ResponsiveContainer width="90%" height={300}>
-                {chartType === "line" ? (
-                  <LineChart
-                    data={results.yearWise.map((data) => ({
-                      year: data.year,
-                      "Car Cost": data.carCumulative,
-                      "PT Cost": data.ptCumulative,
-                    }))}
-                    margin={{ left: 50, right: 30, top: 20, bottom: 20 }}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="year" label={{ value: "Year", position: "insideBottom", offset: -5 }} />
-                    <YAxis tickFormatter={(val) => "₹" + val.toLocaleString("en-IN")} />
-                    <RechartsTooltip formatter={(value: number) => "₹" + Math.round(value).toLocaleString("en-IN")} />
-                    <Legend />
-                    <Line type="monotone" dataKey="Car Cost" stroke="#CAEF7D" strokeWidth={2} name="Car Cost" />
-                    <Line type="monotone" dataKey="PT Cost" stroke="#1B1F13" strokeWidth={2} name="Public Transport Cost" />
-                  </LineChart>
-                ) : (
-                  <BarChart
-                    data={results.yearWise.map((data) => ({
-                      year: data.year,
-                      "Car Cost": data.carCumulative,
-                      "PT Cost": data.ptCumulative,
-                    }))}
-                    margin={{ left: 50, right: 30, top: 20, bottom: 20 }}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="year" />
-                    <YAxis tickFormatter={(val) => "₹" + val.toLocaleString("en-IN")} />
-                    <RechartsTooltip formatter={(value: number) => "₹" + Math.round(value).toLocaleString("en-IN")} />
-                    <Legend />
-                    <Bar dataKey="Car Cost" fill="#CAEF7D" name="Car Cost" />
-                    <Bar dataKey="PT Cost" fill="#1B1F13" name="Public Transport Cost" />
-                  </BarChart>
-                )}
-              </ResponsiveContainer>
-            </div>
-          )}
+          <div className="chart-container">
+            <ResponsiveContainer width="90%" height={300}>
+              {chartType === "line" ? (
+                <LineChart data={chartData} margin={{ left: 50, right: 30, top: 20, bottom: 20 }}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="year" label={{ value: "Year", position: "insideBottom", offset: -5 }} />
+                  <YAxis tickFormatter={(val) => "₹" + val.toLocaleString("en-IN")} />
+                  <RechartsTooltip formatter={(value: number) => "₹" + Math.round(value).toLocaleString("en-IN")} />
+                  <Legend />
+                  <Line type="monotone" dataKey="Car Cost" stroke="#108e66" strokeWidth={2} name="Car Cost" />
+                  <Line type="monotone" dataKey="PT Cost" stroke="#525ECC" strokeWidth={2} name="Public Transport Cost" />
+                </LineChart>
+              ) : (
+                <BarChart data={chartData} margin={{ left: 50, right: 30, top: 20, bottom: 20 }}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="year" />
+                  <YAxis tickFormatter={(val) => "₹" + val.toLocaleString("en-IN")} />
+                  <RechartsTooltip formatter={(value: number) => "₹" + Math.round(value).toLocaleString("en-IN")} />
+                  <Legend />
+                  <Bar dataKey="Car Cost" fill="#108e66" name="Car Cost" />
+                  <Bar dataKey="PT Cost" fill="#525ECC" name="Public Transport Cost" />
+                </BarChart>
+              )}
+            </ResponsiveContainer>
+          </div>
 
           {/* Environmental Impact Section */}
           <div ref={envRef} className="env-impact-container">
@@ -675,47 +687,63 @@ const BuyCarvsCommuteCalculator: React.FC = () => {
               </div>
               <div className="env-impact-details">
                 <p>
-                  By using public transport instead of driving a car, you can save approximately {Math.round(results.co2Savings)} kg of CO₂ emissions per year, thereby reducing your carbon footprint.
+                  By using public transport instead of driving a car, you save approximately {Math.round(results.co2Savings)} kg of CO₂ emissions per year, reducing your carbon footprint.
                 </p>
               </div>
             </div>
           </div>
+
+          {/* -------------------------------
+              Get in Touch CTA Section
+          ------------------------------- */}
+          <div className="cta-container mt-8 text-center">
+            <Link
+              href="https://wa.me/your-phone-number" // Replace with your actual WhatsApp link
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-[#108e66] text-[#fcfffe] px-8 py-3 rounded-md font-medium hover:bg-[#272B2A] transition-colors"
+            >
+              Get in touch
+            </Link>
+          </div>
         </div>
       )}
 
+      {/* Disclaimer Section */}
       {results && (
-      <div className="disclaimer">
-        <h4>Important Considerations</h4>
-        <ul>
-          <li>
-            This calculator estimates the 5‑year total cost of car ownership, including purchase price, fuel costs, maintenance, insurance, registration fees, and optional parking/toll fees.
-          </li>
-          <li>
-            Resale value is deducted only in the final year.
-          </li>
-          <li>
-            Environmental impact is estimated based solely on CO₂ savings from reduced fuel consumption.
-          </li>
-          <li>
-            Results are for reference only; please consult a financial advisor before making any major vehicle purchase decisions.
-          </li>
-        </ul>
-      </div>
+        <div className="disclaimer">
+          <h4>Important Considerations</h4>
+          <ul>
+            <li>
+              This calculator estimates the 5‑year total cost of car ownership, including purchase price, fuel costs, maintenance, insurance, registration fees, and optional parking/toll fees.
+            </li>
+            <li>Resale value is deducted only in the final year.</li>
+            <li>
+              Environmental impact is estimated based solely on CO₂ savings from reduced fuel consumption.
+            </li>
+            <li>
+              Results are for reference only; please consult a financial advisor before making any major vehicle purchase decisions.
+            </li>
+          </ul>
+        </div>
       )}
 
+      {/* -------------------------------
+          Inline Styles for the Component
+      ------------------------------- */}
       <style jsx>{`
         .container {
           padding: 2rem;
           font-family: "Poppins", sans-serif;
-          background: #fcffee;
-          color: #1b1f13;
+          background: #fcfffe;
+          color: #272b2a;
         }
         .top-nav {
           margin-bottom: 1rem;
         }
         .back-button {
-          background: #000000;
-          color: #fcffee;
+          background: #108e66;
+          color: #fcfffe;
           border: none;
           padding: 0.5rem 1rem;
           border-radius: 4px;
@@ -787,8 +815,8 @@ const BuyCarvsCommuteCalculator: React.FC = () => {
           font-size: 0.8rem;
         }
         .calculate-button {
-          background: #caef7d;
-          color: #1b1f13;
+          background: #108e66;
+          color: #fcfffe;
           border: none;
           padding: 0.75rem 1.5rem;
           border-radius: 4px;
@@ -842,6 +870,25 @@ const BuyCarvsCommuteCalculator: React.FC = () => {
           text-align: center;
           font-size: 0.95rem;
         }
+        .chart-toggle {
+          display: flex;
+          justify-content: center;
+          margin: 1rem 0;
+          gap: 1rem;
+        }
+        .chart-toggle button {
+          background: transparent;
+          border: 1px solid #272b2a;
+          padding: 0.5rem 1rem;
+          cursor: pointer;
+          border-radius: 4px;
+          transition: all 0.2s ease;
+        }
+        .chart-toggle button.active {
+          background: #108e66;
+          color: #fcfffe;
+          border-color: #108e66;
+        }
         .chart-container {
           margin: 2rem 0;
           display: flex;
@@ -874,37 +921,21 @@ const BuyCarvsCommuteCalculator: React.FC = () => {
         .env-impact-details {
           flex: 2;
         }
-        .chart-toggle {
-          display: flex;
-          justify-content: center;
-          margin: 1rem 0;
-          gap: 1rem;
-        }
-        .chart-toggle button {
-          background: transparent;
-          border: 1px solid #1b1f13;
-          padding: 0.5rem 1rem;
-          cursor: pointer;
-          border-radius: 4px;
-          transition: all 0.2s ease;
-        }
-        .chart-toggle button.active {
-          background: #caef7d;
-          color: #1b1f13;
-          border-color: #caef7d;
+        .cta-container {
+          margin-top: 2rem;
         }
         .disclaimer {
           background: #f9f9f9;
           padding: 1rem;
           border-radius: 4px;
           font-size: 0.9rem;
-          color: #555;
+          color: #272b2a;
           border: 1px solid #ddd;
           margin-top: 2rem;
         }
         .disclaimer h4 {
           margin-top: 0;
-          color: #1b1f13;
+          color: #272b2a;
           margin-bottom: 0.5rem;
         }
         .disclaimer ul {

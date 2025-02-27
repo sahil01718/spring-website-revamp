@@ -12,6 +12,9 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+// -------------------------------
+// Interfaces for Calculator Inputs & Results
+// -------------------------------
 interface CalculatorInputs {
   // Buying Details
   propertyPrice: string;
@@ -40,10 +43,10 @@ interface Results {
   rentingData: Array<{ year: number; netWorth: number; annualRent: number }>;
 }
 
-/* =========================================
-   1) Tooltip Component
-   Displays info text on hover over an "i" icon
-========================================= */
+// -------------------------------
+// Tooltip Component
+// Updated to use our primary theme color (#108e66) with white text
+// -------------------------------
 const Tooltip: React.FC<{ text: string }> = ({ text }) => {
   const [isHovered, setIsHovered] = useState(false);
   
@@ -65,8 +68,8 @@ const Tooltip: React.FC<{ text: string }> = ({ text }) => {
         }
         .info-icon {
           display: inline-block;
-          background: #CAEF7D;
-          color: #1B1F13;
+          background: #108e66;
+          color: #fcfffe;
           border-radius: 50%;
           font-size: 0.6rem;
           width: 14px;
@@ -78,8 +81,8 @@ const Tooltip: React.FC<{ text: string }> = ({ text }) => {
         .tooltiptext {
           visibility: visible;
           width: 200px;
-          background-color: #CAEF7D;
-          color: #1B1F13;
+          background-color: #108e66;
+          color: #fcfffe;
           text-align: left;
           border-radius: 4px;
           padding: 6px 8px;
@@ -101,58 +104,29 @@ const Tooltip: React.FC<{ text: string }> = ({ text }) => {
           margin-left: -4px;
           border-width: 4px;
           border-style: solid;
-          border-color: #CAEF7D transparent transparent transparent;
+          border-color: #108e66 transparent transparent transparent;
         }
       `}</style>
     </span>
   );
 };
 
-/* =========================================
-   2) Number to Words Conversion Function
-   Consistent with EMI calculator
-========================================= */
+// -------------------------------
+// Number to Words Conversion Functions
+// -------------------------------
 const numberToWords = (num: number): string => {
   if (num === undefined || num === null) return "";
   
-  // Round the number to handle decimals
   num = Math.abs(Math.round(num));
-  
   if (num === 0) return "Zero";
   
   const ones = [
-    "",
-    "One",
-    "Two",
-    "Three",
-    "Four",
-    "Five",
-    "Six",
-    "Seven",
-    "Eight",
-    "Nine",
-    "Ten",
-    "Eleven",
-    "Twelve",
-    "Thirteen",
-    "Fourteen",
-    "Fifteen",
-    "Sixteen",
-    "Seventeen",
-    "Eighteen",
-    "Nineteen",
+    "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
+    "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen",
+    "Seventeen", "Eighteen", "Nineteen",
   ];
   const tens = [
-    "",
-    "Ten",
-    "Twenty",
-    "Thirty",
-    "Forty",
-    "Fifty",
-    "Sixty",
-    "Seventy",
-    "Eighty",
-    "Ninety",
+    "", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety",
   ];
 
   if (num < 20) return ones[num];
@@ -183,19 +157,13 @@ const numberToWords = (num: number): string => {
   );
 };
 
-/* =========================================
-   3) Number to Words Percent
-   Converts numbers to word format with percent
-========================================= */
 const numberToWordsPercent = (value: number): string => {
   if (value === undefined || value === null) return "";
   
-  // If the user enters an integer
   if (Number.isInteger(value)) {
     return numberToWords(value) + " percent";
   }
   
-  // If decimals exist, handle them
   const intPart = Math.floor(value);
   const decimalPart = Math.round((value - intPart) * 10);
   
@@ -205,12 +173,12 @@ const numberToWordsPercent = (value: number): string => {
   return `${intWords} point ${decimalWords} percent`;
 };
 
-/* =========================================
-   4) Main Component
-========================================= */
+// -------------------------------
+// Main BuyVsRentCalculator Component
+// -------------------------------
 const BuyVsRentCalculator: React.FC = () => {
+  // State hooks for form inputs, errors, calculation results, and loading indicator
   const [inputs, setInputs] = useState<CalculatorInputs>({
-    // Buying
     propertyPrice: "",
     downPayment: "",
     loanTenure: "",
@@ -218,27 +186,25 @@ const BuyVsRentCalculator: React.FC = () => {
     propertyAppreciation: "",
     incomeTaxBracket: "",
     maxTaxDeduction: "",
-    // Renting
     currentMonthlyRent: "",
     rentInflation: "",
     investmentReturn: "",
   });
-
   const [errors, setErrors] = useState<Partial<CalculatorInputs>>({});
   const [results, setResults] = useState<Results | null>(null);
   const [isCalculating, setIsCalculating] = useState<boolean>(false);
 
-  /* ==============================
-     Handle Input
-  ===============================*/
+  // -------------------------------
+  // Handle Input Change
+  // -------------------------------
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputs((prev) => ({ ...prev, [name]: value }));
   };
 
-  /* ==============================
-     Validation
-  ===============================*/
+  // -------------------------------
+  // Validate Inputs
+  // -------------------------------
   const validateInputs = (): boolean => {
     const newErrors: Partial<CalculatorInputs> = {};
     Object.keys(inputs).forEach((key) => {
@@ -251,15 +217,14 @@ const BuyVsRentCalculator: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  /* ==============================
-     Calculation
-  ===============================*/
+  // -------------------------------
+  // Calculate Results based on inputs
+  // -------------------------------
   const calculateResults = () => {
     if (!validateInputs()) return;
     setIsCalculating(true);
 
-    // Parse inputs
-    // Buying
+    // Parse inputs for buying details
     const propertyPrice = parseFloat(inputs.propertyPrice);
     const downPayment = parseFloat(inputs.downPayment);
     const loanAmount = propertyPrice - downPayment;
@@ -269,12 +234,12 @@ const BuyVsRentCalculator: React.FC = () => {
     const incomeTaxBracket = parseFloat(inputs.incomeTaxBracket);
     const maxTaxDeduction = parseFloat(inputs.maxTaxDeduction);
 
-    // Renting
+    // Parse inputs for renting details
     const currentMonthlyRent = parseFloat(inputs.currentMonthlyRent);
     const rentInflation = parseFloat(inputs.rentInflation);
     const investmentReturn = parseFloat(inputs.investmentReturn);
 
-    // --- Buying ---
+    // --- Buying Calculations ---
     const monthlyInterestRate = interestRate / 100 / 12;
     const numberOfPayments = loanTenure * 12;
     const emi =
@@ -289,30 +254,25 @@ const BuyVsRentCalculator: React.FC = () => {
     const finalHomeValue = propertyPrice * Math.pow(1 + propertyAppreciation / 100, loanTenure);
     const buyingNetWorth = finalHomeValue - (downPayment + totalEmiPaid) + taxBenefit;
 
-    // --- Renting ---
+    // --- Renting Calculations ---
     let totalRentPaid = 0;
-    let rentingNetWorth = 0; // Accumulate compounded savings
+    let rentingNetWorth = 0;
     const buyingData: Array<{ year: number; netWorth: number; annualCost: number }> = [];
     const rentingData: Array<{ year: number; netWorth: number; annualRent: number }> = [];
 
     for (let i = 0; i < loanTenure; i++) {
       const year = i + 1;
-      // Yearly rent
       const yearlyRent = currentMonthlyRent * 12 * Math.pow(1 + rentInflation / 100, i);
       totalRentPaid += yearlyRent;
 
       const annualBuyingCost = emi * 12;
       const annualSavings = annualBuyingCost - yearlyRent;
-      // Compound savings for the remaining years
       const compoundedSavings = annualSavings * Math.pow(1 + investmentReturn / 100, loanTenure - i);
       rentingNetWorth += compoundedSavings;
 
-      // Year-wise data for buying
       const propertyValueAtYear = propertyPrice * Math.pow(1 + propertyAppreciation / 100, year);
       const cumulativeEmiPaid = emi * 12 * year;
-      // Apportion the total taxBenefit across the years
       const taxBenefitPortion = taxBenefit * (year / loanTenure);
-
       const buyingNetWorthYear =
         propertyValueAtYear - (downPayment + cumulativeEmiPaid) + taxBenefitPortion;
 
@@ -348,13 +308,13 @@ const BuyVsRentCalculator: React.FC = () => {
       rentingData,
     });
 
-    // Simulate calculation delay
+    // Simulate delay for UX
     setTimeout(() => {
       setIsCalculating(false);
     }, 1000);
   };
 
-  // Data for the combined line chart: each entry includes Buying Net Worth and Renting Net Worth
+  // Prepare combined data for the chart
   const combinedData =
     results &&
     results.buyingData.map((data, index) => ({
@@ -365,20 +325,27 @@ const BuyVsRentCalculator: React.FC = () => {
 
   return (
     <div className="container">
-      {/* Top Navigation */}
+      {/* -------------------------------
+          Top Navigation: Back to Tools Dashboard
+      ------------------------------- */}
       <div className="top-nav">
         <Link href="/tools">
           <button className="back-button">Back to Dashboard</button>
         </Link>
       </div>
 
+      {/* -------------------------------
+          Page Title & Description
+      ------------------------------- */}
       <h1 className="title">Should I Buy or Rent a Home?</h1>
       <p className="description">
-        This tool evaluates the financial implications of buying versus renting. Enter your details
-        below to see which option might build more wealth over time.
+        This tool evaluates the financial implications of buying versus renting. Enter your details below
+        to see which option might build more wealth over time.
       </p>
 
-      {/* Form */}
+      {/* -------------------------------
+          Input Form for Buying & Renting Details
+      ------------------------------- */}
       <div className="form-container">
         <h2 className="section-title">Buying Details</h2>
         <div className="input-group">
@@ -463,12 +430,9 @@ const BuyVsRentCalculator: React.FC = () => {
               placeholder="e.g., 5"
             />
             <span className="converter">
-              {inputs.propertyAppreciation &&
-                numberToWordsPercent(parseFloat(inputs.propertyAppreciation))}
+              {inputs.propertyAppreciation && numberToWordsPercent(parseFloat(inputs.propertyAppreciation))}
             </span>
-            {errors.propertyAppreciation && (
-              <span className="error">{errors.propertyAppreciation}</span>
-            )}
+            {errors.propertyAppreciation && <span className="error">{errors.propertyAppreciation}</span>}
           </label>
           <label>
             <span className="input-label">
@@ -483,12 +447,9 @@ const BuyVsRentCalculator: React.FC = () => {
               placeholder="e.g., 30"
             />
             <span className="converter">
-              {inputs.incomeTaxBracket &&
-                numberToWordsPercent(parseFloat(inputs.incomeTaxBracket))}
+              {inputs.incomeTaxBracket && numberToWordsPercent(parseFloat(inputs.incomeTaxBracket))}
             </span>
-            {errors.incomeTaxBracket && (
-              <span className="error">{errors.incomeTaxBracket}</span>
-            )}
+            {errors.incomeTaxBracket && <span className="error">{errors.incomeTaxBracket}</span>}
           </label>
           <label>
             <span className="input-label">
@@ -503,12 +464,9 @@ const BuyVsRentCalculator: React.FC = () => {
               placeholder="e.g., 200000"
             />
             <span className="converter">
-              {inputs.maxTaxDeduction &&
-                numberToWords(parseFloat(inputs.maxTaxDeduction))} Rupees
+              {inputs.maxTaxDeduction && numberToWords(parseFloat(inputs.maxTaxDeduction))} Rupees
             </span>
-            {errors.maxTaxDeduction && (
-              <span className="error">{errors.maxTaxDeduction}</span>
-            )}
+            {errors.maxTaxDeduction && <span className="error">{errors.maxTaxDeduction}</span>}
           </label>
         </div>
 
@@ -529,12 +487,9 @@ const BuyVsRentCalculator: React.FC = () => {
               placeholder="e.g., 20000"
             />
             <span className="converter">
-              {inputs.currentMonthlyRent &&
-                numberToWords(parseFloat(inputs.currentMonthlyRent))} Rupees
+              {inputs.currentMonthlyRent && numberToWords(parseFloat(inputs.currentMonthlyRent))} Rupees
             </span>
-            {errors.currentMonthlyRent && (
-              <span className="error">{errors.currentMonthlyRent}</span>
-            )}
+            {errors.currentMonthlyRent && <span className="error">{errors.currentMonthlyRent}</span>}
           </label>
           <label>
             <span className="input-label">
@@ -566,12 +521,9 @@ const BuyVsRentCalculator: React.FC = () => {
               placeholder="e.g., 8"
             />
             <span className="converter">
-              {inputs.investmentReturn &&
-                numberToWordsPercent(parseFloat(inputs.investmentReturn))}
+              {inputs.investmentReturn && numberToWordsPercent(parseFloat(inputs.investmentReturn))}
             </span>
-            {errors.investmentReturn && (
-              <span className="error">{errors.investmentReturn}</span>
-            )}
+            {errors.investmentReturn && <span className="error">{errors.investmentReturn}</span>}
           </label>
         </div>
 
@@ -580,7 +532,10 @@ const BuyVsRentCalculator: React.FC = () => {
         </button>
       </div>
 
-      {/* Results */}
+      {/* -------------------------------
+          Results Section: Comparison & Visualization
+      ------------------------------- */}
+      
       {results && (
         <div className="results-container">
           <h2 className="results-title">Comparison Results</h2>
@@ -589,48 +544,50 @@ const BuyVsRentCalculator: React.FC = () => {
           </div>
           
           <div className="comparison-grid">
+            {/* Buying Column */}
             <div className="comparison-column buying-column">
               <h3 className="comparison-title">Buying a Home</h3>
               <div className="result-card">
                 <div className="result-item">
                   <div className="result-label">Monthly EMI</div>
-                  <div className="result-value">₹{parseFloat(results.emi).toLocaleString('en-IN')}</div>
+                  <div className="result-value">₹{parseFloat(results.emi).toLocaleString("en-IN")}</div>
                   <div className="result-words">{numberToWords(parseFloat(results.emi))} Rupees</div>
                 </div>
                 <div className="result-item">
                   <div className="result-label">Total EMI Paid</div>
-                  <div className="result-value">₹{parseFloat(results.totalEmiPaid).toLocaleString('en-IN')}</div>
+                  <div className="result-value">₹{parseFloat(results.totalEmiPaid).toLocaleString("en-IN")}</div>
                   <div className="result-words">{numberToWords(parseFloat(results.totalEmiPaid))} Rupees</div>
                 </div>
                 <div className="result-item">
                   <div className="result-label">Tax Benefit</div>
-                  <div className="result-value">₹{parseFloat(results.taxBenefit).toLocaleString('en-IN')}</div>
+                  <div className="result-value">₹{parseFloat(results.taxBenefit).toLocaleString("en-IN")}</div>
                   <div className="result-words">{numberToWords(parseFloat(results.taxBenefit))} Rupees</div>
                 </div>
                 <div className="result-item">
                   <div className="result-label">Final Property Value</div>
-                  <div className="result-value">₹{parseFloat(results.finalHomeValue).toLocaleString('en-IN')}</div>
+                  <div className="result-value">₹{parseFloat(results.finalHomeValue).toLocaleString("en-IN")}</div>
                   <div className="result-words">{numberToWords(parseFloat(results.finalHomeValue))} Rupees</div>
                 </div>
                 <div className="result-item highlight">
                   <div className="result-label">Net Worth After {inputs.loanTenure} Years</div>
-                  <div className="result-value">₹{parseFloat(results.buyingNetWorth).toLocaleString('en-IN')}</div>
+                  <div className="result-value">₹{parseFloat(results.buyingNetWorth).toLocaleString("en-IN")}</div>
                   <div className="result-words">{numberToWords(parseFloat(results.buyingNetWorth))} Rupees</div>
                 </div>
               </div>
             </div>
             
+            {/* Renting Column */}
             <div className="comparison-column renting-column">
               <h3 className="comparison-title">Renting & Investing</h3>
               <div className="result-card">
                 <div className="result-item">
                   <div className="result-label">Monthly Rent (Starting)</div>
-                  <div className="result-value">₹{parseFloat(inputs.currentMonthlyRent).toLocaleString('en-IN')}</div>
+                  <div className="result-value">₹{parseFloat(inputs.currentMonthlyRent).toLocaleString("en-IN")}</div>
                   <div className="result-words">{numberToWords(parseFloat(inputs.currentMonthlyRent))} Rupees</div>
                 </div>
                 <div className="result-item">
                   <div className="result-label">Total Rent Paid</div>
-                  <div className="result-value">₹{parseFloat(results.totalRentPaid).toLocaleString('en-IN')}</div>
+                  <div className="result-value">₹{parseFloat(results.totalRentPaid).toLocaleString("en-IN")}</div>
                   <div className="result-words">{numberToWords(parseFloat(results.totalRentPaid))} Rupees</div>
                 </div>
                 <div className="result-item">
@@ -645,7 +602,7 @@ const BuyVsRentCalculator: React.FC = () => {
                 </div>
                 <div className="result-item highlight">
                   <div className="result-label">Net Worth After {inputs.loanTenure} Years</div>
-                  <div className="result-value">₹{parseFloat(results.rentingNetWorth).toLocaleString('en-IN')}</div>
+                  <div className="result-value">₹{parseFloat(results.rentingNetWorth).toLocaleString("en-IN")}</div>
                   <div className="result-words">{numberToWords(parseFloat(results.rentingNetWorth))} Rupees</div>
                 </div>
               </div>
@@ -654,7 +611,7 @@ const BuyVsRentCalculator: React.FC = () => {
           
           <div className="wealth-difference">
             <p>
-              <strong>Wealth Difference:</strong> ₹{Math.abs(parseFloat(results.buyingNetWorth) - parseFloat(results.rentingNetWorth)).toLocaleString('en-IN')} 
+              <strong>Wealth Difference:</strong> ₹{Math.abs(parseFloat(results.buyingNetWorth) - parseFloat(results.rentingNetWorth)).toLocaleString("en-IN")} 
               ({numberToWords(Math.round(Math.abs(parseFloat(results.buyingNetWorth) - parseFloat(results.rentingNetWorth))))} Rupees) 
               in favor of {parseFloat(results.buyingNetWorth) > parseFloat(results.rentingNetWorth) ? 'buying' : 'renting & investing'}
             </p>
@@ -666,39 +623,21 @@ const BuyVsRentCalculator: React.FC = () => {
             </div>
           </div>
 
-          {/* Combined Line Chart: Buying vs Renting Net Worth */}
+          {/* -------------------------------
+              Combined Line Chart: Buying vs Renting Net Worth
+              Uses green (#108e66) for Buying and purple (#525ECC) for Renting
+          ------------------------------- */}
           {combinedData && (
             <div className="chart-container">
               <ResponsiveContainer width="90%" height={300}>
-                <LineChart
-                  data={combinedData}
-                  margin={{ left: 50, right: 30, top: 20, bottom: 20 }}
-                >
+                <LineChart data={combinedData} margin={{ left: 50, right: 30, top: 20, bottom: 20 }}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis
-                    dataKey="year"
-                    label={{ value: "Year", position: "insideBottom", offset: -5 }}
-                  />
-                  <YAxis
-                    domain={["auto", "auto"]}
-                    tickFormatter={(val) => val.toLocaleString("en-IN")}
-                  />
-                  <RechartsTooltip
-                    formatter={(value: number) => value.toLocaleString("en-IN")}
-                  />
+                  <XAxis dataKey="year" label={{ value: "Year", position: "insideBottom", offset: -5 }} />
+                  <YAxis domain={["auto", "auto"]} tickFormatter={(val) => val.toLocaleString("en-IN")} />
+                  <RechartsTooltip formatter={(value: number) => value.toLocaleString("en-IN")} />
                   <Legend />
-                  <Line
-                    type="monotone"
-                    dataKey="Buying Net Worth"
-                    stroke="#CAEF7D"
-                    strokeWidth={2}
-                  />
-                  <Line
-                    type="monotone"
-                    dataKey="Renting Net Worth"
-                    stroke="#1B1F13"
-                    strokeWidth={2}
-                  />
+                  <Line type="monotone" dataKey="Buying Net Worth" stroke="#108e66" strokeWidth={2} />
+                  <Line type="monotone" dataKey="Renting Net Worth" stroke="#525ECC" strokeWidth={2} />
                 </LineChart>
               </ResponsiveContainer>
             </div>
@@ -721,10 +660,10 @@ const BuyVsRentCalculator: React.FC = () => {
                 {results.buyingData.map((data) => (
                   <tr key={data.year}>
                     <td>{data.year}</td>
-                    <td>{data.netWorth.toLocaleString('en-IN')}</td>
-                    <td>{results.rentingData[data.year-1]?.netWorth.toLocaleString('en-IN')}</td>
-                    <td>{data.annualCost.toLocaleString('en-IN')}</td>
-                    <td>{results.rentingData[data.year-1]?.annualRent.toLocaleString('en-IN')}</td>
+                    <td>{data.netWorth.toLocaleString("en-IN")}</td>
+                    <td>{results.rentingData[data.year - 1]?.netWorth.toLocaleString("en-IN")}</td>
+                    <td>{data.annualCost.toLocaleString("en-IN")}</td>
+                    <td>{results.rentingData[data.year - 1]?.annualRent.toLocaleString("en-IN")}</td>
                   </tr>
                 ))}
               </tbody>
@@ -745,25 +684,39 @@ const BuyVsRentCalculator: React.FC = () => {
           </div>
         </div>
       )}
+      <div className="cta-container mt-8 text-center">
+  <Link
+    href="https://wa.me/your-phone-number" // Replace with your actual WhatsApp link
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-block bg-[#108e66] text-[#fcfffe] px-8 py-3 rounded-md font-medium hover:bg-[#272B2A] transition-colors"
+  >
+    Get in touch
+  </Link>
+</div>
 
+      {/* -------------------------------
+          Inline Styles for the Component
+      ------------------------------- */}
       <style jsx>{`
+        /* Main container styles using new theme colors */
         .container {
           padding: 2rem;
           font-family: "Poppins", sans-serif;
-          background: #fcffee;
-          color: #1b1f13;
+          background: #fcfffe;
+          color: #272b2a;
         }
         .top-nav {
           margin-bottom: 1rem;
         }
+        /* Updated Back Button with Primary color */
         .back-button {
-          background: #000000;
-          color: #fcffee;
+          background: #108e66;
+          color: #fcfffe;
           border: none;
           padding: 0.5rem 1rem;
           border-radius: 4px;
           cursor: pointer;
-          font-family: "Poppins", sans-serif;
           font-weight: 500;
         }
         .title {
@@ -777,8 +730,9 @@ const BuyVsRentCalculator: React.FC = () => {
           font-size: 1.2rem;
           margin-bottom: 2rem;
         }
+        /* Form Container with consistent card styling */
         .form-container {
-          background: #fff;
+          background: #fcfffe;
           padding: 2rem;
           border-radius: 8px;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -830,9 +784,10 @@ const BuyVsRentCalculator: React.FC = () => {
           color: red;
           font-size: 0.8rem;
         }
+        /* Updated Calculate Button using Primary color */
         .calculate-button {
-          background: #caef7d;
-          color: #1b1f13;
+          background: #108e66;
+          color: #fcfffe;
           border: none;
           padding: 0.75rem 1.5rem;
           border-radius: 4px;
@@ -845,8 +800,9 @@ const BuyVsRentCalculator: React.FC = () => {
           opacity: 0.6;
           cursor: not-allowed;
         }
+        /* Results Container styles */
         .results-container {
-          background: #fff;
+          background: #fcfffe;
           padding: 2rem;
           border-radius: 8px;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -858,13 +814,9 @@ const BuyVsRentCalculator: React.FC = () => {
           margin-bottom: 1rem;
           text-align: center;
         }
-        .results-summary p {
-          font-size: 1rem;
-          margin: 0.5rem 0;
-        }
         .decision-banner {
-          background: #1b1f13;
-          color: #fcffee;
+          background: #272b2a;
+          color: #fcfffe;
           padding: 1rem;
           border-radius: 4px;
           text-align: center;
@@ -881,24 +833,28 @@ const BuyVsRentCalculator: React.FC = () => {
           gap: 1.5rem;
           margin-bottom: 1.5rem;
         }
+        /* Comparison Column Titles:
+           Buying uses Primary color (#108e66)
+           Renting uses Purple (#525ECC)
+        */
         .comparison-column {
-          background: #f9f9f9;
+          background: #fcfffe;
           border-radius: 8px;
           overflow: hidden;
         }
         .comparison-title {
-          background: #caef7d;
-          color: #1b1f13;
           padding: 0.75rem;
           text-align: center;
           margin: 0;
           font-size: 1.1rem;
+          color: #fcfffe;
+          font-weight: 600;
         }
         .buying-column .comparison-title {
-          background: #caef7d;
+          background: #108e66;
         }
         .renting-column .comparison-title {
-          background: #d9d9d9;
+          background: #525ecc;
         }
         .result-card {
           padding: 1rem;
@@ -908,11 +864,11 @@ const BuyVsRentCalculator: React.FC = () => {
           border-bottom: 1px solid #eee;
         }
         .result-item.highlight {
-          background: #f5f9e8;
+          background: #fcfffe;
           padding: 0.75rem;
           border-radius: 4px;
           margin-top: 0.5rem;
-          border: 1px solid #caef7d;
+          border: 1px solid #108e66;
         }
         .result-label {
           font-weight: 600;
@@ -920,27 +876,27 @@ const BuyVsRentCalculator: React.FC = () => {
         }
         .result-value {
           font-size: 1.2rem;
-          color: #1b1f13;
+          color: #272b2a;
         }
         .result-words {
           font-size: 0.8rem;
           color: #777;
         }
         .wealth-difference {
-          background: #f5f9e8;
+          background: #fcfffe;
           padding: 1rem;
           border-radius: 4px;
           text-align: center;
           font-size: 1.1rem;
-          border: 1px solid #caef7d;
+          border: 1px solid #108e66;
           margin-bottom: 1.5rem;
         }
         .wealth-difference p {
           margin: 0 0 0.5rem 0;
         }
         .recommendation {
-          background: #1b1f13;
-          color: #fcffee;
+          background: #272b2a;
+          color: #fcfffe;
           padding: 0.75rem;
           border-radius: 4px;
           margin-top: 0.5rem;
@@ -968,22 +924,22 @@ const BuyVsRentCalculator: React.FC = () => {
           text-align: center;
         }
         .amortization-table th {
-          background: #f0f8e8;
+          background: #fcfffe;
           position: sticky;
           top: 0;
         }
         .disclaimer {
           margin-top: 2rem;
           font-size: 0.9rem;
-          color: #555;
-          background: #f9f9f9;
+          color: #272b2a;
+          background: #fcfffe;
           padding: 1rem;
           border-radius: 4px;
           border: 1px solid #ddd;
         }
         .disclaimer h4 {
           margin-top: 0;
-          color: #1b1f13;
+          color: #272b2a;
           margin-bottom: 0.5rem;
         }
         .disclaimer ul {
@@ -1014,5 +970,10 @@ const BuyVsRentCalculator: React.FC = () => {
     </div>
   );
 };
+{/* -------------------------------
+    Get in Touch CTA Section
+------------------------------- */}
 
 export default BuyVsRentCalculator;
+
+

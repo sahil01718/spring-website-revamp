@@ -39,7 +39,7 @@ interface ChartData {
 }
 
 // -----------------------
-// Utility: Tooltip Component for Inputs
+// Updated Tooltip Component
 // -----------------------
 const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -61,8 +61,8 @@ const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
         }
         .info-icon {
           display: inline-block;
-          background: #caef7d;
-          color: #1b1f13;
+          background: #108e66;
+          color: #fcfffe;
           border-radius: 50%;
           font-size: 0.6rem;
           width: 14px;
@@ -74,8 +74,8 @@ const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
         .tooltiptext {
           visibility: visible;
           width: 220px;
-          background-color: #caef7d;
-          color: #1b1f13;
+          background-color: #108e66;
+          color: #fcfffe;
           text-align: left;
           border-radius: 4px;
           padding: 6px 8px;
@@ -97,7 +97,7 @@ const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
           margin-left: -4px;
           border-width: 4px;
           border-style: solid;
-          border-color: #caef7d transparent transparent transparent;
+          border-color: #108e66 transparent transparent transparent;
         }
       `}</style>
     </span>
@@ -112,38 +112,12 @@ const numberToWords = (num: number): string => {
   num = Math.abs(Math.round(num));
   if (num === 0) return "Zero";
   const ones = [
-    "",
-    "One",
-    "Two",
-    "Three",
-    "Four",
-    "Five",
-    "Six",
-    "Seven",
-    "Eight",
-    "Nine",
-    "Ten",
-    "Eleven",
-    "Twelve",
-    "Thirteen",
-    "Fourteen",
-    "Fifteen",
-    "Sixteen",
-    "Seventeen",
-    "Eighteen",
-    "Nineteen",
+    "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
+    "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen",
+    "Seventeen", "Eighteen", "Nineteen",
   ];
   const tens = [
-    "",
-    "Ten",
-    "Twenty",
-    "Thirty",
-    "Forty",
-    "Fifty",
-    "Sixty",
-    "Seventy",
-    "Eighty",
-    "Ninety",
+    "", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety",
   ];
   if (num < 20) return ones[num];
   if (num < 100)
@@ -224,7 +198,7 @@ const HourlyWageCalculator: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Calculation Logic
+  // Calculation Logic (unchanged)
   const calculateResults = () => {
     if (!validateInputs()) return;
     setIsCalculating(true);
@@ -237,13 +211,13 @@ const HourlyWageCalculator: React.FC = () => {
     const bonuses = inputs.bonuses ? parseFloat(inputs.bonuses) : 0;
     const deductions = inputs.deductions ? parseFloat(inputs.deductions) : 0;
 
-    // Theoretical hourly wage (assuming full-time work: 52 weeks)
+    // Theoretical hourly wage (assuming full 52-week schedule)
     const theoreticalHours = workHoursPerWeek * 52;
     const theoreticalHourly = annualSalary / theoreticalHours;
 
-    // Calculate paid holiday hours (assuming 5 workdays per week)
+    // Calculate paid holiday hours (assume 5 workdays per week)
     const paidHolidayHours = (paidHolidays / 5) * workHoursPerWeek;
-    // Actual work hours: subtract vacation weeks, unpaid leave (converted to hours), and paid holiday hours
+    // Actual hours = theoretical hours - (vacation + unpaid leave) * weekly hours - paid holiday hours
     const actualHours = theoreticalHours - (vacationWeeks + unpaidLeave) * workHoursPerWeek - paidHolidayHours;
     const adjustedSalary = annualSalary + bonuses - deductions;
     const actualHourly = adjustedSalary / actualHours;
@@ -255,7 +229,7 @@ const HourlyWageCalculator: React.FC = () => {
     setTimeout(() => setIsCalculating(false), 1000);
   };
 
-  // Prepare chart data for Bar and Pie charts (rounding off values)
+  // Prepare chart data for Bar and Pie charts
   const chartData: ChartData[] =
     results
       ? [
@@ -264,10 +238,10 @@ const HourlyWageCalculator: React.FC = () => {
         ]
       : [];
 
-  // Colors for Pie Chart
-  const COLORS = ["#1B1F13", "#CAEF7D"];
+  // Colors for Pie Chart: Theoretical in green, Actual in purple
+  const COLORS = ["#108e66", "#525ECC"];
 
-  // Calculate difference message using a non-null diff value
+  // Difference message
   const diff: number = results ? results.actualHourly - results.theoreticalHourly : 0;
   const diffMessage =
     results && diff !== 0
@@ -278,7 +252,9 @@ const HourlyWageCalculator: React.FC = () => {
 
   return (
     <div className="container">
-      {/* Back to Dashboard Button at Top */}
+      {/* -----------------------
+          Top Navigation: Back to Dashboard
+      ----------------------- */}
       <div className="top-nav">
         <Link href="/tools">
           <button className="back-button">Back to Dashboard</button>
@@ -420,18 +396,17 @@ const HourlyWageCalculator: React.FC = () => {
           <h2 className="results-title">Hourly Wage Summary</h2>
           <div className="summary-card">
             <div className="summary-item">
-              <strong>Theoretical Hourly Wage:</strong> ₹
-              {results.theoreticalHourly.toLocaleString("en-IN")} (
+              <strong>Theoretical Hourly Wage:</strong> ₹{results.theoreticalHourly.toLocaleString("en-IN")} (
               {numberToWords(Math.round(results.theoreticalHourly))} Rupees/hour)
             </div>
             <div className="summary-item">
-              <strong>Actual Hourly Wage:</strong> ₹
-              {results.actualHourly.toLocaleString("en-IN")} (
+              <strong>Actual Hourly Wage:</strong> ₹{results.actualHourly.toLocaleString("en-IN")} (
               {numberToWords(Math.round(results.actualHourly))} Rupees/hour)
             </div>
             {results.theoreticalHourly !== 0 && (
               <div className="summary-item">
-                <strong>Difference:</strong> {diff >= 0 
+                <strong>Difference:</strong>{" "}
+                {diff >= 0
                   ? `₹${Math.abs(diff).toLocaleString("en-IN")} more per hour`
                   : `₹${Math.abs(diff).toLocaleString("en-IN")} less per hour`}
               </div>
@@ -441,7 +416,7 @@ const HourlyWageCalculator: React.FC = () => {
           <h2 className="results-title">Graphical Comparison</h2>
           <div className="chart-explanation">
             <p>
-              The charts below compare your theoretical hourly wage (based on a full-time schedule) with your actual hourly wage (after accounting for time off). Hover over the graphs for detailed values.
+              The charts below compare your theoretical hourly wage (full-time schedule) with your actual hourly wage (after accounting for time off). Hover over the charts for details.
             </p>
             {chartType === "bar" && (
               <p>
@@ -471,19 +446,13 @@ const HourlyWageCalculator: React.FC = () => {
                   <YAxis tickFormatter={(val) => "₹" + val.toLocaleString("en-IN")} />
                   <RechartsTooltip formatter={(value: number) => "₹" + Math.round(value).toLocaleString("en-IN")} />
                   <Legend />
-                  <Bar dataKey="value" fill="#1B1F13" name="Hourly Wage" />
+                  {/* Use green for theoretical and purple for actual */}
+                  <Bar dataKey="value" fill="#108e66" name="Theoretical" />
+                  <Bar dataKey="value" fill="#525ECC" name="Actual" />
                 </BarChart>
               ) : chartType === "pie" ? (
                 <PieChart>
-                  <Pie
-                    data={chartData}
-                    dataKey="value"
-                    nameKey="name"
-                    cx="50%"
-                    cy="50%"
-                    outerRadius={80}
-                    label
-                  >
+                  <Pie data={chartData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
                     {chartData.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
@@ -495,6 +464,19 @@ const HourlyWageCalculator: React.FC = () => {
                 <React.Fragment />
               )}
             </ResponsiveContainer>
+          </div>
+          {/* -----------------------
+              Get in Touch CTA Section
+          ----------------------- */}
+          <div className="cta-container mt-8 text-center">
+            <Link
+              href="https://wa.me/your-phone-number" // Replace with your actual WhatsApp link
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-[#108e66] text-[#fcfffe] px-8 py-3 rounded-md font-medium hover:bg-[#272b2a] transition-colors"
+            >
+              Get in touch
+            </Link>
           </div>
         </div>
       )}
@@ -523,15 +505,15 @@ const HourlyWageCalculator: React.FC = () => {
         .container {
           padding: 2rem;
           font-family: "Poppins", sans-serif;
-          background: #fcffee;
-          color: #1b1f13;
+          background: #fcfffe;
+          color: #272b2a;
         }
         .top-nav {
           margin-bottom: 1rem;
         }
         .back-button {
-          background: #000000;
-          color: #fcffee;
+          background: #272b2a;
+          color: #fcfffe;
           border: none;
           padding: 0.5rem 1rem;
           border-radius: 4px;
@@ -549,9 +531,6 @@ const HourlyWageCalculator: React.FC = () => {
           text-align: center;
           font-size: 1.2rem;
           margin-bottom: 1rem;
-        }
-        .explanation {
-          display: none;
         }
         .form-container {
           background: #fff;
@@ -603,8 +582,8 @@ const HourlyWageCalculator: React.FC = () => {
           font-size: 0.8rem;
         }
         .calculate-button {
-          background: #caef7d;
-          color: #1b1f13;
+          background: #108e66;
+          color: #fcfffe;
           border: none;
           padding: 0.75rem 1.5rem;
           border-radius: 4px;
@@ -647,7 +626,7 @@ const HourlyWageCalculator: React.FC = () => {
           padding: 1rem;
           border-radius: 8px;
           margin-bottom: 1rem;
-          border-left: 4px solid #caef7d;
+          border-left: 4px solid #108e66;
           text-align: center;
           font-size: 0.95rem;
         }
@@ -659,43 +638,51 @@ const HourlyWageCalculator: React.FC = () => {
         }
         .chart-toggle button {
           background: transparent;
-          border: 1px solid #1b1f13;
+          border: 1px solid #272b2a;
           padding: 0.5rem 1rem;
           cursor: pointer;
           border-radius: 4px;
           transition: all 0.2s ease;
         }
         .chart-toggle button.active {
-          background: #caef7d;
-          color: #1b1f13;
-          border-color: #caef7d;
+          background: #108e66;
+          color: #fcfffe;
+          border-color: #108e66;
         }
         .chart-container {
           margin: 1rem 0 2rem;
           display: flex;
           justify-content: center;
         }
-        .amortization-table {
-          max-height: 400px;
-          overflow-y: auto;
-          margin-bottom: 1.5rem;
+        .env-impact-container {
+          background: #fff;
+          padding: 1.5rem;
           border-radius: 8px;
-          border: 1px solid #eee;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+          border: 1px solid #3E4799;
+          margin-bottom: 2rem;
         }
-        .amortization-table table {
-          width: 100%;
-          border-collapse: collapse;
+        .env-impact-content {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 2rem;
+          justify-content: space-between;
+          align-items: center;
         }
-        .amortization-table th,
-        .amortization-table td {
-          border: 1px solid #eee;
-          padding: 0.5rem;
+        .env-impact-value {
+          flex: 1;
           text-align: center;
         }
-        .amortization-table th {
-          background: #f0f8e8;
-          position: sticky;
-          top: 0;
+        .env-impact-number {
+          font-size: 2rem;
+          font-weight: bold;
+          color: #108e66;
+        }
+        .env-impact-details {
+          flex: 2;
+        }
+        .cta-container {
+          margin-top: 2rem;
         }
         .disclaimer {
           background: #f9f9f9;
@@ -708,7 +695,7 @@ const HourlyWageCalculator: React.FC = () => {
         }
         .disclaimer h4 {
           margin-top: 0;
-          color: #1b1f13;
+          color: #272b2a;
           margin-bottom: 0.5rem;
         }
         .disclaimer ul {

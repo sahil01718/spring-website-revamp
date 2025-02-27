@@ -15,10 +15,8 @@ import {
 } from "recharts";
 
 // -----------------------
-// Interfaces
+// Interfaces for Inputs, Yearly Data & Results
 // -----------------------
-
-// For this Endowment Calculator, we use these inputs:
 interface CalculatorInputs {
   surrenderValue: string;   // Current Surrender Value (INR)
   maturityValue: string;    // Guaranteed Maturity Value (INR)
@@ -26,23 +24,22 @@ interface CalculatorInputs {
   altReturn: string;        // Expected Alternative Investment Return (%)
 }
 
-// Yearly breakdown for projections
 interface YearlyData {
   year: number;
   endowmentValue: number;  // Projected policy value at that year (linear interpolation)
   altCorpus: number;       // Future value if surrender value is invested
 }
 
-// Results interface for Endowment Calculator
 interface Results {
   finalAltCorpus: number;    // Final value if surrender value is invested over the remaining tenure
-  finalPolicyValue: number;  // Guaranteed maturity value of the policy (MV)
+  finalPolicyValue: number;  // Guaranteed maturity value of the policy
   bestOption: string;        // Recommendation for the user
   yearWise: YearlyData[];
 }
 
 // -----------------------
-// Utility: Tooltip Component for Inputs
+// TooltipIcon Component
+// Updated to use our primary theme colors (Primary: #108e66, Text: #fcfffe)
 // -----------------------
 const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -64,8 +61,8 @@ const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
         }
         .info-icon {
           display: inline-block;
-          background: #caef7d;
-          color: #1b1f13;
+          background: #108e66;
+          color: #fcfffe;
           border-radius: 50%;
           font-size: 0.6rem;
           width: 14px;
@@ -77,8 +74,8 @@ const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
         .tooltiptext {
           visibility: visible;
           width: 220px;
-          background-color: #caef7d;
-          color: #1b1f13;
+          background-color: #108e66;
+          color: #fcfffe;
           text-align: left;
           border-radius: 4px;
           padding: 6px 8px;
@@ -100,7 +97,7 @@ const TooltipIcon: React.FC<{ text: string }> = ({ text }) => {
           margin-left: -4px;
           border-width: 4px;
           border-style: solid;
-          border-color: #caef7d transparent transparent transparent;
+          border-color: #108e66 transparent transparent transparent;
         }
       `}</style>
     </span>
@@ -115,65 +112,23 @@ const numberToWords = (num: number): string => {
   num = Math.abs(Math.round(num));
   if (num === 0) return "Zero";
   const ones = [
-    "",
-    "One",
-    "Two",
-    "Three",
-    "Four",
-    "Five",
-    "Six",
-    "Seven",
-    "Eight",
-    "Nine",
-    "Ten",
-    "Eleven",
-    "Twelve",
-    "Thirteen",
-    "Fourteen",
-    "Fifteen",
-    "Sixteen",
-    "Seventeen",
-    "Eighteen",
-    "Nineteen",
+    "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
+    "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen",
+    "Seventeen", "Eighteen", "Nineteen",
   ];
   const tens = [
-    "",
-    "Ten",
-    "Twenty",
-    "Thirty",
-    "Forty",
-    "Fifty",
-    "Sixty",
-    "Seventy",
-    "Eighty",
-    "Ninety",
+    "", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety",
   ];
   if (num < 20) return ones[num];
   if (num < 100)
     return tens[Math.floor(num / 10)] + (num % 10 !== 0 ? " " + ones[num % 10] : "");
   if (num < 1000)
-    return (
-      ones[Math.floor(num / 100)] +
-      " Hundred" +
-      (num % 100 !== 0 ? " " + numberToWords(num % 100) : "")
-    );
+    return ones[Math.floor(num / 100)] + " Hundred" + (num % 100 !== 0 ? " " + numberToWords(num % 100) : "");
   if (num < 100000)
-    return (
-      numberToWords(Math.floor(num / 1000)) +
-      " Thousand" +
-      (num % 1000 !== 0 ? " " + numberToWords(num % 1000) : "")
-    );
+    return numberToWords(Math.floor(num / 1000)) + " Thousand" + (num % 1000 !== 0 ? " " + numberToWords(num % 1000) : "");
   if (num < 10000000)
-    return (
-      numberToWords(Math.floor(num / 100000)) +
-      " Lakh" +
-      (num % 100000 !== 0 ? " " + numberToWords(num % 100000) : "")
-    );
-  return (
-    numberToWords(Math.floor(num / 10000000)) +
-    " Crore" +
-    (num % 10000000 !== 0 ? " " + numberToWords(num % 10000000) : "")
-  );
+    return numberToWords(Math.floor(num / 100000)) + " Lakh" + (num % 100000 !== 0 ? " " + numberToWords(num % 100000) : "");
+  return numberToWords(Math.floor(num / 10000000)) + " Crore" + (num % 10000000 !== 0 ? " " + numberToWords(num % 10000000) : "");
 };
 
 const numberToWordsPercent = (value: number): string => {
@@ -186,6 +141,7 @@ const numberToWordsPercent = (value: number): string => {
 
 // -----------------------
 // Custom Tooltip for Line Chart
+// Updated to use our theme: white background with dark text
 // -----------------------
 const CustomLineTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
@@ -199,25 +155,27 @@ const CustomLineTooltip = ({ active, payload, label }: any) => {
           Alternative Investment: ₹{payload[1]?.value?.toLocaleString("en-IN")}
         </p>
         <p className="desc">
-          This chart compares the growth of your policy value versus investing your surrender value.
+          This chart compares your policy value with the investment value.
         </p>
         <style jsx>{`
           .custom-tooltip {
-            background: #ffffff;
-            border: 1px solid #ccc;
+            background: #fcfffe;
+            border: 1px solid #272b2a;
             padding: 8px;
             border-radius: 4px;
           }
           .label {
             font-weight: bold;
             margin-bottom: 4px;
+            color: #272b2a;
           }
           .intro {
             margin: 0;
+            color: #272b2a;
           }
           .desc {
             font-size: 0.8rem;
-            color: #555;
+            color: #272b2a;
             margin-top: 4px;
           }
         `}</style>
@@ -229,6 +187,7 @@ const CustomLineTooltip = ({ active, payload, label }: any) => {
 
 // -----------------------
 // Custom Tooltip for Area Chart
+// Updated to use our theme: white background with dark text
 // -----------------------
 const CustomAreaTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
@@ -239,25 +198,27 @@ const CustomAreaTooltip = ({ active, payload, label }: any) => {
           Difference: ₹{payload[0]?.value?.toLocaleString("en-IN")}
         </p>
         <p className="desc">
-          The shaded area shows the extra return you could get by investing the surrender value.
+          The shaded area represents the extra return from investing the surrender value.
         </p>
         <style jsx>{`
           .custom-tooltip {
-            background: #ffffff;
-            border: 1px solid #ccc;
+            background: #fcfffe;
+            border: 1px solid #272b2a;
             padding: 8px;
             border-radius: 4px;
           }
           .label {
             font-weight: bold;
             margin-bottom: 4px;
+            color: #272b2a;
           }
           .intro {
             margin: 0;
+            color: #272b2a;
           }
           .desc {
             font-size: 0.8rem;
-            color: #555;
+            color: #272b2a;
             margin-top: 4px;
           }
         `}</style>
@@ -271,6 +232,7 @@ const CustomAreaTooltip = ({ active, payload, label }: any) => {
 // Main Endowment Calculator Component
 // -----------------------
 const EndowmentCalculator: React.FC = () => {
+  // State hooks for inputs, errors, results, loading indicator, and chart type
   const [inputs, setInputs] = useState<CalculatorInputs>({
     surrenderValue: "",
     maturityValue: "",
@@ -282,13 +244,17 @@ const EndowmentCalculator: React.FC = () => {
   const [isCalculating, setIsCalculating] = useState<boolean>(false);
   const [chartType, setChartType] = useState<"line" | "area">("line");
 
-  // Handle input changes
+  // -----------------------
+  // Handle Input Changes
+  // -----------------------
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputs((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Validate inputs
+  // -----------------------
+  // Validate Inputs
+  // -----------------------
   const validateInputs = (): boolean => {
     const newErrors: Partial<CalculatorInputs> = {};
     const requiredFields = ["surrenderValue", "maturityValue", "remainingTenure", "altReturn"];
@@ -302,7 +268,9 @@ const EndowmentCalculator: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Calculation Logic
+  // -----------------------
+  // Calculation Logic for Endowment Policy vs Alternative Investment
+  // -----------------------
   const calculateResults = () => {
     if (!validateInputs()) return;
     setIsCalculating(true);
@@ -310,13 +278,13 @@ const EndowmentCalculator: React.FC = () => {
     const SV = parseFloat(inputs.surrenderValue);  // Surrender Value
     const MV = parseFloat(inputs.maturityValue);     // Maturity Value
     const n = parseFloat(inputs.remainingTenure);      // Remaining Tenure (years)
-    const r = parseFloat(inputs.altReturn) / 100;      // Expected alternative return
+    const r = parseFloat(inputs.altReturn) / 100;      // Expected alternative return rate
 
-    // Alternative Investment Future Value using compound interest
+    // Calculate future value of the surrender value if invested at rate r
     const altFV = SV * Math.pow(1 + r, n);
 
-    // For the policy, we assume a linear progression from surrender value to maturity value over n years.
-    const yearWise: YearlyData[] = [];
+    // Calculate policy value using linear interpolation between surrender and maturity values
+    const yearWise = [];
     for (let i = 0; i <= n; i++) {
       const endowmentValue = SV + ((MV - SV) / n) * i;
       const altCorpus = SV * Math.pow(1 + r, i);
@@ -327,11 +295,10 @@ const EndowmentCalculator: React.FC = () => {
       });
     }
 
-    // Final values at maturity (year = n)
     const finalPolicyValue = MV;
     const finalAltCorpus = altFV;
 
-    // Determine recommendation
+    // Determine recommendation based on final values
     let bestOption = "";
     if (finalAltCorpus > finalPolicyValue) {
       bestOption = "Surrendering the policy and investing the amount is beneficial";
@@ -350,7 +317,9 @@ const EndowmentCalculator: React.FC = () => {
     setTimeout(() => setIsCalculating(false), 1000);
   };
 
-  // Prepare chart data for line and area charts
+  // -----------------------
+  // Prepare Chart Data for Visualizations
+  // -----------------------
   const lineChartData =
     results &&
     results.yearWise.map((data) => ({
@@ -368,27 +337,36 @@ const EndowmentCalculator: React.FC = () => {
 
   return (
     <div className="container">
-      {/* Back to Dashboard Button at Top */}
+      {/* -----------------------
+          Top Navigation: Back to Dashboard
+      ----------------------- */}
       <div className="top-nav">
         <Link href="/tools">
           <button className="back-button">Back to Dashboard</button>
         </Link>
       </div>
 
+      {/* -----------------------
+          Page Title & Description
+      ----------------------- */}
       <h1 className="title">Endowment Insurance Calculator</h1>
       <p className="description">
         Determine whether to continue your endowment policy or surrender it and invest the amount.
       </p>
+
       {/* Explanation Section */}
       <div className="explanation">
         <p>
-          <strong>Endowment Policy:</strong> A life insurance product that guarantees a lump sum payout (maturity value) at the end of the policy term. Continuing the policy means you receive the maturity benefit.
+          <strong>Endowment Policy:</strong> A life insurance product that guarantees a lump sum payout (maturity value) at the end of the policy term.
         </p>
         <p>
-          <strong>Surrender Value:</strong> The amount you receive if you cancel your policy today. If you invest this amount in an alternative investment, it can grow at a compound rate.
+          <strong>Surrender Value:</strong> The amount you receive if you cancel your policy today. Investing this amount can yield compound returns.
         </p>
       </div>
 
+      {/* -----------------------
+          Input Form for Policy & Investment Details
+      ----------------------- */}
       <div className="form-container">
         <h2 className="section-title">Policy & Investment Details</h2>
         <div className="input-group">
@@ -466,18 +444,19 @@ const EndowmentCalculator: React.FC = () => {
         </button>
       </div>
 
+      {/* -----------------------
+          Results Section: Comparison Summary & Visualizations
+      ----------------------- */}
       {results && (
         <div className="results-container">
           <h2 className="results-title">Comparison Summary</h2>
           <div className="summary-card">
             <div className="summary-item">
-              <strong>Policy Maturity Value:</strong> ₹
-              {results.finalPolicyValue.toLocaleString("en-IN")} (
+              <strong>Policy Maturity Value:</strong> ₹{results.finalPolicyValue.toLocaleString("en-IN")} (
               {numberToWords(Math.round(results.finalPolicyValue))} Rupees)
             </div>
             <div className="summary-item">
-              <strong>Alternative Investment Corpus:</strong> ₹
-              {results.finalAltCorpus.toLocaleString("en-IN")} (
+              <strong>Alternative Investment Corpus:</strong> ₹{results.finalAltCorpus.toLocaleString("en-IN")} (
               {numberToWords(Math.round(results.finalAltCorpus))} Rupees)
             </div>
             <div className="summary-item">
@@ -488,7 +467,7 @@ const EndowmentCalculator: React.FC = () => {
           <h2 className="results-title">Cumulative Value Projection</h2>
           <div className="chart-explanation">
             <p>
-              The charts below display the projected growth of your endowment policy value versus the value if you invest your surrender value at the expected return rate. Hover over the graphs for detailed values.
+              The charts below display the projected growth of your policy value versus the value if you invest your surrender value at the expected return rate. Hover over the graphs for details.
             </p>
             {chartType === "line" && (
               <p>
@@ -518,8 +497,8 @@ const EndowmentCalculator: React.FC = () => {
                   <YAxis domain={["auto", "auto"]} tickFormatter={(val) => val.toLocaleString("en-IN")} />
                   <RechartsTooltip content={CustomLineTooltip} />
                   <Legend />
-                  <Line type="monotone" dataKey="Endowment Policy" stroke="#1B1F13" strokeWidth={2} name="Policy Value" />
-                  <Line type="monotone" dataKey="Alternative Investment" stroke="#CAEF7D" strokeWidth={2} name="Investment Value" />
+                  <Line type="monotone" dataKey="Endowment Policy" stroke="#108e66" strokeWidth={2} name="Policy Value" />
+                  <Line type="monotone" dataKey="Alternative Investment" stroke="#525ECC" strokeWidth={2} name="Investment Value" />
                 </LineChart>
               ) : chartType === "area" && areaChartData ? (
                 <AreaChart data={areaChartData} margin={{ left: 50, right: 30, top: 20, bottom: 20 }}>
@@ -528,7 +507,7 @@ const EndowmentCalculator: React.FC = () => {
                   <YAxis domain={["auto", "auto"]} tickFormatter={(val) => val.toLocaleString("en-IN")} />
                   <RechartsTooltip content={CustomAreaTooltip} />
                   <Legend />
-                  <Area type="monotone" dataKey="Difference" stroke="#1B1F13" fill="#1B1F13" name="Corpus Difference" />
+                  <Area type="monotone" dataKey="Difference" stroke="#108e66" fill="#108e66" name="Corpus Difference" />
                 </AreaChart>
               ) : (
                 <React.Fragment />
@@ -558,42 +537,61 @@ const EndowmentCalculator: React.FC = () => {
             </table>
           </div>
 
-          <div className="disclaimer">
-            <h4>Important Considerations</h4>
-            <ul>
-              <li>
-                This calculator compares the guaranteed maturity value of your endowment policy with the potential returns from investing the surrender value.
-              </li>
-              <li>
-                The policy value is approximated using a linear interpolation between the current surrender value and the maturity value.
-              </li>
-              <li>
-                Actual returns can vary due to market conditions, fees, and other factors.
-              </li>
-            </ul>
-            <p>Please consult with a financial advisor before making any major decisions.</p>
+          {/* -----------------------
+              Get in Touch CTA Section
+          ----------------------- */}
+          <div className="cta-container mt-8 text-center">
+            <Link
+              href="https://wa.me/your-phone-number" // Replace with your actual WhatsApp link
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-[#108e66] text-[#fcfffe] px-8 py-3 rounded-md font-medium hover:bg-[#272B2A] transition-colors"
+            >
+              Get in touch
+            </Link>
           </div>
         </div>
       )}
 
+      {/* Disclaimer Section */}
+      {results && (
+        <div className="disclaimer">
+          <h4>Important Considerations</h4>
+          <ul>
+            <li>
+              This calculator compares the guaranteed maturity value of your endowment policy with the potential returns from investing the surrender value.
+            </li>
+            <li>
+              The policy value is approximated using a linear progression from the current surrender value to the maturity value.
+            </li>
+            <li>
+              Actual returns may vary due to market conditions, fees, and other factors.
+            </li>
+          </ul>
+          <p>Please consult with a financial advisor before making any major decisions.</p>
+        </div>
+      )}
+
+      {/* -----------------------
+          Inline Styles for the Component
+      ----------------------- */}
       <style jsx>{`
         .container {
           padding: 2rem;
           font-family: "Poppins", sans-serif;
-          background: #fcffee;
-          color: #1b1f13;
+          background: #fcfffe;
+          color: #272b2a;
         }
         .top-nav {
           margin-bottom: 1rem;
         }
         .back-button {
-          background: #000000;
-          color: #fcffee;
+          background: #108e66;
+          color: #fcfffe;
           border: none;
           padding: 0.5rem 1rem;
           border-radius: 4px;
           cursor: pointer;
-          font-family: "Poppins", sans-serif;
           font-weight: 500;
         }
         .title {
@@ -612,7 +610,7 @@ const EndowmentCalculator: React.FC = () => {
           padding: 1rem;
           border-radius: 8px;
           margin-bottom: 1.5rem;
-          border-left: 4px solid #caef7d;
+          border-left: 4px solid #108e66;
           font-size: 0.95rem;
         }
         .explanation p {
@@ -669,8 +667,8 @@ const EndowmentCalculator: React.FC = () => {
           font-size: 0.8rem;
         }
         .calculate-button {
-          background: #caef7d;
-          color: #1b1f13;
+          background: #108e66;
+          color: #fcfffe;
           border: none;
           padding: 0.75rem 1.5rem;
           border-radius: 4px;
@@ -713,7 +711,7 @@ const EndowmentCalculator: React.FC = () => {
           padding: 1rem;
           border-radius: 8px;
           margin-bottom: 1rem;
-          border-left: 4px solid #caef7d;
+          border-left: 4px solid #108e66;
           text-align: center;
           font-size: 0.95rem;
         }
@@ -725,16 +723,16 @@ const EndowmentCalculator: React.FC = () => {
         }
         .chart-toggle button {
           background: transparent;
-          border: 1px solid #1b1f13;
+          border: 1px solid #272b2a;
           padding: 0.5rem 1rem;
           cursor: pointer;
           border-radius: 4px;
           transition: all 0.2s ease;
         }
         .chart-toggle button.active {
-          background: #caef7d;
-          color: #1b1f13;
-          border-color: #caef7d;
+          background: #108e66;
+          color: #fcfffe;
+          border-color: #108e66;
         }
         .chart-container {
           margin: 1rem 0 2rem;
@@ -763,6 +761,9 @@ const EndowmentCalculator: React.FC = () => {
           position: sticky;
           top: 0;
         }
+        .cta-container {
+          margin-top: 2rem;
+        }
         .disclaimer {
           background: #f9f9f9;
           padding: 1rem;
@@ -774,7 +775,7 @@ const EndowmentCalculator: React.FC = () => {
         }
         .disclaimer h4 {
           margin-top: 0;
-          color: #1b1f13;
+          color: #272b2a;
           margin-bottom: 0.5rem;
         }
         .disclaimer ul {
