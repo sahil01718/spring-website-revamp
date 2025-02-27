@@ -246,7 +246,7 @@ const FDRDCalculator: React.FC = () => {
 
       let totalRdInvested = 0;
       let totalRdFV = 0;
-      let currentDeposit = rdMonthly;
+      const currentDeposit = rdMonthly;
 
       // Build year-wise breakdown
       const rdYearWise: YearlyData[] = [];

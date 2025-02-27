@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import Link from "next/link";
 
 // Data for core financial services
 const financialServices = [
@@ -120,13 +119,13 @@ const professionalSolutions = [
 ];
 
 // A simple carousel for professional solutions
-const Carousel = ({ children }: { children: React.ReactNode }) => (
-  <div className="relative overflow-hidden">
-    <div className="flex space-x-4 animate-autoScroll">
-      {children}
-    </div>
-  </div>
-);
+// const Carousel = ({ children }: { children: React.ReactNode }) => (
+//   <div className="relative overflow-hidden">
+//     <div className="flex space-x-4 animate-autoScroll">
+//       {children}
+//     </div>
+//   </div>
+// );
 
 export default function ServicesPage() {
   return (

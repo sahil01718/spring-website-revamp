@@ -301,7 +301,7 @@ const SukanyaSamriddhiYojanaCalculator: React.FC = () => {
 
       <h1 className="title">Sukanya Samriddhi Yojana Calculator</h1>
       <p className="description">
-        Plan for your daughter's financial future under the Sukanya Samriddhi Yojana scheme.
+        Plan for your daughter&apos;s financial future under the Sukanya Samriddhi Yojana scheme.
         Enter your investment details below to estimate the maturity value at 21 years.
       </p>
 
@@ -376,7 +376,7 @@ const SukanyaSamriddhiYojanaCalculator: React.FC = () => {
           </label>
           <label>
             <span className="input-label">
-              Daughter's Current Age (Years)
+              Daughter&apos;s Current Age (Years)
               <Tooltip text="Enter your daughter's current age. (This ensures withdrawals are allowed only at maturity.)" />
             </span>
             <input

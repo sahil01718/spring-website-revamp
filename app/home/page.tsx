@@ -1,5 +1,6 @@
 // app/home/page.tsx
 import React from 'react';
+import Image from 'next/image';
 
 export default function HomePage() {
   return (
@@ -31,7 +32,7 @@ export default function HomePage() {
           </div>
         </div>
         <div className="md:w-1/2 flex justify-center">
-          <img src="/images/hero-illustration.png" alt="Family Illustration" className="w-3/4 md:w-full h-auto" />
+          <Image src="/images/hero-illustration.png" alt="Family Illustration" className="w-3/4 md:w-full h-auto" />
         </div>
       </section>
 
@@ -40,21 +41,21 @@ export default function HomePage() {
         <h2 className="text-3xl font-bold text-center mb-8">Who We Serve</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="flex flex-col items-center p-6 hover:shadow-lg transition">
-            <img src="/icons/individuals.svg" alt="Individuals" className="w-16 h-16 mb-4" />
+            <Image src="/icons/individuals.svg" alt="Individuals" className="w-16 h-16 mb-4" />
             <h3 className="text-xl font-semibold mb-2">Individuals</h3>
             <p className="text-center text-gray-600">
               Personalized plans to help you achieve your financial dreams.
             </p>
           </div>
           <div className="flex flex-col items-center p-6 hover:shadow-lg transition">
-            <img src="/icons/nris.svg" alt="NRIs" className="w-16 h-16 mb-4" />
+            <Image src="/icons/nris.svg" alt="NRIs" className="w-16 h-16 mb-4" />
             <h3 className="text-xl font-semibold mb-2">NRIs</h3>
             <p className="text-center text-gray-600">
               Seamless solutions for managing cross-border finances.
             </p>
           </div>
           <div className="flex flex-col items-center p-6 hover:shadow-lg transition">
-            <img src="/icons/corporates.svg" alt="Corporates" className="w-16 h-16 mb-4" />
+            <Image src="/icons/corporates.svg" alt="Corporates" className="w-16 h-16 mb-4" />
             <h3 className="text-xl font-semibold mb-2">Corporates</h3>
             <p className="text-center text-gray-600">
               Financial wellness programs to boost employee productivity.
@@ -119,7 +120,7 @@ export default function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           <div className="p-6 bg-white rounded-md shadow">
             <div className="flex items-center mb-4">
-              <img src="/images/user-1.jpg" alt="Amit R." className="w-12 h-12 rounded-full mr-4" />
+              <Image src="/images/user-1.jpg" alt="Amit R." className="w-12 h-12 rounded-full mr-4" />
               <div>
                 <h3 className="text-lg font-semibold">Amit R.</h3>
                 <p className="text-sm text-gray-500">IT Professional</p>
@@ -129,7 +130,7 @@ export default function HomePage() {
           </div>
           <div className="p-6 bg-white rounded-md shadow">
             <div className="flex items-center mb-4">
-              <img src="/images/user-2.jpg" alt="Priya S." className="w-12 h-12 rounded-full mr-4" />
+              <Image src="/images/user-2.jpg" alt="Priya S." className="w-12 h-12 rounded-full mr-4" />
               <div>
                 <h3 className="text-lg font-semibold">Priya S.</h3>
                 <p className="text-sm text-gray-500">Marketing Executive</p>
@@ -169,19 +170,19 @@ export default function HomePage() {
         <h2 className="text-3xl font-bold text-center mb-8">Recognized & Featured In</h2>
         <div className="flex flex-wrap justify-center gap-8">
           <div className="flex flex-col items-center">
-            <img src="/images/logo1.png" alt="Logo 1" className="w-24 h-auto" />
+            <Image src="/images/logo1.png" alt="Logo 1" className="w-24 h-auto" />
             <p className="mt-2 text-sm text-[#1B1F13]">Credibility 1</p>
           </div>
           <div className="flex flex-col items-center">
-            <img src="/images/logo2.png" alt="Logo 2" className="w-24 h-auto" />
+            <Image src="/images/logo2.png" alt="Logo 2" className="w-24 h-auto" />
             <p className="mt-2 text-sm text-[#1B1F13]">Credibility 2</p>
           </div>
           <div className="flex flex-col items-center">
-            <img src="/images/logo3.png" alt="Logo 3" className="w-24 h-auto" />
+            <Image src="/images/logo3.png" alt="Logo 3" className="w-24 h-auto" />
             <p className="mt-2 text-sm text-[#1B1F13]">Credibility 3</p>
           </div>
           <div className="flex flex-col items-center">
-            <img src="/images/logo4.png" alt="Logo 4" className="w-24 h-auto" />
+            <Image src="/images/logo4.png" alt="Logo 4" className="w-24 h-auto" />
             <p className="mt-2 text-sm text-[#1B1F13]">Credibility 4</p>
           </div>
         </div>
