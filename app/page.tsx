@@ -246,18 +246,6 @@ export default function HomePage() {
 
       {/* MISSION & VISION SECTION */}
       <section className="container mx-auto px-4 py-16 max-w-screen-xl">
-        <h2 className="text-3xl font-bold text-center text-[#272B2A] mb-4">Our Mission & Vision</h2>
-        <p className="text-lg text-center text-[#272B2A] max-w-2xl mx-auto mb-10">
-          Spring Money believes in making expert financial advice accessible. Our core values drive us to deliver simple, transparent, and effective financial planning.
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
-          {missionVisionCards.map((card) => (
-            <div key={card.id} className="bg-[#fcfffe] rounded-2xl p-4 shadow-md hover:shadow-xl transition-shadow">
-              <img src={card.image} alt={card.title} className="w-full h-32 object-cover rounded-md mb-2" />
-              <h3 className="text-center text-xl font-semibold text-[#272B2A]">{card.title}</h3>
-            </div>
-          ))}
-        </div>
         <div className="flex justify-center">
           <Link
             href="/financial-planning"
