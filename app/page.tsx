@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 /* ---------------------------------
    Carousel Component with Auto-Scrolling Animation
@@ -90,13 +91,13 @@ const testimonialVideos = [
 /* ---------------------------------
    Mission & Vision Data
 --------------------------------- */
-const missionVisionCards = [
-  { id: 1, title: "Expert Guidance", image: "/images/mission1.jpg" },
-  { id: 2, title: "Innovative Solutions", image: "/images/mission2.jpg" },
-  { id: 3, title: "Long-Term Planning", image: "/images/mission3.jpg" },
-  { id: 4, title: "Personalized Advice", image: "/images/mission4.jpg" },
-  { id: 5, title: "Sustainable Growth", image: "/images/mission5.jpg" },
-];
+// const missionVisionCards = [
+//   { id: 1, title: "Expert Guidance", image: "/images/mission1.jpg" },
+//   { id: 2, title: "Innovative Solutions", image: "/images/mission2.jpg" },
+//   { id: 3, title: "Long-Term Planning", image: "/images/mission3.jpg" },
+//   { id: 4, title: "Personalized Advice", image: "/images/mission4.jpg" },
+//   { id: 5, title: "Sustainable Growth", image: "/images/mission5.jpg" },
+// ];
 
 /* ---------------------------------
    TestimonialCard Component
@@ -130,7 +131,7 @@ const TestimonialCard = ({
             allowFullScreen
           />
         ) : (
-          <img
+          <Image
             src={thumbnailUrl}
             alt="Video Thumbnail"
             className="absolute top-0 left-0 w-full h-full rounded-md object-cover"
@@ -168,7 +169,7 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="hidden md:block md:w-1/2">
-            <img src="/images/fintech-hero.png" alt="Fintech Hero Illustration" className="w-full object-contain" />
+            <Image src="/images/fintech-hero.png" alt="Fintech Hero Illustration" className="w-full object-contain" />
           </div>
         </div>
       </section>

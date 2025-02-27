@@ -438,7 +438,7 @@ const EmiCalculator: React.FC = () => {
           {chartType === "pie" && (
             <div className="chart-explanation">
               <p>
-                This pie chart breaks down your total repayment into the principal amount (green) and the total interest (purple) you'll pay.
+                This pie chart breaks down your total repayment into the principal amount (green) and the total interest (purple) you&apos;ll pay.
               </p>
             </div>
           )}

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 /*
   Carousel Component:
@@ -97,7 +98,7 @@ const TestimonialCard = ({
             allowFullScreen
           />
         ) : (
-          <img
+          <Image
             src={thumbnailUrl}
             alt="Video Thumbnail"
             className="absolute top-0 left-0 w-full h-full rounded-md object-cover"
@@ -148,7 +149,7 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="hidden md:block md:w-1/2">
-            <img
+            <Image
               src="/images/fintech-hero.png"
               alt="Fintech Hero Illustration"
               className="w-full object-contain"
@@ -244,7 +245,7 @@ export default function HomePage() {
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow">
-            <img
+            <Image
               src="/images/mission1.jpg"
               alt="Expert Guidance"
               className="w-full h-40 object-cover rounded-md mb-2"
@@ -252,7 +253,7 @@ export default function HomePage() {
             <p className="text-center text-sm text-black font-medium">Expert Guidance</p>
           </div>
           <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow">
-            <img
+            <Image
               src="/images/mission2.jpg"
               alt="Innovative Solutions"
               className="w-full h-40 object-cover rounded-md mb-2"
@@ -260,7 +261,7 @@ export default function HomePage() {
             <p className="text-center text-sm text-black font-medium">Innovative Solutions</p>
           </div>
           <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow">
-            <img
+            <Image
               src="/images/mission3.jpg"
               alt="Long-Term Planning"
               className="w-full h-40 object-cover rounded-md mb-2"
@@ -268,7 +269,7 @@ export default function HomePage() {
             <p className="text-center text-sm text-black font-medium">Long-Term Planning</p>
           </div>
           <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow">
-            <img
+            <Image
               src="/images/mission4.jpg"
               alt="Strategic Growth"
               className="w-full h-40 object-cover rounded-md mb-2"
@@ -276,7 +277,7 @@ export default function HomePage() {
             <p className="text-center text-sm text-black font-medium">Strategic Growth</p>
           </div>
           <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow">
-            <img
+            <Image
               src="/images/mission5.jpg"
               alt="Empowered Decisions"
               className="w-full h-40 object-cover rounded-md mb-2"
@@ -307,7 +308,7 @@ export default function HomePage() {
                 key={member.id}
                 className="inline-block bg-white rounded-2xl shadow-md mx-2 w-64 p-6 hover:shadow-lg transition-shadow"
               >
-                <img
+                <Image
                   src={member.image}
                   alt={member.name}
                   className="w-full h-40 object-cover rounded-md mb-4"

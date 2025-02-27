@@ -247,7 +247,7 @@ const BuyCarvsCommuteCalculator: React.FC = () => {
     const registrationTaxes = parseFloat(inputs.registrationTaxes);
     const parkingTolls = inputs.parkingTolls ? parseFloat(inputs.parkingTolls) : 0;
     const expectedResale = parseFloat(inputs.expectedResale);
-    const depreciationRate = parseFloat(inputs.depreciationRate);
+    // const depreciationRate = parseFloat(inputs.depreciationRate);
 
     // Parse Public Transport Inputs
     const dailyPublicFare = parseFloat(inputs.dailyPublicFare);
@@ -255,8 +255,8 @@ const BuyCarvsCommuteCalculator: React.FC = () => {
 
     // Calculate Commute Distances
     const dailyCommute = oneWayDistance * 2;
-    const monthlyCommute = dailyCommute * workingDays;
-    const annualDistance = dailyCommute * workingDays * 12;
+    // const monthlyCommute = dailyCommute * workingDays;
+    // const annualDistance = dailyCommute * workingDays * 12;
 
     // -----------------------
     // Car Costs Calculations
