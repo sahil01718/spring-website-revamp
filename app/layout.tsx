@@ -53,10 +53,10 @@ const Footer = () => (
           © {new Date().getFullYear()} by 2AN Technologies Private Limited
         </p>
         <div className="flex gap-4 mt-2 md:mt-0">
-          <a href="/privacy-policy" className="text-white hover:underline">
+            <a href="https://www.spring.money/privacy-policy" className="text-white hover:underline" target="_blank" rel="noopener noreferrer">
             Privacy Policy
-          </a>
-          <a href="/terms-of-service" className="text-white hover:underline">
+            </a>
+          <a href="https://www.spring.money/terms-of-service" className="text-white hover:underline" target="_blank" rel="noopener noreferrer">
             Terms of Service
           </a>
         </div>
