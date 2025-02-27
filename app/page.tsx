@@ -268,29 +268,6 @@ export default function HomePage() {
           Our vision is to help bring about a world that confidently makes smart financial decisions.
         </p>
       </section>
-
-      {/* OUR TEAM SECTION */}
-      <section className="container mx-auto px-4 py-16 max-w-screen-xl">
-        <h2 className="text-3xl font-bold text-center text-[#272B2A] mb-4">Our Team</h2>
-        <p className="text-lg text-center text-[#272B2A] max-w-2xl mx-auto mb-10">
-          Meet the experts behind Spring Money, dedicated to providing clear, unbiased financial guidance.
-        </p>
-        <div className="flex flex-wrap justify-center gap-6">
-          {[
-            { id: 1, name: "Alice Johnson", designation: "CEO", image: "/images/team1.jpg" },
-            { id: 2, name: "Bob Smith", designation: "CFO", image: "/images/team2.jpg" },
-            { id: 3, name: "Carol Davis", designation: "COO", image: "/images/team3.jpg" },
-            { id: 4, name: "David Lee", designation: "CTO", image: "/images/team4.jpg" },
-            { id: 5, name: "Eva Green", designation: "CMO", image: "/images/team5.jpg" },
-          ].map((member) => (
-            <div key={member.id} className="bg-[#fcfffe] rounded-2xl shadow-md p-6 w-64 hover:shadow-xl transition-shadow">
-              <img src={member.image} alt={member.name} className="w-full h-40 object-cover rounded-md mb-4" />
-              <h3 className="text-xl font-semibold text-center text-[#272B2A]">{member.name}</h3>
-              <p className="text-center text-sm text-[#272B2A]">{member.designation}</p>
-            </div>
-          ))}
-        </div>
-      </section>
     </div>
   );
 }
