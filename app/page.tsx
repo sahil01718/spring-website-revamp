@@ -153,7 +153,7 @@ export default function HomePage() {
   return (
     <div className="font-sans space-y-16">
       {/* HERO SECTION (Solid Background, No Gradient) */}
-      <section className="bg-[#108e66] text-white py-16 px-4 md:px-8">
+      <section className="bg-[#108e66] text-white py-16 px-4 md:pb-0 md:px-8">
         <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row items-center md:justify-between">
           <div className="md:w-1/2 text-center md:text-left space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold leading-tight">
@@ -169,9 +169,9 @@ export default function HomePage() {
               Get Started Now
             </Link>
           </div>
-          {/* <div className="hidden md:block md:w-1/2">
-            <Image src="/images/fintech-hero.png" alt="Fintech Hero Illustration" className="w-full object-contain" />
-          </div> */}
+          
+            <Image src="/unsplash_Orl8HXvlfJ8.svg" alt="Fintech Hero Illustration" className="hidden md:block" width={400} height={200}/>
+
         </div>
       </section>
 
