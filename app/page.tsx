@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import FAQAccordion from "./components/FAQAccordion";
+import sideArrow from "../public/Arrow 1.svg"
 
 /* ---------------------------------
    Carousel Component with Auto-Scrolling Animation
@@ -147,6 +149,39 @@ const TestimonialCard = ({
 /* ---------------------------------
    HomePage Component
 --------------------------------- */
+
+const faqs = [
+  {
+    question: "How do I start my financial planning journey with Spring Money?",
+    answer:
+      "Connect with us on WhatsApp, and our SEBI-registered experts will assess your needs and guide you toward the right plan.",
+  },
+  {
+    question: "What makes Spring Money different from other financial advisory platforms?",
+    answer:
+      "We connect you directly with SEBI-registered experts who provide unbiased, personalized guidance with transparency and actionable strategies.",
+  },
+  {
+    question: "Do I need a high income to benefit from financial planning?",
+    answer:
+      "Not at all. Our strategies are tailored for every stage of your financial journey, whether you're starting out or managing substantial wealth.",
+  },
+  {
+    question: "Is my data secure with Spring Money?",
+    answer: "Yes. We follow strict data protection policies to keep your financial information safe.",
+  },
+  {
+    question: "How do I access the free financial calculators?",
+    answer:
+      "Simply explore our tools on the website. For detailed analysis, we can send a personalized report directly to your WhatsApp.",
+  },
+  {
+    question: "How much does a financial planning consultation cost?",
+    answer:
+      "We offer both one-time and comprehensive planning options. Pricing depends on your unique needs. Contact us on WhatsApp to discuss the best plan for you.",
+  },
+];
+
 export default function HomePage() {
   const [activeTestimonial, setActiveTestimonial] = useState<string | null>(null);
 
@@ -213,33 +248,34 @@ export default function HomePage() {
       </section>
 
       {/* TOOLS SECTION (Carousel with Auto-Scrolling) */}
-      <section className="py-20 px-4 text-center bg-[#fcfffe] text-[#272B2A]">
+      <section className="container mx-auto py-20 px-4 text-center bg-[#fcfffe] text-[#272B2A] max-w-screen-xl">
         <div className="max-w-3xl mx-auto mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Smart Financial Tools</h1>
-          <p className="text-lg md:text-xl mb-8">
-            Plan, Calculate &amp; Succeed – your suite of financial tools for effective planning.
+          <h1 className="text-[40px] font-semibold mb-4 text-[#108E66]">Smart Financial Tools</h1>
+          <p className="text-xl mb-8 text-[#108E66] font-normal">
+          Experience innovative, tailored, and comprehensive financial planning for every stage of your life.
           </p>
-          <Link
+          {/* <Link
             href="/tools"
             className="inline-block bg-[#108e66] text-[#fcfffe] px-8 py-3 rounded-md font-medium hover:bg-[#272B2A] transition-colors"
           >
             Explore All Tools
-          </Link>
+          </Link> */}
         </div>
         <Carousel>
           {calculators.map((calc) => (
             <motion.div
               key={calc.id}
               whileHover={{ scale: 1.05 }}
-              className="flex-shrink-0 bg-[#fcfffe] border border-gray-200 p-6 rounded-2xl shadow-md w-64 hover:shadow-xl transition-shadow flex flex-col"
+              className="flex-shrink-0 bg-[#F0FAF7] border border-[#108e6633] p-4 rounded-2xl shadow-md w-96 items-start hover:shadow-xl transition-shadow flex flex-col"
             >
-              <h2 className="text-2xl font-bold mb-3">{calc.title}</h2>
-              <p className="mb-6 flex-grow break-words">{calc.description}</p>
+              <h2 className="text-xl text-[#272B2A] font-medium mb-2">{calc.title}</h2>
+              <p className="mb-6 text-[#272b2ae6] text-base font-normal text-start flex-grow">{calc.description}</p>
               <Link
                 href={`/tools/${calc.slug}`}
-                className="inline-block bg-[#272B2A] text-[#fcfffe] px-4 py-2 rounded-md hover:bg-[#108e66] transition text-center"
+                className="flex border border-[#108E66] gap-[6px] px-4 py-2 rounded-md hover:bg-white transition text-center"
               >
-                Calculate
+                <p className="text-base font-semibold text-[#108E66]">Check Now</p>
+                <Image src={sideArrow} width={10} height={10} alt="right arrow"/>
               </Link>
             </motion.div>
           ))}
@@ -248,7 +284,9 @@ export default function HomePage() {
 
       {/* MISSION & VISION SECTION */}
       <section className="container mx-auto px-4 py-16 max-w-screen-xl">
-        <div className="flex justify-center">
+        <div className="flex flex-col items-center text-center justify-center gap-4">
+          <p className="text-[#272B2A] text-[40px] font-semibold">Our Mission & Vision</p>
+          <p className="text-[#272B2A] text-xl font-normal">Spring Money believes in making expert financial advice accessible. Our core values drive us to deliver simple, transparent, and effective financial planning.</p>
           <Link
             href="/financial-planning"
             className="inline-block bg-[#108e66] text-[#fcfffe] px-8 py-3 rounded-md font-medium hover:bg-[#272B2A] transition-colors"
@@ -256,10 +294,9 @@ export default function HomePage() {
             Learn More About Our Financial Planning
           </Link>
         </div>
-        <p className="text-center text-[#272B2A] text-lg mt-4">
-          Our vision is to help bring about a world that confidently makes smart financial decisions.
-        </p>
       </section>
+      {/* FAQ Accordion remains intact */}
+      <FAQAccordion faqs={faqs}/>
     </div>
   );
 }

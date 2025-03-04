@@ -12,9 +12,6 @@ export const metadata = {
 const Footer = () => (
   <footer className="bg-[#272B2A] py-10">
     <div className="container mx-auto px-4">
-      {/* FAQ Accordion remains intact */}
-      <FAQAccordion />
-      {/* Footer Main Grid */}
       <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="flex flex-col items-center justify-center sm:justify-start sm:items-start">
           <h3 className="text-xl font-semibold text-[#fcfffe]">Download the app</h3>
