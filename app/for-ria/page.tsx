@@ -2,12 +2,20 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { sub } from "framer-motion/client";
 
 interface InfoCardProps {
   imageSrc?: string;
   alt?: string;
   title: string;
   description: string;
+}
+
+interface FinancialAdvisorInfoProps {
+  heading: string;
+  subHeading1: string;
+  subHeading2: string;
+  subHeading3: string;
 }
 
 const InfoCard: React.FC<InfoCardProps> = ({
@@ -31,7 +39,9 @@ const InfoCard: React.FC<InfoCardProps> = ({
       )}
       <div className="flex flex-col items-center gap-1">
         <h3 className="text-xl font-medium  text-[#272B2A]">{title}</h3>
-        <p className="text-[#272b2abf] font-normal text-sm text-center">{description}</p>
+        <p className="text-[#272b2abf] font-normal text-sm text-center">
+          {description}
+        </p>
       </div>
     </div>
   );
@@ -64,6 +74,36 @@ const InfoCardSolution: React.FC<InfoCardProps> = ({
   );
 };
 
+const FinancialAdvisorInfo: React.FC<FinancialAdvisorInfoProps> = ({
+  heading,
+  subHeading1,
+  subHeading2,
+  subHeading3,
+}) => {
+  return (
+    <div className="flex flex-col p-4 rounded-lg bg-[#FCFFFE] border border-[#272b2a26]">
+      <p className="text-[#272B2A] text-xl font-medium mb-8 text-center">
+        {heading}
+      </p>
+      <div className="rounded-[4px] border border-[#525ecccc] bg-[#EBECFA] py-2 mb-6">
+        <p className="text-[#525ECC] text-base font-semibold text-center">
+          {subHeading1}
+        </p>
+      </div>
+      <div className="rounded-[4px] border border-[#525ecccc] bg-[#EBECFA] py-2 mb-6">
+        <p className="text-[#525ECC] text-base font-semibold text-center">
+          {subHeading2}
+        </p>
+      </div>
+      <div className="rounded-[4px] border border-[#525ecccc] bg-[#EBECFA] py-2 mb-6">
+        <p className="text-[#525ECC] text-base font-semibold text-center">
+          {subHeading3}
+        </p>
+      </div>
+    </div>
+  );
+};
+
 export default function ForRiaPage() {
   return (
     <div
@@ -82,7 +122,7 @@ export default function ForRiaPage() {
         <div className="mt-8">
           <Link
             href="/get-started"
-            className="inline-block bg-[#525ECC] text-[#EBECFA] px-8 py-3 rounded-md font-semibold hover:bg-gray-300 hover:text-[#525ECC] transition"
+            className="inline-block bg-[#525ECC] text-[#FCFFFE] px-8 py-3 rounded-md font-semibold hover:bg-[#FCFFFE] hover:text-[#525ECC] transition"
           >
             Learn More
           </Link>
@@ -119,11 +159,55 @@ export default function ForRiaPage() {
         </div>
       </section>
 
+      <section className="bg-[#EBECFA]">
+        <section className="container mx-auto py-8 ">
+          <h1 className="text-4xl md:text-5xl font-bold mb-8 text-[#525ECC] text-center">
+            A Complete Ecosystem for RIAs
+          </h1>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <FinancialAdvisorInfo
+              heading="TRANSFORMATION"
+              subHeading1="Data Processing Excellence"
+              subHeading2="Continuous Improvement"
+              subHeading3="Value Generation"
+            />
+            <FinancialAdvisorInfo
+              heading="INTELLIGENCE"
+              subHeading1="Smart Analytics"
+              subHeading2="Predictive Insights"
+              subHeading3="Research-Driven Decisions"
+            />
+            <FinancialAdvisorInfo
+              heading="INTEGRATION"
+              subHeading1="Seamless Connectivity"
+              subHeading2="Unified Platform"
+              subHeading3="Harmonized Operations"
+            />
+            <FinancialAdvisorInfo
+              heading="TRUST"
+              subHeading1="Security"
+              subHeading2="Compliance"
+              subHeading3="Reliability"
+            />
+          </div>
+          <div className="flex justify-center">
+          <Link
+            href="/"
+            className=" items-center text-[#525ECC] bg-[#FCFFFE] px-8 py-3 rounded-md font-semibold hover:bg-[#525ECC] hover:text-[#FCFFFE] transition"
+          >
+            Get in touch to learn more
+          </Link>
+          </div>
+        </section>
+      </section>
+
       {/* Solution Section */}
       <section className="container mx-auto px-4 py-16">
-        <p className="text-4xl font-bold text-center mb-2">Why Spring Money ?</p>
+        <p className="text-4xl font-bold text-center mb-2">
+          Why Spring Money ?
+        </p>
         <h2 className="text-xl font-normal text-center mb-8">
-        A Unique Value Proposition
+          A Unique Value Proposition
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <InfoCardSolution
