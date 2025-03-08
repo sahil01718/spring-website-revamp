@@ -1,8 +1,10 @@
-// app/for-ria/page.tsx
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { sub } from "framer-motion/client";
+import { faqs } from "../page";
+import RiaFaqAccordion from "../components/RiaFaqAccordion";
 
 interface InfoCardProps {
   imageSrc?: string;
@@ -16,6 +18,11 @@ interface FinancialAdvisorInfoProps {
   subHeading1: string;
   subHeading2: string;
   subHeading3: string;
+}
+
+interface WhatYouGetInfoProps {
+  heading: string;
+  subHeading: string;
 }
 
 const InfoCard: React.FC<InfoCardProps> = ({
@@ -81,7 +88,7 @@ const FinancialAdvisorInfo: React.FC<FinancialAdvisorInfoProps> = ({
   subHeading3,
 }) => {
   return (
-    <div className="flex flex-col p-4 rounded-lg bg-[#FCFFFE] border border-[#272b2a26]">
+    <div className="flex flex-col p-4 rounded-lg bg-[#FCFFFE] border border-[#525ECC]">
       <p className="text-[#272B2A] text-xl font-medium mb-8 text-center">
         {heading}
       </p>
@@ -104,7 +111,20 @@ const FinancialAdvisorInfo: React.FC<FinancialAdvisorInfoProps> = ({
   );
 };
 
+const WhatYouGetInfo: React.FC<WhatYouGetInfoProps> = ({
+  heading,
+  subHeading,
+}) => {
+  return (
+    <div className="p-4 rounded-lg bg-[#FCFFFE] border border-[#525ECC] text-center flex flex-col gap-2">
+      <p className="text-[#272B2A] text-xl font-medium">{heading}</p>
+      <p className="text-[#272b2abf] text-sm font-normal">{subHeading}</p>
+    </div>
+  );
+};
+
 export default function ForRiaPage() {
+  const [open, setOpen] = useState(false);
   return (
     <div
       className="space-y-16"
@@ -191,12 +211,12 @@ export default function ForRiaPage() {
             />
           </div>
           <div className="flex justify-center">
-          <Link
-            href="/"
-            className=" items-center text-[#525ECC] bg-[#FCFFFE] px-8 py-3 rounded-md font-semibold hover:bg-[#525ECC] hover:text-[#FCFFFE] transition"
-          >
-            Get in touch to learn more
-          </Link>
+            <Link
+              href="/"
+              className=" items-center text-[#525ECC] border border-[#525ECC] bg-[#FCFFFE] px-8 py-3 rounded-md font-semibold hover:bg-[#525ECC] hover:text-[#FCFFFE] transition"
+            >
+              Get in touch to learn more
+            </Link>
           </div>
         </section>
       </section>
@@ -233,51 +253,63 @@ export default function ForRiaPage() {
         </div>
       </section>
 
-      {/* ROI Section */}
-      <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl font-bold text-center mb-8">
-          Transforming Businesses &amp; Driving ROI
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <InfoCard
-            imageSrc="/images/roi1.jpg"
-            title="40% Time Savings"
-            description="Reduce administrative hours, letting you focus on strategy."
-          />
-          <InfoCard
-            imageSrc="/images/roi2.jpg"
-            title="30% Cost Efficiency"
-            description="Lower operational expenses through streamlined, automated processes."
-          />
-          <InfoCard
-            imageSrc="/images/roi3.jpg"
-            title="50% Enhanced Trust"
-            description="Improve client retention with secure, real-time insights and transparency."
-          />
-          <InfoCard
-            imageSrc="/images/roi4.jpg"
-            title="Scalable Growth"
-            description="A flexible platform designed to adapt to your evolving business needs."
-          />
-        </div>
+      <section className="bg-[#EBECFA]">
+        <section className="container mx-auto py-8 ">
+          <h1 className="text-4xl md:text-5xl font-bold mb-2 text-[#272B2A] text-center">
+            What you get
+          </h1>
+          <p className="text-lg md:text-xl max-w-3xl mx-auto text-[#272B2A] text-center mb-4">
+            Reduce operational inefficiencies, automate workflows, and enhance
+            compliance—all in one seamless platform.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <WhatYouGetInfo
+              heading="Acquisition Toolkit"
+              subHeading="Turn First Impresssions into Lasting Relationships"
+            />
+            <WhatYouGetInfo
+              heading="Engagement Toolkit"
+              subHeading="Engage Customers, Generate Leads"
+            />
+            <WhatYouGetInfo
+              heading="Knowledge Toolkit"
+              subHeading="Educate, Empower & Build Trust Effortlessly"
+            />
+            <WhatYouGetInfo
+              heading="AI-Future Toolkit"
+              subHeading="Automated, Cutting-Edge, Conversational"
+            />
+            <WhatYouGetInfo
+              heading="Customer Journeys Toolkit"
+              subHeading="UX-First, Consent-led & Efficient"
+            />
+            <WhatYouGetInfo
+              heading="Analytics Toolkit"
+              subHeading="Accurate Real-time & Insightful"
+            />
+          </div>
+        </section>
       </section>
 
-      {/* Final CTA Section */}
-      <section className="bg-[#108e66] py-16 px-4 text-center">
-        <h2 className="text-3xl font-bold mb-4 text-white">
-          Ready to Transform Your Advisory Business?
-        </h2>
-        <p className="text-lg max-w-3xl mx-auto mb-8 text-white">
-          Experience the power of an integrated digital office designed
-          exclusively for financial advisors.
+      <div className="flex flex-col items-center">
+        <h1 className="text-4xl md:text-5xl font-bold mb-1 text-[#525ECC]">
+          Request a Demo and Explore Partnership Opportunities
+        </h1>
+        <p className="text-lg md:text-xl  mx-auto text-[#525ECC]">
+          Schedule a free demo to learn how the Spring Money platform can
+          transform your RIA experience.
         </p>
-        <Link
-          href="https://wa.me/your-phone-number"
-          className="inline-block bg-white text-[#108e66] px-8 py-3 rounded-md font-semibold hover:bg-gray-100 transition"
-        >
-          Get in Touch
-        </Link>
-      </section>
+        <div className="flex justify-center mt-4">
+          <Link
+            href="/"
+            className=" items-center text-[#525ECC] border border-[#525ECC] bg-[#FCFFFE] px-8 py-3 rounded-md font-semibold hover:bg-[#525ECC] hover:text-[#FCFFFE] transition"
+          >
+            Get in touch now
+          </Link>
+        </div>
+      </div>
+
+      <RiaFaqAccordion faqs={faqs} />
     </div>
   );
 }

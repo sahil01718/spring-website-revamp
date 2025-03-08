@@ -150,7 +150,7 @@ const TestimonialCard = ({
    HomePage Component
 --------------------------------- */
 
-const faqs = [
+export const faqs = [
   {
     question: "How do I start my financial planning journey with Spring Money?",
     answer:
