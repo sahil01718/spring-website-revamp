@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { sub } from "framer-motion/client";
-import { faqs } from "../page";
 import RiaFaqAccordion from "../components/RiaFaqAccordion";
 
 interface InfoCardProps {
@@ -24,6 +23,38 @@ interface WhatYouGetInfoProps {
   heading: string;
   subHeading: string;
 }
+
+const faqs = [
+  {
+    question: "How do I start my financial planning journey with Spring Money?",
+    answer:
+      "Connect with us on WhatsApp, and our SEBI-registered experts will assess your needs and guide you toward the right plan.",
+  },
+  {
+    question: "What makes Spring Money different from other financial advisory platforms?",
+    answer:
+      "We connect you directly with SEBI-registered experts who provide unbiased, personalized guidance with transparency and actionable strategies.",
+  },
+  {
+    question: "Do I need a high income to benefit from financial planning?",
+    answer:
+      "Not at all. Our strategies are tailored for every stage of your financial journey, whether you're starting out or managing substantial wealth.",
+  },
+  {
+    question: "Is my data secure with Spring Money?",
+    answer: "Yes. We follow strict data protection policies to keep your financial information safe.",
+  },
+  {
+    question: "How do I access the free financial calculators?",
+    answer:
+      "Simply explore our tools on the website. For detailed analysis, we can send a personalized report directly to your WhatsApp.",
+  },
+  {
+    question: "How much does a financial planning consultation cost?",
+    answer:
+      "We offer both one-time and comprehensive planning options. Pricing depends on your unique needs. Contact us on WhatsApp to discuss the best plan for you.",
+  },
+];
 
 const InfoCard: React.FC<InfoCardProps> = ({
   imageSrc,

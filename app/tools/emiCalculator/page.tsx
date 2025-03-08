@@ -457,7 +457,7 @@ const EmiCalculator: React.FC = () => {
           {chartType === "pie" && (
             <div className="chart-explanation">
               <p>
-                This pie chart shows the breakdown of your loan payments. The green segment represents the principal amount you're borrowing (₹{parseFloat(inputs.loanAmount).toLocaleString("en-IN")}), while the purple segment represents the total interest you'll pay over the loan term (₹{results.totalInterest.toLocaleString("en-IN")}). This visualization helps you understand what portion of your total repayment goes toward interest.
+                This pie chart shows the breakdown of your loan payments. The green segment represents the principal amount you&apos;re borrowing (₹{parseFloat(inputs.loanAmount).toLocaleString("en-IN")}), while the purple segment represents the total interest you&apos;ll pay over the loan term (₹{results.totalInterest.toLocaleString("en-IN")}). This visualization helps you understand what portion of your total repayment goes toward interest.
               </p>
             </div>
           )}
