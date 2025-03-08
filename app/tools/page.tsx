@@ -143,15 +143,15 @@ export default function ToolsPage() {
           {calculators.map((calc) => (
             <div
               key={calc.id}
-              className="bg-[#fcfffe] rounded-md p-6 shadow hover:shadow-2xl transition flex flex-col"
+              className="bg-[#F0FAF7] flex border border-[#108E66] rounded-md p-6 shadow hover:shadow-2xl transition flex flex-col"
             >
-              <h2 className="text-2xl font-bold text-[#272B2A] mb-3">{calc.title}</h2>
+              <h2 className="text-xl text-[#272B2A] font-medium mb-2">{calc.title}</h2>
               <p className="text-[#272B2A] mb-6 flex-grow break-words">{calc.description}</p>
               <Link
                 href={`/tools/${calc.slug}`}
-                className="inline-block bg-[#272B2A] text-[#fcfffe] px-4 py-2 rounded-md hover:bg-[#108e66] transition text-center"
+                className="flex border border-[#108E66] gap-[6px] px-4 py-2 rounded-md bg-white hover:bg-white transition text-center text-[#108E66] font-medium"
               >
-                Calculate
+                Check Now
               </Link>
             </div>
           ))}
