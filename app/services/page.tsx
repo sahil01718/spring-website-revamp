@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import homeFrame from "../../public/home-frame.svg";
 import { desc } from "framer-motion/client";
+import CarouselCards from "../components/CarouselCards";
+import FAQAccordion from "../components/FAQAccordion";
 
 // Data for core financial services
 const financialServices = [
@@ -177,6 +179,40 @@ const ourPartners = [
   },
 ];
 
+const faqs = [
+  {
+    question: "How do I start my financial planning journey with Spring Money?",
+    answer:
+      "Connect with us on WhatsApp, and our SEBI-registered experts will assess your needs and guide you toward the right plan.",
+  },
+  {
+    question:
+      "What makes Spring Money different from other financial advisory platforms?",
+    answer:
+      "We connect you directly with SEBI-registered experts who provide unbiased, personalized guidance with transparency and actionable strategies.",
+  },
+  {
+    question: "Do I need a high income to benefit from financial planning?",
+    answer:
+      "Not at all. Our strategies are tailored for every stage of your financial journey, whether you're starting out or managing substantial wealth.",
+  },
+  {
+    question: "Is my data secure with Spring Money?",
+    answer:
+      "Yes. We follow strict data protection policies to keep your financial information safe.",
+  },
+  {
+    question: "How do I access the free financial calculators?",
+    answer:
+      "Simply explore our tools on the website. For detailed analysis, we can send a personalized report directly to your WhatsApp.",
+  },
+  {
+    question: "How much does a financial planning consultation cost?",
+    answer:
+      "We offer both one-time and comprehensive planning options. Pricing depends on your unique needs. Contact us on WhatsApp to discuss the best plan for you.",
+  },
+];
+
 export default function ServicesPage() {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   useEffect(() => {
@@ -331,11 +367,24 @@ export default function ServicesPage() {
           diverse range of professionals.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 text-center">
-          {ourPartners.map((partner ,idx) => (
-            <div key={idx} className="p-4 flex flex-col items-center border border-[#108E66] rounded-lg bg-[#FCFFFE]">
-              <Image src={partner.image} width={50} height={50} alt="partner image" className="w-[290px] h-[100px] mb-4"/>
-              <p className="text-[#272B2A] text-xl font-medium mb-1">{partner.title}</p>
-              <p className="text-[#272b2abf] text-base font-normal mb-2">{partner.description}</p>
+          {ourPartners.map((partner, idx) => (
+            <div
+              key={idx}
+              className="p-4 flex flex-col items-center border border-[#108E66] rounded-lg bg-[#FCFFFE]"
+            >
+              <Image
+                src={partner.image}
+                width={50}
+                height={50}
+                alt="partner image"
+                className="w-[290px] h-[100px] mb-4"
+              />
+              <p className="text-[#272B2A] text-xl font-medium mb-1">
+                {partner.title}
+              </p>
+              <p className="text-[#272b2abf] text-base font-normal mb-2">
+                {partner.description}
+              </p>
               <button className="bg-[#108E66] rounded w-full py-3 flex justify-center text-[#FFF] text-sm font-semibold mt-auto">
                 Visit Website
               </button>
@@ -344,27 +393,9 @@ export default function ServicesPage() {
         </div>
       </div>
 
-      {/* WHY CHOOSE SPRING MONEY SECTION */}
-      <section className="bg-[#108e66] py-16 px-4 text-center border-t border-[#272B2A]">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-[#FCFFFE] mb-8">
-            Why Choose Spring Money?
-          </h2>
-          <p className="text-lg text-[#FCFFFE] max-w-3xl mx-auto mb-8">
-            Experience expert, tax-efficient financial planning tailored for
-            you. We simplify complex financial decisions with clear,
-            personalized strategies designed to build long-term wealth.
-          </p>
-          <a
-            href="https://wa.me/your-phone-number" // Replace with your actual WhatsApp link
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-[#FCFFFE] text-[#108e66] px-8 py-3 rounded-md hover:bg-[#108e66] transition"
-          >
-            Get in touch Now
-          </a>
-        </div>
-      </section>
+      <CarouselCards />
+
+      <FAQAccordion faqs={faqs} />
     </div>
   );
 }
