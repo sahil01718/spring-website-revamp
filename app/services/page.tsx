@@ -1,25 +1,39 @@
 "use client";
-import React from "react";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import homeFrame from "../../public/home-frame.svg";
+import { desc } from "framer-motion/client";
 
 // Data for core financial services
 const financialServices = [
   {
     id: 1,
-    title: "Personalized Wealth Planning",
+    title: "Wealth & Retirement Planning",
     description:
-      "Customized plans that align with your income and lifestyle for long-term financial success.",
+      "Achieve financial freedom with customized strategies that grow and protect your wealth, ensuring a secure retirement.",
+    image: "/services/pana.svg",
   },
   {
     id: 2,
-    title: "Tax Optimization & Salary Structuring",
+    title: "Optimized Tax & Investment Strategies",
     description:
-      "Smart strategies to minimize your tax burden while optimizing your salary components.",
+      "Minimize tax liabilities and maximize returns with expertly curated investment diversification across multiple asset classes.",
+    image: "/services/bro.svg",
   },
   {
     id: 3,
-    title: "Investment & Portfolio Diversification",
+    title: "Comprehensive Risk & Insurance Planning",
     description:
-      "Maximize returns through diversified investments across various asset classes.",
+      "Safeguard your financial future with tailored insurance solutions that provide the right coverage for you and your loved ones.",
+    image: "/services/amico.svg",
+  },
+  {
+    id: 4,
+    title: "Legacy & Estate Planning",
+    description:
+      "Ensure seamless wealth transfer and secure your family's future with structured estate and will planning.",
+    image: "/services/legacy.svg",
   },
 ];
 
@@ -118,16 +132,61 @@ const professionalSolutions = [
   },
 ];
 
-// A simple carousel for professional solutions
-// const Carousel = ({ children }: { children: React.ReactNode }) => (
-//   <div className="relative overflow-hidden">
-//     <div className="flex space-x-4 animate-autoScroll">
-//       {children}
-//     </div>
-//   </div>
-// );
+const carouselComponents = [
+  {
+    title: "Introducing EMPOWER",
+    description:
+      "Empower Your Team, Enhance Productivity Boost your employees’ financial confidence with expert guidance, personalized tools, and actionable insights.",
+    btnUrl: "",
+  },
+  {
+    title: "Introducing NRICH",
+    description:
+      "Empowering NRIs to Manage Finances Seamlessly Across Countries Equipping you with tools and guidance to manage financial complexities and achieve stability in India and abroad.",
+    btnUrl: "",
+  },
+  {
+    title: "Introducing POWER PLAY",
+    description:
+      "Building a Strong Financial Foundation for India's Youth Your Partner in Conquering Finances—Start Smart Today!",
+    btnUrl: "",
+  },
+];
+
+const ourPartners = [
+  {
+    title: "NS Wealth Financial Planners",
+    description:
+      "The team at NS Wealth has a vision to empower its clients through quality unbiased financial advice, latest technology that helps clients with their personal financial management & also assisting them in realizing all their dreams and converting them into realistic achievable goals.",
+    image: "/services/ns-wealth.svg",
+    btnUrl: "",
+  },
+  {
+    title: "Artha FinPlan",
+    description:
+      "ARTHA FinPlan provides personalized, professional and unbiased services in the area of Personal Financial Planning and Investment Advisory. Our aim is to help our clients to achieve their realistic goals with holistic approach, educate them about personal finance management and be a reliable partner in adding value to their journey in personal finance.",
+    image: "/services/artha.svg",
+    btnUrl: "",
+  },
+  {
+    title: "FinSharpe Investment Advisors",
+    description:
+      "FinSharpe came into existence to enable investors to reduce psychological biases from investment decisions by providing data driven insights. As fiduciaries, we offer investment advice with full transparency and without any conflict of interest. We follow a thorough research process that comprises of - Ranking, Allocation and Risk Management.",
+    image: "/services/finsharp.svg",
+    btnUrl: "",
+  },
+];
 
 export default function ServicesPage() {
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const nextIndex = (activeIndex + 1) % carouselComponents.length;
+      setActiveIndex(nextIndex);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [activeIndex, carouselComponents.length]);
   return (
     <div className="space-y-16">
       {/* HERO SECTION */}
@@ -136,73 +195,165 @@ export default function ServicesPage() {
           Personalized Financial Planning, Simplified
         </h1>
         <p className="text-lg md:text-xl text-[#FCFFFE] max-w-3xl mx-auto">
-          Let’s create your perfect financial plan with our SEBI‑registered advisors.
+          Let&apos;s create your perfect financial plan with our SEBI-registered
+          advisors.
         </p>
+        <Link
+          href="/services"
+          className="inline-block mt-4 bg-[#fcfffe] text-[#108e66] px-8 py-3 rounded-md font-medium border border-[#108e66] hover:bg-[#272B2A] transition-colors"
+        >
+          Get Started Now
+        </Link>
       </section>
 
       {/* CORE FINANCIAL SERVICES SECTION */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl font-bold text-center text-[#272B2A] mb-8">
+        <h2 className="text-[40px] font-semibold text-center text-[#272B2A] mb-2">
           Our Core Services
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <p className="text-[#272B2A] text-xl font-normal text-center mb-4">
+          Challenges Faced by Financial Advisors
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {financialServices.map((service) => (
             <div
               key={service.id}
-              className="bg-[#FCFFFE] p-6 rounded-md shadow hover:shadow-xl transition transform hover:scale-105 border border-[#272B2A]"
+              className="bg-[#FCFFFE] flex flex-col justify-center items-center w-full p-6 rounded-md shadow hover:shadow-xl transition transform hover:scale-105 border border-[#108E66]"
             >
-              <h3 className="text-2xl font-semibold text-[#272B2A] mb-2">
+              <Image
+                width={240}
+                height={158}
+                src={service.image}
+                alt="Financial Planning"
+                className="w-[240px] h-[158px]"
+              />
+              <h3 className="text-xl font-medium text-[#272B2A] mt-4 mb-2">
                 {service.title}
               </h3>
-              <p className="text-[#272B2A]">{service.description}</p>
+              <p className="text-[#272B2A] text-sm font-normal">
+                {service.description}
+              </p>
             </div>
           ))}
         </div>
       </section>
 
+      <div className="container mx-auto flex flex-col gap-4">
+        <p className="text-[#108E66] text-[40px] font-semibold text-center">
+          How it works ?
+        </p>
+        <div className="p-8 flex gap-8 w-full justify-center bg-[#FCFFFE] border rounded border-[#108E66]">
+          <div className="w-[45%]">
+            <Image src={homeFrame} width={1032} height={400} alt="home frame" />
+          </div>
+          <div className="flex flex-col justify-between w-[55%]">
+            <div className="flex flex-col gap-2">
+              <p className="text-[#272B2A] text-[32px] font-bold">
+                Nikhil&apos;s Explaination
+              </p>
+              <p className="text-[#272b2abf] text-2xl font-normal">
+                Some description about the video breaking the process down into
+                easy words for people to understand how financial planning works
+                and how it has helped people across domains
+              </p>
+            </div>
+            <div className="w-fit px-6 py-3 border border-[#108E66] rounded">
+              <span className="text-[#108E66] text-base font-semibold ">
+                Start Your Journey Now !
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* PROFESSIONAL SOLUTIONS CAROUSEL */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl font-bold text-center text-[#272B2A] mb-8">
+        <h2 className="text-[40px] font-semibold text-center text-[#272B2A] mb-2">
           Our Solutions by Profession
         </h2>
+        <p className="text-[#272B2A] text-xl font-normal text-center mb-2">
+          We specialize in providing customized financial solutions for a
+          diverse range of professionals.
+        </p>
         <div className="relative overflow-hidden">
           <div className="flex space-x-4 animate-autoScroll">
-            {professionalSolutions.concat(professionalSolutions).map((profile, index) => (
-              <div
-                key={index}
-                className="flex-shrink-0 bg-[#FCFFFE] p-6 rounded-md shadow mx-2 w-64 border border-[#272B2A]"
-              >
-                <h3 className="text-xl font-semibold text-[#272B2A]">{profile.title}</h3>
-                <p className="text-sm text-[#272B2A] font-medium mt-1">{profile.tagline}</p>
-                <p className="text-[#272B2A] mt-2 break-words">{profile.description}</p>
-              </div>
-            ))}
+            {professionalSolutions
+              .concat(professionalSolutions)
+              .map((profile, index) => (
+                <div
+                  key={index}
+                  className="flex-shrink-0 bg-[#FCFFFE] p-4 rounded-md shadow mx-2 w-64 border border-[#108E66]"
+                >
+                  <h3 className="text-xl font-semibold text-[#272B2A]">
+                    {profile.title}
+                  </h3>
+                  <p className="text-sm text-[#272B2A] font-medium mt-1">
+                    {profile.tagline}
+                  </p>
+                  <p className="text-[#272B2A] mt-2 break-words">
+                    {profile.description}
+                  </p>
+                </div>
+              ))}
           </div>
         </div>
       </section>
 
-      {/* WHO DO WE HELP SECTION */}
-      <section className="bg-[#FCFFFE] py-16 px-4">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center text-[#272B2A] mb-8">
-            Who Do We Help?
-          </h2>
-          <div className="space-y-4 max-w-3xl mx-auto text-lg text-[#272B2A]">
-            <p>
-              We serve a diverse range of professionals—from young earners and IT experts to medical professionals, legal advisors, government officials, athletes, entrepreneurs, educators, creatives, and more.
-              Our tailored solutions ensure that every financial plan is as unique as your career.
-            </p>
-          </div>
+      <div className="flex flex-col items-center gap-8 px-[60px] py-8 bg-[#F0FAF7]">
+        <p className="text-[#108E66] text-[40px] font-bold">
+          {carouselComponents[activeIndex].title}
+        </p>
+        <p className="text-[#108E66] text-center text-2xl font-medium">
+          {carouselComponents[activeIndex].description}
+        </p>
+        <button className="text-[#108E66] text-base font-semibold px-6 py-3 border border-[#108E66] rounded">
+          Learn More
+        </button>
+        <div className="flex justify-center">
+          {carouselComponents.map((item, index) => (
+            <button
+              key={index}
+              className={`mx-2 h-[1rem] text-sm  rounded-lg w-8 ${
+                activeIndex === index ? "bg-[#108E66]" : "bg-[#108e668a] "
+              }`}
+              onClick={() => setActiveIndex(index)}
+            ></button>
+          ))}
         </div>
-      </section>
+      </div>
+
+      <div className="container mx-auto flex flex-col">
+        <h2 className="text-[40px] font-semibold text-center text-[#272B2A] mb-2">
+          Our Partners
+        </h2>
+        <p className="text-[#272B2A] text-xl font-normal text-center mb-4">
+          We specialize in providing customized financial solutions for a
+          diverse range of professionals.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 text-center">
+          {ourPartners.map((partner ,idx) => (
+            <div key={idx} className="p-4 flex flex-col items-center border border-[#108E66] rounded-lg bg-[#FCFFFE]">
+              <Image src={partner.image} width={50} height={50} alt="partner image" className="w-[290px] h-[100px] mb-4"/>
+              <p className="text-[#272B2A] text-xl font-medium mb-1">{partner.title}</p>
+              <p className="text-[#272b2abf] text-base font-normal mb-2">{partner.description}</p>
+              <button className="bg-[#108E66] rounded w-full py-3 flex justify-center text-[#FFF] text-sm font-semibold mt-auto">
+                Visit Website
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* WHY CHOOSE SPRING MONEY SECTION */}
       <section className="bg-[#108e66] py-16 px-4 text-center border-t border-[#272B2A]">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-[#FCFFFE] mb-8">Why Choose Spring Money?</h2>
+          <h2 className="text-3xl font-bold text-[#FCFFFE] mb-8">
+            Why Choose Spring Money?
+          </h2>
           <p className="text-lg text-[#FCFFFE] max-w-3xl mx-auto mb-8">
-            Experience expert, tax-efficient financial planning tailored for you.
-            We simplify complex financial decisions with clear, personalized strategies designed to build long-term wealth.
+            Experience expert, tax-efficient financial planning tailored for
+            you. We simplify complex financial decisions with clear,
+            personalized strategies designed to build long-term wealth.
           </p>
           <a
             href="https://wa.me/your-phone-number" // Replace with your actual WhatsApp link
