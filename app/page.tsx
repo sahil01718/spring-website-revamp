@@ -307,52 +307,40 @@ const testimonials = [
   },
 ];
 
-/* ---------------------------------
-   TestimonialCard Component
---------------------------------- */
-const TestimonialCard = ({
-  videoId,
-  quote,
-  isActive,
-  onPlay,
-}: {
-  videoId: string;
-  quote: string;
-  isActive: boolean;
-  onPlay: () => void;
-}) => {
-  const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-  return (
-    <motion.div
-      onClick={onPlay}
-      whileHover={{ scale: 1.05 }}
-      className="bg-[#fcfffe] rounded-2xl p-6 shadow-lg transition cursor-pointer"
-    >
-      <div className="relative pb-[56.25%] mb-4">
-        {isActive ? (
-          <iframe
-            src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
-            title="Testimonial Video"
-            className="absolute top-0 left-0 w-full h-full rounded-md"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        ) : (
-          <Image
-            src={thumbnailUrl}
-            alt="Video Thumbnail"
-            className="absolute top-0 left-0 w-full h-full rounded-md object-cover"
-            fill
-          />
-        )}
-      </div>
-      <p className="text-center text-[#272B2A] text-base font-semibold">
-        {quote}
-      </p>
-    </motion.div>
-  );
-};
+const carouselItems = [
+  {
+    title: "See Your Financial Health Clearly",
+    description:
+      "Uncover hidden opportunities and gain control of your finances with our comprehensive Financial X-Ray. Get a personalized report in minutes.",
+    button: "Get Your Free X-Ray Today!",
+    image: "/images/xray1.png",
+    link: "/academy/tools/financial-x-ray", // Link added
+  },
+  {
+    title: "File with Confidence. Estimate Your Taxes Now.",
+    description:
+      "Avoid surprises and plan ahead with our user-friendly Income Tax Calculator. Get a free, personalized estimate in seconds.",
+    button: "Coming Soon!",
+    image: "/images/incometax1.png",
+    link: "/", // Link added
+  },
+  {
+    title: "Plan Your Dream Retirement",
+    description:
+      "Chart your course to financial security. Our Retirement Calculator helps you estimate how much you need to save for a comfortable retirement lifestyle.",
+    button: "Plan Your Retirement Today!",
+    image: "/images/retirement1.png",
+    link: "/academy/tools/retirement-goal-calculator", // Link added
+  },
+  {
+    title: "Find Your Perfect Loan",
+    description:
+      "Get matched with the right loan for your needs. Simplify the loan selection process with Loan Assist.",
+    button: "Sign Up to Be Notified!",
+    image: "/images/loan1.png",
+    link: "/", // Link added
+  },
+];
 
 /* ---------------------------------
    HomePage Component
@@ -393,6 +381,15 @@ const faqs = [
 ];
 
 export default function HomePage() {
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const nextIndex = (activeIndex + 1) % carouselItems.length;
+      setActiveIndex(nextIndex);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [activeIndex, carouselItems.length]);
   return (
     <div className="font-sans space-y-16">
       {/* HERO SECTION (Solid Background, No Gradient) */}
@@ -460,20 +457,17 @@ export default function HomePage() {
         <p className="text-xl font-medium text-[#FCFFFE] mb-4 text-center">
           Real People, Real Results.
         </p>
-        <div className="p-8 flex gap-8 justify-center bg-[#FCFFFE]">
-          <div>
+        <div className="p-8 flex gap-8 w-full justify-center bg-[#FCFFFE]">
+          <div className="w-[45%]">
             <Image src={homeFrame} width={1032} height={400} alt="home frame" />
           </div>
-          <div className="flex flex-col justify-between">
+          <div className="flex flex-col justify-between w-[55%]">
             <div className="flex flex-col gap-2">
               <p className="text-[#272B2A] text-[32px] font-bold">
-                Harshal Patil&apos;s Journey
+                {carouselItems[activeIndex].title}
               </p>
               <p className="text-[#272b2abf] text-2xl font-normal">
-                Some Client Testimonial that will look like this and summarise
-                the client profile as well as some good quote from the video
-                that is interesting enough to make the user watch the entire
-                video or get in touch with us
+                {carouselItems[activeIndex].description}
               </p>
             </div>
             <div className="w-fit px-6 py-3 border border-[#108E66] rounded">
@@ -482,6 +476,17 @@ export default function HomePage() {
               </span>
             </div>
           </div>
+        </div>
+        <div className="flex justify-center mt-4">
+          {carouselItems.map((item, index) => (
+            <button
+              key={index}
+              className={`mx-2 h-[1rem] text-sm  rounded-lg w-8 ${
+                activeIndex === index ? "bg-[#ffffff]" : "bg-gray-300 "
+              }`}
+              onClick={() => setActiveIndex(index)}
+            ></button>
+          ))}
         </div>
       </div>
 
