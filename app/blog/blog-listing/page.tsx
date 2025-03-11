@@ -21,20 +21,6 @@ interface Post {
   };
 }
 
-interface BlogListingPageProps {
-  data: {
-    posts: Post[];
-  };
-}
-
-interface BlogProps {
-  blogTitle: string;
-  blogDesc: string;
-  blogImg: string;
-  blogTime: number;
-  className: string;
-}
-
 const Carousel = ({ children }: { children: React.ReactNode }) => (
   <div className="relative overflow-hidden">
     <div className="flex space-x-4 animate-autoScroll">{children}</div>
@@ -168,21 +154,39 @@ const baseCalculators = [
 ];
 const calculators = [...additionalCalculators, ...baseCalculators];
 
-export default function BlogListingPage(props: Readonly<BlogListingPageProps>) {
-  const [data, setData] = useState<Post[]>();
+// interface BlogListingPageProps {
+//   data: {
+//     posts: Post[];
+//   };
+// }
+const BlogListingPage = () => {
+  const [completeData, setCompleteData] = useState<Post[]>();
+  const [slicedData, setSlicedData] = useState<Post[]>();
   const [currentPage, setCurrentPage] = useState<number>(2);
 
   useEffect(() => {
-    console.log("data in client ....", props.data.posts[0].excerpt);
-    setData(props.data.posts.slice(0, 20));
+    const fetchBlogLists = async () => {
+      const response = await fetch("/api/blog", {
+        method: "GET",
+      });
+      const data = await response?.json();
+      console.log("data from list....", data);
+      setCompleteData(data.posts);
+      setSlicedData(data.posts.slice(0, 20));
+    };
+    fetchBlogLists();
+    // setData(props.data.posts.slice(0, 20));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleShowMore = (): void => {
-    const nextPageData = props.data.posts.slice(
+    const nextPageData = completeData?.slice(
       currentPage * 10,
       (currentPage + 1) * 10
     );
-    setData((prevData) => [...prevData!, ...nextPageData]);
+    setSlicedData((prevData) =>
+      prevData && nextPageData ? [...prevData, ...nextPageData] : prevData || []
+    );
     setCurrentPage((prevPage) => prevPage + 1);
   };
 
@@ -225,7 +229,7 @@ export default function BlogListingPage(props: Readonly<BlogListingPageProps>) {
         </Carousel>
       </div>
       <div className="flex flex-col gap-[0.50rem]">
-        {data?.map((d, index) => (
+        {slicedData?.map((d, index) => (
           <Link key={d.id} href={`/blog/${d.slug}`}>
             <Blog
               blogTitle={d.title}
@@ -237,12 +241,20 @@ export default function BlogListingPage(props: Readonly<BlogListingPageProps>) {
           </Link>
         ))}
       </div>
-      <button
-        className="border border-[#272B2A] rounded flex justify-center py-2 mt-2"
-        onClick={handleShowMore}
-      >
-        <span className="text-[#272B2A] text-sm font-medium">Show more</span>
-      </button>
+      {slicedData &&
+        completeData &&
+        slicedData?.length < completeData?.length && (
+          <button
+            className="border border-[#272B2A] rounded flex justify-center py-2 mt-2"
+            onClick={handleShowMore}
+          >
+            <span className="text-[#272B2A] text-sm font-medium">
+              Show more
+            </span>
+          </button>
+        )}
     </div>
   );
-}
+};
+
+export default BlogListingPage;

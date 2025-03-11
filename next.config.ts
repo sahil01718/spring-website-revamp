@@ -5,15 +5,14 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-          protocol: 'https',
-          hostname: '**',
-          port: '',
-          pathname: '**',
+        protocol: "https",
+        hostname: "**",
+        port: "",
+        pathname: "**",
       },
-  ],
+    ],
     domains: ["img.youtube.com"],
   },
-
 };
 
 export default nextConfig;
