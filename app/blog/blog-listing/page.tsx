@@ -5,6 +5,7 @@ import Blog from "../../components/Blog";
 import Image from "next/image";
 import sideArrow from "../../../public/Arrow 1.svg";
 import { motion } from "framer-motion";
+import { PacmanLoader } from "react-spinners";
 
 interface Post {
   id: string;
@@ -253,6 +254,7 @@ const BlogListingPage = () => {
             </span>
           </button>
         )}
+      {!slicedData && <div className="flex w-full justify-center"><PacmanLoader color="#108e66"/></div>}
     </div>
   );
 };
