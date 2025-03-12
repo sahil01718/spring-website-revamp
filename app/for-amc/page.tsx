@@ -272,7 +272,9 @@ export default function ForAmcPage() {
         </p>
         <div className="flex justify-center mt-4">
           <Link
-            href="/"
+            href="https://wa.me/+918668484607"
+            target="_blank"
+            rel="noopener noreferrer"
             className=" items-center text-[#108E66] border border-[#108E66] bg-[#FCFFFE] px-8 py-3 rounded-md font-semibold hover:bg-[#108E66] hover:text-[#FCFFFE] transition"
           >
             Get in touch now

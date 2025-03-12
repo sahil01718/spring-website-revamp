@@ -221,7 +221,7 @@ export default function ToolsPage() {
             effective financial planning.
           </p>
           <Link
-            href="/financial-planning"
+            href="/services"
             className="inline-block bg-[#108e66] text-[#fcfffe] px-8 py-3 rounded-md font-medium hover:bg-[#272B2A] transition-colors"
           >
             Learn More About Our Financial Planning

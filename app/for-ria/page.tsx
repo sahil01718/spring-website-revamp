@@ -31,7 +31,8 @@ const faqs = [
       "Connect with us on WhatsApp, and our SEBI-registered experts will assess your needs and guide you toward the right plan.",
   },
   {
-    question: "What makes Spring Money different from other financial advisory platforms?",
+    question:
+      "What makes Spring Money different from other financial advisory platforms?",
     answer:
       "We connect you directly with SEBI-registered experts who provide unbiased, personalized guidance with transparency and actionable strategies.",
   },
@@ -42,7 +43,8 @@ const faqs = [
   },
   {
     question: "Is my data secure with Spring Money?",
-    answer: "Yes. We follow strict data protection policies to keep your financial information safe.",
+    answer:
+      "Yes. We follow strict data protection policies to keep your financial information safe.",
   },
   {
     question: "How do I access the free financial calculators?",
@@ -172,7 +174,9 @@ export default function ForRiaPage() {
         </p>
         <div className="mt-8">
           <Link
-            href="/get-started"
+            href="https://wa.me/+918668484607"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block bg-[#525ECC] text-[#FCFFFE] px-8 py-3 rounded-md font-semibold hover:bg-[#FCFFFE] hover:text-[#525ECC] transition"
           >
             Learn More
@@ -332,7 +336,9 @@ export default function ForRiaPage() {
         </p>
         <div className="flex justify-center mt-4">
           <Link
-            href="/"
+            href="https://wa.me/+918668484607"
+            target="_blank"
+            rel="noopener noreferrer"
             className=" items-center text-[#525ECC] border border-[#525ECC] bg-[#FCFFFE] px-8 py-3 rounded-md font-semibold hover:bg-[#525ECC] hover:text-[#FCFFFE] transition"
           >
             Get in touch now

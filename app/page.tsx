@@ -361,7 +361,9 @@ export default function HomePage() {
               planning for every stage of your life.
             </p>
             <Link
-              href="/services"
+              href="https://wa.me/+918668484607"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block bg-[#fcfffe] text-[#108e66] px-8 py-3 rounded-md font-medium border border-[#108e66] hover:bg-[#272B2A] transition-colors"
             >
               Get Started Now
@@ -407,7 +409,7 @@ export default function HomePage() {
         </Carousel>
       </section>
 
-      <CarouselCards/>
+      <CarouselCards />
 
       {/* TOOLS SECTION (Carousel with Auto-Scrolling) */}
       <section className="container mx-auto py-20 px-4 text-center bg-[#fcfffe] text-[#272B2A] max-w-screen-xl">
