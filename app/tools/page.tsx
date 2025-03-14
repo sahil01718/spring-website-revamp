@@ -168,7 +168,7 @@ const baseCalculators = [
 ];
 
 // Merge additional tools on top of the existing calculators
-const calculators = [...additionalCalculators, ...baseCalculators];
+const calculators = [...baseCalculators];
 
 export default function ToolsPage() {
   return (

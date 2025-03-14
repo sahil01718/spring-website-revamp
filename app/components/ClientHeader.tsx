@@ -27,7 +27,7 @@ const NavLink = ({ href, children, onClick }: NavLinkProps) => {
     <Link
       href={href}
       onClick={onClick}
-      className={`transition-colors px-2 lg:py-5 ${getActiveStyles()} hover:text-[#108e66] border-b-2 lg:border-b-4`}
+      className={`transition-colors px-2 lg:py-6 ${getActiveStyles()} hover:text-[#108e66] border-b-2 lg:border-b-4`}
     >
       {children}
     </Link>
@@ -46,16 +46,51 @@ const ClientHeader = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           {/* Site Logo/Title */}
-          <Link href={"/"} className="outline-none border-none no-underline decoration-0">
+          <Link
+            href={"/"}
+            className="outline-none border-none no-underline decoration-0"
+          >
             <Image
               src="/logo.svg"
               width={205}
               height={35}
               alt="spring money logo"
-              className="outline-none border-none no-underline no-underline decoration-0"
+              className="outline-none border-none no-underline decoration-0"
             />
           </Link>
 
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex lg:items-center lg:gap-4">
+            <nav>
+              <ul className="flex items-center gap-4">
+                <li>
+                  <NavLink href="/">Home</NavLink>
+                </li>
+                <li>
+                  <NavLink href="/services">Financial Planning</NavLink>
+                </li>
+                <li>
+                  <NavLink href="/tools">Tools</NavLink>
+                </li>
+                <li>
+                  <NavLink href="/for-ria">For RIA</NavLink>
+                </li>
+                <li>
+                  <NavLink href="/for-amc">For AMC</NavLink>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div className="ml-4 hidden lg:flex">
+            <a
+              href="https://wa.me/+918668484607"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#108e66] text-[#fcfffe] px-6 py-2 rounded-md hover:bg-[#fcfffe] hover:text-[#108e66] border border-[#108e66] transition"
+            >
+              Get in touch
+            </a>
+          </div>
           {/* Hamburger Menu Button */}
           <button
             className="lg:hidden text-[#272B2A]"
@@ -78,42 +113,6 @@ const ClientHeader = () => {
               )}
             </svg>
           </button>
-
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex lg:items-center lg:gap-4">
-            <nav>
-              <ul className="flex items-center gap-4">
-                <li>
-                  <NavLink href="/">Home</NavLink>
-                </li>
-                <li>
-                  <NavLink href="/services">Financial Planning</NavLink>
-                </li>
-                <li>
-                  <NavLink href="/tools">Tools</NavLink>
-                </li>
-                <li>
-                  <NavLink href="/for-ria">For RIA</NavLink>
-                </li>
-                <li>
-                  <NavLink href="/for-amc">For AMC</NavLink>
-                </li>
-                <li>
-                  <NavLink href="/blog">Blog</NavLink>
-                </li>
-              </ul>
-            </nav>
-            <div className="ml-4">
-              <a
-                href="https://wa.me/+918668484607"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-[#108e66] text-[#fcfffe] px-6 py-2 rounded-md hover:bg-[#fcfffe] hover:text-[#108e66] border border-[#108e66] transition"
-              >
-                Get in touch
-              </a>
-            </div>
-          </div>
         </div>
 
         {/* Mobile Navigation */}

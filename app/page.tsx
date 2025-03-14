@@ -257,56 +257,8 @@ const baseCalculators = [
     slug: "sukanyaSamruddhi",
   },
 ];
-const calculators = [...additionalCalculators, ...baseCalculators];
+const calculators = [...baseCalculators];
 
-/* ---------------------------------
-   Testimonial Videos Data
---------------------------------- */
-const testimonialVideos = [
-  {
-    videoId: "CSVJa2PK7M8",
-    quote: '"Spring Money transformed my financial future."',
-  },
-  {
-    videoId: "5m5Qigm2j7w",
-    quote: '"Expert advice that makes a real difference."',
-  },
-  {
-    videoId: "jx_6soC3wuM",
-    quote: '"Innovative insights for lasting impact."',
-  },
-  {
-    videoId: "2YlOxs78WPc",
-    quote: '"Trusted and reliable financial guidance."',
-  },
-  {
-    videoId: "abc123XYZ",
-    quote: '"Their personalized approach is unmatched."',
-  },
-];
-
-const testimonials = [
-  {
-    name: "Harshal Patil",
-    text: "Some Client Testimonial that will look like this and summarise the client profile as well as some good quote from the video that is interesting enough to make the user watch the entire video or get in touch with us",
-    image: homeFrame,
-  },
-  {
-    name: "John Doe",
-    text: "John's testimonial text goes here with an inspiring quote and details about his experience.",
-    image: homeFrame,
-  },
-  {
-    name: "Jane Smith",
-    text: "Jane's words on how this service changed her financial planning journey.",
-    image: homeFrame,
-  },
-  {
-    name: "Robert Johnson",
-    text: "Robert shares his story and how the financial advice helped him secure his future.",
-    image: homeFrame,
-  },
-];
 
 /* ---------------------------------
    HomePage Component

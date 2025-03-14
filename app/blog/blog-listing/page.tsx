@@ -153,7 +153,7 @@ const baseCalculators = [
     slug: "sukanyaSamruddhi",
   },
 ];
-const calculators = [...additionalCalculators, ...baseCalculators];
+const calculators = [ ...baseCalculators];
 
 // interface BlogListingPageProps {
 //   data: {
