@@ -43,7 +43,7 @@ const ClientHeader = () => {
 
   return (
     <header className="bg-[#fcfffe] shadow-md border-b border-b-[#108e66]">
-      <div className="container mx-auto px-4 py-4">
+      <div className="mx-auto py-4 px-4 md:max-xl:px-[60px] w-full max-w-screen-xl">
         <div className="flex justify-between items-center">
           {/* Site Logo/Title */}
           <Link
