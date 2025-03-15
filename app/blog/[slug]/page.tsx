@@ -19,7 +19,7 @@ const BlogPost = () => {
   }, [params]);
 
   return (
-    <div className="p-[60px] relative">
+    <div className="p-4 md:p-[60px] relative">
       {isLoading && (
         <div className="absolute flex left-1/2">
           <PacmanLoader color="#108e66" size={50} />

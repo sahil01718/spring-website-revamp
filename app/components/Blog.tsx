@@ -11,7 +11,7 @@ export default function Blog({
 }) {
   return (
     <div {...props}>
-      <div className="flex  gap-[2.00rem] self-stretch flex-row-reverse">
+      <div className="flex  gap-[2.00rem] self-stretch flex-col md:flex-row-reverse ">
         <div className="flex flex-1 flex-col gap-[0.50rem]">
           <p className="text-[#272B2A] text-lg">
             {blogTitle}
@@ -20,7 +20,7 @@ export default function Blog({
             {blogDesc}
           </p>
         </div>
-        <div className="flex w-[20%] rounded bg-gray-400">
+        <div className="flex w-full md:w-[20%] rounded bg-gray-400">
           <Image
             src={blogImg}
             width={218}

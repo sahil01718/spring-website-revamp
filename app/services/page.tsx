@@ -245,14 +245,14 @@ export default function ServicesPage() {
       </section>
 
       {/* CORE FINANCIAL SERVICES SECTION */}
-      <section className="container mx-auto px-4 py-16">
+      <section className="mx-auto py-16 flex flex-col items-center w-full">
         <h2 className="text-[40px] font-semibold text-center text-[#272B2A] mb-2">
           Our Core Services
         </h2>
         <p className="text-[#272B2A] text-xl font-normal text-center mb-4">
           Challenges Faced by Financial Advisors
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-4 md:max-xl:px-[60px] max-w-screen-xl">
           {financialServices.map((service) => (
             <div
               key={service.id}
@@ -276,15 +276,15 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <div className="container mx-auto flex flex-col gap-4">
+      <div className="mx-auto flex flex-col gap-4 items-center px-4 md:max-xl:px-[60px]">
         <p className="text-[#108E66] text-[40px] font-semibold text-center">
           How it works ?
         </p>
-        <div className="p-8 flex gap-8 w-full justify-center bg-[#FCFFFE] border rounded border-[#108E66]">
-          <div className="w-[45%]">
+        <div className="p-4 md:p-8 flex gap-8 w-full justify-center bg-[#FCFFFE] border rounded border-[#108E66]  max-w-screen-xl">
+          <div className="hidden md:block md:w-[45%]">
             <Image src={homeFrame} width={1032} height={400} alt="home frame" />
           </div>
-          <div className="flex flex-col justify-between w-[55%]">
+          <div className="flex flex-col justify-between w-full md:w-[55%]">
             <div className="flex flex-col gap-2">
               <p className="text-[#272B2A] text-[32px] font-bold">
                 Nikhil&apos;s Explaination
@@ -305,7 +305,7 @@ export default function ServicesPage() {
       </div>
 
       {/* PROFESSIONAL SOLUTIONS CAROUSEL */}
-      <section className="container mx-auto px-4 py-16">
+      <section className="mx-auto px-4 py-16 flex flex-col items-center">
         <h2 className="text-[40px] font-semibold text-center text-[#272B2A] mb-2">
           Our Solutions by Profession
         </h2>
@@ -313,7 +313,7 @@ export default function ServicesPage() {
           We specialize in providing customized financial solutions for a
           diverse range of professionals.
         </p>
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden  max-w-screen-xl">
           <div className="flex space-x-4 animate-autoScroll">
             {professionalSolutions
               .concat(professionalSolutions)
@@ -338,10 +338,10 @@ export default function ServicesPage() {
       </section>
 
       <div className="flex flex-col items-center gap-8 px-[60px] py-8 bg-[#F0FAF7]">
-        <p className="text-[#108E66] text-[40px] font-bold">
+        <p className="text-[#108E66] text-[40px] font-bold text-center">
           {carouselComponents[activeIndex].title}
         </p>
-        <p className="text-[#108E66] text-center text-2xl font-medium">
+        <p className="text-[#108E66] text-center text-2xl font-medium  max-w-screen-xl">
           {carouselComponents[activeIndex].description}
         </p>
         <button className="text-[#108E66] text-base font-semibold px-6 py-3 border border-[#108E66] rounded">
@@ -360,7 +360,7 @@ export default function ServicesPage() {
         </div>
       </div>
 
-      <div className="container mx-auto flex flex-col">
+      <div className="mx-auto flex flex-col items-center">
         <h2 className="text-[40px] font-semibold text-center text-[#272B2A] mb-2">
           Our Partners
         </h2>
@@ -368,7 +368,7 @@ export default function ServicesPage() {
           We specialize in providing customized financial solutions for a
           diverse range of professionals.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 text-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 text-center px-4 md:max-xl:px-[60px]  max-w-screen-xl">
           {ourPartners.map((partner, idx) => (
             <div
               key={idx}

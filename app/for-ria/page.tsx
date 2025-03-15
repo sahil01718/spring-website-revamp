@@ -185,12 +185,12 @@ export default function ForRiaPage() {
       </section>
 
       {/* Challenges Section */}
-      <section className="container mx-auto px-4 py-16">
+      <section className="mx-auto py-16 flex flex-col items-center">
         <p className="text-4xl font-bold text-center mb-2">The Problem</p>
         <h2 className="text-xl font-normal text-center mb-8">
           Challenges Faced by Financial Advisors
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-4 md:max-xl:px-[60px]  max-w-screen-xl">
           <InfoCard
             imageSrc="/for-ria/rafiki.svg"
             title="Fragmented Systems"
@@ -214,12 +214,11 @@ export default function ForRiaPage() {
         </div>
       </section>
 
-      <section className="bg-[#EBECFA]">
-        <section className="container mx-auto py-8 ">
+        <section className="mx-auto py-8 flex flex-col items-center bg-[#EBECFA] w-full">
           <h1 className="text-4xl md:text-5xl font-bold mb-8 text-[#525ECC] text-center">
             A Complete Ecosystem for RIAs
           </h1>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 px-4 md:max-xl:px-[60px] w-full max-w-screen-xl">
             <FinancialAdvisorInfo
               heading="TRANSFORMATION"
               subHeading1="Data Processing Excellence"
@@ -254,17 +253,16 @@ export default function ForRiaPage() {
             </Link>
           </div>
         </section>
-      </section>
 
       {/* Solution Section */}
-      <section className="container mx-auto px-4 py-16">
+      <section className="mx-auto py-16 flex flex-col items-center w-full">
         <p className="text-4xl font-bold text-center mb-2">
           Why Spring Money ?
         </p>
         <h2 className="text-xl font-normal text-center mb-8">
           A Unique Value Proposition
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-4 md:max-xl:px-[60px] max-w-screen-xl w-full">
           <InfoCardSolution
             imageSrc="/for-ria/rafiki1.svg"
             title="End-to-End Coverage"
@@ -288,8 +286,7 @@ export default function ForRiaPage() {
         </div>
       </section>
 
-      <section className="bg-[#EBECFA]">
-        <section className="container mx-auto py-8 ">
+        <section className="mx-auto py-8 bg-[#EBECFA] flex flex-col items-center w-full">
           <h1 className="text-4xl md:text-5xl font-bold mb-2 text-[#272B2A] text-center">
             What you get
           </h1>
@@ -297,7 +294,7 @@ export default function ForRiaPage() {
             Reduce operational inefficiencies, automate workflows, and enhance
             compliance—all in one seamless platform.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 md:max-xl:px-[60px] w-full max-w-screen-xl">
             <WhatYouGetInfo
               heading="Acquisition Toolkit"
               subHeading="Turn First Impresssions into Lasting Relationships"
@@ -324,13 +321,12 @@ export default function ForRiaPage() {
             />
           </div>
         </section>
-      </section>
 
       <div className="flex flex-col items-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-1 text-[#525ECC]">
+        <h1 className="text-4xl md:text-5xl font-bold mb-1 text-[#525ECC] px-4 md:max-xl:px-[60px] w-full max-w-screen-xl text-center">
           Request a Demo and Explore Partnership Opportunities
         </h1>
-        <p className="text-lg md:text-xl  mx-auto text-[#525ECC]">
+        <p className="text-lg md:text-xl  mx-auto text-[#525ECC] px-4 md:max-xl:px-[60px] w-full max-w-screen-xl text-center">
           Schedule a free demo to learn how the Spring Money platform can
           transform your RIA experience.
         </p>

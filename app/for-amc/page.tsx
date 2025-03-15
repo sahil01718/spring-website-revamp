@@ -171,17 +171,17 @@ export default function ForAmcPage() {
         </div>
       </section>
 
-      <div className="flex flex-col mx-[60px]">
+      <div className="flex flex-col items-center">
         <p className="text-[40px] font-semibold text-[#272B2A] mb-2 text-center">
           Empower Your Investors with
         </p>
-        <p className="text-lg md:text-xl text-[#272B2A] text-center">
+        <p className="text-lg md:text-xl text-[#272B2A] text-center px-4 md:max-xl:px-[60px] w-full max-w-screen-xl">
           Spring Money provides a single, unified platform to manage every
           aspect of your financial advisory business. From client onboarding to
           compliance tracking, task automation, and portfolio
           analytics—streamline operations and deliver superior client outcomes.
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 px-4 md:max-xl:px-[60px] w-full max-w-screen-xl">
           <EmpowerCards
             heading="Robust API Integrations"
             subHeading="Seamlessly integrate our platform with latest fintech applications and infrastructure."
@@ -217,7 +217,7 @@ export default function ForAmcPage() {
         </p>
       </section>
 
-      <div className="flex flex-col mx-[60px]">
+      <div className="flex flex-col items-center">
         <p className="text-[40px] font-semibold text-[#272B2A] mb-2 text-center">
           What you get
         </p>
@@ -225,7 +225,7 @@ export default function ForAmcPage() {
           We specialize in providing customized financial solutions for a
           diverse range of professionals.
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 px-4 md:max-xl:px-[60px] w-full max-w-screen-xl">
           <EmpowerCards
             heading="Acquisition Toolkit"
             subHeading="Turn First Impresssions into Lasting Relationships"
@@ -263,10 +263,10 @@ export default function ForAmcPage() {
       </div>
 
       <div className="flex flex-col items-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-1 text-[#108E66]">
+        <h1 className="text-4xl md:text-5xl font-bold mb-1 text-[#108E66] px-4 md:max-xl:px-[60px] w-full max-w-screen-xl text-center">
           Request a Demo and Explore Partnership Opportunities
         </h1>
-        <p className="text-lg md:text-xl  mx-auto text-[#108E66]">
+        <p className="text-lg md:text-xl  mx-auto text-[#108E66] px-4 md:max-xl:px-[60px] w-full max-w-screen-xl text-center">
           Schedule a free demo to learn how the Spring Money platform can
           transform your RIA experience.
         </p>

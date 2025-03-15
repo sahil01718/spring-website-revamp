@@ -259,7 +259,6 @@ const baseCalculators = [
 ];
 const calculators = [...baseCalculators];
 
-
 /* ---------------------------------
    HomePage Component
 --------------------------------- */
@@ -302,7 +301,7 @@ export default function HomePage() {
   return (
     <div className="font-sans space-y-16">
       {/* HERO SECTION (Solid Background, No Gradient) */}
-      <section className="bg-[#108e66] text-white py-16 px-4 md:pb-0 md:px-8">
+      <section className="bg-[#108e66] text-white py-16 px-4 md:pb-0 md:px-[60px]">
         <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row items-center md:justify-between">
           <div className="md:w-1/2 text-center md:text-left space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold leading-tight">
@@ -333,7 +332,7 @@ export default function HomePage() {
       </section>
 
       {/* WHO WE SERVE SECTION (Carousel with Auto-Scrolling) */}
-      <section className="container mx-auto px-4 max-w-screen-xl">
+      <section className="mx-auto  max-w-screen-xl">
         <h2 className="text-3xl font-bold text-center text-[#272B2A] mb-4">
           Who We Serve
         </h2>
@@ -361,10 +360,10 @@ export default function HomePage() {
         </Carousel>
       </section>
 
-      <CarouselCards />
+        <CarouselCards />
 
       {/* TOOLS SECTION (Carousel with Auto-Scrolling) */}
-      <section className="container mx-auto py-20 px-4 text-center bg-[#fcfffe] text-[#272B2A] max-w-screen-xl">
+      <section className="mx-auto py-20  text-center bg-[#fcfffe] text-[#272B2A] max-w-screen-xl p">
         <div className="max-w-3xl mx-auto mb-12">
           <h1 className="text-[40px] font-semibold mb-4 text-[#108E66]">
             Smart Financial Tools
@@ -373,12 +372,6 @@ export default function HomePage() {
             Experience innovative, tailored, and comprehensive financial
             planning for every stage of your life.
           </p>
-          {/* <Link
-            href="/tools"
-            className="inline-block bg-[#108e66] text-[#fcfffe] px-8 py-3 rounded-md font-medium hover:bg-[#272B2A] transition-colors"
-          >
-            Explore All Tools
-          </Link> */}
         </div>
         <Carousel>
           {calculators.map((calc) => (

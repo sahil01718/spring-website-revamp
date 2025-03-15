@@ -172,7 +172,7 @@ const calculators = [...baseCalculators];
 
 export default function ToolsPage() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 flex flex-col items-center w-full">
       {/* Hero / Intro Section without gradients */}
       <div className="flex flex-col gap-2 text-center mt-12">
         <p className="text-[#108E66] text-[40px] font-semibold">
@@ -185,7 +185,7 @@ export default function ToolsPage() {
       </div>
 
       {/* Calculators Grid Section */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:px-[60px] pb-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8  px-4 md:max-xl:px-[60px]  max-w-screen-xl pb-12">
         {calculators.map((calc) => (
           <div
             key={calc.id}
@@ -199,9 +199,9 @@ export default function ToolsPage() {
             </p>
             <Link
               href={`/tools/${calc.slug}`}
-              className="flex border border-[#108E66] gap-[6px] px-4 py-2 rounded-md hover:bg-[#108E66] transition text-center"
+              className="flex border border-[#108E66] gap-[6px] px-4 py-2 rounded-md hover:bg-[#108E66] transition text-center text-[#108E66] hover:text-white"
             >
-              <p className="text-base font-semibold text-[#108E66] hover:text-white">
+              <p className="text-base font-semibold">
                 Check Now
               </p>
               <Image src={sideArrow} width={10} height={10} alt="right arrow" />
@@ -210,12 +210,12 @@ export default function ToolsPage() {
         ))}
       </div>
 
-      <section className="py-16  bg-[#F0FAF7]">
+      <section className="py-16  bg-[#F0FAF7] w-full">
         <div className="flex flex-col items-center text-center justify-center gap-4">
           <p className="text-[#272B2A] text-[40px] font-semibold">
             Our Mission & Vision
           </p>
-          <p className="text-[#272B2A] text-xl font-normal">
+          <p className="text-[#272B2A] text-xl font-normal  px-4 md:max-xl:px-[60px]  max-w-screen-xl">
             Spring Money believes in making expert financial advice accessible.
             Our core values drive us to deliver simple, transparent, and
             effective financial planning.
