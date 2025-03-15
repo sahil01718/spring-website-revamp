@@ -19,13 +19,13 @@ const BlogPost = () => {
   }, [params]);
 
   return (
-    <div className="p-4 md:p-[60px] relative">
+    <div className=" relative flex justify-center items-center p-4 md:p-[60px]">
       {isLoading && (
-        <div className="absolute flex left-1/2">
+        <div className="absolute flex left-1/2 top-10">
           <PacmanLoader color="#108e66" size={50} />
         </div>
       )}
-      <div className="h-[2000px]  w-full  rounded border border-solid border-gray-300  shadow-sm ">
+      <div className="h-[2000px]  w-full  rounded border border-solid border-gray-300  shadow-sm  max-w-screen-xl">
         {BlogData && (
           <iframe
             src={`https://nikhil460.wixsite.com/springcomingsoon/post/${BlogData}`}

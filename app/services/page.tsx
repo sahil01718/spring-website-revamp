@@ -139,19 +139,19 @@ const carouselComponents = [
     title: "Introducing EMPOWER",
     description:
       "Empower Your Team, Enhance Productivity Boost your employees’ financial confidence with expert guidance, personalized tools, and actionable insights.",
-    btnUrl: "",
+    btnUrl: "https://www.spring.money/programs/empower",
   },
   {
     title: "Introducing NRICH",
     description:
       "Empowering NRIs to Manage Finances Seamlessly Across Countries Equipping you with tools and guidance to manage financial complexities and achieve stability in India and abroad.",
-    btnUrl: "",
+    btnUrl: "https://www.spring.money/programs/nrich",
   },
   {
     title: "Introducing POWER PLAY",
     description:
       "Building a Strong Financial Foundation for India's Youth Your Partner in Conquering Finances—Start Smart Today!",
-    btnUrl: "",
+    btnUrl: "https://www.spring.money/programs/power-play",
   },
 ];
 
@@ -161,21 +161,21 @@ const ourPartners = [
     description:
       "The team at NS Wealth has a vision to empower its clients through quality unbiased financial advice, latest technology that helps clients with their personal financial management & also assisting them in realizing all their dreams and converting them into realistic achievable goals.",
     image: "/services/ns-wealth.svg",
-    btnUrl: "",
+    btnUrl: "https://nswealth.in/",
   },
   {
     title: "Artha FinPlan",
     description:
       "ARTHA FinPlan provides personalized, professional and unbiased services in the area of Personal Financial Planning and Investment Advisory. Our aim is to help our clients to achieve their realistic goals with holistic approach, educate them about personal finance management and be a reliable partner in adding value to their journey in personal finance.",
     image: "/services/artha.svg",
-    btnUrl: "",
+    btnUrl: "https://arthafinplan.com/",
   },
   {
     title: "FinSharpe Investment Advisors",
     description:
       "FinSharpe came into existence to enable investors to reduce psychological biases from investment decisions by providing data driven insights. As fiduciaries, we offer investment advice with full transparency and without any conflict of interest. We follow a thorough research process that comprises of - Ranking, Allocation and Risk Management.",
     image: "/services/finsharp.svg",
-    btnUrl: "",
+    btnUrl: "https://finsharpe.com/",
   },
 ];
 
@@ -344,9 +344,9 @@ export default function ServicesPage() {
         <p className="text-[#108E66] text-center text-2xl font-medium  max-w-screen-xl">
           {carouselComponents[activeIndex].description}
         </p>
-        <button className="text-[#108E66] text-base font-semibold px-6 py-3 border border-[#108E66] rounded">
+        <Link href={carouselComponents[activeIndex].btnUrl} className="text-[#108E66] text-base font-semibold px-6 py-3 border border-[#108E66] rounded">
           Learn More
-        </button>
+        </Link>
         <div className="flex justify-center">
           {carouselComponents.map((item, index) => (
             <button
@@ -387,9 +387,9 @@ export default function ServicesPage() {
               <p className="text-[#272b2abf] text-base font-normal mb-2">
                 {partner.description}
               </p>
-              <button className="bg-[#108E66] rounded w-full py-3 flex justify-center text-[#FFF] text-sm font-semibold mt-auto">
+              <Link href={partner.btnUrl} className="bg-[#108E66] rounded w-full py-3 flex justify-center text-[#FFF] text-sm font-semibold mt-auto">
                 Visit Website
-              </button>
+              </Link>
             </div>
           ))}
         </div>

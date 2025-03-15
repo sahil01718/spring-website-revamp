@@ -153,7 +153,7 @@ const baseCalculators = [
     slug: "sukanyaSamruddhi",
   },
 ];
-const calculators = [ ...baseCalculators];
+const calculators = [...baseCalculators];
 
 // interface BlogListingPageProps {
 //   data: {
@@ -196,8 +196,12 @@ const BlogListingPage = () => {
   };
 
   return (
-    <div className="flex flex-col px-8 mb-8">
-      <div className="  py-10 text-center bg-[#fcfffe] text-[#272B2A] ">
+    <div className="flex flex-col mb-8 items-center">
+      <div className="  py-10 text-center bg-[#fcfffe] text-[#272B2A] flex flex-col gap-4 px-4 md:max-xl:px-[60px] max-w-screen-xl">
+        <p className="text-[#108E66] text-xl font-semibold text-start">
+          Experience innovative, tailored, and comprehensive financial planning
+          for every stage of your life.
+        </p>
         <Carousel>
           {calculators.map((calc) => (
             <motion.div
@@ -229,7 +233,7 @@ const BlogListingPage = () => {
           ))}
         </Carousel>
       </div>
-      <div className="flex flex-col gap-[0.50rem]">
+      <div className="flex flex-col gap-[0.50rem] px-4 md:max-xl:px-[60px] max-w-screen-xl">
         {slicedData?.map((d, index) => (
           <Link key={d.id} href={`/blog/${d.slug}`}>
             <Blog
@@ -242,19 +246,26 @@ const BlogListingPage = () => {
           </Link>
         ))}
       </div>
+
       {slicedData &&
         completeData &&
         slicedData?.length < completeData?.length && (
-          <button
-            className="border border-[#272B2A] rounded flex justify-center py-2 mt-2"
-            onClick={handleShowMore}
-          >
-            <span className="text-[#272B2A] text-sm font-medium">
-              Show more
-            </span>
-          </button>
+          <div className="px-4 md:max-xl:px-[60px] w-full max-w-screen-xl">
+            <button
+              className="border border-[#272B2A] rounded flex justify-center py-2 mt-2 w-full"
+              onClick={handleShowMore}
+            >
+              <span className="text-[#272B2A] text-sm font-medium">
+                Show more
+              </span>
+            </button>
+          </div>
         )}
-      {!slicedData && <div className="flex w-full justify-center"><PacmanLoader color="#108e66"/></div>}
+      {!slicedData && (
+        <div className="flex w-full justify-center">
+          <PacmanLoader color="#108e66" />
+        </div>
+      )}
     </div>
   );
 };
