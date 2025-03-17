@@ -108,10 +108,42 @@ export default function Footer() {
             <span className="text-[#fcfffe8a] text-base font font-medium">
               Read Blogs About
             </span>
-            <span className="text-[#FCFFFE] text-sm font-normal">Topic 1</span>
-            <span className="text-[#FCFFFE] text-sm font-normal">Topic 2</span>
-            <span className="text-[#FCFFFE] text-sm font-normal">Topic 3</span>
-            <span className="text-[#FCFFFE] text-sm font-normal">Topic 4</span>
+            <Link
+              href={
+                "/blog/the-trusted-financial-advisory-that-changed-everything-harshal-patil-s-financial-transformation"
+              }
+            >
+              <span className="text-[#FCFFFE] text-sm font-normal">
+                Financial transformation led by advisory
+              </span>
+            </Link>
+            <Link
+              href={
+                "/blog/why-trusting-the-right-investment-firm-is-key-to-smart-investments"
+              }
+            >
+              <span className="text-[#FCFFFE] text-sm font-normal">
+                Trusting the right investment advisor
+              </span>
+            </Link>
+            <Link
+              href={
+                "/blog/how-to-verify-if-your-investment-advisor-is-sebi-registered"
+              }
+            >
+              <span className="text-[#FCFFFE] text-sm font-normal">
+                Guide to verify SEBI Registered Advisors
+              </span>
+            </Link>
+            <Link
+              href={
+                "/blog/the-ultimate-checklist-for-managing-your-personal-finances"
+              }
+            >
+              <span className="text-[#FCFFFE] text-sm font-normal">
+                Personal finance management checklist
+              </span>
+            </Link>
           </div>
         </div>
         <div className="py-8 flex flex-col gap-4 items-center text-center">
