@@ -314,7 +314,7 @@ export default function ServicesPage() {
           diverse range of professionals.
         </p>
         <div className="relative overflow-hidden  max-w-screen-xl">
-          <div className="flex space-x-4 animate-autoScroll">
+          <div className="flex space-x-4 animate-autoScroll w-screen">
             {professionalSolutions
               .concat(professionalSolutions)
               .map((profile, index) => (

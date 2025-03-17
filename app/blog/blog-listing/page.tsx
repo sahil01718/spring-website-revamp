@@ -197,7 +197,7 @@ const BlogListingPage = () => {
 
   return (
     <div className="flex flex-col mb-8 items-center">
-      <div className="  py-10 text-center bg-[#fcfffe] text-[#272B2A] flex flex-col gap-4 px-4 md:max-xl:px-[60px] max-w-screen-xl">
+      <div className="  py-10 text-center bg-[#fcfffe] text-[#272B2A] w-screen flex flex-col gap-4 px-4 md:max-xl:px-[60px] max-w-screen-xl">
         <p className="text-[#108E66] text-xl font-semibold text-start">
           Experience innovative, tailored, and comprehensive financial planning
           for every stage of your life.

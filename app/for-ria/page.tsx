@@ -214,45 +214,47 @@ export default function ForRiaPage() {
         </div>
       </section>
 
-        <section className="mx-auto py-8 flex flex-col items-center bg-[#EBECFA] w-full">
-          <h1 className="text-4xl md:text-5xl font-bold mb-8 text-[#525ECC] text-center">
-            A Complete Ecosystem for RIAs
-          </h1>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 px-4 md:max-xl:px-[60px] w-full max-w-screen-xl">
-            <FinancialAdvisorInfo
-              heading="TRANSFORMATION"
-              subHeading1="Data Processing Excellence"
-              subHeading2="Continuous Improvement"
-              subHeading3="Value Generation"
-            />
-            <FinancialAdvisorInfo
-              heading="INTELLIGENCE"
-              subHeading1="Smart Analytics"
-              subHeading2="Predictive Insights"
-              subHeading3="Research-Driven Decisions"
-            />
-            <FinancialAdvisorInfo
-              heading="INTEGRATION"
-              subHeading1="Seamless Connectivity"
-              subHeading2="Unified Platform"
-              subHeading3="Harmonized Operations"
-            />
-            <FinancialAdvisorInfo
-              heading="TRUST"
-              subHeading1="Security"
-              subHeading2="Compliance"
-              subHeading3="Reliability"
-            />
-          </div>
-          <div className="flex justify-center">
-            <Link
-              href="/"
-              className=" items-center text-[#525ECC] border border-[#525ECC] bg-[#FCFFFE] px-8 py-3 rounded-md font-semibold hover:bg-[#525ECC] hover:text-[#FCFFFE] transition"
-            >
-              Get in touch to learn more
-            </Link>
-          </div>
-        </section>
+      <section className="mx-auto py-8 flex flex-col items-center bg-[#EBECFA] w-full">
+        <h1 className="text-4xl md:text-5xl font-bold mb-8 text-[#525ECC] text-center">
+          A Complete Ecosystem for RIAs
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 px-4 md:max-xl:px-[60px] w-full max-w-screen-xl">
+          <FinancialAdvisorInfo
+            heading="TRANSFORMATION"
+            subHeading1="Data Processing Excellence"
+            subHeading2="Continuous Improvement"
+            subHeading3="Value Generation"
+          />
+          <FinancialAdvisorInfo
+            heading="INTELLIGENCE"
+            subHeading1="Smart Analytics"
+            subHeading2="Predictive Insights"
+            subHeading3="Research-Driven Decisions"
+          />
+          <FinancialAdvisorInfo
+            heading="INTEGRATION"
+            subHeading1="Seamless Connectivity"
+            subHeading2="Unified Platform"
+            subHeading3="Harmonized Operations"
+          />
+          <FinancialAdvisorInfo
+            heading="TRUST"
+            subHeading1="Security"
+            subHeading2="Compliance"
+            subHeading3="Reliability"
+          />
+        </div>
+        <div className="flex justify-center">
+          <Link
+            href="https://wa.me/+918668484607"
+            target="_blank"
+            rel="noopener noreferrer"
+            className=" items-center text-[#525ECC] border border-[#525ECC] bg-[#FCFFFE] px-8 py-3 rounded-md font-semibold hover:bg-[#525ECC] hover:text-[#FCFFFE] transition"
+          >
+            Get in touch to learn more
+          </Link>
+        </div>
+      </section>
 
       {/* Solution Section */}
       <section className="mx-auto py-16 flex flex-col items-center w-full">
@@ -286,41 +288,41 @@ export default function ForRiaPage() {
         </div>
       </section>
 
-        <section className="mx-auto py-8 bg-[#EBECFA] flex flex-col items-center w-full">
-          <h1 className="text-4xl md:text-5xl font-bold mb-2 text-[#272B2A] text-center">
-            What you get
-          </h1>
-          <p className="text-lg md:text-xl max-w-3xl mx-auto text-[#272B2A] text-center mb-4">
-            Reduce operational inefficiencies, automate workflows, and enhance
-            compliance—all in one seamless platform.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 md:max-xl:px-[60px] w-full max-w-screen-xl">
-            <WhatYouGetInfo
-              heading="Acquisition Toolkit"
-              subHeading="Turn First Impresssions into Lasting Relationships"
-            />
-            <WhatYouGetInfo
-              heading="Engagement Toolkit"
-              subHeading="Engage Customers, Generate Leads"
-            />
-            <WhatYouGetInfo
-              heading="Knowledge Toolkit"
-              subHeading="Educate, Empower & Build Trust Effortlessly"
-            />
-            <WhatYouGetInfo
-              heading="AI-Future Toolkit"
-              subHeading="Automated, Cutting-Edge, Conversational"
-            />
-            <WhatYouGetInfo
-              heading="Customer Journeys Toolkit"
-              subHeading="UX-First, Consent-led & Efficient"
-            />
-            <WhatYouGetInfo
-              heading="Analytics Toolkit"
-              subHeading="Accurate Real-time & Insightful"
-            />
-          </div>
-        </section>
+      <section className="mx-auto py-8 bg-[#EBECFA] flex flex-col items-center w-full">
+        <h1 className="text-4xl md:text-5xl font-bold mb-2 text-[#272B2A] text-center">
+          What you get
+        </h1>
+        <p className="text-lg md:text-xl max-w-3xl mx-auto text-[#272B2A] text-center mb-4">
+          Reduce operational inefficiencies, automate workflows, and enhance
+          compliance—all in one seamless platform.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 md:max-xl:px-[60px] w-full max-w-screen-xl">
+          <WhatYouGetInfo
+            heading="Acquisition Toolkit"
+            subHeading="Turn First Impresssions into Lasting Relationships"
+          />
+          <WhatYouGetInfo
+            heading="Engagement Toolkit"
+            subHeading="Engage Customers, Generate Leads"
+          />
+          <WhatYouGetInfo
+            heading="Knowledge Toolkit"
+            subHeading="Educate, Empower & Build Trust Effortlessly"
+          />
+          <WhatYouGetInfo
+            heading="AI-Future Toolkit"
+            subHeading="Automated, Cutting-Edge, Conversational"
+          />
+          <WhatYouGetInfo
+            heading="Customer Journeys Toolkit"
+            subHeading="UX-First, Consent-led & Efficient"
+          />
+          <WhatYouGetInfo
+            heading="Analytics Toolkit"
+            subHeading="Accurate Real-time & Insightful"
+          />
+        </div>
+      </section>
 
       <div className="flex flex-col items-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-1 text-[#525ECC] px-4 md:max-xl:px-[60px] w-full max-w-screen-xl text-center">
