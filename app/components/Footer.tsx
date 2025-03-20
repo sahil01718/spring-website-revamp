@@ -15,6 +15,8 @@ export default function Footer() {
                 href={
                   "https://play.google.com/store/apps/details?id=com.spring.money"
                 }
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Image
                   src={"/footer/play-store.svg"}
@@ -25,6 +27,8 @@ export default function Footer() {
               </Link>
               <Link
                 href={"https://apps.apple.com/in/app/spring-money/id1660751993"}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Image
                   src={"/footer/app-store.svg"}
@@ -38,7 +42,11 @@ export default function Footer() {
               Our Socials
             </span>
             <div className="flex gap-4 justify-center lg:justify-start">
-              <Link href={"https://wa.me/+918668484607"}>
+              <Link
+                href={"https://wa.me/+918668484607"}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Image
                   src={"/footer/whatsapp.svg"}
                   width={32}
@@ -46,7 +54,11 @@ export default function Footer() {
                   alt="WhatsApp social media icon"
                 />
               </Link>
-              <Link href={"https://www.instagram.com/springmoneyapp/"}>
+              <Link
+                href={"https://www.instagram.com/springmoneyapp/"}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Image
                   src={"/footer/instagram.svg"}
                   width={32}
@@ -54,7 +66,11 @@ export default function Footer() {
                   alt="Instagram social media icon"
                 />
               </Link>
-              <Link href={"https://www.linkedin.com/company/springmoney/"}>
+              <Link
+                href={"https://www.linkedin.com/company/springmoney/"}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Image
                   src={"/footer/linkedin.svg"}
                   width={32}
@@ -62,7 +78,11 @@ export default function Footer() {
                   alt="LinkedIn social media icon"
                 />
               </Link>
-              <Link href={"https://www.youtube.com/@springmoney"}>
+              <Link
+                href={"https://www.youtube.com/@springmoney"}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Image
                   src={"/footer/youtube.svg"}
                   width={32}
@@ -100,7 +120,12 @@ export default function Footer() {
             >
               For AMC
             </Link>
-            <Link href={"/blog"} className="text-[#FCFFFE] text-sm font-normal">
+            <Link
+              href={"/blog"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#FCFFFE] text-sm font-normal"
+            >
               Blogs
             </Link>
           </div>
@@ -112,6 +137,8 @@ export default function Footer() {
               href={
                 "/blog/the-trusted-financial-advisory-that-changed-everything-harshal-patil-s-financial-transformation"
               }
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <span className="text-[#FCFFFE] text-sm font-normal">
                 Financial transformation led by advisory
@@ -121,6 +148,8 @@ export default function Footer() {
               href={
                 "/blog/why-trusting-the-right-investment-firm-is-key-to-smart-investments"
               }
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <span className="text-[#FCFFFE] text-sm font-normal">
                 Trusting the right investment advisor
@@ -130,6 +159,8 @@ export default function Footer() {
               href={
                 "/blog/how-to-verify-if-your-investment-advisor-is-sebi-registered"
               }
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <span className="text-[#FCFFFE] text-sm font-normal">
                 Guide to verify SEBI Registered Advisors
@@ -139,6 +170,8 @@ export default function Footer() {
               href={
                 "/blog/the-ultimate-checklist-for-managing-your-personal-finances"
               }
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <span className="text-[#FCFFFE] text-sm font-normal">
                 Personal finance management checklist

@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import FAQAccordion from "./components/FAQAccordion";
 import sideArrow from "../public/Arrow 1.svg";
-import homeFrame from "../public/home-frame.svg";
 import CarouselCards from "./components/CarouselCards";
 
 /* ---------------------------------
@@ -327,6 +326,7 @@ export default function HomePage() {
             className="hidden md:block"
             width={400}
             height={200}
+            priority={true}
           />
         </div>
       </section>
@@ -360,7 +360,7 @@ export default function HomePage() {
         </Carousel>
       </section>
 
-        <CarouselCards />
+      <CarouselCards />
 
       {/* TOOLS SECTION (Carousel with Auto-Scrolling) */}
       <section className="mx-auto py-20  text-center bg-[#fcfffe] text-[#272B2A] max-w-screen-xl p">
