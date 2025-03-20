@@ -11,7 +11,7 @@ const carouselItems = [
     button: "Watch Full Video on Youtube",
     image: "/carousel-cards/carousel1.svg",
     link: "https://youtu.be/2YlOxs78WPc?si=QIZELFCXGXWebmct",
-    guest:"~ Harshal Patil"
+    guest: "~ Harshal Patil",
   },
   {
     title: "“A Smarter Approach to Wealth Building”",
@@ -20,7 +20,7 @@ const carouselItems = [
     button: "Watch Full Video on Youtube",
     image: "/carousel-cards/carousel2.svg",
     link: "https://youtu.be/nXjwXqpnBPI",
-    guest:"~ Vijit Neema"
+    guest: "~ Vijit Neema",
   },
   {
     title: "“Breaking Free from Financial Mistakes”",
@@ -29,7 +29,7 @@ const carouselItems = [
     button: "Watch Full Video on Youtube",
     image: "/carousel-cards/carousel3.svg",
     link: "https://www.youtube.com/watch?v=5m5Qigm2j7w",
-    guest:"~ Sandeep Mahajan"
+    guest: "~ Sandeep Mahajan",
   },
   {
     title: "“From Financial Anxiety to Confidence”",
@@ -38,7 +38,7 @@ const carouselItems = [
     button: "Watch Full Video on Youtube",
     image: "/carousel-cards/carousel4.svg",
     link: "https://youtu.be/xJA4zt2hcJE",
-    guest:"~ Anjali Deshpande"
+    guest: "~ Anjali Deshpande",
   },
   {
     title: "“Making Smarter, Goal-Based Investments”",
@@ -47,7 +47,7 @@ const carouselItems = [
     button: "Watch Full Video on Youtube",
     image: "/carousel-cards/carousel5.svg",
     link: "https://www.youtube.com/watch?v=jx_6soC3wuM",
-    guest:"~ Abhi Kasturi"
+    guest: "~ Abhi Kasturi",
   },
 ];
 
@@ -71,7 +71,12 @@ export default function CarouselCards() {
       </p>
       <div className="p-4 md:p-8 flex gap-8 w-full justify-center bg-[#FCFFFE]  max-w-screen-xl">
         <div className="md:w-[45%] hidden md:block">
-          <Image src={carouselItems[activeIndex].image} width={1032} height={400} alt="home frame" />
+          <Image
+            src={carouselItems[activeIndex].image}
+            width={1032}
+            height={400}
+            alt="home frame"
+          />
         </div>
         <div className="flex flex-col justify-between w-full md:w-[55%]">
           <div className="flex flex-col gap-2">
@@ -85,7 +90,12 @@ export default function CarouselCards() {
               {carouselItems[activeIndex].guest}
             </p>
           </div>
-          <Link href={carouselItems[activeIndex].link} className="w-fit px-6 py-3 border border-[#108E66] rounded">
+          <Link
+            href={carouselItems[activeIndex].link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-fit px-6 py-3 border border-[#108E66] rounded"
+          >
             <span className="text-[#108E66] text-base font-semibold ">
               {carouselItems[activeIndex].button}
             </span>

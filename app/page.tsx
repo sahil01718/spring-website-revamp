@@ -12,8 +12,8 @@ import CarouselCards from "./components/CarouselCards";
    Carousel Component with Auto-Scrolling Animation
 --------------------------------- */
 const Carousel = ({ children }: { children: React.ReactNode }) => (
-  <div className="relative overflow-hidden">
-    <div className="flex space-x-4 animate-autoScroll">{children}</div>
+  <div className="relative overflow-hidden w-full">
+    <div className="flex space-x-4 animate-autoScroll w-max">{children}</div>
   </div>
 );
 
@@ -417,7 +417,7 @@ export default function HomePage() {
             effective financial planning.
           </p>
           <Link
-            href="/financial-planning"
+            href="/services"
             className="inline-block bg-[#108e66] text-[#fcfffe] px-8 py-3 rounded-md font-medium hover:bg-[#272B2A] transition-colors"
           >
             Learn More About Our Financial Planning

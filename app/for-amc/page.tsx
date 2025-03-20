@@ -163,7 +163,9 @@ export default function ForAmcPage() {
         </p>
         <div className="mt-8">
           <Link
-            href="/get-started"
+            href="https://wa.me/+918668484607"
+             target="_blank"
+            rel="noopener noreferrer"
             className="inline-block bg-[#108E66] text-[#FCFFFE] px-8 py-3 rounded-md font-semibold hover:bg-[#FCFFFE] hover:text-[#108E66] transition"
           >
             Learn More

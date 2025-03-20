@@ -76,8 +76,11 @@ export default function Footer() {
             <span className="text-[#fcfffe8a] text-base font font-medium">
               Quick Links
             </span>
-            <Link href={"/blog"} className="text-[#FCFFFE] text-sm font-normal">
-              Blogs
+            <Link
+              href={"/services"}
+              className="text-[#FCFFFE] text-sm font-normal"
+            >
+              Financial Planning
             </Link>
             <Link
               href={"/tools"}
@@ -97,11 +100,8 @@ export default function Footer() {
             >
               For AMC
             </Link>
-            <Link
-              href={"/services"}
-              className="text-[#FCFFFE] text-sm font-normal"
-            >
-              Financial Planning
+            <Link href={"/blog"} className="text-[#FCFFFE] text-sm font-normal">
+              Blogs
             </Link>
           </div>
           <div className="hidden lg:flex flex-col gap-2">

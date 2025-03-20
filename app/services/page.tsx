@@ -313,8 +313,8 @@ export default function ServicesPage() {
           We specialize in providing customized financial solutions for a
           diverse range of professionals.
         </p>
-        <div className="relative overflow-hidden  max-w-screen-xl">
-          <div className="flex space-x-4 animate-autoScroll w-screen">
+        <div className="relative overflow-hidden  max-w-screen-xl w-full">
+          <div className="flex space-x-4 animate-autoScroll w-max">
             {professionalSolutions
               .concat(professionalSolutions)
               .map((profile, index) => (
@@ -344,7 +344,10 @@ export default function ServicesPage() {
         <p className="text-[#108E66] text-center text-2xl font-medium  max-w-screen-xl">
           {carouselComponents[activeIndex].description}
         </p>
-        <Link href={carouselComponents[activeIndex].btnUrl} className="text-[#108E66] text-base font-semibold px-6 py-3 border border-[#108E66] rounded">
+        <Link
+          href={carouselComponents[activeIndex].btnUrl}
+          className="text-[#108E66] text-base font-semibold px-6 py-3 border border-[#108E66] rounded"
+        >
           Learn More
         </Link>
         <div className="flex justify-center">
@@ -387,7 +390,12 @@ export default function ServicesPage() {
               <p className="text-[#272b2abf] text-base font-normal mb-2">
                 {partner.description}
               </p>
-              <Link href={partner.btnUrl} className="bg-[#108E66] rounded w-full py-3 flex justify-center text-[#FFF] text-sm font-semibold mt-auto">
+              <Link
+                href={partner.btnUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[#108E66] rounded w-full py-3 flex justify-center text-[#FFF] text-sm font-semibold mt-auto"
+              >
                 Visit Website
               </Link>
             </div>

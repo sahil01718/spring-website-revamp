@@ -23,8 +23,8 @@ interface Post {
 }
 
 const Carousel = ({ children }: { children: React.ReactNode }) => (
-  <div className="relative overflow-hidden">
-    <div className="flex space-x-4 animate-autoScroll">{children}</div>
+  <div className="relative overflow-hidden w-full">
+    <div className="flex space-x-4 animate-autoScroll w-max">{children}</div>
   </div>
 );
 
