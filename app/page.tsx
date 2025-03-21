@@ -16,6 +16,12 @@ const Carousel = ({ children }: { children: React.ReactNode }) => (
   </div>
 );
 
+interface WhoWeServeCardsProps {
+  img: string;
+  heading: string;
+  subHeading: string;
+}
+
 /* ---------------------------------
    Who We Serve Section Data
 --------------------------------- */
@@ -296,13 +302,29 @@ const faqs = [
   },
 ];
 
+const WhoWeServeCards: React.FC<WhoWeServeCardsProps> = ({
+  img,
+  heading,
+  subHeading,
+}) => {
+  return (
+    <div className="flex flex-col gap-4 rounded-lg border border-[#108E66] bg-[#FCFFFE] p-6 items-center">
+      <Image src={img} width={441} height={400} alt="who we serve image" />
+      <span className="text-[#272B2A] text-[28px] font-semibold text-center">
+        {heading}
+      </span>
+      <span className="text-[#272B2A] text-2xl font-normal text-center">{subHeading}</span>
+    </div>
+  );
+};
+
 export default function HomePage() {
   return (
     <div className="font-sans space-y-16">
       {/* HERO SECTION (Solid Background, No Gradient) */}
-      <section className="bg-[#108e66] text-white py-16 px-4 md:pb-0 md:px-[60px]">
-        <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row items-center md:justify-between">
-          <div className="md:w-1/2 text-center md:text-left space-y-4">
+      <section className="bg-[#108e66] text-white md:pb-0">
+        <div className="mx-auto flex flex-col md:flex-row items-center md:justify-between">
+          <div className="md:w-[70%] text-center md:text-left space-y-4 px-16 py-16 md:py-0">
             <h1 className="text-4xl md:text-5xl font-bold leading-tight">
               Smart, Simple, and Transparent Financial Planning
             </h1>
@@ -311,19 +333,17 @@ export default function HomePage() {
               planning for every stage of your life.
             </p>
             <Link
-              href="https://wa.me/+918668484607"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/services"
               className="inline-block bg-[#fcfffe] text-[#108e66] px-8 py-3 rounded-md font-medium border border-[#108e66] hover:bg-[#272B2A] transition-colors"
             >
-              Get Started Now
+              Get Started
             </Link>
           </div>
 
           <Image
-            src="/unsplash_Orl8HXvlfJ8.svg"
+            src="/dashboard.svg"
             alt="Fintech Hero Illustration"
-            className="hidden md:block"
+            className="hidden md:flex md:w-full"
             width={400}
             height={200}
             priority={true}
@@ -336,28 +356,42 @@ export default function HomePage() {
         <h2 className="text-3xl font-bold text-center text-[#272B2A] mb-4">
           Who We Serve
         </h2>
-        <p className="text-center text-[#272B2A] mb-10 max-w-2xl mx-auto">
+        <p className="text-center text-[#272B2A] mb-10 max-w-2xl mx-auto text-xl font-normal">
           We specialize in providing customized financial solutions for a
           diverse range of professionals.
         </p>
-        <Carousel>
-          {professionalSolutions
-            .concat(professionalSolutions)
-            .map((profile, index) => (
-              <div
-                key={index}
-                className="flex-shrink-0 bg-[#fcfffe] border border-gray-200 p-6 rounded-2xl shadow-md mx-2 w-64 hover:shadow-xl transition-shadow flex flex-col"
-              >
-                <h3 className="text-xl font-semibold text-[#272B2A] mb-1">
-                  {profile.title}
-                </h3>
-                <p className="text-sm text-[#272B2A] font-medium mb-2">
-                  {profile.tagline}
-                </p>
-                <p className="text-sm text-[#272B2A]">{profile.description}</p>
-              </div>
-            ))}
-        </Carousel>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-4 md:max-xl:px-[60px]  max-w-screen-xl">
+          <WhoWeServeCards
+            img="/who-we-serve/it.svg"
+            heading="IT Professionals"
+            subHeading="Maximize IT Earnings: ESOP & Wealth Strategies."
+          />
+          <WhoWeServeCards
+            img="/who-we-serve/mba.svg"
+            heading="IT Professionals"
+            subHeading="Maximize IT Earnings: ESOP & Wealth Strategies."
+          />
+          <WhoWeServeCards
+            img="/who-we-serve/professional.svg"
+            heading="IT Professionals"
+            subHeading="Maximize IT Earnings: ESOP & Wealth Strategies."
+          />
+          <WhoWeServeCards
+            img="/who-we-serve/forces.svg"
+            heading="IT Professionals"
+            subHeading="Maximize IT Earnings: ESOP & Wealth Strategies."
+          />
+          <WhoWeServeCards
+            img="/who-we-serve/doctors.svg"
+            heading="IT Professionals"
+            subHeading="Maximize IT Earnings: ESOP & Wealth Strategies."
+          />
+          <WhoWeServeCards
+            img="/who-we-serve/lawyer.svg"
+            heading="IT Professionals"
+            subHeading="Maximize IT Earnings: ESOP & Wealth Strategies."
+          />
+        </div>
       </section>
 
       <CarouselCards />

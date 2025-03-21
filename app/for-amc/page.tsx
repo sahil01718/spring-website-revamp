@@ -148,7 +148,7 @@ const EmpowerCards: React.FC<EmpowerCardsProps> = ({ heading, subHeading }) => {
 export default function ForAmcPage() {
   return (
     <div
-      className="space-y-16"
+      className=""
       style={{ backgroundColor: "#fcfffe", color: "#1B1F13" }}
     >
       {/* Hero / Intro Section */}
@@ -173,7 +173,7 @@ export default function ForAmcPage() {
         </div>
       </section>
 
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center py-16 bg-linearGradient3">
         <p className="text-[40px] font-semibold text-[#272B2A] mb-2 text-center">
           Empower Your Investors with
         </p>
@@ -207,7 +207,7 @@ export default function ForAmcPage() {
         </div>
       </div>
 
-      <section className="py-20 px-4 text-center bg-[#F0FAF7]">
+      <section className="py-16 px-4 text-center bg-linearGradient4">
         <h1 className="text-[40px] font-semibold text-[#272B2A] mb-2">
           A Powerful SaaS Platform for the Modern AMC
         </h1>
@@ -219,7 +219,7 @@ export default function ForAmcPage() {
         </p>
       </section>
 
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center py-16 bg-linearGradient4">
         <p className="text-[40px] font-semibold text-[#272B2A] mb-2 text-center">
           What you get
         </p>
@@ -255,7 +255,7 @@ export default function ForAmcPage() {
         </div>
       </div>
 
-      <div className="bg-[#F0FAF7] flex justify-center py-12">
+      <div className="bg-[#F0FAF7] flex justify-center py-16">
         <Image
           src={experienceFrame}
           width={1000}
@@ -264,7 +264,7 @@ export default function ForAmcPage() {
         />
       </div>
 
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center py-14 md:py-28 bg-linearGradient3">
         <h1 className="text-4xl md:text-5xl font-bold mb-1 text-[#108E66] px-4 md:max-xl:px-[60px] w-full max-w-screen-xl text-center">
           Request a Demo and Explore Partnership Opportunities
         </h1>

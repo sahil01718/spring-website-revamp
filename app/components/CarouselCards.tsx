@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import homeFrame from "../../public/home-frame.svg";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const carouselItems = [
   {
@@ -51,6 +52,12 @@ const carouselItems = [
   },
 ];
 
+const Carousel = ({ children }: { children: React.ReactNode }) => (
+  <div className="relative overflow-hidden w-full">
+    <div className="flex space-x-4 animate-autoScroll w-max">{children}</div>
+  </div>
+);
+
 export default function CarouselCards() {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   useEffect(() => {
@@ -62,57 +69,47 @@ export default function CarouselCards() {
     return () => clearTimeout(timer);
   }, [activeIndex, carouselItems.length]);
   return (
-    <div className="flex flex-col p-4 md:p-[60px] bg-[#108E66] items-center">
-      <p className="text-[40px] font-semibold text-[#FCFFFE] mb-2 text-center">
+    <div className="flex flex-col p-4 md:p-[60px] items-center">
+      <p className="text-[40px] font-semibold text-[#108E66] mb-2 text-center">
         Don&apos;t just take our word for it
       </p>
-      <p className="text-xl font-medium text-[#FCFFFE] mb-4 text-center">
+      <p className="text-xl font-medium text-[#108E66] mb-4 text-center">
         Real People, Real Results.
       </p>
-      <div className="p-4 md:p-8 flex gap-8 w-full justify-center bg-[#FCFFFE]  max-w-screen-xl">
-        <div className="md:w-[45%] hidden md:block">
-          <Image
-            src={carouselItems[activeIndex].image}
-            width={1032}
-            height={400}
-            alt="home frame"
-          />
-        </div>
-        <div className="flex flex-col justify-between w-full md:w-[55%]">
-          <div className="flex flex-col gap-2">
-            <p className="text-[#272B2A] text-[32px] font-bold">
-              {carouselItems[activeIndex].title}
-            </p>
-            <p className="text-[#272b2abf] text-2xl font-normal">
-              {carouselItems[activeIndex].description}
-            </p>
-            <p className="text-[#272B2A] text-[32px] font-bold">
-              {carouselItems[activeIndex].guest}
-            </p>
-          </div>
-          <Link
-            href={carouselItems[activeIndex].link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-fit px-6 py-3 border border-[#108E66] rounded"
-          >
-            <span className="text-[#108E66] text-base font-semibold ">
-              {carouselItems[activeIndex].button}
-            </span>
-          </Link>
-        </div>
-      </div>
-      <div className="flex justify-center mt-4">
+      <Carousel>
         {carouselItems.map((item, index) => (
-          <button
-            key={index}
-            className={`mx-2 h-[1rem] text-sm  rounded-lg w-8 ${
-              activeIndex === index ? "bg-[#ffffff]" : "bg-gray-300 "
-            }`}
-            onClick={() => setActiveIndex(index)}
-          ></button>
+          <motion.div key={index} className="p-4 md:p-8 flex flex-col w-[450px] gap-6 justify-center bg-[#FCFFFE] border border-[#108E66] rounded-lg">
+            <div className=" hidden md:block">
+              <Image
+                src={item.image}
+                width={560}
+                height={400}
+                alt="home frame"
+              />
+            </div>
+            <div className="flex flex-col justify-between">
+              <div className="flex flex-col gap-2">
+                <p className="text-[#272B2A] text-[32px] font-bold">
+                  {item.title}
+                </p>
+                <p className="text-[#272b2abf] text-2xl font-normal">
+                  {item.description}
+                </p>
+              </div>
+              <Link
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full text-center px-6 py-3 border border-[#108E66] mt-6 rounded"
+              >
+                <span className="text-[#108E66] text-base font-semibold ">
+                  {item.button}
+                </span>
+              </Link>
+            </div>
+          </motion.div>
         ))}
-      </div>
+      </Carousel>
     </div>
   );
 }

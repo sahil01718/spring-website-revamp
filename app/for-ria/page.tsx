@@ -160,7 +160,7 @@ export default function ForRiaPage() {
   const [open, setOpen] = useState(false);
   return (
     <div
-      className="space-y-16"
+      className=""
       style={{ backgroundColor: "#fcfffe", color: "#272B2A" }}
     >
       {/* Hero Section */}
@@ -179,13 +179,13 @@ export default function ForRiaPage() {
             rel="noopener noreferrer"
             className="inline-block bg-[#525ECC] text-[#FCFFFE] px-8 py-3 rounded-md font-semibold hover:bg-[#FCFFFE] hover:text-[#525ECC] transition"
           >
-            Learn More
+            Schedule a Demo
           </Link>
         </div>
       </section>
 
       {/* Challenges Section */}
-      <section className="mx-auto py-16 flex flex-col items-center">
+      <section className="mx-auto py-16 flex flex-col items-center bg-linearGradient1">
         <p className="text-4xl font-bold text-center mb-2">The Problem</p>
         <h2 className="text-xl font-normal text-center mb-8">
           Challenges Faced by Financial Advisors
@@ -214,7 +214,7 @@ export default function ForRiaPage() {
         </div>
       </section>
 
-      <section className="mx-auto py-8 flex flex-col items-center bg-[#EBECFA] w-full">
+      <section className="mx-auto py-8 flex flex-col items-center bg-[#FCFFFE] w-full">
         <h1 className="text-4xl md:text-5xl font-bold mb-8 text-[#525ECC] text-center">
           A Complete Ecosystem for RIAs
         </h1>
@@ -257,7 +257,7 @@ export default function ForRiaPage() {
       </section>
 
       {/* Solution Section */}
-      <section className="mx-auto py-16 flex flex-col items-center w-full">
+      <section className="mx-auto py-16 flex flex-col items-center w-full bg-linearGradient2">
         <p className="text-4xl font-bold text-center mb-2">
           Why Spring Money ?
         </p>
@@ -288,7 +288,7 @@ export default function ForRiaPage() {
         </div>
       </section>
 
-      <section className="mx-auto py-8 bg-[#EBECFA] flex flex-col items-center w-full">
+      <section className="mx-auto py-16 bg-[#EBECFA] flex flex-col items-center w-full">
         <h1 className="text-4xl md:text-5xl font-bold mb-2 text-[#272B2A] text-center">
           What you get
         </h1>
@@ -324,7 +324,7 @@ export default function ForRiaPage() {
         </div>
       </section>
 
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center py-14 md:py-28 bg-linearGradient1">
         <h1 className="text-4xl md:text-5xl font-bold mb-1 text-[#525ECC] px-4 md:max-xl:px-[60px] w-full max-w-screen-xl text-center">
           Request a Demo and Explore Partnership Opportunities
         </h1>
