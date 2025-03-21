@@ -73,7 +73,7 @@ const ClientHeader = () => {
                   <NavLink href="/tools">Tools</NavLink>
                 </li>
                 <li>
-                  <NavLink href="/for-ria">For RIA</NavLink>
+                  <NavLink href="/for-ria">For IA</NavLink>
                 </li>
                 <li>
                   <NavLink href="/for-amc">For AMC</NavLink>

@@ -357,8 +357,7 @@ export default function HomePage() {
           Who We Serve
         </h2>
         <p className="text-center text-[#272B2A] mb-10 max-w-2xl mx-auto text-xl font-normal">
-          We specialize in providing customized financial solutions for a
-          diverse range of professionals.
+          Tailored Financial Strategies for Every Professional Journey.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-4 md:max-xl:px-[60px]  max-w-screen-xl">
           <WhoWeServeCards
@@ -368,28 +367,28 @@ export default function HomePage() {
           />
           <WhoWeServeCards
             img="/who-we-serve/mba.svg"
-            heading="IT Professionals"
-            subHeading="Maximize IT Earnings: ESOP & Wealth Strategies."
+            heading="MBA Graduates"
+            subHeading="MBA Financial Edge: Maximize Income, Minimize Taxes."
           />
           <WhoWeServeCards
             img="/who-we-serve/professional.svg"
-            heading="IT Professionals"
-            subHeading="Maximize IT Earnings: ESOP & Wealth Strategies."
+            heading="Young Professionals"
+            subHeading="Young Pro Wealth: Smart Start, Long-Term Growth"
           />
           <WhoWeServeCards
             img="/who-we-serve/forces.svg"
-            heading="IT Professionals"
-            subHeading="Maximize IT Earnings: ESOP & Wealth Strategies."
+            heading="Armed Forces & Government Officials"
+            subHeading="Serve & Secure: Pension & Investment Strategies"
           />
           <WhoWeServeCards
             img="/who-we-serve/doctors.svg"
-            heading="IT Professionals"
-            subHeading="Maximize IT Earnings: ESOP & Wealth Strategies."
+            heading="Doctors & Medical Professionals"
+            subHeading="Secure Your Practice: Loan, Tax & Retirement Planning."
           />
           <WhoWeServeCards
             img="/who-we-serve/lawyer.svg"
-            heading="IT Professionals"
-            subHeading="Maximize IT Earnings: ESOP & Wealth Strategies."
+            heading="Lawyers & Legal Professionals"
+            subHeading="Legal Wealth: Navigate Irregular Income & Taxes."
           />
         </div>
       </section>
@@ -403,8 +402,7 @@ export default function HomePage() {
             Smart Financial Tools
           </h1>
           <p className="text-xl mb-8 text-[#108E66] font-normal">
-            Experience innovative, tailored, and comprehensive financial
-            planning for every stage of your life.
+          Empower Your Financial Decisions with Our Calculators.
           </p>
         </div>
         <Carousel>
@@ -446,15 +444,13 @@ export default function HomePage() {
             Our Mission & Vision
           </p>
           <p className="text-[#272B2A] text-xl font-normal">
-            Spring Money believes in making expert financial advice accessible.
-            Our core values drive us to deliver simple, transparent, and
-            effective financial planning.
+          Democratizing Expert Financial Advice: Simple, Transparent, Effective.
           </p>
           <Link
             href="/services"
             className="inline-block bg-[#108e66] text-[#fcfffe] px-8 py-3 rounded-md font-medium hover:bg-[#272B2A] transition-colors"
           >
-            Learn More About Our Financial Planning
+            Meet the team
           </Link>
         </div>
       </section>
