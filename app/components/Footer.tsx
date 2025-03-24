@@ -5,7 +5,14 @@ export default function Footer() {
   return (
     <div className="bg-[#272B2A] flex flex-col items-center">
       <div className="px-4 md:max-xl:px-[60px] w-full max-w-screen-xl">
-        <div className="flex flex-col lg:flex-row items-center text-center lg:text-start justify-between py-8 border border-b-[#fcfffe8a] border-r-0 border-l-0">
+        <div className="text-lg font-medium flex py-8 justify-center">
+          <span className="text-[#fcfffe8a]">
+            <span className="text-[#FCFFFE]">Our vision</span>{" "}
+            is to help bring about a world that confidently makes smart
+            financial decisions.
+          </span>
+        </div>
+        <div className="flex flex-col lg:flex-row items-center text-center lg:text-start justify-between py-8 border border-y-[#fcfffe8a] border-x-0">
           <div>
             <span className="text-[#FCFFFE] text-sm font-medium mb-2">
               Download the app

@@ -196,7 +196,7 @@ const BlogListingPage = () => {
   };
 
   return (
-    <div className="flex flex-col mb-8 items-center">
+    <div className="flex flex-col items-center">
       <div className="  py-10 text-center bg-[#fcfffe] text-[#272B2A] w-screen flex flex-col gap-4 px-4 md:max-xl:px-[60px] max-w-screen-xl">
         <p className="text-[#108E66] text-xl font-semibold text-start">
           Experience innovative, tailored, and comprehensive financial planning
@@ -262,10 +262,49 @@ const BlogListingPage = () => {
           </div>
         )}
       {!slicedData && (
-        <div className="flex w-full justify-center">
+        <div className="flex w-full justify-center min-h-screen">
           <PacmanLoader color="#108e66" />
         </div>
       )}
+      <div className="flex flex-col py-8 md:py-16 items-center justify-center bg-[#108E66] w-full mt-8 md:mt-16 px-4">
+        <Image
+          src={"/logo2.svg"}
+          width={300}
+          height={100}
+          alt="spring money logo"
+        ></Image>
+        <span className="text-[#FCFFFE] text-[28px] font-semibold mt-4 text-center">
+          To Learn More - Download Our App !
+        </span>
+        <div className="flex gap-4 mt-8">
+              <Link
+                href={
+                  "https://play.google.com/store/apps/details?id=com.spring.money"
+                }
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src={"/footer/play-store.svg"}
+                  width={160}
+                  height={40}
+                  alt="play store image"
+                />
+              </Link>
+              <Link
+                href={"https://apps.apple.com/in/app/spring-money/id1660751993"}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src={"/footer/app-store.svg"}
+                  width={160}
+                  height={40}
+                  alt="app store image"
+                />
+              </Link>
+            </div>
+      </div>
     </div>
   );
 };

@@ -20,10 +20,10 @@ export default function RiaFaqAccordion({ faqs }: { faqs: { question: string; an
 function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border border-[#525ECC]  bg-[#EBECFA] rounded-lg">
+    <div className="border border-[#525ECC]  bg-[#FCFFFE] rounded-lg">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full text-left text-lg font-semibold text-[#272B2A] focus:outline-none px-6 py-4 flex justify-between"
+        className="w-full text-left text-lg font-semibold text-[#525ECC] focus:outline-none px-6 py-4 flex justify-between"
       >
         {question}
         <Image 
@@ -36,7 +36,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
         />
       </button>
       {open && (
-        <p className="border-t border-[#525ECC] text-base text-[#272B2A] transition-all duration-300 px-6 py-4">
+        <p className="border-t border-[#525ECC] text-base font-medium text-[#272B2A] transition-all duration-300 px-6 py-4">
           {answer}
         </p>
       )}
