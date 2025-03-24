@@ -16,41 +16,38 @@ interface EmpowerCardsProps {
   subHeading: string;
 }
 
+const listDelimiter = "=";
+
 const faqs = [
   {
-    question: "How do I start my financial planning journey with Spring Money?",
+    question: "Who is Spring Money designed for in the AMC space?",
     answer:
-      "Connect with us on WhatsApp, and our SEBI-registered experts will assess your needs and guide you toward the right plan.",
+      "Spring Money is designed for Asset Management Companies (AMCs) seeking to enhance investor engagement, streamline operations, and drive growth through digital innovation. Our platform provides the tools and integrations necessary to modernize your investor experience.",
   },
   {
     question:
-      "What makes Spring Money different from other financial advisory platforms?",
+      "What are the key benefits of using Spring Money for AMCs?",
     answer:
-      "We connect you directly with SEBI-registered experts who provide unbiased, personalized guidance with transparency and actionable strategies.",
+      "Our platform offers:Seamless API integrations with leading fintech applications. Data-driven insights into investor behaviour. Customizable branded client portals. Personalized wealth management tools.Streamlined client onboarding processes.",
   },
   {
-    question: "Do I need a high income to benefit from financial planning?",
+    question: "How does Spring Money enhance investor engagement?",
     answer:
-      "Not at all. Our strategies are tailored for every stage of your financial journey, whether you're starting out or managing substantial wealth.",
+      "We provide tools for personalized communication, interactive portfolio analysis, and educational resources, all designed to keep investors engaged and informed.",
   },
   {
-    question: "Is my data secure with Spring Money?",
+    question: "What kind of support does Spring Money offer to AMCs?",
     answer:
-      "Yes. We follow strict data protection policies to keep your financial information safe.",
+      "We provide comprehensive support, including onboarding assistance and technical support to ensure you maximize the benefits of our platform.",
   },
   {
-    question: "How do I access the free financial calculators?",
+    question: "How do I request a demo of the Spring Money platform?",
     answer:
-      "Simply explore our tools on the website. For detailed analysis, we can send a personalized report directly to your WhatsApp.",
-  },
-  {
-    question: "How much does a financial planning consultation cost?",
-    answer:
-      "We offer both one-time and comprehensive planning options. Pricing depends on your unique needs. Contact us on WhatsApp to discuss the best plan for you.",
+      "Simply click the 'Talk to us' button on our website, and we will contact you to arrange a convenient time for a personalized demonstration.",
   },
 ];
 
-const investmentSolutions: Service[] = [
+const investmentSolutions: Service= [
   {
     id: 1,
     title: "Stocks",
@@ -77,7 +74,7 @@ const investmentSolutions: Service[] = [
   },
 ];
 
-const complianceSolutions: Service[] = [
+const complianceSolutions: Service= [
   {
     id: 5,
     title: "KYC Process",
@@ -104,7 +101,7 @@ const complianceSolutions: Service[] = [
   },
 ];
 
-const digitalServices: Service[] = [
+const digitalServices: Service= [
   {
     id: 9,
     title: "CAMS || CAS",
@@ -157,75 +154,97 @@ export default function ForAmcPage() {
           Transform Your Investor Experience with Spring Money.
         </h1>
         <p className="text-lg md:text-xl text-[#108E66] max-w-3xl mx-auto">
-          Empower your organization by leveraging our cutting-edge digital
-          solutions to drive growth, streamline operations, and enhance brand
-          credibility.
+          Drive engagement and growth with integrated & hyper-personalised
+          digital assets
         </p>
         <div className="mt-8">
           <Link
             href="https://wa.me/+918668484607"
-             target="_blank"
+            target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-[#108E66] text-[#FCFFFE] px-8 py-3 rounded-md font-semibold hover:bg-[#FCFFFE] hover:text-[#108E66] transition"
           >
-            Learn More
+            Talk to Us
           </Link>
         </div>
       </section>
 
-      <div className="flex flex-col items-center py-16 bg-linearGradient3">
+      <div className="flex flex-col items-center py-16 bg-gradient-to-b from-[#F0FAF7] to-white">
+        {" "}
+        {/* Gradient Background */}
         <p className="text-[40px] font-semibold text-[#272B2A] mb-2 text-center">
-          Empower Your Investors with
+          Key Features for Modern Investor Engagement
         </p>
-        <p className="text-lg md:text-xl text-[#272B2A] text-center px-4 md:max-xl:px-[60px] w-full max-w-screen-xl">
+        {/* <p className="text-lg md:text-xl text-[#272B2A] text-center px-4 md:max-xl:px-[60px] w-full max-w-screen-xl">
           Spring Money provides a single, unified platform to manage every
           aspect of your financial advisory business. From client onboarding to
           compliance tracking, task automation, and portfolio
           analytics—streamline operations and deliver superior client outcomes.
-        </p>
+        </p> */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 px-4 md:max-xl:px-[60px] w-full max-w-screen-xl">
-          <EmpowerCards
-            heading="Robust API Integrations"
-            subHeading="Seamlessly integrate our platform with latest fintech applications and infrastructure."
-          />
-          <EmpowerCards
-            heading="Data-Driven Insights"
-            subHeading="Gain valuable insights into investor behavior with advanced analytics."
-          />
-          <EmpowerCards
-            heading="Branded Client Portal"
-            subHeading="Offer a customized investor portal for secure access to information and services."
-          />
-          <EmpowerCards
-            heading="Personalized Wealth Management Tools"
-            subHeading="Offer clients interactive tools for portfolio analysis, goal setting, and performance tracking."
-          />
-          <EmpowerCards
-            heading="Enhanced Client Onboarding"
-            subHeading="Streamline onboarding with digital workflows and automated data capture."
-          />
+          <div className="flex flex-col gap-6">
+            {" "}
+            {/* Wrapper div with gap */}
+            <EmpowerCards
+              heading="Data enriched prospecting & engagement"
+              subHeading="Seamlessly integrate our platform with latest fintech applications and infrastructure."
+            />
+          </div>
+          <div className="flex flex-col gap-6">
+            {" "}
+            {/* Wrapper div with gap */}
+            <EmpowerCards
+              heading="Stand out in the chaos"
+              subHeading="Gain valuable insights into investor behavior with advanced analytics."
+            />
+          </div>
+          <div className="flex flex-col gap-6">
+            {" "}
+            {/* Wrapper div with gap */}
+            <EmpowerCards
+              heading="Bespoke on-premise fully secure & compliant"
+              subHeading="Offer a customized investor portal for secure access to information and services."
+            />
+          </div>
+          <div className="flex flex-col gap-6">
+            {" "}
+            {/* Wrapper div with gap */}
+            <EmpowerCards
+              heading="Personalized Wealth Management Tools"
+              subHeading="Offer clients interactive tools for portfolio analysis, goal setting, and performance tracking."
+            />
+          </div>
+          <div className="flex flex-col gap-6">
+            {" "}
+            {/* Wrapper div with gap */}
+            <EmpowerCards
+              heading="Integrated, Automated & AI-First"
+              subHeading="Streamline onboarding with digital workflows and automated data capture."
+            />
+          </div>
         </div>
       </div>
 
-      <section className="py-16 px-4 text-center bg-linearGradient4">
+      <section className="py-16 px-4 text-center bg-gradient-to-b from-white to-[#F0FAF7]">
+        {" "}
+        {/* Gradient Background */}
         <h1 className="text-[40px] font-semibold text-[#272B2A] mb-2">
-          A Powerful SaaS Platform for the Modern AMC
+          Your Digital Partner for Hyper Growth
         </h1>
         <p className="text-lg md:text-xl text-[#272B2A] max-w-3xl mx-auto">
-          Spring Money provides AMCs with a comprehensive suite of digital tools
-          and robust API integrations to enhance investor engagement, streamline
-          operations, and drive growth. Leverage cutting-edge technology.
-          Deliver personalized experiences.
+          Spring Money provides a comprehensive Saas platform with digital tools
+          and API integrations to enhance investor engagement, streamline
+          operations, and drive growth.
         </p>
       </section>
 
-      <div className="flex flex-col items-center py-16 bg-linearGradient4">
+      {/* <div className="flex flex-col items-center py-16 bg-linearGradient4">
         <p className="text-[40px] font-semibold text-[#272B2A] mb-2 text-center">
           What you get
         </p>
         <p className="text-lg md:text-xl text-[#272B2A] text-center">
-          We specialize in providing customized financial solutions for a
-          diverse range of professionals.
+          We specialize in providing customized financial solutions for a diverse
+          range of professionals.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 px-4 md:max-xl:px-[60px] w-full max-w-screen-xl">
           <EmpowerCards
@@ -253,7 +272,7 @@ export default function ForAmcPage() {
             subHeading="Accurate Real-time & Insightful"
           />
         </div>
-      </div>
+      </div> */}
 
       <div className="bg-[#F0FAF7] flex justify-center py-16">
         <Image
@@ -264,14 +283,16 @@ export default function ForAmcPage() {
         />
       </div>
 
-      <div className="flex flex-col items-center py-14 md:py-28 bg-linearGradient3">
+      <div className="flex flex-col items-center py-14 md:py-28 bg-gradient-to-b from-[#F0FAF7] to-white">
+        {" "}
+        {/* Gradient Background */}
         <h1 className="text-4xl md:text-5xl font-bold mb-1 text-[#108E66] px-4 md:max-xl:px-[60px] w-full max-w-screen-xl text-center">
-          Request a Demo and Explore Partnership Opportunities
+          Let's build the tomorrow together
         </h1>
-        <p className="text-lg md:text-xl  mx-auto text-[#108E66] px-4 md:max-xl:px-[60px] w-full max-w-screen-xl text-center">
+        {/* <p className="text-lg md:text-xl  mx-auto text-[#108E66] px-4 md:max-xl:px-[60px] w-full max-w-screen-xl text-center">
           Schedule a free demo to learn how the Spring Money platform can
           transform your RIA experience.
-        </p>
+        </p> */}
         <div className="flex justify-center mt-4">
           <Link
             href="https://wa.me/+918668484607"
@@ -279,7 +300,7 @@ export default function ForAmcPage() {
             rel="noopener noreferrer"
             className=" items-center text-[#108E66] border border-[#108E66] bg-[#FCFFFE] px-8 py-3 rounded-md font-semibold hover:bg-[#108E66] hover:text-[#FCFFFE] transition"
           >
-            Get in touch now
+            Talk to Us
           </Link>
         </div>
       </div>

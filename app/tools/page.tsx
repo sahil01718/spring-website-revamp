@@ -30,33 +30,35 @@ const additionalCalculators = [
 
 const faqs = [
   {
-    question: "How do I start my financial planning journey with Spring Money?",
+    question: "Who are the financial advisors on Spring Money?",
     answer:
-      "Connect with us on WhatsApp, and our SEBI-registered experts will assess your needs and guide you toward the right plan.",
+      "Our network consists exclusively of SEBI-registered investment advisors. This ensures that you receive expert financial guidance from professionals who are regulated and held to the highest ethical and professional standards.",
   },
   {
-    question: "What makes Spring Money different from other financial advisory platforms?",
+    question:
+      "How does Spring Money connect me with an advisor?",
     answer:
-      "We connect you directly with SEBI-registered experts who provide unbiased, personalized guidance with transparency and actionable strategies.",
+      "To begin, simply reach out to us via WhatsApp. We'll initiate a conversation to understand your specific financial goals, current situation, and preferences. Based on this, we'll match you with a suitable advisor from our network. This personalized approach ensures you find an advisor whose expertise aligns with your needs.",
   },
   {
-    question: "Do I need a high income to benefit from financial planning?",
+    question: "What types of financial planning do you offer?",
     answer:
-      "Not at all. Our strategies are tailored for every stage of your financial journey, whether you're starting out or managing substantial wealth.",
+      "Our partner advisors provide personalized financial planning services designed to address your unique circumstances. They offer a comprehensive suite of solutions, encompassing everything from holistic financial planning that integrates investments, retirement, insurance, tax optimization, debt management, and budgeting, to focused strategies for building and managing your investment portfolio. Additionally, they specialize in retirement planning to ensure a secure future and goal-based planning to help you achieve specific financial objectives like homeownership or educational funding.",
   },
   {
-    question: "Is my data secure with Spring Money?",
-    answer: "Yes. We follow strict data protection policies to keep your financial information safe.",
+    question: "Is Spring Money suitable for all income levels?",
+    answer:
+      "Yes, absolutely. We believe that everyone deserves access to quality financial advice. Our services are designed to be flexible and adaptable, catering to individuals at every stage of their financial journey, from those just starting out to those managing substantial wealth.",
   },
   {
-    question: "How do I access the free financial calculators?",
+    question: "Are the financial tools on your website free to use?",
     answer:
-      "Simply explore our tools on the website. For detailed analysis, we can send a personalized report directly to your WhatsApp.",
+      "Yes, our financial calculators are completely free to use. They are designed to provide you with valuable insights and help you make informed financial decisions.",
   },
   {
-    question: "How much does a financial planning consultation cost?",
+    question: "What are the costs associated with financial planning?",
     answer:
-      "We offer both one-time and comprehensive planning options. Pricing depends on your unique needs. Contact us on WhatsApp to discuss the best plan for you.",
+      "You get a range of financial planning options, including one-time consultations and comprehensive, ongoing planning services. Pricing varies depending on the complexity of your financial situation and the services you require. We recommend contacting us via WhatsApp to discuss your specific needs and receive a personalized quote.",
   },
 ];
 

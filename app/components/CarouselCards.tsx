@@ -6,45 +6,45 @@ import { motion } from "framer-motion";
 
 const carouselItems = [
   {
-    title: "“The Financial Advice That Changed My Life”",
+    title: "The Financial Advice That Changed My Life",
     description:
-      "I used to invest based on influencer tips, and it cost me thousands. Now, I let the experts handle my finances, and I finally have peace of mind.",
+      "From Influencer Tips to Expert Plans: Peace of Mind.",
     button: "Watch Full Video on Youtube",
     image: "/carousel-cards/carousel1.svg",
     link: "https://youtu.be/2YlOxs78WPc?si=QIZELFCXGXWebmct",
     guest: "~ Harshal Patil",
   },
   {
-    title: "“A Smarter Approach to Wealth Building”",
+    title: "A Smarter Approach to Wealth Building",
     description:
-      "I used to check my portfolio every day, worrying about losses. Now, I focus on my career while my money works for me.",
+      "Hands-Off Wealth: Focus on Career, Not Portfolio.",
     button: "Watch Full Video on Youtube",
     image: "/carousel-cards/carousel2.svg",
     link: "https://youtu.be/nXjwXqpnBPI",
     guest: "~ Vijit Neema",
   },
   {
-    title: "“Breaking Free from Financial Mistakes”",
+    title: "Breaking Free from Financial Mistakes",
     description:
-      "I learned the hard way that impulsive decisions and short-term thinking don’t work. With expert guidance, I finally have a structured plan.",
+      "From Impulsive to Planned: Financial Freedom.",
     button: "Watch Full Video on Youtube",
     image: "/carousel-cards/carousel3.svg",
     link: "https://www.youtube.com/watch?v=5m5Qigm2j7w",
     guest: "~ Sandeep Mahajan",
   },
+  // {
+  //   title: "From Financial Anxiety to Confidence",
+  //   description:
+  //     "Financial planning isn’t just about investments. It’s about confidence, security, and achieving life’s goals without stress.",
+  //   button: "Watch Full Video on Youtube",
+  //   image: "/carousel-cards/carousel4.svg",
+  //   link: "https://youtu.be/xJA4zt2hcJE",
+  //   guest: "~ Anjali Deshpande",
+  // },
   {
-    title: "“From Financial Anxiety to Confidence”",
+    title: "Making Smarter, Goal-Based Investments",
     description:
-      "Financial planning isn’t just about investments. It’s about confidence, security, and achieving life’s goals without stress.",
-    button: "Watch Full Video on Youtube",
-    image: "/carousel-cards/carousel4.svg",
-    link: "https://youtu.be/xJA4zt2hcJE",
-    guest: "~ Anjali Deshpande",
-  },
-  {
-    title: "“Making Smarter, Goal-Based Investments”",
-    description:
-      "Financial planning is beyond just investments. It’s about achieving life goals, from a family vacation to a secure retirement.",
+      "Goals Achieved: Beyond Investments, Life Planning.",
     button: "Watch Full Video on Youtube",
     image: "/carousel-cards/carousel5.svg",
     link: "https://www.youtube.com/watch?v=jx_6soC3wuM",

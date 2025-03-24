@@ -112,7 +112,7 @@ export default function Footer() {
               href={"/for-ria"}
               className="text-[#FCFFFE] text-sm font-normal"
             >
-              For RIA
+              For Advisors
             </Link>
             <Link
               href={"/for-amc"}

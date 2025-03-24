@@ -26,35 +26,30 @@ interface WhatYouGetInfoProps {
 
 const faqs = [
   {
-    question: "How do I start my financial planning journey with Spring Money?",
+    question: "Who is Spring Money designed for?",
     answer:
-      "Connect with us on WhatsApp, and our SEBI-registered experts will assess your needs and guide you toward the right plan.",
+      "Spring Money is specifically designed for accredited financial advisors who are looking to modernize their practices and enhance their client service offerings. We cater to advisors who want to leverage technology to gain a competitive edge in the rapidly evolving financial advisory landscape.",
   },
   {
     question:
-      "What makes Spring Money different from other financial advisory platforms?",
+      "What are the key benefits of using Spring Money?",
     answer:
-      "We connect you directly with SEBI-registered experts who provide unbiased, personalized guidance with transparency and actionable strategies.",
+      "Spring Money offers a comprehensive suite of benefits, including: Unified Platform: Manage client onboarding, transactions, and more, all in one place. Flexible & Scalable: Grow your business with a system that adapts to your needs. Enhanced Security: Robust encryption and automated compliance tracking. AI-Powered Insights: Make smarter decisions with data-driven intelligence. Improved Client Engagement: Tools to improve client communication, and overall client satisfaction.",
   },
   {
-    question: "Do I need a high income to benefit from financial planning?",
+    question: "How does Spring Money help with compliance?",
     answer:
-      "Not at all. Our strategies are tailored for every stage of your financial journey, whether you're starting out or managing substantial wealth.",
+      "Compliance is a critical aspect of financial advisory. Spring Money simplifies this process by providing: Built-in Reporting Tools: Generate compliance reports quickly and easily, saving you time and reducing the risk of errors. Secure Data Management: Robust encryption and secure data storage protect sensitive client informationand ensure compliance with data protection regulations. Audit Trails: Maintain comprehensive audit trails for all client interactions and transactions, facilitating easy compliance audits.",
   },
   {
-    question: "Is my data secure with Spring Money?",
+    question: "What kind of support does Spring Money offer?",
     answer:
-      "Yes. We follow strict data protection policies to keep your financial information safe.",
+      "We are committed to providing exceptional support to our advisors. Our support includes: Onboarding Assistance: Get up and running quickly with personalized onboarding and training. Technical Support: Access our dedicated support team for prompt assistance with any technical issues. Ongoing Training: Stay up-to-date with the latest features and best practices through regular training sessions and resources.",
   },
   {
-    question: "How do I access the free financial calculators?",
+    question: "What are the pricing options for Spring Money?",
     answer:
-      "Simply explore our tools on the website. For detailed analysis, we can send a personalized report directly to your WhatsApp.",
-  },
-  {
-    question: "How much does a financial planning consultation cost?",
-    answer:
-      "We offer both one-time and comprehensive planning options. Pricing depends on your unique needs. Contact us on WhatsApp to discuss the best plan for you.",
+      "We offer flexible pricing plans that are tailored to the size and needs of your advisory practice. Our pricing is based on factors such as the number of advisors and clients, the features you require, and the level of support you need. We recommend contacting us to discuss your specific requirements and receive a personalized quote. We can also provide a free trial of our product.",
   },
 ];
 
@@ -65,7 +60,7 @@ const InfoCard: React.FC<InfoCardProps> = ({
   description,
 }) => {
   return (
-    <div className="p-4 bg-[#FCFFFE] flex flex-col items-center gap-4 border border-[#525ECC] rounded-lg shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1">
+    <div className="bg-[#FCFFFE] flex flex-col items-center rounded-lg shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 border border-[#525ECC] p-4 gap-4">
       {imageSrc && (
         <div className="mb-4">
           <Image
@@ -78,7 +73,7 @@ const InfoCard: React.FC<InfoCardProps> = ({
         </div>
       )}
       <div className="flex flex-col items-center gap-1">
-        <h3 className="text-xl font-medium  text-[#272B2A]">{title}</h3>
+        <h3 className="text-xl font-medium text-[#272B2A]">{title}</h3>
         <p className="text-[#272b2abf] font-normal text-sm text-center">
           {description}
         </p>
@@ -94,7 +89,7 @@ const InfoCardSolution: React.FC<InfoCardProps> = ({
   description,
 }) => {
   return (
-    <div className="p-4 bg-[#FCFFFE] flex flex-col-reverse items-center gap-4 border border-[#525ECC] rounded-lg shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1">
+    <div className="bg-[#FCFFFE] flex flex-col-reverse items-center rounded-lg shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 border border-[#525ECC] p-4 gap-4">
       {imageSrc && (
         <div className="mb-4">
           <Image
@@ -107,7 +102,7 @@ const InfoCardSolution: React.FC<InfoCardProps> = ({
         </div>
       )}
       <div className="flex flex-col items-start gap-1">
-        <h3 className="text-xl font-medium  text-[#272B2A]">{title}</h3>
+        <h3 className="text-xl font-medium text-[#272B2A]">{title}</h3>
         <p className="text-[#272b2abf] font-normal text-sm ">{description}</p>
       </div>
     </div>
@@ -121,7 +116,7 @@ const FinancialAdvisorInfo: React.FC<FinancialAdvisorInfoProps> = ({
   subHeading3,
 }) => {
   return (
-    <div className="flex flex-col p-4 rounded-lg bg-[#FCFFFE] border border-[#525ECC]">
+    <div className="flex flex-col rounded-lg bg-[#FCFFFE] border border-[#525ECC] p-4">
       <p className="text-[#272B2A] text-xl font-medium mb-8 text-center">
         {heading}
       </p>
@@ -149,7 +144,7 @@ const WhatYouGetInfo: React.FC<WhatYouGetInfoProps> = ({
   subHeading,
 }) => {
   return (
-    <div className="p-4 rounded-lg bg-[#FCFFFE] border border-[#525ECC] text-center flex flex-col gap-2">
+    <div className="rounded-lg bg-[#FCFFFE] border border-[#525ECC] text-center flex flex-col gap-2 p-4">
       <p className="text-[#272B2A] text-xl font-medium">{heading}</p>
       <p className="text-[#272b2abf] text-sm font-normal">{subHeading}</p>
     </div>
@@ -159,18 +154,17 @@ const WhatYouGetInfo: React.FC<WhatYouGetInfoProps> = ({
 export default function ForRiaPage() {
   const [open, setOpen] = useState(false);
   return (
-    <div
-      className=""
-      style={{ backgroundColor: "#fcfffe", color: "#272B2A" }}
-    >
+    <div style={{ backgroundColor: "#fcfffe", color: "#272B2A" }}>
       {/* Hero Section */}
-      <section className="py-20 px-4 text-center bg-[#EBECFA]">
+      <section
+        className="text-center bg-[#EBECFA] py-16 md:py-20 px-4 md:px-16"
+      >
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-[#525ECC]">
           The Digital Office for Financial Advisors
         </h1>
         <p className="text-lg md:text-xl max-w-3xl mx-auto text-[#525ECC]">
-          Reduce operational inefficiencies, automate workflows, and enhance
-          compliance—all in one seamless platform.
+          Streamline operations, automate workflows, and ensure compliance—all
+          in one powerful platform.
         </p>
         <div className="mt-8">
           <Link
@@ -185,86 +179,100 @@ export default function ForRiaPage() {
       </section>
 
       {/* Challenges Section */}
-      <section className="mx-auto py-16 flex flex-col items-center bg-linearGradient1">
-        <p className="text-4xl font-bold text-center mb-2">The Problem</p>
+      <section
+        className="mx-auto py-16 md:py-20  flex flex-col items-center bg-gradient-to-b from-[#EBECFA] to-[#FCFFFE] px-4 md:px-16"
+      >
+        <p className="text-4xl md:text-5xl font-bold mb-2 text-[#272B2A] text-center">
+          Pressing Challenges for Advisors
+        </p>
         <h2 className="text-xl font-normal text-center mb-8">
-          Challenges Faced by Financial Advisors
+          We understand the hurdles you face in today's financial landscape.
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-4 md:max-xl:px-[60px]  max-w-screen-xl">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-screen-xl">
           <InfoCard
             imageSrc="/for-ria/rafiki.svg"
-            title="Fragmented Systems"
-            description="Disjointed tools and systems create operational inefficiencies and drive up costs."
+            title="Fragmented, Inefficient Systems"
+            description="Disconnected tools lead to wasted time and resources."
           />
           <InfoCard
             imageSrc="/for-ria/rafiki.svg"
-            title="Manual Processes"
-            description="Time-consuming, error-prone tasks that drain valuable resources."
+            title="Time-Consuming Tasks"
+            description="Manual workflows hinder growth and productivity."
           />
           <InfoCard
             imageSrc="/for-ria/computer.svg"
-            title="Lack of Integration"
-            description="Siloed systems hinder unified decision-making and effective client service."
+            title="Siloed Data"
+            description="Fragmented information slows down decision-making."
           />
           <InfoCard
             imageSrc="/for-ria/bro.svg"
-            title="Compliance Burdens"
-            description="Increasing regulatory demands add complexity and risk to daily operations."
+            title="Regulatory Complexity"
+            description="Navigating evolving regulations adds risk and stress."
           />
         </div>
       </section>
 
-      <section className="mx-auto py-8 flex flex-col items-center bg-[#FCFFFE] w-full">
-        <h1 className="text-4xl md:text-5xl font-bold mb-8 text-[#525ECC] text-center">
-          A Complete Ecosystem for RIAs
-        </h1>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 px-4 md:max-xl:px-[60px] w-full max-w-screen-xl">
-          <FinancialAdvisorInfo
-            heading="TRANSFORMATION"
-            subHeading1="Data Processing Excellence"
-            subHeading2="Continuous Improvement"
-            subHeading3="Value Generation"
-          />
-          <FinancialAdvisorInfo
-            heading="INTELLIGENCE"
-            subHeading1="Smart Analytics"
-            subHeading2="Predictive Insights"
-            subHeading3="Research-Driven Decisions"
-          />
-          <FinancialAdvisorInfo
-            heading="INTEGRATION"
-            subHeading1="Seamless Connectivity"
-            subHeading2="Unified Platform"
-            subHeading3="Harmonized Operations"
-          />
-          <FinancialAdvisorInfo
-            heading="TRUST"
-            subHeading1="Security"
-            subHeading2="Compliance"
-            subHeading3="Reliability"
-          />
-        </div>
-        <div className="flex justify-center">
-          <Link
-            href="https://wa.me/+918668484607"
-            target="_blank"
-            rel="noopener noreferrer"
-            className=" items-center text-[#525ECC] border border-[#525ECC] bg-[#FCFFFE] px-8 py-3 rounded-md font-semibold hover:bg-[#525ECC] hover:text-[#FCFFFE] transition"
-          >
-            Get in touch to learn more
-          </Link>
-        </div>
-      </section>
+      <section className="mx-auto py-16 md:py-20 flex flex-col items-center bg-[#FCFFFE] w-full px-4 md:px-16">
+  <h1 className="text-4xl md:text-5xl font-bold mb-8 text-[#525ECC] text-center">
+    A Complete Ecosystem for Advisors
+  </h1>
+  <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 max-w-screen-xl">
+    <div className="flex flex-col gap-6 "> {/* Added wrapper div with gap */}
+      <FinancialAdvisorInfo
+        heading="TRANSFORMATION"
+        subHeading1="Data Processing Excellence"
+        subHeading2="Continuous Improvement"
+        subHeading3="Value Generation"
+      />
+    </div>
+    <div className="flex flex-col gap-6"> {/* Added wrapper div with gap */}
+      <FinancialAdvisorInfo gap-8 mb-8 max-w-screen-xl
+        heading="INTELLIGENCE"
+        subHeading1="Smart Analytics"
+        subHeading2="Predictive Insights"
+        subHeading3="Research-Driven Decisions"
+      />
+    </div>
+    <div className="flex flex-col gap-6"> {/* Added wrapper div with gap */}
+      <FinancialAdvisorInfo gap-8 mb-8 max-w-screen-xl
+        heading="INTEGRATION"
+        subHeading1="Seamless Connectivity"
+        subHeading2="Unified Platform"
+        subHeading3="Harmonized Operations"
+      />
+    </div>
+    <div className="flex flex-col gap-6 "> {/* Added wrapper div with gap */}
+      <FinancialAdvisorInfo 
+        heading="TRUST"
+        subHeading1="Security"
+        subHeading2="Compliance"
+        subHeading3="Reliability"
+      />
+    </div>
+  </div>
+  <div className="flex justify-center">
+    <Link
+      href="https://wa.me/+918668484607"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="items-center text-[#525ECC] border border-[#525ECC] bg-[#FCFFFE] px-8 py-3 rounded-md font-semibold hover:bg-[#525ECC] transition"
+    >
+      Get in touch to learn more
+    </Link>
+  </div>
+</section>
 
       {/* Solution Section */}
-      <section className="mx-auto py-16 flex flex-col items-center w-full bg-linearGradient2">
-        <p className="text-4xl font-bold text-center mb-2">
-          Why Spring Money ?
+      <section
+        className="mx-auto py-16 md:py-20  flex flex-col items-center w-full bg-gradient-to-b from-[#FCFFFE] to-[#EBECFA] px-4 md:px-16"
+      >
+        <p className="text-4xl md:text-5xl font-bold mb-2 text-[#272B2A] text-center">
+          The Spring Money Advantage
         </p>
         <h2 className="text-xl font-normal text-center mb-8">
-          A Unique Value Proposition
+          Unlock the tools and support you need to thrive.
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-4 md:max-xl:px-[60px] max-w-screen-xl w-full">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-screen-xl">
           <InfoCardSolution
             imageSrc="/for-ria/rafiki1.svg"
             title="End-to-End Coverage"
@@ -273,7 +281,7 @@ export default function ForRiaPage() {
           <InfoCardSolution
             imageSrc="/for-ria/amico.svg"
             title="Modular & Scalable"
-            description="A flexible system that grows with your business."
+            description="Grow your business with a system that adapts to your needs."
           />
           <InfoCardSolution
             imageSrc="/for-ria/bro1.svg"
@@ -288,15 +296,13 @@ export default function ForRiaPage() {
         </div>
       </section>
 
-      <section className="mx-auto py-16 bg-[#EBECFA] flex flex-col items-center w-full">
+      <section
+        className="mx-auto py-16 md:py-20 gap-8 md:gap-8 flex flex-col items-center w-full bg-[#EBECFA] px-4 md:px-16"
+      >
         <h1 className="text-4xl md:text-5xl font-bold mb-2 text-[#272B2A] text-center">
-          What you get
+          Empowering Your Practice with Powerful Tools
         </h1>
-        <p className="text-lg md:text-xl max-w-3xl mx-auto text-[#272B2A] text-center mb-4">
-          Reduce operational inefficiencies, automate workflows, and enhance
-          compliance—all in one seamless platform.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 md:max-xl:px-[60px] w-full max-w-screen-xl">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-screen-xl">
           <WhatYouGetInfo
             heading="Acquisition Toolkit"
             subHeading="Turn First Impresssions into Lasting Relationships"
@@ -324,22 +330,22 @@ export default function ForRiaPage() {
         </div>
       </section>
 
-      <div className="flex flex-col items-center py-14 md:py-28 bg-linearGradient1">
-        <h1 className="text-4xl md:text-5xl font-bold mb-1 text-[#525ECC] px-4 md:max-xl:px-[60px] w-full max-w-screen-xl text-center">
-          Request a Demo and Explore Partnership Opportunities
+      <div className="bg-gradient-to-b from-[#EBECFA] to-[#FCFFFE] py-16 md:py-20 px-4 md:px-16 flex flex-col items-center gap-8">
+        <h1 className="text-3xl md:text-5xl font-bold text-[#525ECC] text-center w-full max-w-screen-xl">
+          See Spring Money in Action
         </h1>
-        <p className="text-lg md:text-xl  mx-auto text-[#525ECC] px-4 md:max-xl:px-[60px] w-full max-w-screen-xl text-center">
-          Schedule a free demo to learn how the Spring Money platform can
-          transform your RIA experience.
+        <p className="text-lg md:text-xl text-[#525ECC] text-center w-full max-w-screen-xl">
+          Schedule a free demo to discover how our platform can transform your
+          advisory practice.
         </p>
-        <div className="flex justify-center mt-4">
+        <div className="flex justify-center">
           <Link
             href="https://wa.me/+918668484607"
             target="_blank"
             rel="noopener noreferrer"
-            className=" items-center text-[#525ECC] border border-[#525ECC] bg-[#FCFFFE] px-8 py-3 rounded-md font-semibold hover:bg-[#525ECC] hover:text-[#FCFFFE] transition"
+            className="items-center text-[#525ECC] border border-[#525ECC] bg-[#FCFFFE] px-8 py-3 rounded-md font-semibold hover:bg-[#525ECC] hover:text-[#FCFFFE] transition"
           >
-            Get in touch now
+            Schedule Your Demo Today
           </Link>
         </div>
       </div>
