@@ -79,7 +79,7 @@ export default function CarouselCards() {
       <Carousel>
         {carouselItems.map((item, index) => (
           <motion.div key={index} className="p-4 md:p-8 flex flex-col w-[450px] gap-6 justify-center bg-[#FCFFFE] border border-[#108E66] rounded-lg">
-            <div className=" hidden md:block">
+            <div className="block">
               <Image
                 src={item.image}
                 width={560}

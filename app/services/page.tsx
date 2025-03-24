@@ -274,8 +274,8 @@ export default function ServicesPage() {
         <p className="text-[#108E66] text-[40px] font-semibold text-center">
           How it works ?
         </p>
-        <div className="p-4 md:p-8 flex gap-8 w-full justify-center bg-[#FCFFFE] border rounded border-[#108E66]  max-w-screen-xl">
-          <div className="hidden md:block md:w-[45%]">
+        <div className="p-4 md:p-8 flex flex-col md:flex-row gap-8 w-full justify-center bg-[#FCFFFE] border rounded border-[#108E66]  max-w-screen-xl">
+          <div className="block md:w-[45%]">
             <Image
               src={"/services/nikhil-51.svg"}
               width={1032}
