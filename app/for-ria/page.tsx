@@ -186,7 +186,7 @@ export default function ForRiaPage() {
           Pressing Challenges for Advisors
         </p>
         <h2 className="text-xl font-normal text-center mb-8">
-          We understand the hurdles you face in today's financial landscape.
+          We understand the hurdles you face in today&apos;s financial landscape.
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-screen-xl">
           <InfoCard
