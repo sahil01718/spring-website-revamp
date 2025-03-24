@@ -224,7 +224,7 @@ export default function ServicesPage() {
     return () => clearTimeout(timer);
   }, [activeIndex, carouselComponents.length]);
   return (
-    <div className="space-y-16">
+    <div className="">
       {/* HERO SECTION */}
       <section className="bg-[#108e66] py-20 px-4 text-center border-b border-[#272B2A]">
         <h1 className="text-4xl md:text-5xl font-bold text-[#FCFFFE] mb-4">
@@ -276,13 +276,18 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <div className="mx-auto flex flex-col gap-4 items-center px-4 md:max-xl:px-[60px]">
+      <div className="mx-auto flex flex-col gap-4 items-center px-4 md:max-xl:px-[60px] py-8 md:py-16">
         <p className="text-[#108E66] text-[40px] font-semibold text-center">
           How it works ?
         </p>
         <div className="p-4 md:p-8 flex gap-8 w-full justify-center bg-[#FCFFFE] border rounded border-[#108E66]  max-w-screen-xl">
           <div className="hidden md:block md:w-[45%]">
-            <Image src={homeFrame} width={1032} height={400} alt="home frame" />
+            <Image
+              src={"/services/nikhil-51.svg"}
+              width={1032}
+              height={400}
+              alt="home frame"
+            />
           </div>
           <div className="flex flex-col justify-between w-full md:w-[55%]">
             <div className="flex flex-col gap-2">
@@ -304,66 +309,7 @@ export default function ServicesPage() {
         </div>
       </div>
 
-      {/* PROFESSIONAL SOLUTIONS CAROUSEL */}
-      <section className="mx-auto px-4 py-16 flex flex-col items-center">
-        <h2 className="text-[40px] font-semibold text-center text-[#272B2A] mb-2">
-          Our Solutions by Profession
-        </h2>
-        <p className="text-[#272B2A] text-xl font-normal text-center mb-2">
-          We specialize in providing customized financial solutions for a
-          diverse range of professionals.
-        </p>
-        <div className="relative overflow-hidden  max-w-screen-xl w-full">
-          <div className="flex space-x-4 animate-autoScroll w-max">
-            {professionalSolutions
-              .concat(professionalSolutions)
-              .map((profile, index) => (
-                <div
-                  key={index}
-                  className="flex-shrink-0 bg-[#FCFFFE] p-4 rounded-md shadow mx-2 w-64 border border-[#108E66]"
-                >
-                  <h3 className="text-xl font-semibold text-[#272B2A]">
-                    {profile.title}
-                  </h3>
-                  <p className="text-sm text-[#272B2A] font-medium mt-1">
-                    {profile.tagline}
-                  </p>
-                  <p className="text-[#272B2A] mt-2 break-words">
-                    {profile.description}
-                  </p>
-                </div>
-              ))}
-          </div>
-        </div>
-      </section>
-
-      <div className="flex flex-col items-center gap-8 px-[60px] py-8 bg-[#F0FAF7]">
-        <p className="text-[#108E66] text-[40px] font-bold text-center">
-          {carouselComponents[activeIndex].title}
-        </p>
-        <p className="text-[#108E66] text-center text-2xl font-medium  max-w-screen-xl">
-          {carouselComponents[activeIndex].description}
-        </p>
-        <Link
-          href={carouselComponents[activeIndex].btnUrl}
-          className="text-[#108E66] text-base font-semibold px-6 py-3 border border-[#108E66] rounded"
-        >
-          Learn More
-        </Link>
-        <div className="flex justify-center">
-          {carouselComponents.map((item, index) => (
-            <button
-              key={index}
-              className={`mx-2 h-[1rem] text-sm  rounded-lg w-8 ${
-                activeIndex === index ? "bg-[#108E66]" : "bg-[#108e668a] "
-              }`}
-              onClick={() => setActiveIndex(index)}
-            ></button>
-          ))}
-        </div>
-      </div>
-
-      <div className="mx-auto flex flex-col items-center">
+      <div className="mx-auto flex flex-col items-center bg-linearGradient5 py-8 md:py-16">
         <h2 className="text-[40px] font-semibold text-center text-[#272B2A] mb-2">
           Our Partners
         </h2>
@@ -403,7 +349,68 @@ export default function ServicesPage() {
         </div>
       </div>
 
-      <CarouselCards />
+      {/* PROFESSIONAL SOLUTIONS CAROUSEL */}
+      {/* <section className="mx-auto px-4 py-16 flex flex-col items-center">
+        <h2 className="text-[40px] font-semibold text-center text-[#272B2A] mb-2">
+          Our Solutions by Profession
+        </h2>
+        <p className="text-[#272B2A] text-xl font-normal text-center mb-2">
+          We specialize in providing customized financial solutions for a
+          diverse range of professionals.
+        </p>
+        <div className="relative overflow-hidden  max-w-screen-xl w-full">
+          <div className="flex space-x-4 animate-autoScroll w-max">
+            {professionalSolutions
+              .concat(professionalSolutions)
+              .map((profile, index) => (
+                <div
+                  key={index}
+                  className="flex-shrink-0 bg-[#FCFFFE] p-4 rounded-md shadow mx-2 w-64 border border-[#108E66]"
+                >
+                  <h3 className="text-xl font-semibold text-[#272B2A]">
+                    {profile.title}
+                  </h3>
+                  <p className="text-sm text-[#272B2A] font-medium mt-1">
+                    {profile.tagline}
+                  </p>
+                  <p className="text-[#272B2A] mt-2 break-words">
+                    {profile.description}
+                  </p>
+                </div>
+              ))}
+          </div>
+        </div>
+      </section> */}
+
+      <div className="flex flex-col items-center gap-8 px-[60px] py-8 bg-[#F0FAF7] md:py-16">
+        <p className="text-[#108E66] text-[40px] font-bold text-center">
+          {carouselComponents[activeIndex].title}
+        </p>
+        <p className="text-[#108E66] text-center text-2xl font-medium  max-w-screen-xl">
+          {carouselComponents[activeIndex].description}
+        </p>
+        <Link
+          href={carouselComponents[activeIndex].btnUrl}
+          className="text-[#108E66] text-base font-semibold px-6 py-3 border border-[#108E66] rounded"
+        >
+          Learn More
+        </Link>
+        <div className="flex justify-center">
+          {carouselComponents.map((item, index) => (
+            <button
+              key={index}
+              className={`mx-2 h-[1rem] text-sm  rounded-lg w-8 ${
+                activeIndex === index ? "bg-[#108E66]" : "bg-[#108e668a] "
+              }`}
+              onClick={() => setActiveIndex(index)}
+            ></button>
+          ))}
+        </div>
+      </div>
+
+      <div className="bg-linearGradient3">
+        <CarouselCards />
+      </div>
 
       <FAQAccordion faqs={faqs} />
     </div>

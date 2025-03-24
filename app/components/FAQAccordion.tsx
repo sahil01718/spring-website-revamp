@@ -20,7 +20,7 @@ export default function FAQAccordion({ faqs }: { faqs: { question: string; answe
 function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border border-[#108E66]  bg-[#F0FAF7] rounded-lg">
+    <div className="border border-[#108E66]  bg-[#FCFFFE] rounded-lg">
       <button
         onClick={() => setOpen(!open)}
         className="w-full text-left text-lg font-semibold text-[#108E66] focus:outline-none px-6 py-4 flex justify-between"
@@ -36,7 +36,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
         />
       </button>
       {open && (
-        <p className="border-t border-[#108E66] text-base text-[#108E66] transition-all duration-300 px-6 py-4">
+        <p className="border-t border-[#108E66] text-base font-medium text-[#272A2B] transition-all duration-300 px-6 py-4">
           {answer}
         </p>
       )}

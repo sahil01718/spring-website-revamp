@@ -21,7 +21,7 @@ const BlogPost = () => {
   return (
     <div className=" relative flex justify-center items-center p-4 md:p-[60px]">
       {isLoading && (
-        <div className="absolute flex left-1/2 top-10">
+        <div className="absolute flex left-1/2 top-[80px]">
           <PacmanLoader color="#108e66" size={50} />
         </div>
       )}
