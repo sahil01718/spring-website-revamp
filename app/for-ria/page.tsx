@@ -190,7 +190,7 @@ export default function ForRiaPage() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-screen-xl">
           <InfoCard
-            imageSrc="/for-ria/rafiki.svg"
+            imageSrc="/for-ria/rafiki3.svg"
             title="Fragmented, Inefficient Systems"
             description="Disconnected tools lead to wasted time and resources."
           />
