@@ -1,0 +1,207 @@
+import Image from "next/image";
+import Link from "next/link";
+
+export default function MeetTheTeam() {
+  return (
+    <div className="min-h-screen flex flex-col">
+      {/* Main content */}
+      <main className="container mx-auto px-4 py-8 flex-1">
+        {/* Page Title */}
+        <section className="mb-8 mt-16">
+          <div className="py-4 px-4 text-[#272B2A] text-4xl font-semibold text-center">
+            Meet The Team
+          </div>
+        </section>
+
+        {/* Co-founders */}
+        <section className="flex flex-col mb-8 px-8 items-center">
+          <h2 className="text-2xl text-center font-semibold mb-4">
+            Co-founders
+          </h2>
+          <div className="flex flex-col md:flex-row gap-4 md:gap-56 ">
+            <div className="flex flex-col gap-4 items-center">
+              <Image
+                src={"/meet-the-team/nikhil.svg"}
+                width={262}
+                height={262}
+                className="rounded-full"
+                alt="Nikhil"
+              />
+              <h3 className="text-xl text-center font-bold">
+                Nikhil Narkhedkar(CEO)
+              </h3>
+            </div>
+            <div className="flex flex-col gap-4 items-center">
+              <Image
+                src={"/meet-the-team/nikhil.svg"}
+                width={262}
+                height={262}
+                className="rounded-full"
+                alt="Omkar"
+              />
+              <h3 className="text-xl text-center font-bold">Omkar Jadhav</h3>
+            </div>
+          </div>
+        </section>
+
+        {/* Meet the Squad */}
+        <section className="py-4 px-4 justify-center mb-8">
+          <h2 className="text-2xl text-center font-semibold mb-4">
+            Meet the Squad
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="text-[#272B2A] flex flex-col items-center">
+              <Image
+                src={"/meet-the-team/nikhil.svg"}
+                width={122}
+                height={122}
+                className="rounded-full"
+                alt="Omkar"
+              />
+              <span className="text-lg font-semibold mt-2">Arnav Limaye</span>
+              <span className="text-base font-medium">Engineering</span>
+            </div>
+            <div className="text-[#272B2A] flex flex-col items-center">
+              <Image
+                src={"/meet-the-team/nikhil.svg"}
+                width={122}
+                height={122}
+                className="rounded-full"
+                alt="Omkar"
+              />
+              <span className="text-lg font-semibold mt-2">Arnav Limaye</span>
+              <span className="text-base font-medium">Engineering</span>
+            </div>
+            <div className="text-[#272B2A] flex flex-col items-center">
+              <Image
+                src={"/meet-the-team/nikhil.svg"}
+                width={122}
+                height={122}
+                className="rounded-full"
+                alt="Omkar"
+              />
+              <span className="text-lg font-semibold mt-2">Arnav Limaye</span>
+              <span className="text-base font-medium">Engineering</span>
+            </div>
+            <div className="text-[#272B2A] flex flex-col items-center">
+              <Image
+                src={"/meet-the-team/nikhil.svg"}
+                width={122}
+                height={122}
+                className="rounded-full"
+                alt="Omkar"
+              />
+              <span className="text-lg font-semibold mt-2">Arnav Limaye</span>
+              <span className="text-base font-medium">Engineering</span>
+            </div>
+            <div className="text-[#272B2A] flex flex-col items-center">
+              <Image
+                src={"/meet-the-team/nikhil.svg"}
+                width={122}
+                height={122}
+                className="rounded-full"
+                alt="Omkar"
+              />
+              <span className="text-lg font-semibold mt-2">Arnav Limaye</span>
+              <span className="text-base font-medium">Engineering</span>
+            </div>
+            <div className="text-[#272B2A] flex flex-col items-center">
+              <Image
+                src={"/meet-the-team/nikhil.svg"}
+                width={122}
+                height={122}
+                className="rounded-full"
+                alt="Omkar"
+              />
+              <span className="text-lg font-semibold mt-2">Arnav Limaye</span>
+              <span className="text-base font-medium">Engineering</span>
+            </div>
+            <div className="text-[#272B2A] flex flex-col items-center">
+              <Image
+                src={"/meet-the-team/nikhil.svg"}
+                width={122}
+                height={122}
+                className="rounded-full"
+                alt="Omkar"
+              />
+              <span className="text-lg font-semibold mt-2">Arnav Limaye</span>
+              <span className="text-base font-medium">Engineering</span>
+            </div>
+            <div className="text-[#272B2A] flex flex-col items-center">
+              <Image
+                src={"/meet-the-team/nikhil.svg"}
+                width={122}
+                height={122}
+                className="rounded-full"
+                alt="Omkar"
+              />
+              <span className="text-lg font-semibold mt-2">Arnav Limaye</span>
+              <span className="text-base font-medium">Engineering</span>
+            </div>
+            <div className="text-[#272B2A] flex flex-col items-center">
+              <Image
+                src={"/meet-the-team/nikhil.svg"}
+                width={122}
+                height={122}
+                className="rounded-full"
+                alt="Omkar"
+              />
+              <span className="text-lg font-semibold mt-2">Arnav Limaye</span>
+              <span className="text-base font-medium">Engineering</span>
+            </div>
+          </div>
+        </section>
+        <div className="flex flex-col items-center">
+          <span className="text-[#272B2A] text-xl font-bold text-center">
+            Recognised by
+          </span>
+          <div className="flex flex-col lg:flex-row gap-8 mt-4 items-center">
+            <Image
+              src={"/meet-the-team/infinity.svg"}
+              width={233}
+              height={63}
+              alt="infinity logo"
+            />
+            <Image
+              src={"/meet-the-team/appscale.svg"}
+              width={395}
+              height={85}
+              alt="appscale logo"
+            />
+            <Image
+              src={"/meet-the-team/gsf.svg"}
+              width={331}
+              height={70}
+              alt="appscale logo"
+            />
+          </div>
+          <div className="flex flex-col lg:flex-row gap-8 mt-8 items-center">
+            <Image
+              src={"/meet-the-team/startup.svg"}
+              width={244}
+              height={50}
+              alt="appscale logo"
+            />
+            <Image
+              src={"/meet-the-team/garge-marathi.svg"}
+              width={143}
+              height={88}
+              alt="appscale logo"
+            />
+          </div>
+        </div>
+      </main>
+      <div className="flex flex-col py-8 md:py-16 items-center justify-center bg-[#108E66] w-full mt-8 md:mt-16 px-4">
+        <Image
+          src={"/logo2.svg"}
+          width={300}
+          height={100}
+          alt="spring money logo"
+        ></Image>
+        <span className="text-[#FCFFFE] text-[28px] font-semibold mt-4 text-center">
+        One platform for your journey towards financial freedom.
+        </span>
+      </div>
+    </div>
+  );
+}

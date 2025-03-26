@@ -31,8 +31,7 @@ const faqs = [
       "Spring Money is specifically designed for accredited financial advisors who are looking to modernize their practices and enhance their client service offerings. We cater to advisors who want to leverage technology to gain a competitive edge in the rapidly evolving financial advisory landscape.",
   },
   {
-    question:
-      "What are the key benefits of using Spring Money?",
+    question: "What are the key benefits of using Spring Money?",
     answer:
       "Spring Money offers a comprehensive suite of benefits, including: Unified Platform: Manage client onboarding, transactions, and more, all in one place. Flexible & Scalable: Grow your business with a system that adapts to your needs. Enhanced Security: Robust encryption and automated compliance tracking. AI-Powered Insights: Make smarter decisions with data-driven intelligence. Improved Client Engagement: Tools to improve client communication, and overall client satisfaction.",
   },
@@ -156,9 +155,7 @@ export default function ForRiaPage() {
   return (
     <div style={{ backgroundColor: "#fcfffe", color: "#272B2A" }}>
       {/* Hero Section */}
-      <section
-        className="text-center bg-[#EBECFA] py-16 md:py-20 px-4 md:px-16"
-      >
+      <section className="text-center bg-[#EBECFA] py-16 md:py-20 px-4 md:px-16">
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-[#525ECC]">
           The Digital Office for Financial Advisors
         </h1>
@@ -179,14 +176,13 @@ export default function ForRiaPage() {
       </section>
 
       {/* Challenges Section */}
-      <section
-        className="mx-auto py-16 md:py-20  flex flex-col items-center bg-gradient-to-b from-[#EBECFA] to-[#FCFFFE] px-4 md:px-16"
-      >
+      <section className="mx-auto py-16 md:py-20  flex flex-col items-center bg-gradient-to-b from-[#EBECFA] to-[#FCFFFE] px-4 md:px-16">
         <p className="text-4xl md:text-4xl font-bold mb-2 text-[#272B2A] text-center">
           Pressing Challenges for Advisors
         </p>
         <h2 className="text-xl font-normal text-center mb-8">
-          We understand the hurdles you face in today&apos;s financial landscape.
+          We understand the hurdles you face in today&apos;s financial
+          landscape.
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-screen-xl">
           <InfoCard
@@ -213,59 +209,71 @@ export default function ForRiaPage() {
       </section>
 
       <section className="mx-auto py-16 md:py-20 flex flex-col items-center bg-[#FCFFFE] w-full px-4 md:px-16">
-  <h1 className="text-4xl md:text-4xl font-bold mb-8 text-[#525ECC] text-center">
-    A Complete Ecosystem for Advisors
-  </h1>
-  <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 max-w-screen-xl">
-    <div className="flex flex-col gap-6 "> {/* Added wrapper div with gap */}
-      <FinancialAdvisorInfo
-        heading="TRANSFORMATION"
-        subHeading1="Data Processing Excellence"
-        subHeading2="Continuous Improvement"
-        subHeading3="Value Generation"
-      />
-    </div>
-    <div className="flex flex-col gap-6"> {/* Added wrapper div with gap */}
-      <FinancialAdvisorInfo gap-8 mb-8 max-w-screen-xl
-        heading="INTELLIGENCE"
-        subHeading1="Smart Analytics"
-        subHeading2="Predictive Insights"
-        subHeading3="Research-Driven Decisions"
-      />
-    </div>
-    <div className="flex flex-col gap-6"> {/* Added wrapper div with gap */}
-      <FinancialAdvisorInfo gap-8 mb-8 max-w-screen-xl
-        heading="INTEGRATION"
-        subHeading1="Seamless Connectivity"
-        subHeading2="Unified Platform"
-        subHeading3="Harmonized Operations"
-      />
-    </div>
-    <div className="flex flex-col gap-6 "> {/* Added wrapper div with gap */}
-      <FinancialAdvisorInfo 
-        heading="TRUST"
-        subHeading1="Security"
-        subHeading2="Compliance"
-        subHeading3="Reliability"
-      />
-    </div>
-  </div>
-  <div className="flex justify-center">
-    <Link
-      href="https://wa.me/+918668484607"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="items-center text-[#525ECC] border border-[#525ECC] bg-[#FCFFFE] px-8 py-3 rounded-md font-semibold hover:bg-[#525ECC] hover:text-[#FCFFFE] transition"
-    >
-      Get in touch to learn more
-    </Link>
-  </div>
-</section>
+        <h1 className="text-4xl md:text-4xl font-bold mb-8 text-[#525ECC] text-center">
+          A Complete Ecosystem for Advisors
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 max-w-screen-xl">
+          <div className="flex flex-col gap-6 ">
+            {" "}
+            {/* Added wrapper div with gap */}
+            <FinancialAdvisorInfo
+              heading="TRANSFORMATION"
+              subHeading1="Data Processing Excellence"
+              subHeading2="Continuous Improvement"
+              subHeading3="Value Generation"
+            />
+          </div>
+          <div className="flex flex-col gap-6">
+            {" "}
+            {/* Added wrapper div with gap */}
+            <FinancialAdvisorInfo
+              gap-8
+              mb-8
+              max-w-screen-xl
+              heading="INTELLIGENCE"
+              subHeading1="Smart Analytics"
+              subHeading2="Predictive Insights"
+              subHeading3="Research-Driven Decisions"
+            />
+          </div>
+          <div className="flex flex-col gap-6">
+            {" "}
+            {/* Added wrapper div with gap */}
+            <FinancialAdvisorInfo
+              gap-8
+              mb-8
+              max-w-screen-xl
+              heading="INTEGRATION"
+              subHeading1="Seamless Connectivity"
+              subHeading2="Unified Platform"
+              subHeading3="Harmonized Operations"
+            />
+          </div>
+          <div className="flex flex-col gap-6 ">
+            {" "}
+            {/* Added wrapper div with gap */}
+            <FinancialAdvisorInfo
+              heading="TRUST"
+              subHeading1="Security"
+              subHeading2="Compliance"
+              subHeading3="Reliability"
+            />
+          </div>
+        </div>
+        <div className="flex justify-center">
+          <Link
+            href="https://wa.me/+918668484607"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="items-center text-[#525ECC] border border-[#525ECC] bg-[#FCFFFE] px-8 py-3 rounded-md font-semibold hover:bg-[#525ECC] hover:text-[#FCFFFE] transition"
+          >
+            Get in touch to learn more
+          </Link>
+        </div>
+      </section>
 
       {/* Solution Section */}
-      <section
-        className="mx-auto py-16 md:py-20  flex flex-col items-center w-full bg-gradient-to-b from-[#FCFFFE] to-[#EBECFA] px-4 md:px-16"
-      >
+      <section className="mx-auto py-16 md:py-20  flex flex-col items-center w-full bg-gradient-to-b from-[#FCFFFE] to-[#EBECFA] px-4 md:px-16">
         <p className="text-4xl md:text-4xl font-bold mb-2 text-[#272B2A] text-center">
           The Spring Money Advantage
         </p>
@@ -296,9 +304,7 @@ export default function ForRiaPage() {
         </div>
       </section>
 
-      <section
-        className="mx-auto py-16 md:py-20 gap-8 md:gap-8 flex flex-col items-center w-full bg-[#EBECFA] px-4 md:px-16"
-      >
+      <section className="mx-auto py-16 md:py-20 gap-8 md:gap-8 flex flex-col items-center w-full bg-[#EBECFA] px-4 md:px-16">
         <h1 className="text-4xl md:text-4xl font-bold mb-2 text-[#272B2A] text-center">
           Empowering Your Practice with Powerful Tools
         </h1>
