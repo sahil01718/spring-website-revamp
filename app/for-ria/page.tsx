@@ -44,7 +44,7 @@ const faqs = [
   {
     question: "What kind of support does Spring Money offer?",
     answer:
-      "We are committed to providing exceptional support to our advisors. Our support includes: Onboarding Assistance: Get up and running quickly with personalized onboarding and training. Technical Support: Access our dedicated support team for prompt assistance with any technical issues. Ongoing Training: Stay up-to-date with the latest features and best practices through regular training sessions and resources.",
+      "We are committed to providing exceptional support to our advisors at every step. Our onboarding assistance ensures a smooth start with personalized guidance and hands-on training. If you encounter any technical issues, our dedicated support team is always available to provide prompt assistance. To help you stay ahead, we also offer ongoing training, keeping you updated on the latest features and best practices. No matter what you need, we’re here to support you every step of the way.",
   },
   {
     question: "What are the pricing options for Spring Money?",
@@ -182,7 +182,7 @@ export default function ForRiaPage() {
       <section
         className="mx-auto py-16 md:py-20  flex flex-col items-center bg-gradient-to-b from-[#EBECFA] to-[#FCFFFE] px-4 md:px-16"
       >
-        <p className="text-4xl md:text-5xl font-bold mb-2 text-[#272B2A] text-center">
+        <p className="text-4xl md:text-4xl font-bold mb-2 text-[#272B2A] text-center">
           Pressing Challenges for Advisors
         </p>
         <h2 className="text-xl font-normal text-center mb-8">
@@ -213,7 +213,7 @@ export default function ForRiaPage() {
       </section>
 
       <section className="mx-auto py-16 md:py-20 flex flex-col items-center bg-[#FCFFFE] w-full px-4 md:px-16">
-  <h1 className="text-4xl md:text-5xl font-bold mb-8 text-[#525ECC] text-center">
+  <h1 className="text-4xl md:text-4xl font-bold mb-8 text-[#525ECC] text-center">
     A Complete Ecosystem for Advisors
   </h1>
   <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 max-w-screen-xl">
@@ -255,7 +255,7 @@ export default function ForRiaPage() {
       href="https://wa.me/+918668484607"
       target="_blank"
       rel="noopener noreferrer"
-      className="items-center text-[#525ECC] border border-[#525ECC] bg-[#FCFFFE] px-8 py-3 rounded-md font-semibold hover:bg-[#525ECC] transition"
+      className="items-center text-[#525ECC] border border-[#525ECC] bg-[#FCFFFE] px-8 py-3 rounded-md font-semibold hover:bg-[#525ECC] hover:text-[#FCFFFE] transition"
     >
       Get in touch to learn more
     </Link>
@@ -266,7 +266,7 @@ export default function ForRiaPage() {
       <section
         className="mx-auto py-16 md:py-20  flex flex-col items-center w-full bg-gradient-to-b from-[#FCFFFE] to-[#EBECFA] px-4 md:px-16"
       >
-        <p className="text-4xl md:text-5xl font-bold mb-2 text-[#272B2A] text-center">
+        <p className="text-4xl md:text-4xl font-bold mb-2 text-[#272B2A] text-center">
           The Spring Money Advantage
         </p>
         <h2 className="text-xl font-normal text-center mb-8">
@@ -276,7 +276,7 @@ export default function ForRiaPage() {
           <InfoCardSolution
             imageSrc="/for-ria/rafiki1.svg"
             title="End-to-End Coverage"
-            description="Manage everything from onboarding to transactions in one place."
+            description="A Comprehensive Operating System for Financial Planning & Advisory Services"
           />
           <InfoCardSolution
             imageSrc="/for-ria/amico.svg"
@@ -299,7 +299,7 @@ export default function ForRiaPage() {
       <section
         className="mx-auto py-16 md:py-20 gap-8 md:gap-8 flex flex-col items-center w-full bg-[#EBECFA] px-4 md:px-16"
       >
-        <h1 className="text-4xl md:text-5xl font-bold mb-2 text-[#272B2A] text-center">
+        <h1 className="text-4xl md:text-4xl font-bold mb-2 text-[#272B2A] text-center">
           Empowering Your Practice with Powerful Tools
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-screen-xl">

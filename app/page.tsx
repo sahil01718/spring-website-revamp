@@ -196,7 +196,7 @@ export default function HomePage() {
         <div className="mx-auto flex flex-col lg:flex-row items-center lg:justify-between">
           <div className="lg:w-[70%] text-center lg:text-left space-y-4 px-16 py-16 lg:py-0">
             <h1 className="text-4xl lg:text-5xl font-bold leading-tight">
-              Smart, Simple, and Transparent Financial Planning
+            Smart, Comprehensive and Unbiased Financial Planning
             </h1>
             <p className="text-lg md:text-xl">
             Experience digital-first, personalised and goal-based financial planning for every stage of your life
@@ -265,7 +265,7 @@ export default function HomePage() {
       <CarouselCards />
 
       {/* TOOLS SECTION (Carousel with Auto-Scrolling) */}
-      <section className="mx-auto py-20  text-center bg-[#fcfffe] text-[#272B2A] max-w-screen-xl p">
+      <section className="mx-auto py-20 text-center bg-[#fcfffe] text-[#272B2A] max-w-screen-xl p">
         <div className="max-w-3xl mx-auto mb-12">
           <h1 className="text-[40px] font-semibold mb-4 text-[#108E66]">
             Smart Financial Tools
@@ -303,6 +303,13 @@ export default function HomePage() {
               </Link>
             </div>
           ))}
+          <div className="flex justify-center"></div>
+          <Link
+              href="/tools"
+              className="inline-block bg-[#fcfffe] text-[#108e66] px-8 py-3 rounded-md font-medium border border-[#108e66] hover:bg-[#108e66] hover:text-[#fcfffe] transition-colors"
+            >
+              View all tools
+            </Link>
         </div>
       </section>
 
@@ -316,7 +323,7 @@ export default function HomePage() {
           Democratizing Expert Financial Advice: Comprehensive, Transparent, Effective.
           </p>
           <Link
-            href="/services"
+            href="/meettheteam"
             className="inline-block bg-[#108e66] text-[#fcfffe] px-8 py-3 rounded-md font-medium hover:bg-[#272B2A] transition-colors"
           >
             Meet the team

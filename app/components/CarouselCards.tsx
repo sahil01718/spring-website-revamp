@@ -85,7 +85,7 @@ export default function CarouselCards() {
           {duplicatedItems.map((item, index) => (
             <motion.div 
               key={index} 
-              className="p-4 md:p-8 flex flex-col w-[450px] gap-6 justify-center bg-[#FCFFFE] border border-[#108E66] rounded-lg"
+              className="md:p-8 flex flex-col w-[450px] gap-4 justify-center bg-[#FCFFFE] border border-[#108E66] rounded-lg"
             >
               <div className="block">
                 <Image
@@ -97,10 +97,10 @@ export default function CarouselCards() {
               </div>
               <div className="flex flex-col justify-between">
                 <div className="flex flex-col gap-2">
-                  <p className="text-[#272B2A] text-[32px] font-bold">
+                  <p className="text-[#272B2A] text-2xl font-bold">
                     {item.title}
                   </p>
-                  <p className="text-[#272b2abf] text-2xl font-normal">
+                  <p className="text-[#272b2abf] text-1.5xl font-normal">
                     {item.description}
                   </p>
                 </div>
@@ -110,7 +110,7 @@ export default function CarouselCards() {
                   rel="noopener noreferrer"
                   className="w-full text-center px-6 py-3 border border-[#108E66] mt-6 rounded"
                 >
-                  <span className="text-[#108E66] text-base font-semibold ">
+                  <span className="text-[#108E66] text-base font-semibold">
                     {item.button}
                   </span>
                 </Link>
