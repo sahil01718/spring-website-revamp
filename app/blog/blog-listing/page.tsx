@@ -5,7 +5,7 @@ import Blog from "../../components/Blog";
 import Image from "next/image";
 import sideArrow from "../../../public/Arrow 1.svg";
 import { motion } from "framer-motion";
-import { PacmanLoader } from "react-spinners";
+import { ClipLoader } from "react-spinners";
 
 interface Post {
   id: string;
@@ -263,7 +263,7 @@ const BlogListingPage = () => {
         )}
       {!slicedData && (
         <div className="flex w-full justify-center min-h-screen">
-          <PacmanLoader color="#108e66" />
+          <ClipLoader color="#108e66" />
         </div>
       )}
       <div className="flex flex-col py-8 md:py-16 items-center justify-center bg-[#108E66] w-full mt-8 md:mt-16 px-4">

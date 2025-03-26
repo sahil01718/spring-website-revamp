@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { PacmanLoader } from "react-spinners";
+import { ClipLoader } from "react-spinners";
 
 interface PageProps {
   params: { slug: string };
@@ -22,7 +22,7 @@ const BlogPost = () => {
     <div className=" relative flex justify-center items-center p-4 md:p-[60px]">
       {isLoading && (
         <div className="absolute flex left-1/2 top-[80px]">
-          <PacmanLoader color="#108e66" size={50} />
+          <ClipLoader color="#108e66" size={50} />
         </div>
       )}
       <div className="h-[2000px]  w-full  rounded border border-solid border-gray-300  shadow-sm  max-w-screen-xl">
