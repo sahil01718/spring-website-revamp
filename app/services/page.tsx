@@ -13,15 +13,13 @@ const financialServices = [
   {
     id: 1,
     title: "Build Wealth & Secure Your Future",
-    description:
-      "Personalized strategies for growth and retirement.",
+    description: "Personalized strategies for growth and retirement.",
     image: "/services/pana.svg",
   },
   {
     id: 2,
     title: "Maximize Returns, Minimize Taxes",
-    description:
-      "Expert investment strategies across diverse assets.",
+    description: "Expert investment strategies across diverse assets.",
     image: "/services/bro.svg",
   },
   {
@@ -34,8 +32,7 @@ const financialServices = [
   {
     id: 4,
     title: "Secure Your Legacy",
-    description:
-      "Plan your estate and ensure a smooth wealth transfer.",
+    description: "Plan your estate and ensure a smooth wealth transfer.",
     image: "/services/legacy.svg",
   },
 ];
@@ -144,7 +141,7 @@ const carouselComponents = [
   },
   {
     title: "Introducing NRICH",
-    description: 
+    description:
       "NRI Financial Solutions Seamlessly manage your finances across borders with expert guidance and specialized tools.",
     btnUrl: "https://www.spring.money/programs/nrich",
   },
@@ -187,8 +184,7 @@ const faqs = [
       "Our network consists exclusively of SEBI-registered investment advisors. This ensures that you receive expert financial guidance from professionals who are regulated and held to the highest ethical and professional standards.",
   },
   {
-    question:
-      "How does Spring Money connect me with an advisor?",
+    question: "How does Spring Money connect me with an advisor?",
     answer:
       "To begin, simply reach out to us via WhatsApp. We'll initiate a conversation to understand your specific financial goals, current situation, and preferences. Based on this, we'll match you with a suitable advisor from our network. This personalized approach ensures you find an advisor whose expertise aligns with your needs.",
   },
@@ -232,7 +228,8 @@ export default function ServicesPage() {
           Personalized Financial Planning, Simplified
         </h1>
         <p className="text-lg md:text-xl text-[#FCFFFE] max-w-3xl mx-auto">
-        Find Your Ideal Financial Advisor and Start Building Your Future Today.
+          Find Your Ideal Financial Advisor and Start Building Your Future
+          Today.
         </p>
         <Link
           href="https://wa.me/+918668484607"
@@ -247,7 +244,7 @@ export default function ServicesPage() {
       {/* CORE FINANCIAL SERVICES SECTION */}
       <section className="mx-auto py-16 flex flex-col items-center w-full">
         <h2 className="text-[40px] font-semibold text-center text-[#272B2A] mb-2">
-        Our Expertise, Your Financial Success
+          Our Expertise, Your Financial Success
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-4 md:max-xl:px-[60px] max-w-screen-xl">
           {financialServices.map((service) => (
@@ -277,8 +274,8 @@ export default function ServicesPage() {
         <p className="text-[#108E66] text-[40px] font-semibold text-center">
           How it works ?
         </p>
-        <div className="p-4 md:p-8 flex gap-8 w-full justify-center bg-[#FCFFFE] border rounded border-[#108E66]  max-w-screen-xl">
-          <div className="hidden md:block md:w-[45%]">
+        <div className="p-4 md:p-8 flex flex-col md:flex-row gap-8 w-full justify-center bg-[#FCFFFE] border rounded border-[#108E66]  max-w-screen-xl">
+          <div className="block md:w-[45%]">
             <Image
               src={"/services/nikhil-51.svg"}
               width={1032}
@@ -289,17 +286,25 @@ export default function ServicesPage() {
           <div className="flex flex-col justify-between w-full md:w-[55%]">
             <div className="flex flex-col gap-2">
               <p className="text-[#272B2A] text-[32px] font-bold">
-              Financial Planning, Simplified: A Step-by-Step Guide
+                Financial Planning, Simplified: A Step-by-Step Guide
               </p>
               <p className="text-[#272b2abf] text-2xl font-normal">
-              Learn how Spring Money simplifies financial planning. This video guides you through the process, from goal setting to expert advisor support. Gain clarity and achieve your financial aspirations.
+                Learn how Spring Money simplifies financial planning. This video
+                guides you through the process, from goal setting to expert
+                advisor support. Gain clarity and achieve your financial
+                aspirations.
               </p>
             </div>
-            <div className="w-fit px-6 py-3 border border-[#108E66] rounded">
+            <Link
+              href={"https://youtu.be/0LTAmuIidsI?si=8TZEOLyMHBGHXveP"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-fit px-6 py-3 border border-[#108E66] rounded"
+            >
               <span className="text-[#108E66] text-base font-semibold ">
                 Start Your Journey Now !
               </span>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

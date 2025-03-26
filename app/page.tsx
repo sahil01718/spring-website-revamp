@@ -26,26 +26,7 @@ interface WhoWeServeCardsProps {
    Tools (Calculators) Data for Home Page
    (Three new placeholder tools are added on top)
 --------------------------------- */
-const additionalCalculators = [
-  {
-    id: 16,
-    title: "Placeholder Tool 1",
-    description: "This is a placeholder tool for future features.",
-    slug: "placeholder-tool-1",
-  },
-  {
-    id: 17,
-    title: "Placeholder Tool 2",
-    description: "This is a placeholder tool for future features.",
-    slug: "placeholder-tool-2",
-  },
-  {
-    id: 18,
-    title: "Placeholder Tool 3",
-    description: "This is a placeholder tool for future features.",
-    slug: "placeholder-tool-3",
-  },
-];
+
 const baseCalculators = [
   {
     id: 1,
@@ -88,68 +69,68 @@ const baseCalculators = [
     description: "Plan your retirement corpus using FD-based projections.",
     slug: "fdRetirementCalculator",
   },
-  {
-    id: 7,
-    title: "FIRE Calculator",
-    description:
-      "Evaluate if 25x your annual expenses is enough for early retirement.",
-    slug: "fireCalculator",
-  },
-  {
-    id: 8,
-    title: "When Will I Make My First Crore?",
-    description:
-      "Find out how long it takes to accumulate ₹1 crore based on your investments.",
-    slug: "firstCrore",
-  },
-  {
-    id: 9,
-    title: "Fuel vs. Electric Vehicle Calculator",
-    description:
-      "Compare long-term costs of fuel-based versus electric vehicles.",
-    slug: "fuelVsEv",
-  },
-  {
-    id: 10,
-    title: "Hourly Wage Calculator",
-    description: "Convert your annual or monthly salary into an hourly wage.",
-    slug: "hourlyWage",
-  },
-  {
-    id: 11,
-    title: "MBA ROI Calculator",
-    description:
-      "Assess lost earnings during an MBA versus potential salary growth post-MBA.",
-    slug: "mbaRoi",
-  },
-  {
-    id: 12,
-    title: "Mutual Fund vs. NPS Tier I Calculator",
-    description:
-      "Compare market-driven Mutual Funds with government-backed NPS Tier I investments.",
-    slug: "npsVsMf",
-  },
-  {
-    id: 13,
-    title: "CTC vs. In-Hand Salary Calculator",
-    description:
-      "Break down your Cost-to-Company into net monthly take-home pay.",
-    slug: "salaryCalculator",
-  },
-  {
-    id: 14,
-    title: "SIP Calculator",
-    description:
-      "Explore potential returns of Systematic Investment Plans over time.",
-    slug: "sipCalculator",
-  },
-  {
-    id: 15,
-    title: "Sukanya Samriddhi Yojana Calculator",
-    description:
-      "Compute maturity amounts and benefits of the SSY savings scheme.",
-    slug: "sukanyaSamruddhi",
-  },
+  // {
+  //   id: 7,
+  //   title: "FIRE Calculator",
+  //   description:
+  //     "Evaluate if 25x your annual expenses is enough for early retirement.",
+  //   slug: "fireCalculator",
+  // },
+  // {
+  //   id: 8,
+  //   title: "When Will I Make My First Crore?",
+  //   description:
+  //     "Find out how long it takes to accumulate ₹1 crore based on your investments.",
+  //   slug: "firstCrore",
+  // },
+  // {
+  //   id: 9,
+  //   title: "Fuel vs. Electric Vehicle Calculator",
+  //   description:
+  //     "Compare long-term costs of fuel-based versus electric vehicles.",
+  //   slug: "fuelVsEv",
+  // },
+  // {
+  //   id: 10,
+  //   title: "Hourly Wage Calculator",
+  //   description: "Convert your annual or monthly salary into an hourly wage.",
+  //   slug: "hourlyWage",
+  // },
+  // {
+  //   id: 11,
+  //   title: "MBA ROI Calculator",
+  //   description:
+  //     "Assess lost earnings during an MBA versus potential salary growth post-MBA.",
+  //   slug: "mbaRoi",
+  // },
+  // {
+  //   id: 12,
+  //   title: "Mutual Fund vs. NPS Tier I Calculator",
+  //   description:
+  //     "Compare market-driven Mutual Funds with government-backed NPS Tier I investments.",
+  //   slug: "npsVsMf",
+  // },
+  // {
+  //   id: 13,
+  //   title: "CTC vs. In-Hand Salary Calculator",
+  //   description:
+  //     "Break down your Cost-to-Company into net monthly take-home pay.",
+  //   slug: "salaryCalculator",
+  // },
+  // {
+  //   id: 14,
+  //   title: "SIP Calculator",
+  //   description:
+  //     "Explore potential returns of Systematic Investment Plans over time.",
+  //   slug: "sipCalculator",
+  // },
+  // {
+  //   id: 15,
+  //   title: "Sukanya Samriddhi Yojana Calculator",
+  //   description:
+  //     "Compute maturity amounts and benefits of the SSY savings scheme.",
+  //   slug: "sukanyaSamruddhi",
+  // },
 ];
 const calculators = [...baseCalculators];
 
@@ -211,11 +192,11 @@ export default function HomePage() {
   return (
     <div className="font-sans space-y-16">
       {/* HERO SECTION (Solid Background, No Gradient) */}
-      <section className="bg-[#108e66] text-white md:pb-0">
-        <div className="mx-auto flex flex-col md:flex-row items-center md:justify-between">
-          <div className="md:w-[70%] text-center md:text-left space-y-4 px-16 py-16 md:py-0">
-            <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-            Smart, Comprehensive and Unbiased Financial Planning
+      <section className="bg-[#108e66] text-white lg:pb-0">
+        <div className="mx-auto flex flex-col lg:flex-row items-center lg:justify-between">
+          <div className="lg:w-[70%] text-center lg:text-left space-y-4 px-16 py-16 lg:py-0">
+            <h1 className="text-4xl lg:text-5xl font-bold leading-tight">
+              Smart, Simple, and Transparent Financial Planning
             </h1>
             <p className="text-lg md:text-xl">
             Experience digital-first, personalised and goal-based financial planning for every stage of your life
@@ -231,9 +212,9 @@ export default function HomePage() {
           <Image
             src="/dashboard.svg"
             alt="Fintech Hero Illustration"
-            className="hidden md:flex md:w-full"
-            width={400}
-            height={200}
+            className="hidden lg:block w-auto max-w-full"
+            width={100}
+            height={100}
             priority={true}
           />
         </div>
@@ -293,12 +274,12 @@ export default function HomePage() {
           Empower Your Financial Decisions with comprehensive Calculators.
           </p>
         </div>
-        <Carousel>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 px-4">
           {calculators.map((calc) => (
-            <motion.div
+            <div
               key={calc.id}
-              whileHover={{ scale: 1.05 }}
-              className="flex-shrink-0 bg-[#F0FAF7] border border-[#108e6633] p-4 rounded-2xl shadow-md w-96 items-start hover:shadow-xl transition-shadow flex flex-col"
+              // whileHover={{ scale: 1.05 }}
+              className="flex-shrink-0 bg-[#F0FAF7] border border-[#108e6633] p-4 rounded-2xl shadow-md  items-start hover:shadow-xl transition-shadow flex flex-col"
             >
               <h2 className="text-xl text-[#272B2A] font-medium mb-2">
                 {calc.title}
@@ -320,9 +301,9 @@ export default function HomePage() {
                   alt="right arrow"
                 />
               </Link>
-            </motion.div>
+            </div>
           ))}
-        </Carousel>
+        </div>
       </section>
 
       {/* MISSION & VISION SECTION */}

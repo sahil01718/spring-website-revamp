@@ -47,80 +47,80 @@ const faqs = [
   },
 ];
 
-const investmentSolutions: Service= [
-  {
-    id: 1,
-    title: "Stocks",
-    description:
-      "Seamless integration for efficient stock investments with minimal hassle.",
-  },
-  {
-    id: 2,
-    title: "Mutual Funds",
-    description:
-      "Robust tools to manage mutual fund investments with real-time updates and precision.",
-  },
-  {
-    id: 3,
-    title: "Multi AA",
-    description:
-      "Advanced analytics for comprehensive account aggregation and informed decision-making.",
-  },
-  {
-    id: 4,
-    title: "Mutual Funds Trading",
-    description:
-      "Efficient processing and trading tools designed specifically for NSE mutual fund operations.",
-  },
-];
+// const investmentSolutions: Service= [
+//   {
+//     id: 1,
+//     title: "Stocks",
+//     description:
+//       "Seamless integration for efficient stock investments with minimal hassle.",
+//   },
+//   {
+//     id: 2,
+//     title: "Mutual Funds",
+//     description:
+//       "Robust tools to manage mutual fund investments with real-time updates and precision.",
+//   },
+//   {
+//     id: 3,
+//     title: "Multi AA",
+//     description:
+//       "Advanced analytics for comprehensive account aggregation and informed decision-making.",
+//   },
+//   {
+//     id: 4,
+//     title: "Mutual Funds Trading",
+//     description:
+//       "Efficient processing and trading tools designed specifically for NSE mutual fund operations.",
+//   },
+// ];
 
-const complianceSolutions: Service= [
-  {
-    id: 5,
-    title: "KYC Process",
-    description:
-      "Streamlined KYC processes that expedite onboarding and ensure full regulatory compliance.",
-  },
-  {
-    id: 6,
-    title: "KYC Verification",
-    description:
-      "Secure and compliant digital KYC verification tailored for asset management.",
-  },
-  {
-    id: 7,
-    title: "Aadhar & PAN eKYC",
-    description:
-      "Fast and reliable digital KYC services that simplify customer verification.",
-  },
-  {
-    id: 8,
-    title: "Signzy Solutions",
-    description:
-      "Cutting-edge digital verification tools to modernize your compliance procedures.",
-  },
-];
+// const complianceSolutions: Service= [
+//   {
+//     id: 5,
+//     title: "KYC Process",
+//     description:
+//       "Streamlined KYC processes that expedite onboarding and ensure full regulatory compliance.",
+//   },
+//   {
+//     id: 6,
+//     title: "KYC Verification",
+//     description:
+//       "Secure and compliant digital KYC verification tailored for asset management.",
+//   },
+//   {
+//     id: 7,
+//     title: "Aadhar & PAN eKYC",
+//     description:
+//       "Fast and reliable digital KYC services that simplify customer verification.",
+//   },
+//   {
+//     id: 8,
+//     title: "Signzy Solutions",
+//     description:
+//       "Cutting-edge digital verification tools to modernize your compliance procedures.",
+//   },
+// ];
 
-const digitalServices: Service= [
-  {
-    id: 9,
-    title: "CAMS || CAS",
-    description:
-      "Real-time insights on portfolio holdings to ensure accurate and timely reporting.",
-  },
-  {
-    id: 10,
-    title: "Digital Agreements",
-    description:
-      "Secure electronic agreements and documentation for streamlined legal processes.",
-  },
-  {
-    id: 11,
-    title: "Credit Report Soft Pull",
-    description:
-      "Comprehensive, non-intrusive credit reporting services to gauge client creditworthiness.",
-  },
-];
+// const digitalServices: Service= [
+//   {
+//     id: 9,
+//     title: "CAMS || CAS",
+//     description:
+//       "Real-time insights on portfolio holdings to ensure accurate and timely reporting.",
+//   },
+//   {
+//     id: 10,
+//     title: "Digital Agreements",
+//     description:
+//       "Secure electronic agreements and documentation for streamlined legal processes.",
+//   },
+//   {
+//     id: 11,
+//     title: "Credit Report Soft Pull",
+//     description:
+//       "Comprehensive, non-intrusive credit reporting services to gauge client creditworthiness.",
+//   },
+// ];
 
 const ServiceCard: React.FC<Service> = ({ title, description }) => {
   return (
@@ -287,7 +287,7 @@ export default function ForAmcPage() {
         {" "}
         {/* Gradient Background */}
         <h1 className="text-4xl md:text-5xl font-bold mb-1 text-[#108E66] px-4 md:max-xl:px-[60px] w-full max-w-screen-xl text-center">
-          Let's build the tomorrow together
+          Let&apos;s build the tomorrow together
         </h1>
         {/* <p className="text-lg md:text-xl  mx-auto text-[#108E66] px-4 md:max-xl:px-[60px] w-full max-w-screen-xl text-center">
           Schedule a free demo to learn how the Spring Money platform can
