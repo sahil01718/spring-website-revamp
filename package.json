@@ -10,12 +10,15 @@
     "build:css": "tailwindcss build -o ./app/output.css"
   },
   "dependencies": {
+    "@mui/icons-material": "^6.4.8",
+    "@mui/material": "^6.4.8",
     "framer-motion": "^12.4.7",
     "next": "15.1.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-spinners": "^0.15.0",
-    "recharts": "^2.15.1"
+    "recharts": "^2.15.1",
+    "to-words": "^4.4.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
