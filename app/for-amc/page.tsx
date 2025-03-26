@@ -175,19 +175,13 @@ export default function ForAmcPage() {
         <p className="text-[40px] font-semibold text-[#272B2A] mb-2 text-center">
           Key Features for Modern Investor Engagement
         </p>
-        {/* <p className="text-lg md:text-xl text-[#272B2A] text-center px-4 md:max-xl:px-[60px] w-full max-w-screen-xl">
-          Spring Money provides a single, unified platform to manage every
-          aspect of your financial advisory business. From client onboarding to
-          compliance tracking, task automation, and portfolio
-          analytics—streamline operations and deliver superior client outcomes.
-        </p> */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 px-4 md:max-xl:px-[60px] w-full max-w-screen-xl">
           <div className="flex flex-col gap-6">
             {" "}
             {/* Wrapper div with gap */}
             <EmpowerCards
               heading="Data enriched prospecting & engagement"
-              subHeading="Seamlessly integrate our platform with latest fintech applications and infrastructure."
+              subHeading="Leverage rich data insights to identify, engage, and convert high-potential prospects with precision and efficiency."
             />
           </div>
           <div className="flex flex-col gap-6">
@@ -195,15 +189,15 @@ export default function ForAmcPage() {
             {/* Wrapper div with gap */}
             <EmpowerCards
               heading="Stand out in the chaos"
-              subHeading="Gain valuable insights into investor behavior with advanced analytics."
+              subHeading="Use behavioral, transactional, and aspirational insights to craft personalized engagements that capture attention and drive action."
             />
           </div>
           <div className="flex flex-col gap-6">
             {" "}
             {/* Wrapper div with gap */}
             <EmpowerCards
-              heading="Bespoke on-premise fully secure & compliant"
-              subHeading="Offer a customized investor portal for secure access to information and services."
+              heading="Bespoke, on-premise, fully secure & compliant"
+              subHeading="A tailor-made, on-premise solution ensuring top-tier security, full compliance, and complete data control."
             />
           </div>
           <div className="flex flex-col gap-6">
@@ -219,7 +213,7 @@ export default function ForAmcPage() {
             {/* Wrapper div with gap */}
             <EmpowerCards
               heading="Integrated, Automated & AI-First"
-              subHeading="Streamline onboarding with digital workflows and automated data capture."
+              subHeading="Streamline onboarding with digital workflows, automated data capture, and driven by AI to optimize efficiency and enhance decision-making."
             />
           </div>
         </div>
@@ -232,9 +226,7 @@ export default function ForAmcPage() {
           Your Digital Partner for Hyper Growth
         </h1>
         <p className="text-lg md:text-xl text-[#272B2A] max-w-3xl mx-auto">
-          Spring Money provides a comprehensive Saas platform with digital tools
-          and API integrations to enhance investor engagement, streamline
-          operations, and drive growth.
+        Spring Money provides a comprehensive suite of digital assets  which can be integrated seamlessly with existing platforms at AMC to enhance investor engagement, streamline operations, and drive growth.
         </p>
       </section>
 
