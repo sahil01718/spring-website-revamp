@@ -23,117 +23,6 @@ interface WhoWeServeCardsProps {
 }
 
 /* ---------------------------------
-   Who We Serve Section Data
---------------------------------- */
-const professionalSolutions = [
-  {
-    id: 1,
-    title: "Young Professionals",
-    tagline: "Start Strong, Stay Ahead!",
-    description:
-      "Tailored strategies for early career growth and smart investments.",
-  },
-  {
-    id: 2,
-    title: "MBA Graduates",
-    tagline: "Smart Money Moves for Smart MBAs!",
-    description:
-      "Optimize high-income potential with strategic planning and tax-efficient investments.",
-  },
-  {
-    id: 3,
-    title: "IT Professionals",
-    tagline: "Maximize Earnings, Build Wealth Like a Pro!",
-    description:
-      "Diversified investment strategies and ESOP planning to secure financial independence.",
-  },
-  {
-    id: 4,
-    title: "Doctors & Medical Professionals",
-    tagline: "You Care for Patients, We Care for Your Wealth!",
-    description:
-      "Structured roadmaps for managing loans, optimizing taxes, and planning retirement.",
-  },
-  {
-    id: 5,
-    title: "Lawyers & Legal Professionals",
-    tagline: "Win in Court, Win with Your Money!",
-    description:
-      "Manage irregular income and tax liabilities with strategic investment plans.",
-  },
-  {
-    id: 6,
-    title: "Armed Forces & Government Officials",
-    tagline: "Secure Your Future While Serving the Nation!",
-    description:
-      "Pension maximization, tax-efficient investments, and real estate advisory.",
-  },
-  {
-    id: 7,
-    title: "Professional Athletes",
-    tagline: "Short Careers, Lifelong Wealth!",
-    description:
-      "Wealth preservation, passive income, and tax-efficient plans for long-term security.",
-  },
-  {
-    id: 8,
-    title: "Startup Founders & Entrepreneurs",
-    tagline: "Scale Your Startup, Scale Your Wealth!",
-    description:
-      "Structured wealth-building plans balancing reinvestment and long-term planning.",
-  },
-  {
-    id: 9,
-    title: "Engineers & Architects",
-    tagline: "Design the Future, Build Your Wealth!",
-    description:
-      "Optimizing tax strategies and planning for early retirement with tailored investments.",
-  },
-  {
-    id: 10,
-    title: "Teachers & Professors",
-    tagline: "Shape Minds, Secure Your Future!",
-    description:
-      "Smart savings, side-income strategies, and pension planning for educators.",
-  },
-  {
-    id: 11,
-    title: "Media & Creative Professionals",
-    tagline: "Transform Creativity into Wealth!",
-    description:
-      "Manage irregular income with smart tax planning and secure investment strategies.",
-  },
-  {
-    id: 12,
-    title: "Freelancers & Consultants",
-    tagline: "From Irregular Income to Consistent Wealth!",
-    description:
-      "Income stabilization and tax-efficient financial roadmaps for independent professionals.",
-  },
-  {
-    id: 13,
-    title: "Real Estate Agents & Investors",
-    tagline: "Build Properties, Build Your Empire!",
-    description:
-      "Optimize commissions and create diversified portfolios for sustained wealth.",
-  },
-  {
-    id: 14,
-    title: "Finance Experts",
-    tagline: "Optimize Your Finances!",
-    description:
-      "Customized strategies for financial professionals to manage and grow wealth.",
-  },
-  {
-    id: 15,
-    title: "Government Officials",
-    tagline: "Secure Your Future!",
-    description:
-      "Tailored plans focusing on pension maximization and secure investments.",
-  },
-];
-
-/* ---------------------------------
    Tools (Calculators) Data for Home Page
    (Three new placeholder tools are added on top)
 --------------------------------- */
@@ -309,11 +198,11 @@ const WhoWeServeCards: React.FC<WhoWeServeCardsProps> = ({
 }) => {
   return (
     <div className="flex flex-col gap-4 rounded-lg border border-[#108E66] bg-[#FCFFFE] p-6 items-center">
-      <Image src={img} width={441} height={400} alt="who we serve image" />
-      <span className="text-[#272B2A] text-[28px] font-semibold text-center">
+      <Image src={img} width={441} height={400} alt="who we serve image" className="mb-4 w-full h-auto object-contain"/>
+      <span className="text-[24px] md:text-[28px] font-semibold text-[#272a2b] mb-2">
         {heading}
       </span>
-      <span className="text-[#272B2A] text-2xl font-normal text-center">{subHeading}</span>
+      <span className="text-[18px] md:text-[20px] font-normal text-[#272a2b]">{subHeading}</span>
     </div>
   );
 };
@@ -326,11 +215,10 @@ export default function HomePage() {
         <div className="mx-auto flex flex-col md:flex-row items-center md:justify-between">
           <div className="md:w-[70%] text-center md:text-left space-y-4 px-16 py-16 md:py-0">
             <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-              Smart, Simple, and Transparent Financial Planning
+            Smart, Comprehensive and Unbiased Financial Planning
             </h1>
             <p className="text-lg md:text-xl">
-              Experience innovative, tailored, and comprehensive financial
-              planning for every stage of your life.
+            Experience digital-first, personalised and goal-based financial planning for every stage of your life
             </p>
             <Link
               href="/services"
@@ -354,12 +242,12 @@ export default function HomePage() {
       {/* WHO WE SERVE SECTION (Carousel with Auto-Scrolling) */}
       <section className="mx-auto  max-w-screen-xl">
         <h2 className="text-3xl font-bold text-center text-[#272B2A] mb-4">
-          Who We Serve
+        We Serve You and Your Aspirations
         </h2>
         <p className="text-center text-[#272B2A] mb-10 max-w-2xl mx-auto text-xl font-normal">
           Tailored Financial Strategies for Every Professional Journey.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-4 md:max-xl:px-[60px]  max-w-screen-xl">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 sm:px-6 md:px-16 max-w-screen-xl">
           <WhoWeServeCards
             img="/who-we-serve/it.svg"
             heading="IT Professionals"
@@ -402,7 +290,7 @@ export default function HomePage() {
             Smart Financial Tools
           </h1>
           <p className="text-xl mb-8 text-[#108E66] font-normal">
-          Empower Your Financial Decisions with Our Calculators.
+          Empower Your Financial Decisions with comprehensive Calculators.
           </p>
         </div>
         <Carousel>
@@ -444,7 +332,7 @@ export default function HomePage() {
             Our Mission & Vision
           </p>
           <p className="text-[#272B2A] text-xl font-normal">
-          Democratizing Expert Financial Advice: Simple, Transparent, Effective.
+          Democratizing Expert Financial Advice: Comprehensive, Transparent, Effective.
           </p>
           <Link
             href="/services"
