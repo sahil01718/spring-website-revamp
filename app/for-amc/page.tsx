@@ -22,13 +22,13 @@ const faqs = [
   {
     question: "Who is Spring Money designed for in the AMC space?",
     answer:
-      "Spring Money is designed for Asset Management Companies (AMCs) seeking to enhance investor engagement, streamline operations, and drive growth through digital innovation. Our platform provides the tools and integrations necessary to modernize your investor experience.",
+      "Spring Money is designed for Asset Management Companies (AMCs) seeking to enhance investor engagement, streamline operations, and drive growth through digital innovation, Our platform provides the tools and integrations necessary to modernize your investor experience.",
   },
   {
     question:
       "What are the key benefits of using Spring Money for AMCs?",
     answer:
-      "Our platform offers:Seamless API integrations with leading fintech applications. Data-driven insights into investor behaviour. Customizable branded client portals. Personalized wealth management tools.Streamlined client onboarding processes.",
+      "Our platform offers: Seamless API integrations with leading fintech applications, Data-driven insights into investor behaviour, Customizable branded client portals, Personalized wealth management tools, Streamlined client onboarding processes.",
   },
   {
     question: "How does Spring Money enhance investor engagement?",

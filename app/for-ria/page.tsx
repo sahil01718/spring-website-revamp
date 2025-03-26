@@ -34,12 +34,12 @@ const faqs = [
     question:
       "What are the key benefits of using Spring Money?",
     answer:
-      "Spring Money offers a comprehensive suite of benefits, including: Unified Platform: Manage client onboarding, transactions, and more, all in one place. Flexible & Scalable: Grow your business with a system that adapts to your needs. Enhanced Security: Robust encryption and automated compliance tracking. AI-Powered Insights: Make smarter decisions with data-driven intelligence. Improved Client Engagement: Tools to improve client communication, and overall client satisfaction.",
+      "Spring Money offers a comprehensive suite of benefits, including : Unified Platform - Manage client onboarding, transactions, and more, all in one place. Flexible & Scalable - Grow your business with a system that adapts to your needs. Enhanced Security - Robust encryption and automated compliance tracking. AI-Powered Insights: Make smarter decisions with data-driven intelligence. Improved Client Engagement - Tools to improve client communication, and overall client satisfaction.",
   },
   {
     question: "How does Spring Money help with compliance?",
     answer:
-      "Compliance is a critical aspect of financial advisory. Spring Money simplifies this process by providing: Built-in Reporting Tools: Generate compliance reports quickly and easily, saving you time and reducing the risk of errors. Secure Data Management: Robust encryption and secure data storage protect sensitive client informationand ensure compliance with data protection regulations. Audit Trails: Maintain comprehensive audit trails for all client interactions and transactions, facilitating easy compliance audits.",
+      "Compliance is a critical aspect of financial advisory. Spring Money simplifies this process by providing: Built-in Reporting Tools: Generate compliance reports quickly and easily, saving you time and reducing the risk of errors. Secure Data Management - Robust encryption and secure data storage protect sensitive client informationand ensure compliance with data protection regulations. Audit Trails - Maintain comprehensive audit trails for all client interactions and transactions, facilitating easy compliance audits.",
   },
   {
     question: "What kind of support does Spring Money offer?",
