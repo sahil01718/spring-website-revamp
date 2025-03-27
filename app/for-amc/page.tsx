@@ -135,7 +135,7 @@ const ServiceCard: React.FC<Service> = ({ title, description }) => {
 
 const EmpowerCards: React.FC<EmpowerCardsProps> = ({ heading, subHeading }) => {
   return (
-    <div className="p-4 rounded-lg bg-[#FCFFFE] border border-[#108E66] text-center flex flex-col gap-2">
+    <div className="p-4 rounded-lg bg-[#FCFFFE] border border-[#108E66] text-center flex flex-col gap-2 flex-1 justify-center">
       <p className="text-[#272B2A] text-xl font-medium">{heading}</p>
       <p className="text-[#272b2abf] text-sm font-normal">{subHeading}</p>
     </div>

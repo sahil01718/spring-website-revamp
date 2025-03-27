@@ -304,6 +304,34 @@ export default function ForRiaPage() {
         </div>
       </section>
 
+      <section className="mx-auto py-16 md:py-20  flex flex-col items-center w-full bg-[#EBECFA] px-4 md:px-16">
+        <p className="text-4xl md:text-4xl font-bold mb-2 text-[#272B2A] text-center">
+          Components Of Our Platform
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-screen-xl mt-8">
+          <Image
+            src={"/for-ria/components.svg"}
+            width={650}
+            height={532}
+            alt="component image"
+          />
+          <div className="flex flex-col gap-4 justify-center">
+            {[
+              "A Comprehensive Operating System for Financial Planning & Advisory Services",
+              "Transforming Data into Valuable Insights",
+              "A Comprehensive Operating System for Financial Planning & Advisory Services",
+            ].map((text, index) => (
+              <div
+                key={index}
+                className="rounded-lg bg-[#FCFFFE] border border-[#525ECC] text-center flex flex-col p-4 flex-1 justify-center"
+              >
+                <p className="text-[#272B2A] text-xl font-medium">{text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="mx-auto py-16 md:py-20 gap-8 md:gap-8 flex flex-col items-center w-full bg-[#EBECFA] px-4 md:px-16">
         <h1 className="text-4xl md:text-4xl font-bold mb-2 text-[#272B2A] text-center">
           Empowering Your Practice with Powerful Tools
