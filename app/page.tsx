@@ -323,7 +323,7 @@ export default function HomePage() {
           Democratizing Expert Financial Advice: Comprehensive, Transparent, Effective.
           </p>
           <Link
-            href="/meettheteam"
+            href="/meet-the-team"
             className="inline-block bg-[#108e66] text-[#fcfffe] px-8 py-3 rounded-md font-medium hover:bg-[#272B2A] transition-colors"
           >
             Meet the team
