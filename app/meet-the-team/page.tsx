@@ -1,5 +1,6 @@
+"use client";
 import Image from "next/image";
-import Link from "next/link";
+import { CoFounder, Squad } from "../components/MeetTheTeam";
 
 export default function MeetTheTeam() {
   return (
@@ -19,28 +20,16 @@ export default function MeetTheTeam() {
             Co-founders
           </h2>
           <div className="flex flex-col md:flex-row gap-4 md:gap-56 ">
-            <div className="flex flex-col gap-4 items-center">
-              <Image
-                src={"/meet-the-team/nikhil.svg"}
-                width={262}
-                height={262}
-                className="rounded-full"
-                alt="Nikhil"
-              />
-              <h3 className="text-xl text-center font-bold">
-                Nikhil Narkhedkar(CEO)
-              </h3>
-            </div>
-            <div className="flex flex-col gap-4 items-center">
-              <Image
-                src={"/meet-the-team/nikhil.svg"}
-                width={262}
-                height={262}
-                className="rounded-full"
-                alt="Omkar"
-              />
-              <h3 className="text-xl text-center font-bold">Omkar Jadhav</h3>
-            </div>
+            <CoFounder
+              image="/meet-the-team/nikhil.svg"
+              name="Nikhil Narkhedkar (CEO)"
+              linkedinUrl="https://www.linkedin.com/in/nikhil-narkhedkar/"
+            />
+            <CoFounder
+              image="/meet-the-team/nikhil.svg"
+              name="Omkar Jadhav"
+              linkedinUrl="https://www.linkedin.com/in/omkarjadhav1995/"
+            />
           </div>
         </section>
 
@@ -50,105 +39,66 @@ export default function MeetTheTeam() {
             Meet the Squad
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="text-[#272B2A] flex flex-col items-center">
-              <Image
-                src={"/meet-the-team/nikhil.svg"}
-                width={122}
-                height={122}
-                className="rounded-full"
-                alt="Omkar"
-              />
-              <span className="text-lg font-semibold mt-2">Arnav Limaye</span>
-              <span className="text-base font-medium">Engineering</span>
-            </div>
-            <div className="text-[#272B2A] flex flex-col items-center">
-              <Image
-                src={"/meet-the-team/nikhil.svg"}
-                width={122}
-                height={122}
-                className="rounded-full"
-                alt="Omkar"
-              />
-              <span className="text-lg font-semibold mt-2">Arnav Limaye</span>
-              <span className="text-base font-medium">Engineering</span>
-            </div>
-            <div className="text-[#272B2A] flex flex-col items-center">
-              <Image
-                src={"/meet-the-team/nikhil.svg"}
-                width={122}
-                height={122}
-                className="rounded-full"
-                alt="Omkar"
-              />
-              <span className="text-lg font-semibold mt-2">Arnav Limaye</span>
-              <span className="text-base font-medium">Engineering</span>
-            </div>
-            <div className="text-[#272B2A] flex flex-col items-center">
-              <Image
-                src={"/meet-the-team/nikhil.svg"}
-                width={122}
-                height={122}
-                className="rounded-full"
-                alt="Omkar"
-              />
-              <span className="text-lg font-semibold mt-2">Arnav Limaye</span>
-              <span className="text-base font-medium">Engineering</span>
-            </div>
-            <div className="text-[#272B2A] flex flex-col items-center">
-              <Image
-                src={"/meet-the-team/nikhil.svg"}
-                width={122}
-                height={122}
-                className="rounded-full"
-                alt="Omkar"
-              />
-              <span className="text-lg font-semibold mt-2">Arnav Limaye</span>
-              <span className="text-base font-medium">Engineering</span>
-            </div>
-            <div className="text-[#272B2A] flex flex-col items-center">
-              <Image
-                src={"/meet-the-team/nikhil.svg"}
-                width={122}
-                height={122}
-                className="rounded-full"
-                alt="Omkar"
-              />
-              <span className="text-lg font-semibold mt-2">Arnav Limaye</span>
-              <span className="text-base font-medium">Engineering</span>
-            </div>
-            <div className="text-[#272B2A] flex flex-col items-center">
-              <Image
-                src={"/meet-the-team/nikhil.svg"}
-                width={122}
-                height={122}
-                className="rounded-full"
-                alt="Omkar"
-              />
-              <span className="text-lg font-semibold mt-2">Arnav Limaye</span>
-              <span className="text-base font-medium">Engineering</span>
-            </div>
-            <div className="text-[#272B2A] flex flex-col items-center">
-              <Image
-                src={"/meet-the-team/nikhil.svg"}
-                width={122}
-                height={122}
-                className="rounded-full"
-                alt="Omkar"
-              />
-              <span className="text-lg font-semibold mt-2">Arnav Limaye</span>
-              <span className="text-base font-medium">Engineering</span>
-            </div>
-            <div className="text-[#272B2A] flex flex-col items-center">
-              <Image
-                src={"/meet-the-team/nikhil.svg"}
-                width={122}
-                height={122}
-                className="rounded-full"
-                alt="Omkar"
-              />
-              <span className="text-lg font-semibold mt-2">Arnav Limaye</span>
-              <span className="text-base font-medium">Engineering</span>
-            </div>
+            <Squad
+              image="/meet-the-team/nikhil.svg"
+              name="Arnav Limaye"
+              linkedinUrl="https://www.linkedin.com/in/omkarjadhav1995/"
+              title="Engineering"
+            />
+            <Squad
+              image="/meet-the-team/nikhil.svg"
+              name="Sheetal Datir"
+              linkedinUrl="https://www.linkedin.com/in/omkarjadhav1995/"
+              title="Engineering"
+            />
+            <Squad
+              image="/meet-the-team/nikhil.svg"
+              name="Rishabh Shetty"
+              linkedinUrl="https://www.linkedin.com/in/omkarjadhav1995/"
+              title="UI UX & Design"
+            />
+            <Squad
+              image="/meet-the-team/nikhil.svg"
+              name="Neeraj Singh"
+              linkedinUrl="https://www.linkedin.com/in/neeraj-singh-achara/"
+              title="Engineering"
+            />
+            <Squad
+              image="/meet-the-team/nikhil.svg"
+              name="Ravinder Singh"
+              linkedinUrl="https://www.linkedin.com/in/omkarjadhav1995/"
+              title="Engineering"
+            />
+            <Squad
+              image="/meet-the-team/nikhil.svg"
+              name="Khushi Pawar"
+              linkedinUrl="https://www.linkedin.com/in/omkarjadhav1995/"
+              title="Product"
+            />
+            <Squad
+              image="/meet-the-team/nikhil.svg"
+              name="Sahil Panda"
+              linkedinUrl="https://www.linkedin.com/in/omkarjadhav1995/"
+              title="Product & Design"
+            />
+            <Squad
+              image="/meet-the-team/nikhil.svg"
+              name="Saurabh Pharate"
+              linkedinUrl="https://www.linkedin.com/in/omkarjadhav1995/"
+              title="Engineering"
+            />
+            <Squad
+              image="/meet-the-team/nikhil.svg"
+              name="Nirmal Kumar"
+              linkedinUrl="https://www.linkedin.com/in/omkarjadhav1995/"
+              title="Engineering"
+            />
+            <Squad
+              image="/meet-the-team/nikhil.svg"
+              name="Akhilesh Patidar"
+              linkedinUrl="https://www.linkedin.com/in/omkarjadhav1995/"
+              title="Engineering"
+            />
           </div>
         </section>
         <div className="flex flex-col items-center">
@@ -199,7 +149,7 @@ export default function MeetTheTeam() {
           alt="spring money logo"
         ></Image>
         <span className="text-[#FCFFFE] text-[28px] font-semibold mt-4 text-center">
-        One platform for your journey towards financial freedom.
+          One platform for your journey towards financial freedom.
         </span>
       </div>
     </div>
