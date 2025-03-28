@@ -277,33 +277,33 @@ const BlogListingPage = () => {
           To Learn More - Download Our App !
         </span>
         <div className="flex gap-4 mt-8">
-              <Link
-                href={
-                  "https://play.google.com/store/apps/details?id=com.spring.money"
-                }
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src={"/footer/play-store.svg"}
-                  width={160}
-                  height={40}
-                  alt="play store image"
-                />
-              </Link>
-              <Link
-                href={"https://apps.apple.com/in/app/spring-money/id1660751993"}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src={"/footer/app-store.svg"}
-                  width={160}
-                  height={40}
-                  alt="app store image"
-                />
-              </Link>
-            </div>
+          <Link
+            href={
+              "https://play.google.com/store/apps/details?id=com.spring.money"
+            }
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src={"/footer/play-store.svg"}
+              width={160}
+              height={40}
+              alt="play store image"
+            />
+          </Link>
+          <Link
+            href={"https://apps.apple.com/in/app/spring-money/id1660751993"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src={"/footer/app-store.svg"}
+              width={160}
+              height={40}
+              alt="app store image"
+            />
+          </Link>
+        </div>
       </div>
     </div>
   );

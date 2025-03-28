@@ -137,19 +137,19 @@ const carouselComponents = [
     title: "Introducing EMPOWER",
     description:
       "Empower Your Workforce Boost employee financial wellness and productivity with expert guidance and tailored tools.",
-    btnUrl: "https://www.spring.money/programs/empower",
+    btnUrl: "/programs/empower",
   },
   {
     title: "Introducing NRICH",
     description:
       "NRI Financial Solutions Seamlessly manage your finances across borders with expert guidance and specialized tools.",
-    btnUrl: "https://www.spring.money/programs/nrich",
+    btnUrl: "/programs/nrich",
   },
   {
     title: "Introducing POWER PLAY",
     description:
       " Empowering Young Professionals Build a solid financial future with expert guidance from the start.",
-    btnUrl: "https://www.spring.money/programs/power-play",
+    btnUrl: "/programs/power-play",
   },
 ];
 
@@ -391,6 +391,8 @@ export default function ServicesPage() {
         </p>
         <Link
           href={carouselComponents[activeIndex].btnUrl}
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-[#108E66] text-base font-semibold px-6 py-3 border border-[#108E66] rounded"
         >
           Learn More
