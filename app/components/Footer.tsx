@@ -197,14 +197,14 @@ export default function Footer() {
             </span>
             <Link
               className="text-[#FCFFFE] text-xs font-semibold"
-              href={"https://www.spring.money/privacy-policy"}
+              href={"/privacy-policy"}
               target="_blank"
               rel="noopener noreferrer"
             >
               Privacy Policy
             </Link>
             <Link
-              href={"https://www.spring.money/terms-of-service"}
+              href={"/terms-of-service"}
               className="text-[#FCFFFE] text-xs font-semibold"
               target="_blank"
               rel="noopener noreferrer"
