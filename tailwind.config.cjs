@@ -17,6 +17,9 @@ module.exports = {
       transitionDuration: {
         300: '300ms',
       },
+      backgroundColor:{
+        white:"#FCFFFE"
+      },
       backgroundImage:{
         linearGradient1:"linear-gradient(180deg, #EBECFA 0%, #FCFFFE 100%)",
         linearGradient2:"linear-gradient(180deg, #FCFFFE 17.39%, #EBECFA 100%)",

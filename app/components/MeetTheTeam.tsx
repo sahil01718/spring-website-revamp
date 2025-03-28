@@ -36,7 +36,7 @@ const CoFounder = ({
               window.open(linkedinUrl, "_blank", "noopener,noreferrer");
             }}
           >
-            <img
+            <Image
               src="/meet-the-team/linkedin.svg"
               width={65}
               height={65}
@@ -86,7 +86,7 @@ const Squad = ({
               window.open(linkedinUrl, "_blank", "noopener,noreferrer");
             }}
           >
-            <img
+            <Image
               src="/meet-the-team/linkedin.svg"
               width={48}
               height={48}
