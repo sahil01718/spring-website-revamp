@@ -195,7 +195,7 @@ export default function HomePage() {
       <section className="bg-[#108e66] text-white lg:pb-0">
         <div className="mx-auto flex flex-col lg:flex-row items-center lg:justify-between">
           <div className="lg:w-[70%] text-center lg:text-left space-y-4 px-16 py-16 lg:py-0">
-            <h1 className="text-4xl lg:text-5xl font-bold leading-tight">
+            <h1 className="text-4xl lg:text-5xl font-bold">
             Smart, Comprehensive and Unbiased Financial Planning
             </h1>
             <p className="text-lg md:text-xl">
@@ -203,7 +203,7 @@ export default function HomePage() {
             </p>
             <Link
               href="/services"
-              className="inline-block bg-[#fcfffe] text-[#108e66] px-8 py-3 rounded-md font-medium border border-[#108e66] hover:bg-[#272B2A] transition-colors"
+              className="inline-block bg-[#fcfffe] text-[#108e66] px-8 py-3 rounded-md font-semibold border border-[#108e66] hover:bg-[#fcfffe] transition-colors"
             >
               Get Started
             </Link>
@@ -303,10 +303,10 @@ export default function HomePage() {
               </Link>
             </div>
           ))}
-          <div className="flex justify-center"></div>
+          <div className="flex justify-center "></div>
           <Link
               href="/tools"
-              className="inline-block bg-[#fcfffe] text-[#108e66] px-8 py-3 rounded-md font-medium border border-[#108e66] hover:bg-[#108e66] hover:text-[#fcfffe] transition-colors"
+              className="inline-block bg-[#fcfffe] text-[#108e66] mt-4 px-8 py-3 rounded-md font-medium border border-[#108e66] hover:bg-[#108e66] hover:text-[#fcfffe] transition-colors"
             >
               View all tools
             </Link>
