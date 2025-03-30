@@ -184,10 +184,10 @@ export default function ForRiaPage() {
           We understand the hurdles you face in today&apos;s financial
           landscape.
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-screen-xl">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-screen-xl text-center">
           <InfoCard
             imageSrc="/for-ria/rafiki3.svg"
-            title="Fragmented, Inefficient Systems"
+            title="Inefficient Systems"
             description="Disconnected tools lead to wasted time and resources."
           />
           <InfoCard
