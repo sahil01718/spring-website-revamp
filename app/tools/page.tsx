@@ -212,7 +212,7 @@ export default function ToolsPage() {
         ))}
       </div>
 
-      <section className="py-16  bg-[#F0FAF7] w-full">
+      <section className="py-16  bg-[#fcfffe] w-full">
         <div className="flex flex-col items-center text-center justify-center gap-4">
           <p className="text-[#272B2A] text-[40px] font-semibold">
             Our Mission & Vision

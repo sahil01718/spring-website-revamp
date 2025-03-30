@@ -37,101 +37,6 @@ const financialServices = [
   },
 ];
 
-// Data for professional solutions
-const professionalSolutions = [
-  {
-    id: 1,
-    title: "Young Professionals",
-    tagline: "Start Strong, Stay Ahead!",
-    description:
-      "Tailored financial strategies for early career growth and smart investments.",
-  },
-  {
-    id: 2,
-    title: "MBA Graduates",
-    tagline: "Smart Money Moves for Smart MBAs!",
-    description:
-      "Optimize your high-income potential with strategic planning and tax-efficient investments.",
-  },
-  {
-    id: 3,
-    title: "IT Professionals",
-    tagline: "Maximize Earnings, Build Wealth Like a Pro!",
-    description:
-      "Diversified investment strategies and ESOP planning to secure financial independence.",
-  },
-  {
-    id: 4,
-    title: "Doctors & Medical Professionals",
-    tagline: "You Care for Patients, We Care for Your Wealth!",
-    description:
-      "Structured roadmaps for managing student loans, optimizing taxes, and planning retirement.",
-  },
-  {
-    id: 5,
-    title: "Lawyers & Legal Professionals",
-    tagline: "Win in Court, Win with Your Money!",
-    description:
-      "Manage irregular income and tax liabilities with strategic investment plans.",
-  },
-  {
-    id: 6,
-    title: "Armed Forces & Government Officials",
-    tagline: "Secure Your Future While Serving the Nation!",
-    description:
-      "Focused on pension maximization, tax-efficient investments, and real estate advisory.",
-  },
-  {
-    id: 7,
-    title: "Professional Athletes",
-    tagline: "Short Careers, Lifelong Wealth!",
-    description:
-      "Wealth preservation, passive income, and tax-efficient plans to secure your future beyond your career.",
-  },
-  {
-    id: 8,
-    title: "Startup Founders & Entrepreneurs",
-    tagline: "Scale Your Startup, Scale Your Wealth!",
-    description:
-      "Structured wealth-building plans that balance reinvestment with long-term financial planning.",
-  },
-  {
-    id: 9,
-    title: "Engineers & Architects",
-    tagline: "Design the Future, Build Your Wealth!",
-    description:
-      "Optimizing tax strategies and planning for early retirement with tailored investment structures.",
-  },
-  {
-    id: 10,
-    title: "Teachers & Professors",
-    tagline: "Shape Minds, Secure Your Future!",
-    description:
-      "Structured savings, side-income strategies, and pension planning for educators.",
-  },
-  {
-    id: 11,
-    title: "Media & Creative Professionals",
-    tagline: "Transform Creativity into Wealth!",
-    description:
-      "Managing irregular income with smart tax planning and secure long-term financial strategies.",
-  },
-  {
-    id: 12,
-    title: "Freelancers & Consultants",
-    tagline: "From Irregular Income to Consistent Wealth!",
-    description:
-      "Income stabilization, tax-efficient savings, and comprehensive financial roadmaps for independent professionals.",
-  },
-  {
-    id: 13,
-    title: "Business Owners & SME Operators",
-    tagline: "Run Your Business, Let Us Manage Your Wealth!",
-    description:
-      "Cash flow optimization, tax-saving strategies, and long-term investment plans for entrepreneurs.",
-  },
-];
-
 const carouselComponents = [
   {
     title: "Introducing EMPOWER",
@@ -235,7 +140,7 @@ export default function ServicesPage() {
           href="https://wa.me/+918668484607"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block mt-4 bg-[#fcfffe] text-[#108e66] px-8 py-3 rounded-md font-medium border border-[#108e66] hover:bg-[#272B2A] transition-colors"
+          className="inline-block mt-4 bg-[#fcfffe] text-[#108e66] px-8 py-3 rounded-md font-semibold border border-[#108e66] hover:bg-[#fcfffe] transition-colors"
         >
           Get Started Now
         </Link>
@@ -259,10 +164,10 @@ export default function ServicesPage() {
                 alt="Financial Planning"
                 className="w-[240px] h-[158px]"
               />
-              <h3 className="text-xl font-medium text-[#272B2A] mt-4 mb-2">
+              <h3 className="text-xl font-medium text-[#272B2A] mt-4 mb-2 text-center">
                 {service.title}
               </h3>
-              <p className="text-[#272B2A] text-sm font-normal">
+              <p className="text-[#272B2A] text-sm font-normal text-center">
                 {service.description}
               </p>
             </div>
@@ -348,39 +253,6 @@ export default function ServicesPage() {
           ))}
         </div>
       </div>
-
-      {/* PROFESSIONAL SOLUTIONS CAROUSEL */}
-      {/* <section className="mx-auto px-4 py-16 flex flex-col items-center">
-        <h2 className="text-[40px] font-semibold text-center text-[#272B2A] mb-2">
-          Our Solutions by Profession
-        </h2>
-        <p className="text-[#272B2A] text-xl font-normal text-center mb-2">
-          We specialize in providing customized financial solutions for a
-          diverse range of professionals.
-        </p>
-        <div className="relative overflow-hidden  max-w-screen-xl w-full">
-          <div className="flex space-x-4 animate-autoScroll w-max">
-            {professionalSolutions
-              .concat(professionalSolutions)
-              .map((profile, index) => (
-                <div
-                  key={index}
-                  className="flex-shrink-0 bg-[#FCFFFE] p-4 rounded-md shadow mx-2 w-64 border border-[#108E66]"
-                >
-                  <h3 className="text-xl font-semibold text-[#272B2A]">
-                    {profile.title}
-                  </h3>
-                  <p className="text-sm text-[#272B2A] font-medium mt-1">
-                    {profile.tagline}
-                  </p>
-                  <p className="text-[#272B2A] mt-2 break-words">
-                    {profile.description}
-                  </p>
-                </div>
-              ))}
-          </div>
-        </div>
-      </section> */}
 
       <div className="flex flex-col items-center gap-8 px-[60px] py-8 bg-[#F0FAF7] md:py-16">
         <p className="text-[#108E66] text-[40px] font-bold text-center">
