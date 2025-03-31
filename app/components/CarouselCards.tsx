@@ -42,16 +42,21 @@ export default function CarouselCards() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const cardWidth = 450 + 32; // Card width (450px) + gap (32px)
-  
+
   // Duplicate the items to create the illusion of infinite scrolling
-  const duplicatedItems = [...carouselItems, ...carouselItems];
+  const duplicatedItems = [
+    ...carouselItems,
+    ...carouselItems,
+    ...carouselItems,
+    ...carouselItems,
+  ];
 
   useEffect(() => {
     const animate = () => {
       if (carouselRef.current) {
         // Increment scroll position
-        setScrollPosition(prev => prev + 1);
-        
+        setScrollPosition((prev) => prev + 1);
+
         // When we've scrolled past the first set of cards, reset position to beginning
         if (scrollPosition >= cardWidth * carouselItems.length) {
           setScrollPosition(0);
@@ -73,18 +78,18 @@ export default function CarouselCards() {
       </p>
 
       <div className="relative overflow-hidden w-full">
-        <div 
+        <div
           ref={carouselRef}
-          className="flex space-x-8" 
-          style={{ 
+          className="flex space-x-8"
+          style={{
             transform: `translateX(-${scrollPosition}px)`,
-            transition: 'transform 0.05s linear',
-            width: 'max-content'
+            transition: "transform 0.05s linear",
+            width: "max-content",
           }}
         >
           {duplicatedItems.map((item, index) => (
-            <motion.div 
-              key={index} 
+            <motion.div
+              key={index}
               className="md:p-8 flex flex-col w-[450px] gap-4 justify-center bg-[#FCFFFE] border border-[#108E66] rounded-lg"
             >
               <div className="block">
